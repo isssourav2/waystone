@@ -5,6 +5,7 @@ function App() {
   return (
     <Router>
       <CssBaseline />
+      {/* App js */}
       <Routes>
         <Route path="/" element={<Dashboard />} exact />
         <Route path="/DataExtracter" element={<DataExtracter />} exact />
