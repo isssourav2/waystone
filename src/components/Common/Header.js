@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { makeStyles } from '@mui/styles';
 import MuiDrawer from '@mui/material/Drawer';
 import MuiAppBar from '@mui/material/AppBar';
@@ -29,7 +29,7 @@ import logo from '../../images/logo.png';
 import StarIcon from '@mui/icons-material/Star';
 
 import NotificationsIcon from '@mui/icons-material/Notifications';
-
+import { TabMenuContext } from '../../Context/TabMenuContext';
 const drawerWidth = 200;
 
 const openedMixin = (theme) => ({
@@ -98,6 +98,7 @@ const Drawer = styled(MuiDrawer, {
 }));
 
 function Header() {
+  const tabMenu = useContext(TabMenuContext);
   const [open, setOpen] = React.useState(false);
   const [subOpen, setSubOpen] = React.useState(false);
 
@@ -112,6 +113,24 @@ function Header() {
 
   const handleSubMenu = () => {
     setSubOpen(!subOpen);
+  };
+
+  const handleChange = (newValue) => {
+    //setValue(newValue);
+    switch (newValue) {
+      case 0:
+        tabMenu.dispatch({ type: 'Tab1' });
+        break;
+      case 1:
+        tabMenu.dispatch({ type: 'Tab2' });
+        break;
+      case 2:
+        tabMenu.dispatch({ type: 'Tab3' });
+        break;
+
+      default:
+        break;
+    }
   };
 
   return (
@@ -201,19 +220,27 @@ function Header() {
           </ListItem>
           <Collapse in={subOpen} timeout="auto" unmountOnExit>
             <List component="div" disablePadding>
-              <ListItem button>
+              <ListItem button onClick={() => handleChange(0)}>
                 <ListItemIcon>
                   <StarBorder />
                 </ListItemIcon>
-                <ListItemText primary="My Report1" />
+                <ListItemText primary="Item One" />
               </ListItem>
             </List>
             <List component="div" disablePadding>
-              <ListItem button>
+              <ListItem button onClick={() => handleChange(1)}>
                 <ListItemIcon>
                   <StarBorder />
                 </ListItemIcon>
-                <ListItemText primary="My Report2" />
+                <ListItemText primary="Item Two" />
+              </ListItem>
+            </List>
+            <List component="div" disablePadding>
+              <ListItem button onClick={() => handleChange(2)}>
+                <ListItemIcon>
+                  <StarBorder />
+                </ListItemIcon>
+                <ListItemText primary="Item Three" />
               </ListItem>
             </List>
           </Collapse>
