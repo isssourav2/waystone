@@ -30,7 +30,7 @@ import profile from '../../images/profile.png';
 import logo from '../../images/logo.png';
 
 import StarIcon from '@mui/icons-material/Star';
-
+import { useNavigate } from 'react-router-dom';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import { TabMenuContext } from '../../Context/TabMenuContext';
 const drawerWidth = 200;
@@ -104,6 +104,7 @@ function Header() {
   const tabMenu = useContext(TabMenuContext);
   const [open, setOpen] = React.useState(false);
   const [subOpen, setSubOpen] = React.useState(false);
+  const navigate = useNavigate();
   // const [SubActiveValue, setSubActiveValue] = React.useState(0);
   const SubActiveValue = tabMenu.state.SubActiveValue;
   const theme = useTheme();
@@ -122,6 +123,7 @@ function Header() {
   const handleChange = (newValue) => {
     //setValue(newValue);
     // setSubActiveValue(newValue);
+    navigate('/TabMenu');
     switch (newValue) {
       case 0:
         tabMenu.dispatch({ type: 'Tab1' });
@@ -245,6 +247,9 @@ function Header() {
                   onClick={() => handleChange(0)}
                   selected={SubActiveValue === 0}
                 >
+                  <ListItemIcon className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root">
+                    <StarBorder />
+                  </ListItemIcon>
                   <ListItemText primary="Item One" />
                 </ListItem>
               </List>
@@ -254,6 +259,9 @@ function Header() {
                   onClick={() => handleChange(1)}
                   selected={SubActiveValue === 1}
                 >
+                  <ListItemIcon>
+                    <StarBorder />
+                  </ListItemIcon>
                   <ListItemText primary="Item Two" />
                 </ListItem>
               </List>
@@ -263,6 +271,9 @@ function Header() {
                   onClick={() => handleChange(2)}
                   selected={SubActiveValue === 2}
                 >
+                  <ListItemIcon>
+                    <StarBorder />
+                  </ListItemIcon>
                   <ListItemText primary="Item Three" />
                 </ListItem>
               </List>
