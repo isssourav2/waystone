@@ -909,3 +909,11 @@ div#root .MuiBox-root.css-0{ width: 100% !important;}
   .btn-link{ font-size: 12px;}
 
 }
+
+@media (max-width: 900px) {
+  .panel-box .MuiGrid-grid-xs-true{
+    padding: 15px 0px 11px 10px;
+  }
+
+ 
+}

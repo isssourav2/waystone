@@ -39,7 +39,7 @@ const home = () => {
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla venenatis est nunc, at tempus orci commodo quis. Nullam convallis malesuada orci, quis tincidunt urna tempor vitae. Quisque nulla ligula, feugiat in congue quis, dignissim at elit. Interdum et malesuada fames ac ante ipsum primis in faucibus. Cras eleifend neque id commodo gravida. </p>
              </Typography>
             </Grid>
-            <Grid item xs={6}>
+            <Grid item lg={6} md={6} sm={12} sx={12} xl={6} xs={12}>
               <div class="panel-box">
                 <div class="panel-heading">
                   <span class="icon-cell">
@@ -129,7 +129,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla venenatis est nun
               </div>
             </Grid>
 
-            <Grid item xs={6}>
+            <Grid item lg={6} md={6} sm={12} sx={12} xl={6} xs={12}>
               <div class="panel-box">
                 
                 

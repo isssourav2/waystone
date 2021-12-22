@@ -163,15 +163,7 @@ function Header() {
           </div>
 
           <div class="header-right">
-            <form get="post">
-              <div class="search-box">
-                <SearchIcon />
-                <input
-                  type="search"
-                  placeholder="Global search by keyword..."
-                />
-              </div>
-            </form>
+           
 
             <IconButton
               size="large"
