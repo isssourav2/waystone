@@ -22,6 +22,9 @@ import InboxIcon from '@mui/icons-material/Inbox';
 import Badge from '@mui/material/Badge';
 import { Link } from 'react-router-dom';
 import Menu from '../menu';
+import NearMeIcon from '@mui/icons-material/NearMe';
+import FolderIcon from '@mui/icons-material/Folder';
+import PersonIcon from '@mui/icons-material/Person';
 
 import profile from '../../images/profile.png';
 import logo from '../../images/logo.png';
@@ -197,6 +200,8 @@ function Header() {
           <img src={logo} alt="logo" />
         </DrawerHeader>
         <Divider />
+        <div class="menu-link">
+    
 
         <List component="nav">
           <div class="spacer"></div>
@@ -205,7 +210,7 @@ function Header() {
             <li>
               <Link to="/">
                 {' '}
-                <HomeIcon /> Dashboard
+                <HomeIcon /> <span>Dashboard</span>
               </Link>
             </li>
           </ul>
@@ -257,29 +262,30 @@ function Header() {
             <li>
               <a href="#">
                 {' '}
-                <ArticleIcon /> Schemas / Models
+                <AccountBalanceIcon /> Schemas / Models
               </a>
             </li>
             <li>
               <a href="#">
                 {' '}
-                <AssessmentIcon /> Sources
+                <FolderIcon /> Sources
               </a>
             </li>
             <li>
               <a href="#">
                 {' '}
-                <TimelineIcon /> Destinations
+                <NearMeIcon /> Destinations
               </a>
             </li>
             <li>
               <a href="#">
                 {' '}
-                <AssessmentIcon /> Fund Admins
+                <PersonIcon /> Fund Admins
               </a>
             </li>
           </ul>
         </List>
+        </div>
         <Divider />
       </Drawer>
     </>

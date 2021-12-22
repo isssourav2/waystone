@@ -49,15 +49,8 @@ Item.propTypes = {
 export default function GridAutoFlow() {
   return (
     <div class="cardstyle" style={{ width: '100%' }}>
-      <Box
-        sx={{
-          display: 'grid',
-          gridAutoFlow: 'row',
-          gridTemplateColumns: 'repeat(3, 1fr)',
-         
-          gap: 2,
-        }}
-      >
+
+      <Grid  sx={{ display: 'grid', gridAutoFlow: 'row', gridTemplateColumns: 'repeat(3, 1fr)', gap: 2,}} sm={{ display: 'grid', gridAutoFlow: 'row', gridTemplateColumns: 'repeat(1, 1fr)', gap: 2,}} >
        <Grid container spacing={2}>
        <Grid item>
               <ButtonBase sx={{ width: 20, height: 50 }}>
@@ -153,7 +146,7 @@ export default function GridAutoFlow() {
             
         </Grid>
         <Grid item>
-            <Link href="#"> <DoubleArrowIcon/></Link>
+        <Link class="btn-link" href="#"> <DoubleArrowIcon/></Link>
           </Grid>
       </Grid>
         
@@ -214,7 +207,7 @@ export default function GridAutoFlow() {
 
     
         
-      </Box>
+      </Grid>
 
     </div>
     
