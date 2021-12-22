@@ -104,7 +104,8 @@ function Header() {
   const tabMenu = useContext(TabMenuContext);
   const [open, setOpen] = React.useState(false);
   const [subOpen, setSubOpen] = React.useState(false);
-
+  // const [SubActiveValue, setSubActiveValue] = React.useState(0);
+  const SubActiveValue = tabMenu.state.SubActiveValue;
   const theme = useTheme();
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -120,6 +121,7 @@ function Header() {
 
   const handleChange = (newValue) => {
     //setValue(newValue);
+    // setSubActiveValue(newValue);
     switch (newValue) {
       case 0:
         tabMenu.dispatch({ type: 'Tab1' });
@@ -214,35 +216,53 @@ function Header() {
             </ul>
           </List>
           <List component="nav">
-            <ListItem button onClick={handleSubMenu}>
-              <ListItemIcon>
+            <ul onClick={handleSubMenu}>
+              <li>
+                <InboxIcon /> <span>Report</span>
+                {subOpen ? (
+                  <ExpandLess style={{ marginLeft: '2em' }} />
+                ) : (
+                  <ExpandMore style={{ marginLeft: '2em' }} />
+                )}
+              </li>
+            </ul>
+            {/* <ListItem button onClick={handleSubMenu}>
+              <ListItemIcon
+              // style={{ marginLeft: '-1.2em' }}
+              >
                 <InboxIcon />
               </ListItemIcon>
-              <ListItemText primary="Report" />
+              <ListItemText
+                primary="Report"
+                // style={{ marginLeft: '-1.2em', marginRight: '6.5em' }}
+              />
               {subOpen ? <ExpandLess /> : <ExpandMore />}
-            </ListItem>
+            </ListItem> */}
             <Collapse in={subOpen} timeout="auto" unmountOnExit>
-              <List component="div" disablePadding>
-                <ListItem button onClick={() => handleChange(0)}>
-                  <ListItemIcon>
-                    <StarBorder />
-                  </ListItemIcon>
+              <List component="ul" disablePadding>
+                <ListItem
+                  button
+                  onClick={() => handleChange(0)}
+                  selected={SubActiveValue === 0}
+                >
                   <ListItemText primary="Item One" />
                 </ListItem>
               </List>
-              <List component="div" disablePadding>
-                <ListItem button onClick={() => handleChange(1)}>
-                  <ListItemIcon>
-                    <StarBorder />
-                  </ListItemIcon>
+              <List component="ul" disablePadding>
+                <ListItem
+                  button
+                  onClick={() => handleChange(1)}
+                  selected={SubActiveValue === 1}
+                >
                   <ListItemText primary="Item Two" />
                 </ListItem>
               </List>
-              <List component="div" disablePadding>
-                <ListItem button onClick={() => handleChange(2)}>
-                  <ListItemIcon>
-                    <StarBorder />
-                  </ListItemIcon>
+              <List component="ul" disablePadding>
+                <ListItem
+                  button
+                  onClick={() => handleChange(2)}
+                  selected={SubActiveValue === 2}
+                >
                   <ListItemText primary="Item Three" />
                 </ListItem>
               </List>
