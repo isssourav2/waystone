@@ -25,7 +25,7 @@ import Menu from '../menu';
 import NearMeIcon from '@mui/icons-material/NearMe';
 import FolderIcon from '@mui/icons-material/Folder';
 import PersonIcon from '@mui/icons-material/Person';
-
+import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
 import profile from '../../images/profile.png';
 import logo from '../../images/logo.png';
 
@@ -201,90 +201,88 @@ function Header() {
         </DrawerHeader>
         <Divider />
         <div class="menu-link">
-    
-
-        <List component="nav">
-          <div class="spacer"></div>
-          <h3>Main Menu</h3>
-          <ul>
-            <li>
-              <Link to="/">
-                {' '}
-                <HomeIcon /> <span>Dashboard</span>
-              </Link>
-            </li>
-          </ul>
-        </List>
-        <List component="nav">
-          <ListItem button onClick={handleSubMenu}>
-            <ListItemIcon>
-              <InboxIcon />
-            </ListItemIcon>
-            <ListItemText primary="Report" />
-            {subOpen ? <ExpandLess /> : <ExpandMore />}
-          </ListItem>
-          <Collapse in={subOpen} timeout="auto" unmountOnExit>
-            <List component="div" disablePadding>
-              <ListItem button onClick={() => handleChange(0)}>
-                <ListItemIcon>
-                  <StarBorder />
-                </ListItemIcon>
-                <ListItemText primary="Item One" />
-              </ListItem>
-            </List>
-            <List component="div" disablePadding>
-              <ListItem button onClick={() => handleChange(1)}>
-                <ListItemIcon>
-                  <StarBorder />
-                </ListItemIcon>
-                <ListItemText primary="Item Two" />
-              </ListItem>
-            </List>
-            <List component="div" disablePadding>
-              <ListItem button onClick={() => handleChange(2)}>
-                <ListItemIcon>
-                  <StarBorder />
-                </ListItemIcon>
-                <ListItemText primary="Item Three" />
-              </ListItem>
-            </List>
-          </Collapse>
-        </List>
-        <List>
-          <h3>Work Space</h3>
-          <ul>
-            <li>
-              <Link to="/DataExtracter">
-                {' '}
-                <StarIcon /> Data Pipelines
-              </Link>
-            </li>
-            <li>
-              <a href="#">
-                {' '}
-                <AccountBalanceIcon /> Schemas / Models
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                {' '}
-                <FolderIcon /> Sources
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                {' '}
-                <NearMeIcon /> Destinations
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                {' '}
-                <PersonIcon /> Fund Admins
-              </a>
-            </li>
-          </ul>
-        </List>
+          <List component="nav">
+            <div class="spacer"></div>
+            <h3>Main Menu</h3>
+            <ul>
+              <li>
+                <Link to="/">
+                  {' '}
+                  <HomeIcon /> <span>Dashboard</span>
+                </Link>
+              </li>
+            </ul>
+          </List>
+          <List component="nav">
+            <ListItem button onClick={handleSubMenu}>
+              <ListItemIcon>
+                <InboxIcon />
+              </ListItemIcon>
+              <ListItemText primary="Report" />
+              {subOpen ? <ExpandLess /> : <ExpandMore />}
+            </ListItem>
+            <Collapse in={subOpen} timeout="auto" unmountOnExit>
+              <List component="div" disablePadding>
+                <ListItem button onClick={() => handleChange(0)}>
+                  <ListItemIcon>
+                    <StarBorder />
+                  </ListItemIcon>
+                  <ListItemText primary="Item One" />
+                </ListItem>
+              </List>
+              <List component="div" disablePadding>
+                <ListItem button onClick={() => handleChange(1)}>
+                  <ListItemIcon>
+                    <StarBorder />
+                  </ListItemIcon>
+                  <ListItemText primary="Item Two" />
+                </ListItem>
+              </List>
+              <List component="div" disablePadding>
+                <ListItem button onClick={() => handleChange(2)}>
+                  <ListItemIcon>
+                    <StarBorder />
+                  </ListItemIcon>
+                  <ListItemText primary="Item Three" />
+                </ListItem>
+              </List>
+            </Collapse>
+          </List>
+          <List>
+            <h3>Work Space</h3>
+            <ul>
+              <li>
+                <Link to="/DataExtracter">
+                  {' '}
+                  <StarIcon /> Data Pipelines
+                </Link>
+              </li>
+              <li>
+                <a href="#">
+                  {' '}
+                  <AccountBalanceIcon /> Schemas / Models
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  {' '}
+                  <FolderIcon /> Sources
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  {' '}
+                  <NearMeIcon /> Destinations
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  {' '}
+                  <PersonIcon /> Fund Admins
+                </a>
+              </li>
+            </ul>
+          </List>
         </div>
         <Divider />
       </Drawer>
