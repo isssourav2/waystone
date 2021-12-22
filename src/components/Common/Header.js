@@ -1,4 +1,5 @@
 import React from 'react';
+import { makeStyles } from '@mui/styles';
 import MuiDrawer from '@mui/material/Drawer';
 import MuiAppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
@@ -13,14 +14,11 @@ import HomeIcon from '@mui/icons-material/Home';
 import TimelineIcon from '@mui/icons-material/Timeline';
 import ArticleIcon from '@mui/icons-material/Article';
 import AssessmentIcon from '@mui/icons-material/Assessment';
-import AssignmentIcon from '@mui/icons-material/Assignment';
-import DeviceHubIcon from '@mui/icons-material/DeviceHub';
-import AddLinkIcon from '@mui/icons-material/AddLink';
-import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
-import AttachFileIcon from '@mui/icons-material/AttachFile';
-import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
+import { ListItemText, ListItemIcon, ListItem, Collapse } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import SearchIcon from '@mui/icons-material/Search';
+import { ExpandLess, ExpandMore, StarBorder } from '@mui/icons-material';
+import InboxIcon from '@mui/icons-material/Inbox';
 import Badge from '@mui/material/Badge';
 import { Link } from 'react-router-dom';
 import Menu from '../menu';
@@ -104,6 +102,8 @@ const Drawer = styled(MuiDrawer, {
 
 function Header() {
   const [open, setOpen] = React.useState(false);
+  const [subOpen, setSubOpen] = React.useState(false);
+
   const theme = useTheme();
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -111,6 +111,10 @@ function Header() {
 
   const handleDrawerClose = () => {
     setOpen(false);
+  };
+
+  const handleSubMenu = () => {
+    setSubOpen(!subOpen);
   };
 
   return (
@@ -178,7 +182,9 @@ function Header() {
         </DrawerHeader>
         <Divider />
         <div class="menu-link">
-        <List>
+    
+
+        <List component="nav">
           <div class="spacer"></div>
           <h3>Main Menu</h3>
           <ul>
@@ -189,6 +195,33 @@ function Header() {
               </Link>
             </li>
           </ul>
+        </List>
+        <List component="nav">
+          <ListItem button onClick={handleSubMenu}>
+            <ListItemIcon>
+              <InboxIcon />
+            </ListItemIcon>
+            <ListItemText primary="Report" />
+            {subOpen ? <ExpandLess /> : <ExpandMore />}
+          </ListItem>
+          <Collapse in={subOpen} timeout="auto" unmountOnExit>
+            <List component="div" disablePadding>
+              <ListItem button>
+                <ListItemIcon>
+                  <StarBorder />
+                </ListItemIcon>
+                <ListItemText primary="My Report1" />
+              </ListItem>
+            </List>
+            <List component="div" disablePadding>
+              <ListItem button>
+                <ListItemIcon>
+                  <StarBorder />
+                </ListItemIcon>
+                <ListItemText primary="My Report2" />
+              </ListItem>
+            </List>
+          </Collapse>
         </List>
         <List>
           <h3>Work Space</h3>
@@ -223,7 +256,6 @@ function Header() {
                 <PersonIcon /> Fund Admins
               </a>
             </li>
-            
           </ul>
         </List>
         </div>
