@@ -28,7 +28,7 @@ import PersonIcon from '@mui/icons-material/Person';
 import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
 import profile from '../../images/profile.png';
 import logo from '../../images/logo.png';
-
+import AppsIcon from '@mui/icons-material/Apps';
 import StarIcon from '@mui/icons-material/Star';
 import { useNavigate } from 'react-router-dom';
 import NotificationsIcon from '@mui/icons-material/Notifications';
@@ -118,12 +118,14 @@ function Header() {
 
   const handleSubMenu = () => {
     setSubOpen(!subOpen);
+    setOpen(true);
   };
 
   const handleChange = (newValue) => {
     //setValue(newValue);
     // setSubActiveValue(newValue);
     navigate('/TabMenu');
+    setOpen(true);
     switch (newValue) {
       case 0:
         tabMenu.dispatch({ type: 'Tab1' });
@@ -167,8 +169,6 @@ function Header() {
           </div>
 
           <div class="header-right">
-           
-
             <IconButton
               size="large"
               aria-label="show 8 new notifications"
@@ -209,6 +209,18 @@ function Header() {
               </li>
             </ul>
           </List>
+          <Divider />
+          <List component="nav">
+            <div class="spacer"></div>
+            <ul>
+              <li>
+                <Link to="/Application">
+                  {' '}
+                  <AppsIcon /> <span>Application</span>
+                </Link>
+              </li>
+            </ul>
+          </List>
           <List component="nav">
             <ul onClick={handleSubMenu}>
               <li>
@@ -232,7 +244,12 @@ function Header() {
               />
               {subOpen ? <ExpandLess /> : <ExpandMore />}
             </ListItem> */}
-            <Collapse in={subOpen} timeout="auto" unmountOnExit>
+            <Collapse
+              in={subOpen}
+              timeout="auto"
+              unmountOnExit
+              sx={{ marginLeft: '0.6em' }}
+            >
               <List component="ul" disablePadding>
                 <ListItem
                   button
@@ -271,15 +288,10 @@ function Header() {
               </List>
             </Collapse>
           </List>
+
           <List>
             <h3>Work Space</h3>
             <ul>
-              <li>
-                <Link to="/DataExtracter">
-                  {' '}
-                  <StarIcon /> Data Pipelines
-                </Link>
-              </li>
               <li>
                 <a href="#">
                   {' '}
