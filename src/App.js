@@ -1,5 +1,11 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { Dashboard, DataExtracter, Stepper, TabMenu } from './components';
+import {
+  Dashboard,
+  DataExtracter,
+  Stepper,
+  TabMenu,
+  Application,
+} from './components';
 import { CssBaseline } from '@mui/material';
 import BasicButtons from './components/Stapper';
 function App() {
@@ -12,6 +18,7 @@ function App() {
         <Route path="/DataExtracter" element={<DataExtracter />} />
         <Route path="/Stepper" element={<Stepper />} />
         <Route path="/TabMenu" element={<TabMenu />} />
+        <Route path="/Application" element={<Application />} />
       </Routes>
     </Router>
   );

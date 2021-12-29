@@ -1,8 +1,8 @@
 import React from 'react';
-import Box from '@mui/material/Box';
 import Home from './home';
 import Header from '../Common/Header';
-const TabMenu = () => {
+import Box from '@mui/material/Box';
+const Application = () => {
   return (
     <Box sx={{ display: 'flex' }}>
       <Header />
@@ -11,4 +11,4 @@ const TabMenu = () => {
   );
 };
 
-export default TabMenu;
+export default Application;

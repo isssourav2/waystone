@@ -8,6 +8,8 @@ import ButtonBase from '@mui/material/ButtonBase';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import CachedIcon from '@mui/icons-material/Cached';
 
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+
 import ShareIcon from '@mui/icons-material/Share';
 import GroupIcon from '@mui/icons-material/Group';
 import MarginIcon from '@mui/icons-material/Margin';
@@ -49,39 +51,33 @@ Item.propTypes = {
 export default function GridAutoFlow() {
   return (
     <div class="cardstyle" style={{ width: '100%' }}>
-      <Box
-        sx={{
-          display: 'grid',
-          gridAutoFlow: 'row',
-          gridTemplateColumns: 'repeat(3, 1fr)',
-         
-          gap: 2,
-        }}
-      >
-       <Grid container spacing={2}>
-       <Grid item>
+
+      <Grid  sx={{ display: 'grid', gridAutoFlow: 'row', gridTemplateColumns: 'repeat(3, 1fr)', gap: 2,}} sm={{ display: 'grid', gridAutoFlow: 'row', gridTemplateColumns: 'repeat(1, 1fr)', gap: 2,}} >
+      
+      <Grid container spacing={2} className="box-col">
+          <Grid item>
               <ButtonBase sx={{ width: 20, height: 50 }}>
-                <GroupIcon/>
+              <GroupIcon/>
               </ButtonBase>
           </Grid>
         <Grid item xs={12} sm container>
           <Grid item xs container direction="column" spacing={2}>
             <Grid item xs>
               <Typography gutterBottom variant="subtitle1" component="div">
-                 <strong>203</strong> Total: Fund Admins
+              <strong>203</strong> Total: Fund Admins
               </Typography>
               
             </Grid>
            
           </Grid>
-         
+          
         </Grid>
         <Grid item>
-        <Link class="btn-link" href="#"> <DoubleArrowIcon/></Link>
+        <Link class="btn-link" href="#"> <ArrowForwardIcon/></Link>
           </Grid>
       </Grid>
 
-      <Grid container spacing={2}>
+      <Grid container spacing={2} className="box-col">
           <Grid item>
               <ButtonBase sx={{ width: 20, height: 50 }}>
                 <ShareIcon/>
@@ -100,7 +96,7 @@ export default function GridAutoFlow() {
           
         </Grid>
         <Grid item>
-        <Link class="btn-link" href="#"> <DoubleArrowIcon/></Link>
+        <Link class="btn-link" href="#"> <ArrowForwardIcon/></Link>
           </Grid>
       </Grid>
 
@@ -127,7 +123,7 @@ export default function GridAutoFlow() {
            
         </Grid>
         <Grid item>
-        <Link class="btn-link" href="#"> <DoubleArrowIcon/></Link>
+        <Link class="btn-link" href="#"> <ArrowForwardIcon/></Link>
           </Grid>
       </Grid>
         
@@ -153,7 +149,7 @@ export default function GridAutoFlow() {
             
         </Grid>
         <Grid item>
-            <Link href="#"> <DoubleArrowIcon/></Link>
+        <Link class="btn-link" href="#"> <ArrowForwardIcon/></Link>
           </Grid>
       </Grid>
         
@@ -179,7 +175,7 @@ export default function GridAutoFlow() {
          
        </Grid>
        <Grid item>
-       <Link class="btn-link" href="#"> <DoubleArrowIcon/></Link>
+       <Link class="btn-link" href="#"> <ArrowForwardIcon/></Link>
           </Grid>
      </Grid>
 
@@ -204,7 +200,7 @@ export default function GridAutoFlow() {
          
        </Grid>
        <Grid item>
-       <Link class="btn-link" href="#"> <DoubleArrowIcon/></Link>
+       <Link class="btn-link" href="#"> <ArrowForwardIcon/></Link>
           </Grid>
      </Grid>
 
@@ -214,7 +210,7 @@ export default function GridAutoFlow() {
 
     
         
-      </Box>
+      </Grid>
 
     </div>
     

@@ -1,9 +1,11 @@
-import * as React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
+
+import { TabMenuContext } from '../../Context/TabMenuContext';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -37,18 +39,35 @@ function a11yProps(index) {
     'aria-controls': `simple-tabpanel-${index}`,
   };
 }
-const Home = ({ value1 }) => {
-  const [value, setValue] = React.useState(0);
+const Home = () => {
+  const tabMenu = useContext(TabMenuContext);
+  const tabMenuOpenIndex = tabMenu.state.TabMenuOpen;
 
+  // const [value, setValue] = React.useState(0);
+  console.log('Menu Index', tabMenuOpenIndex);
   const handleChange = (event, newValue) => {
-    setValue(newValue);
+    //setValue(newValue);
+    switch (newValue) {
+      case 0:
+        tabMenu.dispatch({ type: 'Tab1' });
+        break;
+      case 1:
+        tabMenu.dispatch({ type: 'Tab2' });
+        break;
+      case 2:
+        tabMenu.dispatch({ type: 'Tab3' });
+        break;
+
+      default:
+        break;
+    }
   };
-  console.log(value1);
+
   return (
     <Box sx={{ width: '100%', marginTop: '4em' }}>
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
         <Tabs
-          value={value}
+          value={tabMenuOpenIndex}
           onChange={handleChange}
           aria-label="basic tabs example"
         >
@@ -57,13 +76,13 @@ const Home = ({ value1 }) => {
           <Tab label="Item Three" {...a11yProps(2)} />
         </Tabs>
       </Box>
-      <TabPanel value={value} index={0}>
+      <TabPanel value={tabMenuOpenIndex} index={0}>
         Item One
       </TabPanel>
-      <TabPanel value={value} index={1}>
+      <TabPanel value={tabMenuOpenIndex} index={1}>
         Item Two
       </TabPanel>
-      <TabPanel value={value} index={2}>
+      <TabPanel value={tabMenuOpenIndex} index={2}>
         Item Three
       </TabPanel>
     </Box>

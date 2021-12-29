@@ -20,12 +20,12 @@ export default function ComplexGrid() {
     
     <Paper sx={{ p: 1, margin: 'auto', maxWidth: 700, flexGrow: 5 }}>
       <Grid container spacing={2}>
-        <Grid item>
+        <Grid item lg={2} md={2} sm={2} sx={2} xl={2} xs={2}>
           <ButtonBase sx={{ width: 50, height: 50 }}>
             <AddTaskIcon/>
           </ButtonBase>
         </Grid>
-        <Grid item xs={12} sm container>
+        <Grid item container lg={10} md={10} sm={10} sx={10} xl={10} xs={10}>
           <Grid item xs container direction="column" spacing={0}>
             <Grid item xs>
               <Typography gutterBottom variant="subtitle1" component="div">
@@ -45,12 +45,12 @@ export default function ComplexGrid() {
 
 
       <Grid container spacing={2}>
-        <Grid item>
+        <Grid item lg={2} md={2} sm={2} sx={2} xl={2} xs={2}>
           <ButtonBase sx={{ width: 50, height: 50 }}>
             <SettingsIcon/>
           </ButtonBase>
         </Grid>
-        <Grid item xs={12} sm container>
+        <Grid item container lg={10} md={10} sm={10} sx={10} xl={10} xs={10}>
           <Grid item xs container direction="column" spacing={0}>
             <Grid item xs>
               <Typography gutterBottom variant="subtitle1" component="div">
@@ -70,12 +70,12 @@ export default function ComplexGrid() {
 
 
       <Grid container spacing={2}>
-        <Grid item>
+        <Grid item lg={2} md={2} sm={2} sx={2} xl={2} xs={2}>
           <ButtonBase sx={{ width: 50, height: 50 }}>
             <CancelIcon/>
           </ButtonBase>
         </Grid>
-        <Grid item xs={12} sm container>
+        <Grid item container lg={10} md={10} sm={10} sx={10} xl={10} xs={10}>
           <Grid item xs container direction="column" spacing={0}>
             <Grid item xs>
               <Typography gutterBottom variant="subtitle1" component="div">

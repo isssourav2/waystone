@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { makeStyles } from '@mui/styles';
 import MuiDrawer from '@mui/material/Drawer';
 import MuiAppBar from '@mui/material/AppBar';
@@ -22,14 +22,17 @@ import InboxIcon from '@mui/icons-material/Inbox';
 import Badge from '@mui/material/Badge';
 import { Link } from 'react-router-dom';
 import Menu from '../menu';
-
+import NearMeIcon from '@mui/icons-material/NearMe';
+import FolderIcon from '@mui/icons-material/Folder';
+import PersonIcon from '@mui/icons-material/Person';
+import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
 import profile from '../../images/profile.png';
 import logo from '../../images/logo.png';
-
+import AppsIcon from '@mui/icons-material/Apps';
 import StarIcon from '@mui/icons-material/Star';
-
+import { useNavigate } from 'react-router-dom';
 import NotificationsIcon from '@mui/icons-material/Notifications';
-
+import { TabMenuContext } from '../../Context/TabMenuContext';
 const drawerWidth = 200;
 
 const openedMixin = (theme) => ({
@@ -98,9 +101,12 @@ const Drawer = styled(MuiDrawer, {
 }));
 
 function Header() {
+  const tabMenu = useContext(TabMenuContext);
   const [open, setOpen] = React.useState(false);
   const [subOpen, setSubOpen] = React.useState(false);
-
+  const navigate = useNavigate();
+  // const [SubActiveValue, setSubActiveValue] = React.useState(0);
+  const SubActiveValue = tabMenu.state.SubActiveValue;
   const theme = useTheme();
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -112,6 +118,28 @@ function Header() {
 
   const handleSubMenu = () => {
     setSubOpen(!subOpen);
+    setOpen(true);
+  };
+
+  const handleChange = (newValue) => {
+    //setValue(newValue);
+    // setSubActiveValue(newValue);
+    navigate('/TabMenu');
+    setOpen(true);
+    switch (newValue) {
+      case 0:
+        tabMenu.dispatch({ type: 'Tab1' });
+        break;
+      case 1:
+        tabMenu.dispatch({ type: 'Tab2' });
+        break;
+      case 2:
+        tabMenu.dispatch({ type: 'Tab3' });
+        break;
+
+      default:
+        break;
+    }
   };
 
   return (
@@ -141,16 +169,6 @@ function Header() {
           </div>
 
           <div class="header-right">
-            <form get="post">
-              <div class="search-box">
-                <SearchIcon />
-                <input
-                  type="search"
-                  placeholder="Global search by keyword..."
-                />
-              </div>
-            </form>
-
             <IconButton
               size="large"
               aria-label="show 8 new notifications"
@@ -178,81 +196,129 @@ function Header() {
           <img src={logo} alt="logo" />
         </DrawerHeader>
         <Divider />
+        <div class="menu-link">
+          <List component="nav">
+            <div class="spacer"></div>
+            <h3>Main Menu</h3>
+            <ul>
+              <li>
+                <Link to="/">
+                  {' '}
+                  <HomeIcon /> <span>Dashboard</span>
+                </Link>
+              </li>
+            </ul>
+          </List>
+          <Divider />
+          <List component="nav">
+            <div class="spacer"></div>
+            <ul>
+              <li>
+                <Link to="/Application">
+                  {' '}
+                  <AppsIcon /> <span>Application</span>
+                </Link>
+              </li>
+            </ul>
+          </List>
+          <List component="nav">
+            <ul onClick={handleSubMenu}>
+              <li>
+                <InboxIcon /> <span>Report</span>
+                {subOpen ? (
+                  <ExpandLess style={{ marginLeft: '2em' }} />
+                ) : (
+                  <ExpandMore style={{ marginLeft: '2em' }} />
+                )}
+              </li>
+            </ul>
+            {/* <ListItem button onClick={handleSubMenu}>
+              <ListItemIcon
+              // style={{ marginLeft: '-1.2em' }}
+              >
+                <InboxIcon />
+              </ListItemIcon>
+              <ListItemText
+                primary="Report"
+                // style={{ marginLeft: '-1.2em', marginRight: '6.5em' }}
+              />
+              {subOpen ? <ExpandLess /> : <ExpandMore />}
+            </ListItem> */}
+            <Collapse
+              in={subOpen}
+              timeout="auto"
+              unmountOnExit
+              sx={{ marginLeft: '0.6em' }}
+            >
+              <List component="ul" disablePadding>
+                <ListItem
+                  button
+                  onClick={() => handleChange(0)}
+                  selected={SubActiveValue === 0}
+                >
+                  <ListItemIcon className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root">
+                    <StarBorder />
+                  </ListItemIcon>
+                  <ListItemText primary="Item One" />
+                </ListItem>
+              </List>
+              <List component="ul" disablePadding>
+                <ListItem
+                  button
+                  onClick={() => handleChange(1)}
+                  selected={SubActiveValue === 1}
+                >
+                  <ListItemIcon>
+                    <StarBorder />
+                  </ListItemIcon>
+                  <ListItemText primary="Item Two" />
+                </ListItem>
+              </List>
+              <List component="ul" disablePadding>
+                <ListItem
+                  button
+                  onClick={() => handleChange(2)}
+                  selected={SubActiveValue === 2}
+                >
+                  <ListItemIcon>
+                    <StarBorder />
+                  </ListItemIcon>
+                  <ListItemText primary="Item Three" />
+                </ListItem>
+              </List>
+            </Collapse>
+          </List>
 
-        <List component="nav">
-          <div class="spacer"></div>
-          <h3>Main Menu</h3>
-          <ul>
-            <li>
-              <Link to="/">
-                {' '}
-                <HomeIcon /> Dashboard
-              </Link>
-            </li>
-          </ul>
-        </List>
-        <List component="nav">
-          <ListItem button onClick={handleSubMenu}>
-            <ListItemIcon>
-              <InboxIcon />
-            </ListItemIcon>
-            <ListItemText primary="Report" />
-            {subOpen ? <ExpandLess /> : <ExpandMore />}
-          </ListItem>
-          <Collapse in={subOpen} timeout="auto" unmountOnExit>
-            <List component="div" disablePadding>
-              <ListItem button>
-                <ListItemIcon>
-                  <StarBorder />
-                </ListItemIcon>
-                <ListItemText primary="My Report1" />
-              </ListItem>
-            </List>
-            <List component="div" disablePadding>
-              <ListItem button>
-                <ListItemIcon>
-                  <StarBorder />
-                </ListItemIcon>
-                <ListItemText primary="My Report2" />
-              </ListItem>
-            </List>
-          </Collapse>
-        </List>
-        <List>
-          <h3>Work Space</h3>
-          <ul>
-            <li>
-              <Link to="/DataExtracter">
-                {' '}
-                <StarIcon /> Data Pipelines
-              </Link>
-            </li>
-            <li>
-              <a href="#">
-                {' '}
-                <ArticleIcon /> Schemas / Models
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                {' '}
-                <AssessmentIcon /> Sources
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                {' '}
-                <TimelineIcon /> Destinations
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                {' '}
-                <AssessmentIcon /> Fund Admins
-              </a>
-            </li>
-          </ul>
-        </List>
+          <List>
+            <h3>Work Space</h3>
+            <ul>
+              <li>
+                <a href="#">
+                  {' '}
+                  <AccountBalanceIcon /> Schemas / Models
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  {' '}
+                  <FolderIcon /> Sources
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  {' '}
+                  <NearMeIcon /> Destinations
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  {' '}
+                  <PersonIcon /> Fund Admins
+                </a>
+              </li>
+            </ul>
+          </List>
+        </div>
         <Divider />
       </Drawer>
     </>

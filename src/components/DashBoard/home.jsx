@@ -15,6 +15,8 @@ import Linkbox from '../../components/linkbox.jsx';
 import Allert from '../../components/allert.jsx';
 import Systems from '../../components/Systems.jsx';
 
+
+
 import Link from '@mui/material/Link';
 
 import '../../style/style.css';
@@ -40,13 +42,13 @@ export default function Home() {
         <div class="content-box">
           <Box sx={{ flexGrow: 1 }}>
             <Grid container spacing={2}>
-              <Grid item lg={4} md={6} sm={6} sx={12} xl={4} xs={12} >
-                <Typography>
+              <Grid item lg={4} md={4} sm={6} sx={12} xl={4} xs={12} >
+                <Typography className="title-space">
                   {' '}
-                  <h3>Jobs Overview</h3>{' '}
+                  <h3>Jobs Overview </h3> <Calender />  {' '}
                 </Typography>
                 <div class="col-box">
-                  <Calender />
+                 
                   <CssBaseline />
                   <div class="box-row">
                   <Boxrow />
@@ -54,7 +56,7 @@ export default function Home() {
                   </div>
                 </div>
               </Grid>
-              <Grid item lg={4} md={6} sm={6} sx={12} xl={4} xs={12} >
+              <Grid item lg={4} md={4} sm={6} sx={12} xl={4} xs={12} >
                 <Typography>
                   {' '}
                   <h3>Recent Jobs</h3>{' '}
@@ -67,7 +69,7 @@ export default function Home() {
                   </div>
                 </div>
               </Grid>
-              <Grid item lg={4} md={6} sm={6} sx={12} xl={4} xs={12} >
+              <Grid item lg={4} md={4} sm={12} sx={12} xl={4} xs={12} >
               
                 <Typography>
                   {' '}
@@ -116,7 +118,6 @@ export default function Home() {
 
 
          
-
           <Box sx={{ flexGrow: 1 }}>
             <Grid container spacing={2}>
               <Grid item xs={12}>

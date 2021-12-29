@@ -9,6 +9,8 @@ import CachedIcon from '@mui/icons-material/Cached';
 import ErrorIcon from '@mui/icons-material/Error';
 import AccessAlarmsIcon from '@mui/icons-material/AccessAlarms';
 
+
+
 import EditIcon from '@mui/icons-material/Edit';
 
 export default function ComplexGrid() {
@@ -16,63 +18,70 @@ export default function ComplexGrid() {
   return (
     
     <Paper sx={{ p: 1, margin: 'auto', maxWidth: 700, flexGrow: 5 }}>
+     
+
+
       <Grid container spacing={2}>
-        <Grid item>
-          <ButtonBase sx={{ width: 20, height: 50 }}>
-            <CheckCircleIcon/>
-          </ButtonBase>
-        </Grid>
-        <Grid item xs={12} sm container>
-          <Grid item xs container direction="column" spacing={0}>
-            <Grid item xs>
-              <Typography gutterBottom variant="subtitle1" component="div">
-                Scheduled Jobs
-              </Typography>
-              
-            </Grid>
-           
-          </Grid>
-          <Grid item>
-            <Typography variant="subtitle1" component="div">
-              203
+      <Grid item  sm container lg={12} md={12} sm={12} sx={12} xl={12} xs={12}  className="boxrow">
+      <Grid item className="icon-space">
+        <ButtonBase sx={{ width: 20, height: 50 }}>
+        <CheckCircleIcon/>
+        </ButtonBase>
+      </Grid>
+
+        <Grid item xs container direction="column" spacing={0}>
+          <Grid item xs>
+            <Typography gutterBottom variant="subtitle1" component="div">
+            Scheduled Jobs
             </Typography>
+            
           </Grid>
+        
         </Grid>
+        <Grid item>
+          <Typography variant="subtitle1" component="div">
+          170
+          </Typography>
+        </Grid>
+      </Grid>
+      </Grid>
+
+
+
+      <Grid container spacing={2}>
+      <Grid item  sm container lg={12} md={12} sm={12} sx={12} xl={12} xs={12}  className="boxrow">
+      <Grid item className="icon-space">
+        <ButtonBase sx={{ width: 20, height: 50 }}>
+          <CachedIcon/>
+        </ButtonBase>
+      </Grid>
+
+        <Grid item xs container direction="column" spacing={0}>
+          <Grid item xs>
+            <Typography gutterBottom variant="subtitle1" component="div">
+            Completed
+            </Typography>
+            
+          </Grid>
+        
+        </Grid>
+        <Grid item>
+          <Typography variant="subtitle1" component="div">
+          170
+          </Typography>
+        </Grid>
+      </Grid>
       </Grid>
 
 
       <Grid container spacing={2}>
-        <Grid item>
-          <ButtonBase sx={{ width: 20, height: 50 }}>
-            <CachedIcon/>
-          </ButtonBase>
-        </Grid>
-        <Grid item xs={12} sm container>
-          <Grid item xs container direction="column" spacing={0}>
-            <Grid item xs>
-              <Typography gutterBottom variant="subtitle1" component="div">
-              Completed
-              </Typography>
-              
-            </Grid>
-           
-          </Grid>
-          <Grid item>
-            <Typography variant="subtitle1" component="div">
-             170
-            </Typography>
-          </Grid>
-        </Grid>
-      </Grid>
-
-
-      <Grid container spacing={2}>
-        <Grid item>
+        <Grid item  sm container lg={12} md={12} sm={12} sx={12} xl={12} xs={12}  className="boxrow">
+        <Grid item className="icon-space">
           <ButtonBase sx={{ width: 20, height: 50 }}>
             <ErrorIcon/>
           </ButtonBase>
         </Grid>
-        <Grid item xs={12} sm container>
+
           <Grid item xs container direction="column" spacing={0}>
             <Grid item xs>
               <Typography gutterBottom variant="subtitle1" component="div">
@@ -80,64 +89,72 @@ export default function ComplexGrid() {
               </Typography>
               
             </Grid>
-           
+          
           </Grid>
           <Grid item>
             <Typography variant="subtitle1" component="div">
-             2
+            2
             </Typography>
           </Grid>
         </Grid>
-      </Grid>
+    </Grid>
 
-      <Grid container spacing={2}>
+
+    <Grid container spacing={2}>
+      <Grid item  sm container lg={12} md={12} sm={12} sx={12} xl={12} xs={12}  className="boxrow">
+      <Grid item className="icon-space">
+        <ButtonBase sx={{ width: 20, height: 50 }}>
+          <AccessAlarmsIcon/>
+        </ButtonBase>
+      </Grid>
+      
+        <Grid item xs container direction="column" spacing={0}>
+          <Grid item xs>
+            <Typography gutterBottom variant="subtitle1" component="div">
+            Overdue
+            </Typography>
+            
+          </Grid>
+        
+        </Grid>
         <Grid item>
-          <ButtonBase sx={{ width: 20, height: 50 }}>
-            <AccessAlarmsIcon/>
-          </ButtonBase>
-        </Grid>
-        <Grid item xs={12} sm container>
-          <Grid item xs container direction="column" spacing={0}>
-            <Grid item xs>
-              <Typography gutterBottom variant="subtitle1" component="div">
-               Overdue
-              </Typography>
-              
-            </Grid>
-           
-          </Grid>
-          <Grid item>
-            <Typography variant="subtitle1" component="div">
-              5
-            </Typography>
-          </Grid>
+          <Typography variant="subtitle1" component="div">
+            5
+          </Typography>
         </Grid>
       </Grid>
+    </Grid>
 
-      <Grid container spacing={2}>
-        <Grid item>
-          <ButtonBase sx={{ width: 20, height: 50 }}>
-            <CheckCircleIcon/>
-          </ButtonBase>
+
+    <Grid container spacing={2}>
+    <Grid item  sm container lg={12} md={12} sm={12} sx={12} xl={12} xs={12}  className="boxrow">
+    <Grid item className="icon-space">
+      <ButtonBase sx={{ width: 20, height: 50 }}>
+        <CheckCircleIcon/>
+      </ButtonBase>
+    </Grid>
+
+      <Grid item xs container direction="column" spacing={0}>
+        <Grid item xs>
+          <Typography gutterBottom variant="subtitle1" component="div">
+          Pending
+          </Typography>
+          
         </Grid>
-        <Grid item xs={12} sm container>
-          <Grid item xs container direction="column" spacing={0}>
-            <Grid item xs>
-              <Typography gutterBottom variant="subtitle1" component="div">
-              Pending
-              </Typography>
-              
-            </Grid>
-           
-          </Grid>
-          <Grid item>
-            <Typography variant="subtitle1" component="div">
-              26
-            </Typography>
-          </Grid>
-        </Grid>
+      
       </Grid>
+      <Grid item>
+        <Typography variant="subtitle1" component="div">
+          26
+        </Typography>
+      </Grid>
+    </Grid>
+    </Grid>
 
+
+
+
+     
     </Paper>
   );
 }
