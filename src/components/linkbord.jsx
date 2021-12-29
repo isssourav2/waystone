@@ -11,7 +11,7 @@ import AccessAlarmsIcon from '@mui/icons-material/AccessAlarms';
 import Link from '@mui/material/Link';
 import DateRangeIcon from '@mui/icons-material/DateRange';
 import { makeStyles } from '@mui/styles';
-import DoubleArrowIcon from '@mui/icons-material/DoubleArrow';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
 const useStyles = makeStyles({
   root: {
@@ -59,7 +59,7 @@ export default function ComplexGrid() {
            
           </Grid>
           <Grid item>
-          <Link class="btn-link" href="#"> <DoubleArrowIcon/></Link>
+          <Link class="btn-link" href="#"> <ArrowForwardIcon/></Link>
           </Grid>
         </Grid>
       </Grid>
@@ -93,7 +93,7 @@ export default function ComplexGrid() {
            
           </Grid>
           <Grid item>
-          <Link class="btn-link" href="#"> <DoubleArrowIcon/></Link>
+          <Link class="btn-link" href="#"> <ArrowForwardIcon/></Link>
           </Grid>
         </Grid>
       </Grid>
@@ -112,7 +112,7 @@ export default function ComplexGrid() {
            
           </Grid>
           <Grid item>
-          <Link class="btn-link" href="#"> <DoubleArrowIcon/></Link>
+          <Link class="btn-link" href="#"> <ArrowForwardIcon/></Link>
           </Grid>
         </Grid>
       </Grid>
@@ -131,7 +131,7 @@ export default function ComplexGrid() {
            
           </Grid>
           <Grid item>
-          <Link class="btn-link" href="#"> <DoubleArrowIcon/></Link>
+          <Link class="btn-link" href="#"> <ArrowForwardIcon/></Link>
           </Grid>
         </Grid>
       </Grid>
@@ -149,7 +149,7 @@ export default function ComplexGrid() {
            
           </Grid>
           <Grid item>
-          <Link class="btn-link" href="#"> <DoubleArrowIcon/></Link>
+          <Link class="btn-link" href="#"><ArrowForwardIcon/></Link>
           </Grid>
         </Grid>
       </Grid>

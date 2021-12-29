@@ -18,6 +18,11 @@ import Divider from '@mui/material/Divider';
 import ListItemText from '@mui/material/ListItemText';
 import DoubleArrowIcon from '@mui/icons-material/DoubleArrow';
 
+import SimCardDownloadIcon from '@mui/icons-material/SimCardDownload';
+
+
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+
 import Link from '@mui/material/Link';
 
 import Linkbord from '../../components/linkbord.jsx';
@@ -70,8 +75,12 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla venenatis est nun
             </React.Fragment>
           }
         />
+
+        <div className="icon-box">
+        <Link href="#"><SimCardDownloadIcon/></Link>
+        </div>
       </ListItem>
-      <Divider variant="inset" component="li" />
+    
       <ListItem alignItems="flex-start">
         
         <ListItemText
@@ -90,8 +99,11 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla venenatis est nun
             </React.Fragment>
           }
         />
+         <div className="icon-box">
+         <Link href="#"><SimCardDownloadIcon/></Link>
+        </div>
       </ListItem>
-      <Divider variant="inset" component="li" />
+     
       <ListItem alignItems="flex-start">
        
         <ListItemText
@@ -110,21 +122,66 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla venenatis est nun
             </React.Fragment>
           }
         />
+         <div className="icon-box">
+         <Link href="#"><SimCardDownloadIcon/></Link>
+        </div>
       </ListItem>
     </List>
 
-
-    <Link class="btn-link" href="#"> View more <DoubleArrowIcon/></Link>
-
+    <div class="panel-box-link">
+    <Link class="btn-link" href="#"> View more <ArrowForwardIcon/></Link>
+    </div>
     </div>
     <div class="panel-box">
           <h3>Where to next?</h3>
-        <br/>
-          <Link class="btn-link" href="#"> View Dashborad  <EditIcon/> </Link>
+    <br/>
+    <List sx={{ width: '100%', bgcolor: 'background.paper' }}>
+      <ListItem alignItems="flex-start">
+       
+        <ListItemText
+          primary="View Dashborad "
+        />
 
-          <Link class="btn-link" href="#"> Create Data Pipeline <EditIcon/></Link>
+        <div className="icon-box">
+        <Link href="#"> <EditIcon/></Link>
+            
+        </div>
+      </ListItem>
+    
+      <ListItem alignItems="flex-start">
+       
+        <ListItemText
+          primary="Create Data Pipeline"
+        />
 
-          <Link class="btn-link" href="#"> Add Source <EditIcon/></Link>
+        <div className="icon-box">
+        <Link href="#"> <EditIcon/></Link>
+            
+        </div>
+      </ListItem>
+     
+      <ListItem alignItems="flex-start">
+       
+        <ListItemText
+          primary="Add Source"
+        />
+
+        <div className="icon-box">
+        <Link href="#"> <EditIcon/></Link>
+            
+        </div>
+      </ListItem>
+
+
+    </List>
+
+
+
+
+
+
+
+          
 
               </div>
             </Grid>

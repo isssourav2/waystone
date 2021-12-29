@@ -19,7 +19,7 @@ const bull = (
 
 const card = (
   <React.Fragment>
-    <div class="link-box">
+    <div className="link-box">
       <CardContent>
         <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
           View Data Pipelines
@@ -31,7 +31,7 @@ const card = (
         <AddCircleIcon/>
     </CardActions>
     </div>
-    <div class="link-box">
+    <div className="link-box">
     <CardContent>
       <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
          View Data Pipelines
@@ -43,7 +43,7 @@ const card = (
         <EditRoadOutlinedIcon/>
     </CardActions>
     </div>
-    <div class="link-box">
+    <div className="link-box">
     <CardContent>
       <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
          View Data Pipelines

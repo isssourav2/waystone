@@ -10,6 +10,10 @@ import ErrorIcon from '@mui/icons-material/Error';
 import AccessAlarmsIcon from '@mui/icons-material/AccessAlarms';
 import Link from '@mui/material/Link';
 
+import Box from '@mui/material/Box';
+
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+
 import { makeStyles } from '@mui/styles';
 
 
@@ -28,82 +32,93 @@ const useStyles = makeStyles({
 export default function ComplexGrid() {
   const classes = useStyles();
   return (
+
     
-    <Paper sx={{ p: 1, margin: 'auto', maxWidth: 700, flexGrow: 5 }}>
-      <Grid container spacing={2}>
-        <Grid item lg={1} md={1} sm={1} sx={1} xl={1} xs={1}>
-          <ButtonBase sx={{ width: 20, height: 50 }}>
-            <CheckCircleIcon/>
-          </ButtonBase>
-        </Grid>
-        <Grid item container lg={11} md={11} sm={11} sx={11} xl={11} xs={11}>
-          <Grid item xs container direction="column" spacing={0}>
-            <Grid item xs>
-              <Typography gutterBottom variant="subtitle1" component="div">
-               2 incomplete Pipelines need your attention
-              </Typography>
-              
-            </Grid>
-           
-          </Grid>
-          <Grid item>
-            <Link class="btn-link" href="#"> Review</Link>
-          </Grid>
-        </Grid>
-      </Grid>
+ 
 
 
-      <Grid container spacing={2}>
-        <Grid item lg={1} md={1} sm={1} sx={1} xl={1} xs={1}>
-          <ButtonBase sx={{ width: 20, height: 50 }}>
-            <CachedIcon/>
-          </ButtonBase>
-        </Grid>
-        <Grid item container lg={11} md={11} sm={11} sx={11} xl={11} xs={11}>
-          <Grid item xs container direction="column" spacing={0}>
-            <Grid item xs>
-              <Typography gutterBottom variant="subtitle1" component="div">
-               2 Pipelines Schedule required
-              </Typography>
-              
-            </Grid>
-           
-          </Grid>
-          <Grid item>
-          <Link class="btn-link" href="#"> Review</Link>
-          </Grid>
-        </Grid>
-      </Grid>
 
 
-      <Grid container spacing={2}>
-        <Grid item lg={1} md={1} sm={1} sx={1} xl={1} xs={1}>
-          <ButtonBase sx={{ width: 20, height: 50 }}>
-            <ErrorIcon/>
-          </ButtonBase>
-        </Grid>
-        <Grid item container lg={11} md={11} sm={11} sx={11} xl={11} xs={11}>
-          <Grid item xs container direction="column" spacing={0}>
-            <Grid item xs>
-              <Typography gutterBottom variant="subtitle1" component="div">
-              2 Pipelines are failing since last 2 weeks
-              </Typography>
-              
-            </Grid>
-           
-          </Grid>
-          <Grid item>
-          <Link class="btn-link" href="#"> Review</Link>
-          </Grid>
-        </Grid>
-      </Grid>
-
+<Paper sx={{ p: 1, margin: 'auto', maxWidth: 700, flexGrow: 5 }}>
      
-      
 
-      
 
-    </Paper>
+     <Grid container spacing={2}>
+     <Grid item  sm container lg={12} md={12} sm={12} sx={12} xl={12} xs={12}  className="boxrow arrow">
+     
+
+       <Grid item xs container direction="column" spacing={0}>
+         <Grid item xs>
+           <Typography gutterBottom variant="subtitle1" component="div">
+            <h3>2 Pipelines are failing since last 2 weeks </h3>
+           </Typography>
+           
+         </Grid>
+       
+       </Grid>
+       <Grid item>
+         <Typography variant="subtitle1" component="div">
+         <Link class="btn-link" href="#"> Review  <ArrowForwardIcon/> </Link>       
+        </Typography>
+       </Grid>
+     </Grid>
+     </Grid>
+
+
+
+     <Grid container spacing={2}>
+     <Grid item  sm container lg={12} md={12} sm={12} sx={12} xl={12} xs={12}  className="boxrow arrow">
+     
+
+       <Grid item xs container direction="column" spacing={0}>
+         <Grid item xs>
+           <Typography gutterBottom variant="subtitle1" component="div">
+            <h3>2 Pipelines are failing since last 2 weeks </h3>
+           </Typography>
+           
+         </Grid>
+       
+       </Grid>
+       <Grid item>
+         <Typography variant="subtitle1" component="div">
+         <Link class="btn-link" href="#"> Review  <ArrowForwardIcon/> </Link>       
+        </Typography>
+       </Grid>
+     </Grid>
+     </Grid>
+
+
+     <Grid container spacing={2}>
+     <Grid item  sm container lg={12} md={12} sm={12} sx={12} xl={12} xs={12}  className="boxrow arrow">
+     
+
+       <Grid item xs container direction="column" spacing={0}>
+         <Grid item xs>
+           <Typography gutterBottom variant="subtitle1" component="div">
+            <h3>2 Pipelines are failing since last 2 weeks </h3>
+           </Typography>
+           
+         </Grid>
+       
+       </Grid>
+       <Grid item>
+         <Typography variant="subtitle1" component="div">
+         <Link class="btn-link" href="#"> Review  <ArrowForwardIcon/> </Link>       
+        </Typography>
+       </Grid>
+     </Grid>
+     </Grid>
+
+
+  
+
+
+
+
+    
+   </Paper>
+
+
   
   );
 }
