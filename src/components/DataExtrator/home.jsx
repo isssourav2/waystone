@@ -27,6 +27,7 @@ import Link from '@mui/material/Link';
 
 import Linkbord from '../../components/linkbord.jsx';
 
+
 import EditIcon from '@mui/icons-material/Edit';
 
 
@@ -176,13 +177,6 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla venenatis est nun
     </List>
 
 
-
-
-
-
-
-          
-
               </div>
             </Grid>
 
@@ -191,6 +185,10 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla venenatis est nun
                 
                 
                 <Linkbord/>
+
+  
+               
+
 
               </div>
             </Grid>
@@ -202,5 +200,9 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla venenatis est nun
     </Box>
   );
 };
+
+
+
+
 
 export default home;
