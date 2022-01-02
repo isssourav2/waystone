@@ -292,6 +292,12 @@ function Header() {
           <List>
             <h3>Work Space</h3>
             <ul>
+            <li>
+                <a href="#">
+                  {' '}
+                  <AccountBalanceIcon /> Roles
+                </a>
+              </li>
               <li>
                 <a href="#">
                   {' '}

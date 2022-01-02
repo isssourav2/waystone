@@ -4,6 +4,7 @@ import {
   DataExtracter,
   Stepper,
   TabMenu,
+  Roles,
   Application,
 } from './components';
 import { CssBaseline } from '@mui/material';
@@ -19,6 +20,7 @@ function App() {
         <Route path="/Stepper" element={<Stepper />} />
         <Route path="/TabMenu" element={<TabMenu />} />
         <Route path="/Application" element={<Application />} />
+        <Route path="/Roles" element={<Roles />} />
       </Routes>
     </Router>
   );
