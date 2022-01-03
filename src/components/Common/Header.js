@@ -241,7 +241,130 @@ function Header() {
               </List>
             </Collapse>
           </List>
+          <List component="nav">
+            <ul onClick={handleSubMenu}>
+              <li>
+                <InboxIcon /> <span>Job Scheduling</span>
+                {subOpen ? (
+                  <ExpandLess style={{ marginLeft: '2em' }} />
+                ) : (
+                  <ExpandMore style={{ marginLeft: '2em' }} />
+                )}
+              </li>
+            </ul>
 
+            <Collapse
+              in={subOpen}
+              timeout="auto"
+              unmountOnExit
+              sx={{ marginLeft: '0.6em' }}
+            >
+              <List component="ul" disablePadding>
+                <ListItem
+                  button
+                  onClick={() => handleChange(0)}
+                  selected={SubActiveValue === 0}
+                >
+                  <ListItemIcon className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root">
+                    <StarBorder />
+                  </ListItemIcon>
+                  <ListItemText primary="Jobs" />
+                </ListItem>
+              </List>
+              <List component="ul" disablePadding>
+                <ListItem
+                  button
+                  onClick={() => handleChange(1)}
+                  selected={SubActiveValue === 1}
+                >
+                  <ListItemIcon>
+                    <StarBorder />
+                  </ListItemIcon>
+                  <ListItemText primary="Schedules" />
+                </ListItem>
+              </List>
+              <List component="ul" disablePadding>
+                <ListItem
+                  button
+                  onClick={() => handleChange(1)}
+                  selected={SubActiveValue === 1}
+                >
+                  <ListItemIcon>
+                    <StarBorder />
+                  </ListItemIcon>
+                  <ListItemText primary="Calender" />
+                </ListItem>
+              </List>
+              <List component="ul" disablePadding>
+                <ListItem
+                  button
+                  onClick={() => handleChange(1)}
+                  selected={SubActiveValue === 1}
+                >
+                  <ListItemIcon>
+                    <StarBorder />
+                  </ListItemIcon>
+                  <ListItemText primary="Application" />
+                </ListItem>
+              </List>
+              <List component="ul" disablePadding>
+                <ListItem
+                  button
+                  onClick={() => handleChange(1)}
+                  selected={SubActiveValue === 1}
+                >
+                  <ListItemIcon>
+                    <StarBorder />
+                  </ListItemIcon>
+                  <ListItemText primary="Application Template" />
+                </ListItem>
+              </List>
+            </Collapse>
+          </List>
+          <List component="nav">
+            <ul onClick={handleSubMenu}>
+              <li>
+                <InboxIcon /> <span>Data Source</span>
+                {subOpen ? (
+                  <ExpandLess style={{ marginLeft: '2em' }} />
+                ) : (
+                  <ExpandMore style={{ marginLeft: '2em' }} />
+                )}
+              </li>
+            </ul>
+
+            <Collapse
+              in={subOpen}
+              timeout="auto"
+              unmountOnExit
+              sx={{ marginLeft: '0.6em' }}
+            >
+              <List component="ul" disablePadding>
+                <ListItem
+                  button
+                  onClick={() => handleChange(0)}
+                  selected={SubActiveValue === 0}
+                >
+                  <ListItemIcon className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root">
+                    <StarBorder />
+                  </ListItemIcon>
+                  <ListItemText primary="Source" />
+                </ListItem>
+              </List>
+              <List component="ul" disablePadding>
+                <ListItem
+                  button
+                  onClick={() => handleChange(1)}
+                  selected={SubActiveValue === 1}
+                >
+                  <ListItemIcon>
+                    <StarBorder />
+                  </ListItemIcon>
+                  <ListItemText primary="Connection" />
+                </ListItem>
+              </List>
+            </Collapse>
+          </List>
           <Divider />
           <List component="nav">
             <div class="spacer"></div>
