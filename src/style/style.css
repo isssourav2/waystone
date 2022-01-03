@@ -1071,18 +1071,28 @@ thead.css-15wwp11-MuiTableHead-root{
   background-color: #f2f2f2 !important;
 }
 
+.css-45fs7h-MuiDrawer-docked button.css-78trlr-MuiButtonBase-root-MuiIconButton-root{
+  width: 20px !important;
+  height: 20px !important;
+  position:absolute;
+  right: -10px;
+    top: 79px;
+    background-color: #fff;
+}
 
 .modelPopUp .MuiDialog-paper{
   width: 100%;
-  max-width: 450px;
+  max-width: 500px;
+  padding: 20px;                  
 }
 
 .modelPopUp .MuiDialog-paper h3{
-  color: #265773;
   font-size: 22px;
   font-weight: 700;
   line-height: 45px;
 }
+
+
 
 .modelPopUp .MuiDialog-paper input[type="text"]{
   font-family: "Roboto","Helvetica","Arial",sans-serif;
@@ -1110,6 +1120,11 @@ thead.css-15wwp11-MuiTableHead-root{
   font-family: "Roboto","Helvetica","Arial",sans-serif;
   font-size: 16px;
   resize: none;
+} 
+
+                 
+.modelPopUp .MuiDialogActions-root,.css-153eyq5-MuiModal-root-MuiDialog-root.MuiDialogContent-root{
+  padding: 0px !important;
 } 
 
 .box-btn.tag{
