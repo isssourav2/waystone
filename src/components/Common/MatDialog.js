@@ -64,7 +64,7 @@ function MatDialog({
   isAction,
 }) {
   return (
-    <div>
+    <div className="modelPopUp">
       <BootstrapDialog
         onClose={handleClose}
         aria-labelledby="customized-dialog-title"
