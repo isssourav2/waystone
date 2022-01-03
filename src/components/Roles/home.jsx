@@ -26,10 +26,23 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Paper from '@mui/material/Paper';
+import Alert from '@mui/material/Alert';
 import '../../style/style.css';
 function PaperComponent(props) {
   return <Paper {...props} />;
 }
+function Alerts({ alert, color }) {
+  return (
+    <Alert severity={alert} color={color}>
+      Insert Successfully done!
+    </Alert>
+  );
+}
+
+const Insert = () => {
+  Alert();
+};
+
 const Home = () => {
   //Role Modal
   const [open, setOpen] = React.useState(false);
@@ -48,6 +61,10 @@ const Home = () => {
   const dialogHandleOpen = () => {
     setdialogOpen(true);
   };
+  const deleteHandle = () => {};
+  const InsertHandle = () => {};
+  const UpdateHandle = () => {};
+
   //View Role Modal
   const [viewOpen, setviewOpen] = React.useState(false);
 
@@ -80,6 +97,7 @@ const Home = () => {
     setTags((oldtag) => [...oldtag, tag]);
     setAnchorEl(null);
   };
+
   console.log(tags);
   tagged.push('Dashboard');
   tagged.push('Role Creation');

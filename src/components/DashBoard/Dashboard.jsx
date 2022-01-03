@@ -5,9 +5,9 @@ import Box from '@mui/material/Box';
 const Dashboard = () => {
   return (
     <Box sx={{ display: 'flex' }}>
-      <Header />
+      {/* <Header /> */}
       <Home />
-      </Box>
+    </Box>
   );
 };
 

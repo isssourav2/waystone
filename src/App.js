@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import {
   Dashboard,
-  DataExtracter,
+  Welcome,
   Stepper,
   TabMenu,
   Roles,
@@ -16,7 +16,8 @@ function App() {
       {/* App js */}
       <Routes>
         <Route path="/" element={<Dashboard />} exact />
-        <Route path="/DataExtracter" element={<DataExtracter />} />
+        {/* <Route path="/Welcome" element={<Welcome />} /> */}
+        <Route path="/help" element={<Welcome />} />
         <Route path="/Stepper" element={<Stepper />} />
         <Route path="/TabMenu" element={<TabMenu />} />
         <Route path="/Application" element={<Application />} />
