@@ -198,33 +198,9 @@ function Header() {
         <Divider />
         <div class="menu-link">
           <List component="nav">
-            <div class="spacer"></div>
-            <h3>Main Menu</h3>
-            <ul>
-              <li>
-                <Link to="/">
-                  {' '}
-                  <HomeIcon /> <span>Dashboard</span>
-                </Link>
-              </li>
-            </ul>
-          </List>
-          <Divider />
-          <List component="nav">
-            <div class="spacer"></div>
-            <ul>
-              <li>
-                <Link to="/Application">
-                  {' '}
-                  <AppsIcon /> <span>Application</span>
-                </Link>
-              </li>
-            </ul>
-          </List>
-          <List component="nav">
             <ul onClick={handleSubMenu}>
               <li>
-                <InboxIcon /> <span>Report</span>
+                <InboxIcon /> <span>Dashboard</span>
                 {subOpen ? (
                   <ExpandLess style={{ marginLeft: '2em' }} />
                 ) : (
@@ -232,18 +208,7 @@ function Header() {
                 )}
               </li>
             </ul>
-            {/* <ListItem button onClick={handleSubMenu}>
-              <ListItemIcon
-              // style={{ marginLeft: '-1.2em' }}
-              >
-                <InboxIcon />
-              </ListItemIcon>
-              <ListItemText
-                primary="Report"
-                // style={{ marginLeft: '-1.2em', marginRight: '6.5em' }}
-              />
-              {subOpen ? <ExpandLess /> : <ExpandMore />}
-            </ListItem> */}
+
             <Collapse
               in={subOpen}
               timeout="auto"
@@ -259,7 +224,7 @@ function Header() {
                   <ListItemIcon className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root">
                     <StarBorder />
                   </ListItemIcon>
-                  <ListItemText primary="Item One" />
+                  <ListItemText primary="Insights" />
                 </ListItem>
               </List>
               <List component="ul" disablePadding>
@@ -271,22 +236,23 @@ function Header() {
                   <ListItemIcon>
                     <StarBorder />
                   </ListItemIcon>
-                  <ListItemText primary="Item Two" />
-                </ListItem>
-              </List>
-              <List component="ul" disablePadding>
-                <ListItem
-                  button
-                  onClick={() => handleChange(2)}
-                  selected={SubActiveValue === 2}
-                >
-                  <ListItemIcon>
-                    <StarBorder />
-                  </ListItemIcon>
-                  <ListItemText primary="Item Three" />
+                  <ListItemText primary="Remedial Action" />
                 </ListItem>
               </List>
             </Collapse>
+          </List>
+
+          <Divider />
+          <List component="nav">
+            <div class="spacer"></div>
+            <ul>
+              <li>
+                <Link to="/Application">
+                  {' '}
+                  <AppsIcon /> <span>Application</span>
+                </Link>
+              </li>
+            </ul>
           </List>
 
           <List>

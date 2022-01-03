@@ -4,7 +4,7 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-
+import { Dashboard } from '../../components';
 import { TabMenuContext } from '../../Context/TabMenuContext';
 
 function TabPanel(props) {
@@ -54,9 +54,6 @@ const Home = () => {
       case 1:
         tabMenu.dispatch({ type: 'Tab2' });
         break;
-      case 2:
-        tabMenu.dispatch({ type: 'Tab3' });
-        break;
 
       default:
         break;
@@ -64,26 +61,26 @@ const Home = () => {
   };
 
   return (
-    <Box sx={{ width: '100%', marginTop: '4em' }}>
-      <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+    <Box sx={{ width: '100%', marginTop: '4em', marginLeft: '1.4em' }}>
+      <Box
+        className="tabDashboard"
+        sx={{ borderBottom: 1, borderColor: 'divider' }}
+      >
         <Tabs
           value={tabMenuOpenIndex}
           onChange={handleChange}
           aria-label="basic tabs example"
         >
-          <Tab label="Item One" {...a11yProps(0)} />
-          <Tab label="Item Two" {...a11yProps(1)} />
-          <Tab label="Item Three" {...a11yProps(2)} />
+          <Tab label="Insights" {...a11yProps(0)} />
+          <Tab label="Remedial Action" {...a11yProps(1)} />
         </Tabs>
       </Box>
+
       <TabPanel value={tabMenuOpenIndex} index={0}>
-        Item One
+        <Dashboard />
       </TabPanel>
       <TabPanel value={tabMenuOpenIndex} index={1}>
-        Item Two
-      </TabPanel>
-      <TabPanel value={tabMenuOpenIndex} index={2}>
-        Item Three
+        Remedial Action
       </TabPanel>
     </Box>
   );
