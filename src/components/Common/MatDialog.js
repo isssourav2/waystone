@@ -9,6 +9,7 @@ import DialogActions from '@mui/material/DialogActions';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import Typography from '@mui/material/Typography';
+
 import AddIcon from '@mui/icons-material/Add';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import AspectRatioIcon from '@mui/icons-material/AspectRatio';
@@ -64,8 +65,9 @@ function MatDialog({
   isAction,
 }) {
   return (
-    <div className="modelPopUp">
-      <BootstrapDialog
+    
+ 
+      <BootstrapDialog className="modelPopUp"
         onClose={handleClose}
         aria-labelledby="customized-dialog-title"
         open={open}
@@ -74,7 +76,7 @@ function MatDialog({
           id="customized-dialog-title"
           onClose={handleClose}
         >
-          <Typography variant="h6" style={{ marginRight: '3em' }}>
+          <Typography variant="h3" style={{ marginRight: '3em' }}>
             {title}
           </Typography>
         </BootstrapDialogTitle>
@@ -82,13 +84,14 @@ function MatDialog({
         {isAction && (
           <DialogActions dividers>
             <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-              {isCancel && <Button onClick={handleClose}>Cancel</Button>}
-              {isSubmit && <Button autoFocus>Save changes</Button>}
+              {isCancel && <Button onClick={handleClose} className="box-btn left">Cancel</Button>}
+              {isSubmit && <Button autoFocus className="box-btn">Save changes</Button>}
             </Box>
           </DialogActions>
         )}
       </BootstrapDialog>
-    </div>
+  
+    
   );
 }
 

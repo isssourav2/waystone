@@ -1072,6 +1072,38 @@ thead.css-15wwp11-MuiTableHead-root{
 }
 
 
+.modelPopUp .MuiDialog-paper{
+  width: 100%;
+  max-width: 450px;
+}
+
+.modelPopUp .MuiDialog-paper h3{
+  color: #265773;
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 45px;
+}
+
+.modelPopUp .MuiDialog-paper input[type="text"]{
+  font-family: "Roboto","Helvetica","Arial",sans-serif;
+  font-size: 14px;
+  width: 80%;
+}
+
+.modelPopUp .MuiDialog-paper .MuiInputBase-formControl{
+  width: 100%;
+}
+
+.modelPopUp .MuiDialog-paper .MuiFormControl-root{
+  width: 95%;
+}
+
+.modelPopUp .MuiDialog-paper .css-gg4vpm{
+  justify-content: space-between;
+  width: 100%;
+}
+
+
 @media (max-width: 1100px) {
   .col-box .css-i4bv87-MuiSvgIcon-root{font-size: 20px;}
   .css-1wniyei-MuiTypography-root,.css-10wpov9-MuiTypography-root{font-size: 14px;}
