@@ -333,10 +333,10 @@ const Home = () => {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button autoFocus onClick={handleClose}>
+          <Button autoFocus onClick={dialogHandleClose}>
             close
           </Button>
-          <Button onClick={handleClose}>Delete</Button>
+          <Button onClick={dialogHandleClose}>Delete</Button>
         </DialogActions>
       </Dialog>
     </>
