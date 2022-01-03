@@ -13,7 +13,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import { DataGrid, GridRowsProp, GridColDef } from '@mui/x-data-grid';
 import TextField from '@mui/material/TextField';
 import MatDialog from '../Common/MatDialog';
-import DataTable from '../../components/DataTable.jsx';
+import DataTable from './DataTable.jsx';
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import Input from '@mui/material/Input';
