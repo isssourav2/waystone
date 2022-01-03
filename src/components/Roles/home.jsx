@@ -294,26 +294,21 @@ const Home = () => {
         isCancel="true"
         isSubmit="true"
       >
-
         <Typography className="text-row">
-
-        <label>Role Name</label> <span>Power User | BD Team</span>
-
+          <label>Role Name</label> <span>Power User | BD Team</span>
         </Typography>
 
         <Typography className="text-row">
-
-        <label>Role Description</label> <span>Access to Everything (excl. Configuration, Manage</span>
-
+          <label>Role Description</label>{' '}
+          <span>Access to Everything (excl. Configuration, Manage</span>
         </Typography>
 
         <Typography className="text-row">
-
-          <label>Permission</label> 
-
+          <label>Permission</label>
         </Typography>
 
-        <Box className="box-tag"
+        <Box
+          className="box-tag"
           component="form"
           sx={{
             '& > :not(style)': { m: 1 },
@@ -321,10 +316,6 @@ const Home = () => {
           noValidate
           autoComplete="off"
         >
-
-         
-
-
           <TextareaAutosize
             aria-label="minimum height"
             minRows={3}
@@ -334,7 +325,7 @@ const Home = () => {
           />
           {tags.map((tag) => (
             <Item key={tag} className="box-btn tag">
-              <IconButton >
+              <IconButton>
                 <CloseIcon />
               </IconButton>
               {tag}
@@ -349,7 +340,7 @@ const Home = () => {
         aria-labelledby="draggable-dialog-title"
       >
         <DialogTitle style={{ cursor: 'move' }} id="draggable-dialog-title">
-          Subscribe
+          Delete
         </DialogTitle>
         <DialogContent>
           <DialogContentText>
