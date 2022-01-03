@@ -52,7 +52,7 @@ const Home = () => {
   const handleTaggedClose = () => {
     setAnchorEl(null);
   };
-
+  const id = open ? 'simple-popover' : undefined;
   return (
     <>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
