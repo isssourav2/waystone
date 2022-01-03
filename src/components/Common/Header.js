@@ -33,7 +33,14 @@ import StarIcon from '@mui/icons-material/Star';
 import { useNavigate } from 'react-router-dom';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import { TabMenuContext } from '../../Context/TabMenuContext';
-const drawerWidth = 200;
+
+//icons
+import HelpIcon from '@mui/icons-material/Help';
+import SettingsIcon from '@mui/icons-material/Settings';
+import ScheduleIcon from '@mui/icons-material/Schedule';
+
+import DashboardIcon from '@mui/icons-material/Dashboard';
+const drawerWidth = 280;
 
 const openedMixin = (theme) => ({
   width: drawerWidth,
@@ -200,7 +207,7 @@ function Header() {
           <List component="nav">
             <ul onClick={handleSubMenu}>
               <li>
-                <InboxIcon /> <span>Dashboard</span>
+                <DashboardIcon /> <span>Dashboard</span>
                 {subOpen ? (
                   <ExpandLess style={{ marginLeft: '2em' }} />
                 ) : (
@@ -221,9 +228,6 @@ function Header() {
                   onClick={() => handleChange(0)}
                   selected={SubActiveValue === 0}
                 >
-                  <ListItemIcon className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root">
-                    <StarBorder />
-                  </ListItemIcon>
                   <ListItemText primary="Insights" />
                 </ListItem>
               </List>
@@ -233,9 +237,6 @@ function Header() {
                   onClick={() => handleChange(1)}
                   selected={SubActiveValue === 1}
                 >
-                  <ListItemIcon>
-                    <StarBorder />
-                  </ListItemIcon>
                   <ListItemText primary="Remedial Action" />
                 </ListItem>
               </List>
@@ -244,7 +245,7 @@ function Header() {
           <List component="nav">
             <ul onClick={handleSubMenu}>
               <li>
-                <InboxIcon /> <span>Job Scheduling</span>
+                <MenuIcon /> <span>Data Source</span>
                 {subOpen ? (
                   <ExpandLess style={{ marginLeft: '2em' }} />
                 ) : (
@@ -265,89 +266,6 @@ function Header() {
                   onClick={() => handleChange(0)}
                   selected={SubActiveValue === 0}
                 >
-                  <ListItemIcon className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root">
-                    <StarBorder />
-                  </ListItemIcon>
-                  <ListItemText primary="Jobs" />
-                </ListItem>
-              </List>
-              <List component="ul" disablePadding>
-                <ListItem
-                  button
-                  onClick={() => handleChange(1)}
-                  selected={SubActiveValue === 1}
-                >
-                  <ListItemIcon>
-                    <StarBorder />
-                  </ListItemIcon>
-                  <ListItemText primary="Schedules" />
-                </ListItem>
-              </List>
-              <List component="ul" disablePadding>
-                <ListItem
-                  button
-                  onClick={() => handleChange(1)}
-                  selected={SubActiveValue === 1}
-                >
-                  <ListItemIcon>
-                    <StarBorder />
-                  </ListItemIcon>
-                  <ListItemText primary="Calender" />
-                </ListItem>
-              </List>
-              <List component="ul" disablePadding>
-                <ListItem
-                  button
-                  onClick={() => handleChange(1)}
-                  selected={SubActiveValue === 1}
-                >
-                  <ListItemIcon>
-                    <StarBorder />
-                  </ListItemIcon>
-                  <ListItemText primary="Application" />
-                </ListItem>
-              </List>
-              <List component="ul" disablePadding>
-                <ListItem
-                  button
-                  onClick={() => handleChange(1)}
-                  selected={SubActiveValue === 1}
-                >
-                  <ListItemIcon>
-                    <StarBorder />
-                  </ListItemIcon>
-                  <ListItemText primary="Application Template" />
-                </ListItem>
-              </List>
-            </Collapse>
-          </List>
-          <List component="nav">
-            <ul onClick={handleSubMenu}>
-              <li>
-                <InboxIcon /> <span>Data Source</span>
-                {subOpen ? (
-                  <ExpandLess style={{ marginLeft: '2em' }} />
-                ) : (
-                  <ExpandMore style={{ marginLeft: '2em' }} />
-                )}
-              </li>
-            </ul>
-
-            <Collapse
-              in={subOpen}
-              timeout="auto"
-              unmountOnExit
-              sx={{ marginLeft: '0.6em' }}
-            >
-              <List component="ul" disablePadding>
-                <ListItem
-                  button
-                  onClick={() => handleChange(0)}
-                  selected={SubActiveValue === 0}
-                >
-                  <ListItemIcon className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root">
-                    <StarBorder />
-                  </ListItemIcon>
                   <ListItemText primary="Source" />
                 </ListItem>
               </List>
@@ -357,28 +275,147 @@ function Header() {
                   onClick={() => handleChange(1)}
                   selected={SubActiveValue === 1}
                 >
-                  <ListItemIcon>
-                    <StarBorder />
-                  </ListItemIcon>
                   <ListItemText primary="Connection" />
                 </ListItem>
               </List>
             </Collapse>
           </List>
+
+          <List component="nav">
+            <ul onClick={handleSubMenu}>
+              <li>
+                <ScheduleIcon /> <span>Job Scheduling</span>
+                {subOpen ? (
+                  <ExpandLess style={{ marginLeft: '2em' }} />
+                ) : (
+                  <ExpandMore style={{ marginLeft: '2em' }} />
+                )}
+              </li>
+            </ul>
+
+            <Collapse
+              in={subOpen}
+              timeout="auto"
+              unmountOnExit
+              sx={{ marginLeft: '0.6em' }}
+            >
+              <List component="ul" disablePadding>
+                <ListItem
+                  button
+                  onClick={() => handleChange(0)}
+                  selected={SubActiveValue === 0}
+                >
+                  <ListItemText primary="Jobs" />
+                </ListItem>
+              </List>
+              <List component="ul" disablePadding>
+                <ListItem
+                  button
+                  onClick={() => handleChange(1)}
+                  selected={SubActiveValue === 1}
+                >
+                  <ListItemText primary="Schedules" />
+                </ListItem>
+              </List>
+              <List component="ul" disablePadding>
+                <ListItem
+                  button
+                  onClick={() => handleChange(1)}
+                  selected={SubActiveValue === 1}
+                >
+                  <ListItemText primary="Calender" />
+                </ListItem>
+              </List>
+              <List component="ul" disablePadding>
+                <ListItem
+                  button
+                  onClick={() => handleChange(1)}
+                  selected={SubActiveValue === 1}
+                >
+                  <ListItemText primary="Application" />
+                </ListItem>
+              </List>
+              <List component="ul" disablePadding>
+                <ListItem
+                  button
+                  onClick={() => handleChange(1)}
+                  selected={SubActiveValue === 1}
+                >
+                  <ListItemText primary="Application Template" />
+                </ListItem>
+              </List>
+            </Collapse>
+          </List>
+
           <Divider />
           <List component="nav">
-            <div class="spacer"></div>
+            <ul onClick={handleSubMenu}>
+              <li>
+                <SettingsIcon /> <span>Settings</span>
+                {subOpen ? (
+                  <ExpandLess style={{ marginLeft: '2em' }} />
+                ) : (
+                  <ExpandMore style={{ marginLeft: '2em' }} />
+                )}
+              </li>
+            </ul>
+
+            <Collapse
+              in={subOpen}
+              timeout="auto"
+              unmountOnExit
+              sx={{ marginLeft: '0.6em' }}
+            >
+              <List component="ul" disablePadding>
+                <ListItem
+                  button
+                  onClick={() => handleChange(0)}
+                  selected={SubActiveValue === 0}
+                >
+                  <ListItemText primary="Config" />
+                </ListItem>
+              </List>
+              <List component="ul" disablePadding>
+                <ListItem
+                  button
+                  onClick={() => handleChange(1)}
+                  selected={SubActiveValue === 1}
+                >
+                  <ListItemText primary="User" />
+                </ListItem>
+              </List>
+              <List component="ul" disablePadding>
+                <ListItem
+                  button
+                  onClick={() => handleChange(1)}
+                  selected={SubActiveValue === 1}
+                >
+                  <ListItemText primary="Roles" />
+                </ListItem>
+              </List>
+              <List component="ul" disablePadding>
+                <ListItem
+                  button
+                  onClick={() => handleChange(1)}
+                  selected={SubActiveValue === 1}
+                >
+                  <ListItemText primary="Tag" />
+                </ListItem>
+              </List>
+            </Collapse>
+          </List>
+          <List>
+            {/* <h3>Help</h3> */}
             <ul>
               <li>
-                <Link to="/Application">
+                <Link to="/Roles">
                   {' '}
-                  <AppsIcon /> <span>Application</span>
+                  <HelpIcon /> Help
                 </Link>
               </li>
             </ul>
           </List>
-
-          <List>
+          {/* <List>
             <h3>Work Space</h3>
             <ul>
               <li>
@@ -412,7 +449,7 @@ function Header() {
                 </a>
               </li>
             </ul>
-          </List>
+          </List> */}
         </div>
         <Divider />
       </Drawer>
