@@ -294,7 +294,26 @@ const Home = () => {
         isCancel="true"
         isSubmit="true"
       >
-        <Box
+
+        <Typography className="text-row">
+
+        <label>Role Name</label> <span>Power User | BD Team</span>
+
+        </Typography>
+
+        <Typography className="text-row">
+
+        <label>Role Description</label> <span>Access to Everything (excl. Configuration, Manage</span>
+
+        </Typography>
+
+        <Typography className="text-row">
+
+          <label>Permission</label> 
+
+        </Typography>
+
+        <Box className="box-tag"
           component="form"
           sx={{
             '& > :not(style)': { m: 1 },
@@ -302,6 +321,10 @@ const Home = () => {
           noValidate
           autoComplete="off"
         >
+
+         
+
+
           <TextareaAutosize
             aria-label="minimum height"
             minRows={3}
@@ -310,8 +333,8 @@ const Home = () => {
             onKeyDown={handleTaggedChange}
           />
           {tags.map((tag) => (
-            <Item key={tag}>
-              <IconButton style={{ marginLeft: '-4em' }}>
+            <Item key={tag} className="box-btn tag">
+              <IconButton >
                 <CloseIcon />
               </IconButton>
               {tag}
