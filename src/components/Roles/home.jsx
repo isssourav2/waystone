@@ -28,6 +28,10 @@ import DialogTitle from '@mui/material/DialogTitle';
 import Paper from '@mui/material/Paper';
 import Alert from '@mui/material/Alert';
 import '../../style/style.css';
+
+/*import DataGridPro from '../../components/DataGridPro';*/
+
+
 function PaperComponent(props) {
   return <Paper {...props} />;
 }
@@ -357,6 +361,8 @@ const Home = () => {
           <Button onClick={dialogHandleClose} className="btn">Delete</Button>
         </DialogActions>
       </Dialog>
+      
+      {/* <DataGridPro/> */}
     </>
   );
 };
