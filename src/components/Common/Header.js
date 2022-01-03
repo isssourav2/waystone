@@ -38,7 +38,6 @@ import { TabMenuContext } from '../../Context/TabMenuContext';
 import HelpIcon from '@mui/icons-material/Help';
 import SettingsIcon from '@mui/icons-material/Settings';
 import ScheduleIcon from '@mui/icons-material/Schedule';
-
 import DashboardIcon from '@mui/icons-material/Dashboard';
 const drawerWidth = 280;
 
@@ -209,9 +208,9 @@ function Header() {
               <li>
                 <DashboardIcon /> <span>Dashboard</span>
                 {subOpen ? (
-                  <ExpandLess style={{ marginLeft: '2em' }} />
-                ) : (
                   <ExpandMore style={{ marginLeft: '2em' }} />
+                ) : (
+                  <ChevronRightIcon style={{ marginLeft: '2em' }} />
                 )}
               </li>
             </ul>
@@ -247,9 +246,9 @@ function Header() {
               <li>
                 <MenuIcon /> <span>Data Source</span>
                 {subOpen ? (
-                  <ExpandLess style={{ marginLeft: '2em' }} />
-                ) : (
                   <ExpandMore style={{ marginLeft: '2em' }} />
+                ) : (
+                  <ChevronRightIcon style={{ marginLeft: '2em' }} />
                 )}
               </li>
             </ul>
@@ -286,9 +285,9 @@ function Header() {
               <li>
                 <ScheduleIcon /> <span>Job Scheduling</span>
                 {subOpen ? (
-                  <ExpandLess style={{ marginLeft: '2em' }} />
-                ) : (
                   <ExpandMore style={{ marginLeft: '2em' }} />
+                ) : (
+                  <ChevronRightIcon style={{ marginLeft: '2em' }} />
                 )}
               </li>
             </ul>
@@ -353,9 +352,9 @@ function Header() {
               <li>
                 <SettingsIcon /> <span>Settings</span>
                 {subOpen ? (
-                  <ExpandLess style={{ marginLeft: '2em' }} />
-                ) : (
                   <ExpandMore style={{ marginLeft: '2em' }} />
+                ) : (
+                  <ChevronRightIcon style={{ marginLeft: '2em' }} />
                 )}
               </li>
             </ul>
