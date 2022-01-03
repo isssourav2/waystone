@@ -4,8 +4,8 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import { Dashboard } from '../../components';
-import { TabMenuContext } from '../../Context/TabMenuContext';
+import { Dashboard } from '../..';
+import { TabMenuContext } from '../../../Context/TabMenuContext';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -49,10 +49,10 @@ const Home = () => {
     //setValue(newValue);
     switch (newValue) {
       case 0:
-        tabMenu.dispatch({ type: 'Tab1' });
+        tabMenu.dispatch({ type: 'Dashboard_Insight' });
         break;
       case 1:
-        tabMenu.dispatch({ type: 'Tab2' });
+        tabMenu.dispatch({ type: 'Dashboard_RemedialAction' });
         break;
 
       default:
