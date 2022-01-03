@@ -84,8 +84,8 @@ function MatDialog({
         {isAction && (
           <DialogActions dividers className="css-hlj6pa-MuiDialogActions-root">
             <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-              {isCancel && <Button onClick={handleClose} className="box-btn left">Cancel</Button>}
-              {isSubmit && <Button autoFocus className="box-btn">Save changes</Button>}
+              {isCancel && <Button onClick={handleClose} className="box-btn-cancel">Cancel</Button>}
+              {isSubmit && <Button autoFocus className="btn">Save changes</Button>}
             </Box>
           </DialogActions>
         )}
