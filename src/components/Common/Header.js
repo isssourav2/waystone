@@ -408,7 +408,7 @@ function Header() {
             {/* <h3>Help</h3> */}
             <ul>
               <li>
-                <Link to="/Roles">
+                <Link to="/help">
                   {' '}
                   <HelpIcon /> Help
                 </Link>
