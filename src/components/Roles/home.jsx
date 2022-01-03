@@ -20,8 +20,16 @@ import Input from '@mui/material/Input';
 import TextareaAutosize from '@mui/material/TextareaAutosize';
 import Popover from '@mui/material/Popover';
 import CloseIcon from '@mui/icons-material/Close';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import Paper from '@mui/material/Paper';
 import '../../style/style.css';
-
+function PaperComponent(props) {
+  return <Paper {...props} />;
+}
 const Home = () => {
   //Role Modal
   const [open, setOpen] = React.useState(false);
@@ -29,9 +37,26 @@ const Home = () => {
   const handleClickOpen = () => {
     setOpen(true);
   };
-
   const handleClose = () => {
     setOpen(false);
+  };
+  //Dialog Modal
+  const [dialogOpen, setdialogOpen] = React.useState(false);
+  const dialogHandleClose = () => {
+    setdialogOpen(false);
+  };
+  const dialogHandleOpen = () => {
+    setdialogOpen(true);
+  };
+  //View Role Modal
+  const [viewOpen, setviewOpen] = React.useState(false);
+
+  const viewHandleOpen = () => {
+    setviewOpen(true);
+  };
+
+  const viewHandleClose = () => {
+    setviewOpen(false);
   };
   //Permision Modal
   const [PermissionOpen, setPermissionOpen] = React.useState(false);
@@ -133,7 +158,12 @@ const Home = () => {
           <Grid item xs={12}>
             <Grid container spacing={2}>
               <Grid item xs={12}>
-                <DataTable PermissionOpen={PermissionhandleClickOpen} />
+                <DataTable
+                  PermissionOpen={PermissionhandleClickOpen}
+                  ClickOpen={handleClickOpen}
+                  viewOpen={viewHandleOpen}
+                  dialogOpen={dialogHandleOpen}
+                />
               </Grid>
 
               <Grid item xs={9}>
@@ -224,6 +254,39 @@ const Home = () => {
         </Box>
       </MatDialog>
       <MatDialog
+        open={viewOpen}
+        title="Role"
+        handleClose={viewHandleClose}
+        isAction="true"
+        isCancel="true"
+        isSubmit="true"
+      >
+        <Box
+          component="form"
+          sx={{
+            '& > :not(style)': { m: 1 },
+          }}
+          noValidate
+          autoComplete="off"
+        >
+          <FormControl variant="standard">
+            <InputLabel htmlFor="component-simple">Role Name</InputLabel>
+          </FormControl>
+        </Box>
+        <Box
+          component="form"
+          sx={{
+            '& > :not(style)': { m: 1 },
+          }}
+          noValidate
+          autoComplete="off"
+        >
+          <FormControl variant="standard">
+            <InputLabel htmlFor="component-simple">Description</InputLabel>
+          </FormControl>
+        </Box>
+      </MatDialog>
+      <MatDialog
         open={PermissionOpen}
         title="Permission"
         handleClose={PermissionhandleClose}
@@ -279,6 +342,27 @@ const Home = () => {
           ))}
         </Box>
       </MatDialog>
+      <Dialog
+        open={dialogOpen}
+        onClose={dialogHandleClose}
+        PaperComponent={PaperComponent}
+        aria-labelledby="draggable-dialog-title"
+      >
+        <DialogTitle style={{ cursor: 'move' }} id="draggable-dialog-title">
+          Subscribe
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            Are you sure you want delete this records?
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button autoFocus onClick={handleClose}>
+            close
+          </Button>
+          <Button onClick={handleClose}>Delete</Button>
+        </DialogActions>
+      </Dialog>
     </>
   );
 };
