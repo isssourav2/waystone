@@ -18,7 +18,6 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Link from '@mui/material/Link';
 
-
 function createData(name, calories, fat, carbs, protein, price) {
   return {
     name,
@@ -43,29 +42,40 @@ function createData(name, calories, fat, carbs, protein, price) {
 }
 
 function Row(props) {
-  const { row } = props;
+  const { row, PermissionOpen } = props;
   const [open, setOpen] = React.useState(false);
-  
 
   return (
     <React.Fragment>
       <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
-        <TableCell>
-          
-        </TableCell>
+        <TableCell></TableCell>
         <TableCell component="th" scope="row">
           {row.name}
         </TableCell>
         <TableCell align="center">{row.calories}</TableCell>
         <TableCell align="center">{row.fat}</TableCell>
-        <TableCell align="center"><span className='count'>{row.carbs} </span></TableCell>
-        <TableCell align="center"> <Link href="" className="link-tool"> <RemoveRedEyeIcon/></Link> <Link className="link-tool" href=""> <EditIcon/></Link> <Link className="link-tool" href=""> <DeleteIcon/></Link> </TableCell>
+        <TableCell align="center">
+          <span onClick={PermissionOpen} className="count">
+            {row.carbs}{' '}
+          </span>
+        </TableCell>
+        <TableCell align="center">
+          {' '}
+          <Link href="" className="link-tool">
+            {' '}
+            <RemoveRedEyeIcon />
+          </Link>{' '}
+          <Link className="link-tool" href="">
+            {' '}
+            <EditIcon />
+          </Link>{' '}
+          <Link className="link-tool" href="">
+            {' '}
+            <DeleteIcon />
+          </Link>{' '}
+        </TableCell>
       </TableRow>
-     
     </React.Fragment>
-
-
-
   );
 }
 
@@ -79,7 +89,7 @@ Row.propTypes = {
         amount: PropTypes.number.isRequired,
         customerId: PropTypes.string.isRequired,
         date: PropTypes.string.isRequired,
-      }),
+      })
     ).isRequired,
     name: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
@@ -88,14 +98,42 @@ Row.propTypes = {
 };
 
 const rows = [
-  createData('Power User | BD Team', 'Lorem Ipsum is simply dummy text of the printing and typesetting', 6.0,  24 , 4.0, 3.99),
-  createData('Ice cream sandwich', 'Lorem Ipsum is simply dummy text ', 9.0, 37, 4.3, 4.99),
-  createData('Eclair', 'Lorem Ipsum is simply dummy text of ', 16.0, 24, 6.0, 3.79),
-  createData('Cupcake', 'Lorem Ipsum is simply dummy text of the printing and typesetting', 3.7, 67, 4.3, 2.5),
+  createData(
+    'Power User | BD Team',
+    'Lorem Ipsum is simply dummy text of the printing and typesetting',
+    6.0,
+    24,
+    4.0,
+    3.99
+  ),
+  createData(
+    'Ice cream sandwich',
+    'Lorem Ipsum is simply dummy text ',
+    9.0,
+    37,
+    4.3,
+    4.99
+  ),
+  createData(
+    'Eclair',
+    'Lorem Ipsum is simply dummy text of ',
+    16.0,
+    24,
+    6.0,
+    3.79
+  ),
+  createData(
+    'Cupcake',
+    'Lorem Ipsum is simply dummy text of the printing and typesetting',
+    3.7,
+    67,
+    4.3,
+    2.5
+  ),
   createData('Gingerbread', 'Lorem Ipsum is simply ', 16.0, 49, 3.9, 1.5),
 ];
 
-export default function CollapsibleTable() {
+export default function CollapsibleTable({ PermissionOpen }) {
   return (
     <TableContainer component={Paper}>
       <Table aria-label="collapsible table">
@@ -111,7 +149,7 @@ export default function CollapsibleTable() {
         </TableHead>
         <TableBody>
           {rows.map((row) => (
-            <Row key={row.name} row={row} />
+            <Row key={row.name} PermissionOpen={PermissionOpen} row={row} />
           ))}
         </TableBody>
       </Table>
