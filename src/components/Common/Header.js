@@ -109,7 +109,10 @@ const Drawer = styled(MuiDrawer, {
 function Header() {
   const tabMenu = useContext(TabMenuContext);
   const [open, setOpen] = React.useState(false);
-  const [subOpen, setSubOpen] = React.useState(false);
+  const [dashboardSubOpen, setdashboardSubOpen] = React.useState(false);
+  const [dataSourceSubOpen, setdataSourceSubOpen] = React.useState(false);
+  const [jobScheduleSubOpen, setjobScheduleSubOpen] = React.useState(false);
+  const [SettingsSubOpen, setSettingsSubOpen] = React.useState(false);
   const navigate = useNavigate();
   // const [SubActiveValue, setSubActiveValue] = React.useState(0);
   const SubActiveValue = tabMenu.state.SubActiveValue;
@@ -121,11 +124,50 @@ function Header() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
+  const handleSubMenu = (menu) => {
+    if (menu == 'dashboard') {
+      setdashboardSubOpen(!dashboardSubOpen);
+      setdataSourceSubOpen(false);
+      setjobScheduleSubOpen(false);
+      setSettingsSubOpen(false);
+    }
+    if (menu == 'dataSource') {
+      setdataSourceSubOpen(!dataSourceSubOpen);
+      setdashboardSubOpen(false);
+      setjobScheduleSubOpen(false);
+      setSettingsSubOpen(false);
+    }
+    if (menu == 'jobScedule') {
+      setdataSourceSubOpen(false);
+      setdashboardSubOpen(false);
+      setjobScheduleSubOpen(!jobScheduleSubOpen);
+      setSettingsSubOpen(false);
+    }
+    if (menu == 'settings') {
+      setdataSourceSubOpen(false);
+      setdashboardSubOpen(false);
+      setjobScheduleSubOpen(false);
+      setSettingsSubOpen(!SettingsSubOpen);
+    }
 
-  const handleSubMenu = () => {
-    setSubOpen(!subOpen);
     setOpen(true);
   };
+  // const handleDashboardSubMenu = () => {
+  //   setdashboardSubOpen(!dashboardSubOpen);
+  //   setOpen(true);
+  // };
+  // const handleDataSourceSubMenu = () => {
+  //   setdataSourceSubOpen(!dataSourceSubOpen);
+  //   setOpen(true);
+  // };
+  // const handlejobScheduleSubMenu = () => {
+  //   setjobScheduleSubOpen(!jobScheduleSubOpen);
+  //   setOpen(true);
+  // };
+  // const handleSettingsSubMenu = () => {
+  //   setSettingsSubOpen(!SettingsSubOpen);
+  //   setOpen(true);
+  // };
 
   const handleChange = (newValue) => {
     //setValue(newValue);
@@ -134,15 +176,11 @@ function Header() {
     setOpen(true);
     switch (newValue) {
       case 0:
-        tabMenu.dispatch({ type: 'Tab1' });
+        tabMenu.dispatch({ type: 'Dashboard_Insight' });
         break;
       case 1:
-        tabMenu.dispatch({ type: 'Tab2' });
+        tabMenu.dispatch({ type: 'Dashboard_RemedialAction' });
         break;
-      case 2:
-        tabMenu.dispatch({ type: 'Tab3' });
-        break;
-
       default:
         break;
     }
@@ -204,10 +242,10 @@ function Header() {
         <Divider />
         <div class="menu-link">
           <List component="nav">
-            <ul onClick={handleSubMenu}>
+            <ul onClick={() => handleSubMenu('dashboard')}>
               <li>
                 <DashboardIcon /> <span>Dashboard</span>
-                {subOpen ? (
+                {dashboardSubOpen ? (
                   <ExpandMore style={{ marginLeft: '2em' }} />
                 ) : (
                   <ChevronRightIcon style={{ marginLeft: '2em' }} />
@@ -216,7 +254,7 @@ function Header() {
             </ul>
 
             <Collapse
-              in={subOpen}
+              in={dashboardSubOpen}
               timeout="auto"
               unmountOnExit
               sx={{ marginLeft: '0.6em' }}
@@ -242,10 +280,10 @@ function Header() {
             </Collapse>
           </List>
           <List component="nav">
-            <ul onClick={handleSubMenu}>
+            <ul onClick={() => handleSubMenu('dataSource')}>
               <li>
                 <MenuIcon /> <span>Data Source</span>
-                {subOpen ? (
+                {dataSourceSubOpen ? (
                   <ExpandMore style={{ marginLeft: '2em' }} />
                 ) : (
                   <ChevronRightIcon style={{ marginLeft: '2em' }} />
@@ -254,7 +292,7 @@ function Header() {
             </ul>
 
             <Collapse
-              in={subOpen}
+              in={dataSourceSubOpen}
               timeout="auto"
               unmountOnExit
               sx={{ marginLeft: '0.6em' }}
@@ -281,10 +319,10 @@ function Header() {
           </List>
 
           <List component="nav">
-            <ul onClick={handleSubMenu}>
+            <ul onClick={() => handleSubMenu('jobScedule')}>
               <li>
                 <ScheduleIcon /> <span>Job Scheduling</span>
-                {subOpen ? (
+                {jobScheduleSubOpen ? (
                   <ExpandMore style={{ marginLeft: '2em' }} />
                 ) : (
                   <ChevronRightIcon style={{ marginLeft: '2em' }} />
@@ -293,7 +331,7 @@ function Header() {
             </ul>
 
             <Collapse
-              in={subOpen}
+              in={jobScheduleSubOpen}
               timeout="auto"
               unmountOnExit
               sx={{ marginLeft: '0.6em' }}
@@ -348,10 +386,10 @@ function Header() {
 
           <Divider />
           <List component="nav">
-            <ul onClick={handleSubMenu}>
+            <ul onClick={() => handleSubMenu('settings')}>
               <li>
                 <SettingsIcon /> <span>Settings</span>
-                {subOpen ? (
+                {SettingsSubOpen ? (
                   <ExpandMore style={{ marginLeft: '2em' }} />
                 ) : (
                   <ChevronRightIcon style={{ marginLeft: '2em' }} />
@@ -360,7 +398,7 @@ function Header() {
             </ul>
 
             <Collapse
-              in={subOpen}
+              in={SettingsSubOpen}
               timeout="auto"
               unmountOnExit
               sx={{ marginLeft: '0.6em' }}
