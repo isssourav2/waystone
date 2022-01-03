@@ -37,30 +37,6 @@ const BootstrapDialogTitle = (props) => {
             onClick={onClose}
             sx={{
               position: 'absolute',
-              right: 65,
-              top: 8,
-              color: (theme) => theme.palette.grey[500],
-            }}
-          >
-            <AspectRatioIcon />
-          </IconButton>
-          <IconButton
-            aria-label="close"
-            onClick={onClose}
-            sx={{
-              position: 'absolute',
-              right: 35,
-              top: 8,
-              color: (theme) => theme.palette.grey[500],
-            }}
-          >
-            <MoreHorizIcon />
-          </IconButton>
-          <IconButton
-            aria-label="close"
-            onClick={onClose}
-            sx={{
-              position: 'absolute',
               right: 8,
               top: 8,
               color: (theme) => theme.palette.grey[500],
@@ -78,7 +54,15 @@ BootstrapDialogTitle.propTypes = {
   children: PropTypes.node,
   onClose: PropTypes.func.isRequired,
 };
-function MatDialog({ open, handleClose }) {
+function MatDialog({
+  open,
+  handleClose,
+  children,
+  title,
+  isCancel,
+  isSubmit,
+  isAction,
+}) {
   return (
     <div>
       <BootstrapDialog
@@ -90,37 +74,19 @@ function MatDialog({ open, handleClose }) {
           id="customized-dialog-title"
           onClose={handleClose}
         >
-          <IconButton color="inherit">
-            <AddIcon />
-          </IconButton>
+          <Typography variant="h6" style={{ marginRight: '3em' }}>
+            {title}
+          </Typography>
         </BootstrapDialogTitle>
-        <DialogContent dividers>
-          <Box
-            sx={{
-              width: 300,
-              height: 300,
-            }}
-          >
-            <TextareaAutosize
-              aria-label="minimum height"
-              minRows={3}
-              multiple={true}
-              placeholder="Minimum 3 rows"
-              style={{
-                width: '332px',
-                position: 'absolute',
-                inset: '4.2em 0px 0px',
-                height: '333px',
-                margin: '0px',
-              }}
-            />
-          </Box>
-        </DialogContent>
-        <DialogActions>
-          <Button autoFocus onClick={handleClose}>
-            Save changes
-          </Button>
-        </DialogActions>
+        <DialogContent dividers>{children}</DialogContent>
+        {isAction && (
+          <DialogActions dividers>
+            <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+              {isCancel && <Button onClick={handleClose}>Cancel</Button>}
+              {isSubmit && <Button autoFocus>Save changes</Button>}
+            </Box>
+          </DialogActions>
+        )}
       </BootstrapDialog>
     </div>
   );

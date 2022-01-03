@@ -53,13 +53,15 @@ const home = () => {
 
         <Grid item xs={6}></Grid>
         <Grid item xs={6}>
-          <TextField
-            style={{ backgroundColor: 'white', height: '1em' }}
-            id="filled-basic"
-            label="Filled"
-            variant="filled"
-          />
-          <SearchIcon style={{ textAlign: 'right' }} />
+          <Item>
+            <TextField
+              style={{ backgroundColor: 'white' }}
+              id="filled-basic"
+              label="Filled"
+              variant="filled"
+            />
+            <SearchIcon style={{ textAlign: 'right' }} />
+          </Item>
         </Grid>
 
         <Grid item xs={12}>
