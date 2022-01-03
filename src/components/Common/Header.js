@@ -39,7 +39,7 @@ import HelpIcon from '@mui/icons-material/Help';
 import SettingsIcon from '@mui/icons-material/Settings';
 import ScheduleIcon from '@mui/icons-material/Schedule';
 import DashboardIcon from '@mui/icons-material/Dashboard';
-const drawerWidth = 280;
+const drawerWidth = 200;
 
 const openedMixin = (theme) => ({
   width: drawerWidth,
@@ -229,7 +229,7 @@ function Header() {
       </AppBar>
 
       <Drawer variant="permanent" open={open}>
-        <IconButton onClick={handleDrawerClose}>
+        <IconButton onClick={handleDrawerClose} className="arrow-btn">
           {theme.direction === 'rtl' ? (
             <ChevronRightIcon />
           ) : (

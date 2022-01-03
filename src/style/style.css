@@ -199,6 +199,9 @@ button.css-78trlr-MuiButtonBase-root-MuiIconButton-root
 
 .css-h4y409-MuiList-root li {
   padding: 8px 0;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
 }
 
 .css-h4y409-MuiList-root a {
@@ -998,7 +1001,13 @@ div#root .MuiBox-root.css-0 {
 
 .menu-link {
   overflow: hidden;
+  margin: 36px 0 0 0;
 }
+
+.menu-link li{
+  cursor:pointer;
+}
+
 .allert-col {
   border: #f2f2f2 1px solid;
   color: #1f3038;
@@ -1077,15 +1086,22 @@ thead.css-15wwp11-MuiTableHead-root {
   background-color: #f2f2f2 !important;
 }
 
-.css-45fs7h-MuiDrawer-docked button.css-78trlr-MuiButtonBase-root-MuiIconButton-root{
-  width: 20px !important;
-  height: 20px !important;
-  position:absolute;
-  right: -10px;
-    top: 79px;
-    background-color: #fff;
-    box-shadow: #666 0 0 4px;
+nav.MuiList-root{
+  padding: 0 !important;
 }
+
+.css-1kf81xp-MuiPaper-root-MuiAppBar-root .header-right {
+  width: calc(100% - 155px);
+}
+
+.css-15hesxo{
+  margin-right: 1.6em;
+}
+
+.col-box .css-mhc70k-MuiGrid-root{
+  width: calc(100% + 0px);
+}
+
 
 .modelPopUp .MuiDialog-paper{
   width: 100%;
@@ -1110,6 +1126,20 @@ thead.css-15wwp11-MuiTableHead-root {
 .cardstyle  .MuiTypography-subtitle1{
   display:block;
   padding: 15px 0 0;
+}
+
+.cardstyle{ margin-top: 15px;}
+
+.arrow-btn{
+  position: absolute !important;
+    left: 94%;
+    top: 68px;
+    width: 25px;
+    height: 25px;
+    line-height: 25px;
+    border: #ccc 1px solid !important;
+    border-radius: 50% !important;
+    background-color: #fff !important;
 }
 
 .modelPopUp .MuiDialog-paper input[type="text"]{
@@ -1201,6 +1231,17 @@ thead.css-15wwp11-MuiTableHead-root {
 }*/
 
 .frame .MuiBox-root{ padding: 0px;}
+
+
+.css-1kf81xp-MuiPaper-root-MuiAppBar-root {
+  z-index: 1 !important;
+}
+
+.css-45fs7h-MuiDrawer-docked .MuiDrawer-paper {
+  box-shadow: none;
+  border-right: 0 !important;
+  z-index: 999;
+}
 
 
 @media (max-width: 1100px) {
