@@ -18,6 +18,7 @@ import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import Input from '@mui/material/Input';
 import TextareaAutosize from '@mui/material/TextareaAutosize';
+import Popover from '@mui/material/Popover';
 import '../../style/style.css';
 
 const Home = () => {
@@ -40,6 +41,16 @@ const Home = () => {
 
   const PermissionhandleClose = () => {
     setPermissionOpen(false);
+  };
+  //tagged collection
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handleTaggedChange = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleTaggedClose = () => {
+    setAnchorEl(null);
   };
 
   return (
@@ -118,7 +129,18 @@ const Home = () => {
           </Grid>
         </div>
       </Box>
-
+      <Popover
+        id={id}
+        open={open}
+        anchorEl={anchorEl}
+        onClose={handleTaggedClose}
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'left',
+        }}
+      >
+        <Typography sx={{ p: 2 }}>The content of the Popover.</Typography>
+      </Popover>
       <MatDialog
         open={open}
         title="Role"
@@ -175,6 +197,7 @@ const Home = () => {
             minRows={3}
             placeholder="Minimum 3 rows"
             style={{ width: 200 }}
+            onKeyPress={handleTaggedChange}
           />
         </Box>
       </MatDialog>
