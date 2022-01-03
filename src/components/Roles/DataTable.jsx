@@ -42,7 +42,7 @@ function createData(name, calories, fat, carbs, protein, price) {
 }
 
 function Row(props) {
-  const { row, PermissionOpen } = props;
+  const { row, PermissionOpen, ClickOpen, viewOpen, dialogOpen } = props;
   const [open, setOpen] = React.useState(false);
 
   return (
@@ -61,17 +61,17 @@ function Row(props) {
         </TableCell>
         <TableCell align="center">
           {' '}
-          <Link href="" className="link-tool">
+          <Link href="" className="link-tool" href="javascript:void(0)">
             {' '}
-            <RemoveRedEyeIcon />
+            <RemoveRedEyeIcon onClick={viewOpen} />
           </Link>{' '}
-          <Link className="link-tool" href="">
+          <Link className="link-tool" href="javascript:void(0)">
             {' '}
-            <EditIcon />
+            <EditIcon onClick={ClickOpen} />
           </Link>{' '}
-          <Link className="link-tool" href="">
+          <Link className="link-tool" href="javascript:void(0)">
             {' '}
-            <DeleteIcon />
+            <DeleteIcon onClick={dialogOpen} />
           </Link>{' '}
         </TableCell>
       </TableRow>
@@ -133,7 +133,12 @@ const rows = [
   createData('Gingerbread', 'Lorem Ipsum is simply ', 16.0, 49, 3.9, 1.5),
 ];
 
-export default function CollapsibleTable({ PermissionOpen }) {
+export default function CollapsibleTable({
+  PermissionOpen,
+  ClickOpen,
+  viewOpen,
+  dialogOpen,
+}) {
   return (
     <TableContainer component={Paper}>
       <Table aria-label="collapsible table">
@@ -149,7 +154,14 @@ export default function CollapsibleTable({ PermissionOpen }) {
         </TableHead>
         <TableBody>
           {rows.map((row) => (
-            <Row key={row.name} PermissionOpen={PermissionOpen} row={row} />
+            <Row
+              key={row.name}
+              PermissionOpen={PermissionOpen}
+              ClickOpen={ClickOpen}
+              viewOpen={viewOpen}
+              dialogOpen={dialogOpen}
+              row={row}
+            />
           ))}
         </TableBody>
       </Table>
