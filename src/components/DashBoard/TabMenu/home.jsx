@@ -76,7 +76,7 @@ const Home = () => {
         </Tabs>
       </Box>
 
-      <TabPanel value={tabMenuOpenIndex} index={0}>
+      <TabPanel value={tabMenuOpenIndex} index={0} className="frame">
         <Dashboard />
       </TabPanel>
       <TabPanel value={tabMenuOpenIndex} index={1}>
