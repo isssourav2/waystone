@@ -1,6 +1,7 @@
 import Paper from '@mui/material/Paper';
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
+
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
   marginTop: '8em',
@@ -17,4 +18,12 @@ const muiBox = styled(Box)(({ theme }) => ({
   padding: theme.spacing(1),
 }));
 
-export { Item, muiBox };
+const paperItem = styled(Paper)(({ theme }) => ({
+  ...theme.typography.body2,
+  textAlign: 'center',
+  color: theme.palette.text.secondary,
+  height: 60,
+  lineHeight: '60px',
+}));
+
+export { Item, muiBox, paperItem };

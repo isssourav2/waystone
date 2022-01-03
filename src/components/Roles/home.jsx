@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Grid from '@mui/material/Grid';
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
-import { Item, muiBox } from './styles';
+import { Item, muiBox, paperItem } from './styles';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import AddIcon from '@mui/icons-material/Add';
@@ -19,6 +19,7 @@ import InputLabel from '@mui/material/InputLabel';
 import Input from '@mui/material/Input';
 import TextareaAutosize from '@mui/material/TextareaAutosize';
 import Popover from '@mui/material/Popover';
+import CloseIcon from '@mui/icons-material/Close';
 import '../../style/style.css';
 
 const Home = () => {
@@ -44,11 +45,37 @@ const Home = () => {
   };
   //tagged collection
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const [value, setValue] = React.useState('');
+
+  const tagged = [];
+  const [tags, setTags] = React.useState([]);
+
+  const handleTagChange = (tag) => {
+    console.log(tag);
+    setTags((oldtag) => [...oldtag, tag]);
+    setAnchorEl(null);
+  };
+  console.log(tags);
+  tagged.push('Dashboard');
+  tagged.push('Role Creation');
+  tagged.push('User Creation');
+  tagged.push('Connection');
+  tagged.push('Notification');
+  tagged.push('Setup');
+  tagged.push('Source');
+  tagged.push('Application');
+  tagged.push('Insight');
+  tagged.push('Job Creation');
+  tagged.push('Tags');
+  tagged.push('Fields');
 
   const handleTaggedChange = (event) => {
-    setAnchorEl(event.currentTarget);
+    if (event.key == 'Enter') {
+      setValue(event.nativeEvent.target.value);
+      setAnchorEl(event.currentTarget);
+    }
   };
-
+  const taggedOpen = Boolean(anchorEl);
   const handleTaggedClose = () => {
     setAnchorEl(null);
   };
@@ -131,7 +158,7 @@ const Home = () => {
       </Box>
       <Popover
         id={id}
-        open={open}
+        open={taggedOpen}
         anchorEl={anchorEl}
         onClose={handleTaggedClose}
         anchorOrigin={{
@@ -139,7 +166,27 @@ const Home = () => {
           horizontal: 'left',
         }}
       >
-        <Typography sx={{ p: 2 }}>The content of the Popover.</Typography>
+        <Box
+          sx={{
+            p: 2,
+            bgcolor: 'background.default',
+            display: 'grid',
+            gridTemplateColumns: { md: '1fr' },
+            gridTemplateRows: { md: '1fr' },
+            cursor: 'pointer',
+            gap: 2,
+          }}
+        >
+          {tagged.map((tag) => (
+            <paperItem
+              key={tag}
+              elevation={tag}
+              onClick={() => handleTagChange(tag)}
+            >
+              {tag}
+            </paperItem>
+          ))}
+        </Box>
       </Popover>
       <MatDialog
         open={open}
@@ -197,8 +244,16 @@ const Home = () => {
             minRows={3}
             placeholder="Minimum 3 rows"
             style={{ width: 200 }}
-            onKeyPress={handleTaggedChange}
+            onKeyDown={handleTaggedChange}
           />
+          {tags.map((tag) => (
+            <Item key={tag}>
+              <IconButton style={{ marginLeft: '-4em' }}>
+                <CloseIcon />
+              </IconButton>
+              {tag}
+            </Item>
+          ))}
         </Box>
       </MatDialog>
     </>
