@@ -261,29 +261,14 @@ const Home = () => {
         isCancel="true"
         isSubmit="true"
       >
-        <Box
-          component="form"
-          sx={{
-            '& > :not(style)': { m: 1 },
-          }}
-          noValidate
-          autoComplete="off"
-        >
-          <FormControl variant="standard">
-            <InputLabel htmlFor="component-simple">Role Name</InputLabel>
-          </FormControl>
-        </Box>
-        <Box
-          component="form"
-          sx={{
-            '& > :not(style)': { m: 1 },
-          }}
-          noValidate
-          autoComplete="off"
-        >
-          <FormControl variant="standard">
-            <InputLabel htmlFor="component-simple">Description</InputLabel>
-          </FormControl>
+        <Box component="form" noValidate autoComplete="off">
+          <Typography className="text-row">
+            <label>Role Name</label> Role1
+          </Typography>
+
+          <Typography className="text-row">
+            <label>Role Description</label> Role1
+          </Typography>
         </Box>
       </MatDialog>
       <MatDialog
