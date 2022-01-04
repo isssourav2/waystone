@@ -29,7 +29,7 @@ import Paper from '@mui/material/Paper';
 import Alert from '@mui/material/Alert';
 import '../../style/style.css';
 
-/*import DataGridPro from '../../components/DataGridPro';*/
+import DataGridPro from '../../components/DataGridPro';
 
 
 function PaperComponent(props) {
@@ -362,7 +362,7 @@ const Home = () => {
         </DialogActions>
       </Dialog>
       
-      {/* <DataGridPro/> */}
+      <DataGridPro/>
     </>
   );
 };

@@ -1243,6 +1243,19 @@ nav.MuiList-root{
   z-index: 999;
 }
 
+.css-1h9z7r5-MuiButtonBase-root-MuiTab-root.Mui-selected{
+  color: #0bb202 !important;
+}
+
+
+.css-1aquho2-MuiTabs-indicator{
+  background-color: #0bb202 !important;
+}
+
+.menu-link .MuiList-root .css-bshv44-MuiButtonBase-root-MuiListItem-root{
+  padding: 0px;
+}
+
 
 @media (max-width: 1100px) {
   .col-box .css-i4bv87-MuiSvgIcon-root {
