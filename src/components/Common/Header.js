@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { makeStyles } from '@mui/styles';
 import MuiDrawer from '@mui/material/Drawer';
 import MuiAppBar from '@mui/material/AppBar';
@@ -124,7 +124,8 @@ function Header() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
-  const handleSubMenu = (menu) => {
+  const dashboardMenu = (menu) => {
+    setOpen(false);
     if (menu == 'dashboard') {
       setdashboardSubOpen(!dashboardSubOpen);
       setdataSourceSubOpen(false);
@@ -149,9 +150,33 @@ function Header() {
       setjobScheduleSubOpen(false);
       setSettingsSubOpen(!SettingsSubOpen);
     }
+  };
 
+  const handleSubMenu = (menu) => {
+    dashboardMenu(menu);
     setOpen(true);
   };
+  useEffect(() => {
+    if (SubActiveValue == 0 || SubActiveValue == 1) {
+      setdashboardSubOpen(true);
+      setdataSourceSubOpen(false);
+      setjobScheduleSubOpen(false);
+      setSettingsSubOpen(false);
+      setOpen(true);
+    } else {
+      setdashboardSubOpen(false);
+      setdataSourceSubOpen(false);
+      setjobScheduleSubOpen(false);
+      setSettingsSubOpen(false);
+      setOpen(false);
+    }
+  }, [SubActiveValue]);
+
+  const helpHandleClick = () => {
+    setOpen(!open);
+    navigate('/help');
+  };
+
   // const handleDashboardSubMenu = () => {
   //   setdashboardSubOpen(!dashboardSubOpen);
   //   setOpen(true);
@@ -444,11 +469,8 @@ function Header() {
           <List>
             {/* <h3>Help</h3> */}
             <ul>
-              <li>
-                <Link to="/help">
-                  {' '}
-                  <HelpIcon /> Help
-                </Link>
+              <li onClick={helpHandleClick}>
+                <HelpIcon /> Help
               </li>
             </ul>
           </List>
