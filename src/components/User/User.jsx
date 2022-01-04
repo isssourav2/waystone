@@ -2,7 +2,7 @@ import React from 'react';
 import Home from './home';
 import Header from '../Common/Header';
 import Box from '@mui/material/Box';
-const Roles = () => {
+const User = () => {
   return (
     <Box sx={{ display: 'flex' }}>
       <Header />
@@ -11,4 +11,4 @@ const Roles = () => {
   );
 };
 
-export default Roles;
+export default User;

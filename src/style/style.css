@@ -36,6 +36,11 @@ h4 {
   padding: 70px 0 0 0;
 }
 
+#root .boxrow.big{
+  padding-top: 6px !important;
+  padding-bottom: 5px !important;
+}
+
 .css-1u2mxbp img {
   margin: 0 auto;
 }
@@ -1042,6 +1047,12 @@ div#root .MuiBox-root.css-0 {
 .icon-box .css-i4bv87-MuiSvgIcon-root {
   color: #0bb202;
   font-size: 30px !important;
+  
+}
+
+.link-small .css-i4bv87-MuiSvgIcon-root {
+  color: #1f3038 !important;
+  font-size: 18px !important;
 }
 
 .boxrow {
@@ -1105,9 +1116,9 @@ nav.MuiList-root{
   margin-right: 1.6em;
 }
 
-.col-box .css-mhc70k-MuiGrid-root{
+/*.col-box .css-mhc70k-MuiGrid-root{
   width: calc(100% + 0px);
-}
+}*/
 
 
 .modelPopUp .MuiDialog-paper{
@@ -1153,9 +1164,11 @@ nav.MuiList-root{
   font-family: "Roboto","Helvetica","Arial",sans-serif;
   font-size: 14px;
   width: 100%;
-  
+  padding: 10px;
+  height: 15px;
+  margin: 0 0 0px 0;
   border-radius: 10px !important;
-  background-color:  #f2f2f2; 
+ 
 }
 
 .modelPopUp .MuiDialog-paper .MuiInputBase-formControl {
@@ -1164,8 +1177,14 @@ nav.MuiList-root{
 
 .modelPopUp .MuiDialog-paper .MuiFormControl-root{
   width: 100%;
-  margin: 0 !important;
+  margin: 0 0 10px 0 !important;
 }
+
+.modelPopUp .css-14s5rfu-MuiFormLabel-root-MuiInputLabel-root{
+  top:-8px;
+  font-size: 14px;
+}
+
 
 /*.modelPopUp .MuiDialog-paper .css-gg4vpm{
   justify-content: space-between;
