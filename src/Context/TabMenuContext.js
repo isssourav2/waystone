@@ -4,6 +4,7 @@ export const TabMenuContext = createContext();
 const initialState = {
   TabMenuOpen: 0,
   SubActiveValue: -1,
+  TabMenuSettings: 0,
 };
 
 const TabMenuReducer = (state, action) => {
@@ -27,13 +28,13 @@ const TabMenuReducer = (state, action) => {
     case 'JobScheduling_ApplicationTemplate':
       return { TabMenuOpen: 8, SubActiveValue: 8 };
     case 'Settings_Config':
-      return { TabMenuOpen: 9, SubActiveValue: 9 };
+      return { TabMenuSettings: 0, SubActiveValue: 9 };
     case 'Settings_User':
-      return { TabMenuOpen: 10, SubActiveValue: 10 };
+      return { TabMenuSettings: 1, SubActiveValue: 10 };
     case 'Settings_Roles':
-      return { TabMenuOpen: 11, SubActiveValue: 11 };
+      return { TabMenuSettings: 2, SubActiveValue: 11 };
     case 'Settings_Tag':
-      return { TabMenuOpen: 12, SubActiveValue: 12 };
+      return { TabMenuSettings: 3, SubActiveValue: 12 };
     default:
       return { TabMenuOpen: -1, SubActiveValue: -1 };
   }
