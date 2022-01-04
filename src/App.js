@@ -6,7 +6,8 @@ import {
   Roles,
   Application,
   Settings,
-  User
+  User,
+  Email
 } from './components';
 import { CssBaseline } from '@mui/material';
 import BasicButtons from './components/Stapper';
@@ -25,6 +26,7 @@ function App() {
         <Route path="/Roles" element={<Roles />} />
         <Route path="/User" element={<User />} />
         <Route path="/Settings" element={<Settings />} />
+        <Route path="/Email" element={<Email />} />
       </Routes>
     </Router>
   );

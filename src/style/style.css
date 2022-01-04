@@ -1185,6 +1185,44 @@ nav.MuiList-root{
   font-size: 14px;
 }
 
+.tab-group{
+  padding: 50px 0 0 0;
+}
+
+.tab-group h3{
+  font-size: 12px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  color: #0d783d;
+}
+
+.tabform {
+  padding: 20px 0;
+  width: 100%;
+  max-width: 800px;
+ 
+}
+
+.tabform .box-btn{
+  line-height: 50px !important;
+  padding: 0px 30px !important;
+}
+
+.tabform .MuiTextField-root{
+  width: 100%;
+  margin: 0 0 10px;
+}
+
+.tabform-box{
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -10px;
+}
+
+.tab-group h3 .MuiSvgIcon-fontSizeMedium{
+  margin-right: 10px;
+}
 
 /*.modelPopUp .MuiDialog-paper .css-gg4vpm{
   justify-content: space-between;
