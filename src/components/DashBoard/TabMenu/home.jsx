@@ -44,7 +44,6 @@ const Home = () => {
   const tabMenuOpenIndex = tabMenu.state.TabMenuOpen;
 
   // const [value, setValue] = React.useState(0);
-  console.log('Menu Index', tabMenuOpenIndex);
   const handleChange = (event, newValue) => {
     //setValue(newValue);
     switch (newValue) {
