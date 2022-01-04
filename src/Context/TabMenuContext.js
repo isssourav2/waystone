@@ -3,7 +3,7 @@ export const TabMenuContext = createContext();
 
 const initialState = {
   TabMenuOpen: 0,
-  SubActiveValue: 0,
+  SubActiveValue: -1,
 };
 
 const TabMenuReducer = (state, action) => {
