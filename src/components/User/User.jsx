@@ -5,7 +5,7 @@ import Box from '@mui/material/Box';
 const User = () => {
   return (
     <Box sx={{ display: 'flex' }}>
-      <Header />
+      {/* <Header /> */}
       <Home />
     </Box>
   );
