@@ -1,5 +1,12 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { TabMenu, Welcome, Stepper, Roles, Application } from './components';
+import {
+  TabMenu,
+  Welcome,
+  Stepper,
+  Roles,
+  Application,
+  Settings,
+} from './components';
 import { CssBaseline } from '@mui/material';
 import BasicButtons from './components/Stapper';
 function App() {
@@ -15,6 +22,7 @@ function App() {
         <Route path="/TabMenu" element={<TabMenu />} />
         <Route path="/Application" element={<Application />} />
         <Route path="/Roles" element={<Roles />} />
+        <Route path="/Settings" element={<Settings />} />
       </Routes>
     </Router>
   );

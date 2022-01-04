@@ -1,14 +1,14 @@
 import React from 'react';
-import Home from './home';
-import Header from '../Common/Header';
 import Box from '@mui/material/Box';
-const Roles = () => {
+import Home from './home';
+import Header from '../../Common/Header';
+const TabSettings = () => {
   return (
     <Box sx={{ display: 'flex' }}>
-      {/* <Header /> */}
+      <Header />
       <Home />
     </Box>
   );
 };
 
-export default Roles;
+export default TabSettings;
