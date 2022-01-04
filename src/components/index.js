@@ -6,3 +6,4 @@ export { default as Settings } from './Settings/TabMenu/TabSettings';
 export { default as Application } from './Application/Application';
 export { default as Roles } from './Roles/Roles';
 export { default as User } from './User/User';
+export { default as Email } from './Email/Email';
