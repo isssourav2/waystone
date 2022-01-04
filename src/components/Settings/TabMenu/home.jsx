@@ -5,7 +5,7 @@ import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import { Dashboard } from '../..';
-import { Roles } from '../../../components';
+import { Roles, User } from '../../../components';
 import { TabMenuContext } from '../../../Context/TabMenuContext';
 
 function TabPanel(props) {
@@ -89,7 +89,7 @@ const Home = () => {
         Config
       </TabPanel>
       <TabPanel value={tabMenuOpenIndex} index={1} className="frame">
-        Users
+        <User />
       </TabPanel>
       <TabPanel value={tabMenuOpenIndex} index={2} className="frame">
         <Roles />
