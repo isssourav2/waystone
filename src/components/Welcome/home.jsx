@@ -143,17 +143,17 @@ const home = () => {
                   </Link>
                 </div>
               </div>
-              <div class="panel-box">
+              <div class="panel-box link-small">
                 <h3>Where to next?</h3>
                 <br />
-                <List sx={{ width: '100%', bgcolor: 'background.paper' }}>
+                <List sx={{ width: '100%', bgcolor: 'background.paper' }} >
                   <ListItem alignItems="flex-start">
                     <ListItemText primary="View Dashborad " />
 
                     <div className="icon-box">
                       <Link href="#">
                         {' '}
-                        <EditIcon />
+                        <ArrowForwardIcon />
                       </Link>
                     </div>
                   </ListItem>
@@ -164,7 +164,7 @@ const home = () => {
                     <div className="icon-box">
                       <Link href="#">
                         {' '}
-                        <EditIcon />
+                        <ArrowForwardIcon />
                       </Link>
                     </div>
                   </ListItem>
@@ -175,7 +175,7 @@ const home = () => {
                     <div className="icon-box">
                       <Link href="#">
                         {' '}
-                        <EditIcon />
+                        <ArrowForwardIcon />
                       </Link>
                     </div>
                   </ListItem>

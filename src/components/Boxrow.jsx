@@ -22,7 +22,7 @@ export default function ComplexGrid() {
 
 
       <Grid container spacing={2}>
-      <Grid item  sm container lg={12} md={12} sm={12} sx={12} xl={12} xs={12}  className="boxrow">
+      <Grid item  sm container lg={12} md={12} sm={12} sx={12} xl={12} xs={12}  className="boxrow big">
       <Grid item className="icon-space">
         <ButtonBase sx={{ width: 20, height: 50 }}>
         <CheckCircleIcon/>
@@ -49,7 +49,7 @@ export default function ComplexGrid() {
 
 
       <Grid container spacing={2}>
-      <Grid item  sm container lg={12} md={12} sm={12} sx={12} xl={12} xs={12}  className="boxrow">
+      <Grid item  sm container lg={12} md={12} sm={12} sx={12} xl={12} xs={12}  className="boxrow big">
       <Grid item className="icon-space">
         <ButtonBase sx={{ width: 20, height: 50 }}>
           <CachedIcon/>
@@ -75,7 +75,7 @@ export default function ComplexGrid() {
 
 
       <Grid container spacing={2}>
-        <Grid item  sm container lg={12} md={12} sm={12} sx={12} xl={12} xs={12}  className="boxrow">
+        <Grid item  sm container lg={12} md={12} sm={12} sx={12} xl={12} xs={12}  className="boxrow big">
         <Grid item className="icon-space">
           <ButtonBase sx={{ width: 20, height: 50 }}>
             <ErrorIcon/>
@@ -101,7 +101,7 @@ export default function ComplexGrid() {
 
 
     <Grid container spacing={2}>
-      <Grid item  sm container lg={12} md={12} sm={12} sx={12} xl={12} xs={12}  className="boxrow">
+      <Grid item  sm container lg={12} md={12} sm={12} sx={12} xl={12} xs={12}  className="boxrow big">
       <Grid item className="icon-space">
         <ButtonBase sx={{ width: 20, height: 50 }}>
           <AccessAlarmsIcon/>
@@ -127,7 +127,7 @@ export default function ComplexGrid() {
 
 
     <Grid container spacing={2}>
-    <Grid item  sm container lg={12} md={12} sm={12} sx={12} xl={12} xs={12}  className="boxrow">
+    <Grid item  sm container lg={12} md={12} sm={12} sx={12} xl={12} xs={12}  className="boxrow big">
     <Grid item className="icon-space">
       <ButtonBase sx={{ width: 20, height: 50 }}>
         <CheckCircleIcon/>

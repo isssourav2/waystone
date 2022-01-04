@@ -117,7 +117,7 @@ const Home = () => {
                     display: 'flex',
                   }}
                 >
-                  <Typography variant="h2">Settings: Roles</Typography>
+                  <Typography variant="h2">Users</Typography>
                   <Button
                     className="box-btn"
                     variant="contained"
@@ -125,7 +125,7 @@ const Home = () => {
                     size="small"
                     onClick={handleClickOpen}
                   >
-                    <AddIcon /> Create Roles
+                    <AddIcon /> Create User
                   </Button>
                 </Box>
               </Grid>
@@ -220,7 +220,7 @@ const Home = () => {
       </Popover>
       <MatDialog
         open={open}
-        title="Role"
+        title="User"
         handleClose={handleClose}
         isAction="true"
         isCancel="true"
@@ -228,29 +228,75 @@ const Home = () => {
       >
         <Box
           component="form"
-          sx={{
-            '& > :not(style)': { m: 1 },
-          }}
+         
           noValidate
           autoComplete="off"
         >
-          <FormControl variant="standard">
-            <InputLabel htmlFor="component-simple">Role Name</InputLabel>
-            <Input id="component-simple" />
-          </FormControl>
+          
+         
         </Box>
         <Box
           component="form"
-          sx={{
-            '& > :not(style)': { m: 1 },
-          }}
+         
           noValidate
           autoComplete="off"
         >
-          <FormControl variant="standard">
-            <InputLabel htmlFor="component-simple">Description</InputLabel>
-            <Input id="component-simple" />
-          </FormControl>
+
+
+
+      <Box
+      component="form"
+      sx={{
+        '& .MuiTextField-root': { m: 1, width: '25ch' },
+      }}
+      noValidate
+      autoComplete="off"
+    >
+      <div>
+
+      <TextField
+          id="outlined-password-input"
+          label="User Name"
+          type="Text"
+        />
+
+        <TextField
+          id="outlined-password-input"
+          label="First Name"
+          type="Text"
+        />
+
+        <TextField
+          id="outlined-password-input"
+          label="Last Name"
+          type="Text"
+        />
+
+        <TextField
+          id="outlined-password-input"
+          label="Email"
+          type="Text"
+        />
+        <TextField
+          id="outlined-password-input"
+          label="Department"
+          type="Text"
+        />
+        
+        <TextField
+          id="outlined-password-input"
+          label="User Role"
+          type="Text"
+        />
+        
+
+
+      </div>
+    </Box>
+
+
+
+         
         </Box>
       </MatDialog>
       <MatDialog
