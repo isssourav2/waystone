@@ -362,7 +362,7 @@ const Home = () => {
         </DialogActions>
       </Dialog>
       
-      <DataGridPro/>
+      
     </>
   );
 };

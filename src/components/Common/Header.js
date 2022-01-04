@@ -248,7 +248,7 @@ function Header() {
                 {dashboardSubOpen ? (
                   <ExpandMore style={{ marginLeft: '2em' }} />
                 ) : (
-                  <ChevronRightIcon style={{ marginLeft: '2em' }} />
+                  <ChevronRightIcon  className="icon-next" />
                 )}
               </li>
             </ul>
@@ -286,7 +286,7 @@ function Header() {
                 {dataSourceSubOpen ? (
                   <ExpandMore style={{ marginLeft: '2em' }} />
                 ) : (
-                  <ChevronRightIcon style={{ marginLeft: '2em' }} />
+                  <ChevronRightIcon className="icon-next"  />
                 )}
               </li>
             </ul>
@@ -325,7 +325,7 @@ function Header() {
                 {jobScheduleSubOpen ? (
                   <ExpandMore style={{ marginLeft: '2em' }} />
                 ) : (
-                  <ChevronRightIcon style={{ marginLeft: '2em' }} />
+                  <ChevronRightIcon className="icon-next"  />
                 )}
               </li>
             </ul>
@@ -392,7 +392,7 @@ function Header() {
                 {SettingsSubOpen ? (
                   <ExpandMore style={{ marginLeft: '2em' }} />
                 ) : (
-                  <ChevronRightIcon style={{ marginLeft: '2em' }} />
+                  <ChevronRightIcon className="icon-next"  />
                 )}
               </li>
             </ul>
