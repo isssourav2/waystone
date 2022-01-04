@@ -163,6 +163,17 @@ function Header() {
       setjobScheduleSubOpen(false);
       setSettingsSubOpen(false);
       setOpen(true);
+    } else if (
+      SubActiveValue == 9 ||
+      SubActiveValue == 10 ||
+      SubActiveValue == 11 ||
+      SubActiveValue == 12
+    ) {
+      setdashboardSubOpen(false);
+      setdataSourceSubOpen(false);
+      setjobScheduleSubOpen(false);
+      setSettingsSubOpen(true);
+      setOpen(true);
     } else {
       setdashboardSubOpen(false);
       setdataSourceSubOpen(false);
@@ -197,14 +208,32 @@ function Header() {
   const handleChange = (newValue) => {
     //setValue(newValue);
     // setSubActiveValue(newValue);
-    navigate('/TabMenu');
+
     setOpen(true);
     switch (newValue) {
       case 0:
         tabMenu.dispatch({ type: 'Dashboard_Insight' });
+        navigate('/TabMenu');
         break;
       case 1:
         tabMenu.dispatch({ type: 'Dashboard_RemedialAction' });
+        navigate('/TabMenu');
+        break;
+      case 9:
+        tabMenu.dispatch({ type: 'Settings_Config' });
+        navigate('/Settings');
+        break;
+      case 10:
+        tabMenu.dispatch({ type: 'Settings_User' });
+        navigate('/Settings');
+        break;
+      case 11:
+        tabMenu.dispatch({ type: 'Settings_Roles' });
+        navigate('/Settings');
+        break;
+      case 12:
+        tabMenu.dispatch({ type: 'Settings_Tag' });
+        navigate('/Settings');
         break;
       default:
         break;
@@ -273,7 +302,7 @@ function Header() {
                 {dashboardSubOpen ? (
                   <ExpandMore style={{ marginLeft: '2em' }} />
                 ) : (
-                  <ChevronRightIcon  className="icon-next" />
+                  <ChevronRightIcon className="icon-next" />
                 )}
               </li>
             </ul>
@@ -311,7 +340,7 @@ function Header() {
                 {dataSourceSubOpen ? (
                   <ExpandMore style={{ marginLeft: '2em' }} />
                 ) : (
-                  <ChevronRightIcon className="icon-next"  />
+                  <ChevronRightIcon className="icon-next" />
                 )}
               </li>
             </ul>
@@ -350,7 +379,7 @@ function Header() {
                 {jobScheduleSubOpen ? (
                   <ExpandMore style={{ marginLeft: '2em' }} />
                 ) : (
-                  <ChevronRightIcon className="icon-next"  />
+                  <ChevronRightIcon className="icon-next" />
                 )}
               </li>
             </ul>
@@ -417,7 +446,7 @@ function Header() {
                 {SettingsSubOpen ? (
                   <ExpandMore style={{ marginLeft: '2em' }} />
                 ) : (
-                  <ChevronRightIcon className="icon-next"  />
+                  <ChevronRightIcon className="icon-next" />
                 )}
               </li>
             </ul>
@@ -431,8 +460,8 @@ function Header() {
               <List component="ul" disablePadding>
                 <ListItem
                   button
-                  onClick={() => handleChange(0)}
-                  selected={SubActiveValue === 0}
+                  onClick={() => handleChange(9)}
+                  selected={SubActiveValue === 9}
                 >
                   <ListItemText primary="Config" />
                 </ListItem>
@@ -440,8 +469,8 @@ function Header() {
               <List component="ul" disablePadding>
                 <ListItem
                   button
-                  onClick={() => handleChange(1)}
-                  selected={SubActiveValue === 1}
+                  onClick={() => handleChange(10)}
+                  selected={SubActiveValue === 10}
                 >
                   <ListItemText primary="User" />
                 </ListItem>
@@ -449,8 +478,8 @@ function Header() {
               <List component="ul" disablePadding>
                 <ListItem
                   button
-                  onClick={() => handleChange(1)}
-                  selected={SubActiveValue === 1}
+                  onClick={() => handleChange(11)}
+                  selected={SubActiveValue === 11}
                 >
                   <ListItemText primary="Roles" />
                 </ListItem>
@@ -458,8 +487,8 @@ function Header() {
               <List component="ul" disablePadding>
                 <ListItem
                   button
-                  onClick={() => handleChange(1)}
-                  selected={SubActiveValue === 1}
+                  onClick={() => handleChange(12)}
+                  selected={SubActiveValue === 12}
                 >
                   <ListItemText primary="Tag" />
                 </ListItem>
