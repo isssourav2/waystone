@@ -7,3 +7,5 @@ export { default as Application } from './Application/Application';
 export { default as Roles } from './Roles/Roles';
 export { default as User } from './User/User';
 export { default as Email } from './Email/Email';
+export { default as Tags } from './Tags/Tags';   
+export { default as Connections } from './Connections/Connections';
