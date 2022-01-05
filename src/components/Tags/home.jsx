@@ -13,7 +13,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import { DataGrid, GridRowsProp, GridColDef } from '@mui/x-data-grid';
 import TextField from '@mui/material/TextField';
 import MatDialog from '../Common/MatDialog';
-
+import DataTable from './DataTable.jsx';
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import Input from '@mui/material/Input';
@@ -26,29 +26,11 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Paper from '@mui/material/Paper';
-
-
-import Tab from '@mui/material/Tab';
-import TabContext from '@mui/lab/TabContext';
-import TabList from '@mui/lab/TabList';
-import TabPanel from '@mui/lab/TabPanel';
-import MailIcon from '@mui/icons-material/Mail';
-import SettingsIcon from '@mui/icons-material/Settings';
-
-
-
-
 import '../../style/style.css';
 function PaperComponent(props) {
   return <Paper {...props} />;
 }
 const Home = () => {
-
-   //Tab
-    const handleChange = (event, newValue) => {
-     setValue(newValue);
-   };
-
   //Role Modal
   const [open, setOpen] = React.useState(false);
 
@@ -135,172 +117,73 @@ const Home = () => {
                     display: 'flex',
                   }}
                 >
-                  <Typography variant="h2">Settings: Config</Typography>
-                 
+                  <Typography variant="h2">Tags</Typography>
+                  <Button
+                    className="box-btn"
+                    variant="contained"
+                    sx={{ marginLeft: 3 }}
+                    size="small"
+                    onClick={handleClickOpen}
+                  >
+                    <AddIcon /> Create 
+                  </Button>
                 </Box>
               </Grid>
 
               <Grid item xs={6}>
-                
+                <IconButton className="print-box">
+                  <PrintIcon />
+                </IconButton>
               </Grid>
             </Grid>
           </Box>
 
           <Box sx={{ flexGrow: 1 }}>
-            <Grid container spacing={2} className="tab-group">
-              <Grid item xs={12}>
-
-
-
-
-              <Box sx={{ width: '100%', typography: 'body1' }}>
-                <TabContext value={value}>
-                  <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-                    <TabList onChange={handleChange} aria-label="lab API tabs example">
-                      <Tab label="Scheduler Settings" value="1" />
-                      <Tab label="Email Settings" value="2" />
-                      
-                    </TabList>
-
-                  </Box>
-                  <TabPanel value="1">
-                        <Typography variant="h3"> <SettingsIcon/> Scheduler Settings</Typography>
-
-                        <Box className="tabform"
-                          component="form"
-                        
-                          noValidate
-                          autoComplete="off"
-                        >
-                          <div class="tabform-box">
-
-                          <TextField
-                              id="outlined-password-input"
-                              required
-                              label="01:00 AM"
-                              type="Text"
-                              placeholder="01:00 AM"
-                            />
-
-                            
-
-                            <TextField
-                              required
-                              id="outlined-password-input"
-                              label="Time Interval (HH)"
-                              type="Text"
-                              placeholder="1"
-                            />
-
-                           
-                            
-                            <Button className="box-btn" variant="contained" size="small">
-                              Submit
-                            </Button>
-
-                            
-
-                          </div>
-                        </Box>
-
-
-
-
-                  </TabPanel>
-                  <TabPanel value="2">
-                      <Typography variant="h3"> <MailIcon/> Email Settings</Typography>
-
-
-
-                      <Box className="tabform"
-                          component="form"
-                        
-                          noValidate
-                          autoComplete="off"
-                        >
-                          <div class="tabform-box">
-
-                          <TextField
-                              id="outlined-password-input"
-                              required
-                              label="Form"
-                              type="Text"
-                              placeholder="mb_riskire@waystone.com"
-                            />
-
-                            <em className="note">Please provide only one email id</em>
-
-                            <TextField
-                              required
-                              id="outlined-password-input"
-                              label="Host"
-                              type="Text"
-                              placeholder="smtp.office365.com"
-                            />
-
-                            <TextField
-                              required
-                              id="outlined-password-input"
-                              label="Port"
-                              type="Text"
-                              placeholder="586"
-                            />
-
-                            <TextField
-                              required
-                              id="outlined-password-input"
-                              label="User Name"
-                              type="Text"
-                              placeholder="mb_riskire@waystone.com"
-                            />
-                            <TextField
-
-                              required
-                              id="outlined-password-input"
-                              label="Password"
-                              type="Text"
-                              placeholder="Enter Password"
-                            />
-                            
-                            <TextField
-                            required
-                              id="outlined-password-input"
-                              label="To"
-                              type="Text"
-                              placeholder="mb_riskire@waystone.com"
-                            />
-                            <em className="note">Email id must be comma separated e.g- info@info.com, info1@info.com.</em>
-
-                            
-                            <Button className="box-btn" variant="contained" size="small">
-                              Submit
-                            </Button>
-
-                            
-
-                          </div>
-                        </Box>
-
-
-
-
-
-
-                  </TabPanel>
-                </TabContext>
-              </Box>
-
-
-
-
-
-
+            <Grid container spacing={2}>
+              <Grid item xs={10}></Grid>
+              <Grid item xs={2}>
+                <div className="search-box">
+                  <TextField
+                    style={{ backgroundColor: 'white', height: '1em' }}
+                    id="filled-basic"
+                    placeholder="Filled"
+                    variant="filled"
+                  />
+                  <SearchIcon style={{ textAlign: 'right' }} />
+                </div>
               </Grid>
-             
             </Grid>
           </Box>
 
-         
+          <Grid item xs={12}>
+            <Grid container spacing={2}>
+              <Grid item xs={12}>
+                <DataTable
+                  PermissionOpen={PermissionhandleClickOpen}
+                  ClickOpen={handleClickOpen}
+                  viewOpen={viewHandleOpen}
+                  dialogOpen={dialogHandleOpen}
+                />
+              </Grid>
+
+              <Grid item xs={9}>
+                <Grid className="pagination-count">
+                  <Typography sx={{ textAlign: 'left' }} variant="h6">
+                    {' '}
+                    showing 1 to 5
+                  </Typography>{' '}
+                </Grid>
+              </Grid>
+              <Grid item xs={3}>
+                <Grid className="pagination-box">
+                  {' '}
+                  <Stack>
+                    <Pagination count={10} shape="rounded" />
+                  </Stack>
+                </Grid>
+              </Grid>
+            </Grid>
+          </Grid>
         </div>
       </Box>
       <Popover
@@ -436,23 +319,15 @@ const Home = () => {
       </MatDialog>
       <MatDialog
         open={PermissionOpen}
-        title="Permission"
+        title="Tags"
         handleClose={PermissionhandleClose}
         isAction="true"
         isCancel="true"
         isSubmit="true"
       >
+       
         <Typography className="text-row">
-          <label>Role Name</label> <span>Power User | BD Team</span>
-        </Typography>
-
-        <Typography className="text-row">
-          <label>Role Description</label>{' '}
-          <span>Access to Everything (excl. Configuration, Manage</span>
-        </Typography>
-
-        <Typography className="text-row">
-          <label>Permission</label>
+          <label>Tag Name</label>
         </Typography>
 
         <Box
@@ -467,7 +342,7 @@ const Home = () => {
           <TextareaAutosize
             aria-label="minimum height"
             minRows={3}
-            placeholder="Minimum 3 rows"
+            placeholder="Enter Tag Name"
             style={{ width: 200 }}
             onKeyDown={handleTaggedChange}
           />
