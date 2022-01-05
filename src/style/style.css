@@ -1100,9 +1100,10 @@ div#root .MuiBox-root.css-0 {
   margin: 0 10px !important;
 }
 
-.link-tool .MuiSvgIcon-root {
+.link-tool .MuiSvgIcon-root,
+.css-30pzqk-MuiDataGrid-root button.link-tool .MuiSvgIcon-root {
   font-size: 21px;
-  color: #1f3038;
+  color: #1f3038 !important;
 }
 
 span.count {
@@ -1188,11 +1189,13 @@ nav.MuiList-root {
   width: 100% !important;
 }
 
-.modelPopUp .css-viou3o-MuiAutocomplete-root{
+.modelPopUp .css-viou3o-MuiAutocomplete-root {
   width: 100% !important;
 }
 
-.modelPopUp .MuiAutocomplete-input{ padding: 0px !important;}
+.modelPopUp .MuiAutocomplete-input {
+  padding: 0px !important;
+}
 
 .modelPopUp .MuiDialog-paper .MuiInputBase-formControl {
   width: 100%;
@@ -1352,7 +1355,7 @@ nav.MuiList-root {
   font-size: 12px;
 }
 
-.note{
+.note {
   font-size: 14px;
   display: block;
   margin: 0 0 10px 5px;

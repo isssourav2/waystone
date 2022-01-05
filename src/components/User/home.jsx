@@ -85,13 +85,22 @@ const Home = () => {
       flex: 1,
       disableClickEventBubbling: true,
       getActions: (params) => [
-        <IconButton onClick={() => console.log(params.row)}>
+        <IconButton
+          className="link-tool"
+          onClick={() => console.log(params.row)}
+        >
           <RemoveRedEyeIcon />
         </IconButton>,
-        <IconButton onClick={() => console.log(params.row)}>
+        <IconButton
+          className="link-tool"
+          onClick={() => console.log(params.row)}
+        >
           <EditIcon />
         </IconButton>,
-        <IconButton onClick={() => console.log(params.row.id)}>
+        <IconButton
+          className="link-tool"
+          onClick={() => console.log(params.row.id)}
+        >
           <DeleteIcon />
         </IconButton>,
       ],
