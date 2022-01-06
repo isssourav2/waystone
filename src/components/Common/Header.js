@@ -30,7 +30,9 @@ import profile from '../../images/profile.png';
 import logo from '../../images/logo.png';
 import AppsIcon from '@mui/icons-material/Apps';
 import StarIcon from '@mui/icons-material/Star';
-import { useNavigate } from 'react-router-dom-latest';
+import LogoutIcon from '@mui/icons-material/Logout';
+import { useHistory } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom-latest';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import { TabMenuContext } from '../../Context/TabMenuContext';
 
@@ -116,7 +118,8 @@ function Header() {
   const [dataSourceSubOpen, setdataSourceSubOpen] = React.useState(false);
   const [jobScheduleSubOpen, setjobScheduleSubOpen] = React.useState(false);
   const [SettingsSubOpen, setSettingsSubOpen] = React.useState(false);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
+  const history = useHistory();
   // const [SubActiveValue, setSubActiveValue] = React.useState(0);
   const SubActiveValue = tabMenu.state.SubActiveValue;
   const theme = useTheme();
@@ -188,7 +191,8 @@ function Header() {
 
   const helpHandleClick = () => {
     setOpen(!open);
-    navigate('/help');
+    //navigate('/help');
+    history.push('/help');
   };
 
   // const handleDashboardSubMenu = () => {
@@ -207,7 +211,10 @@ function Header() {
   //   setSettingsSubOpen(!SettingsSubOpen);
   //   setOpen(true);
   // };
-
+  const LogoutHandler = () => {
+    debugger;
+    history.push('/');
+  };
   const handleChange = (newValue) => {
     //setValue(newValue);
     // setSubActiveValue(newValue);
@@ -216,27 +223,33 @@ function Header() {
     switch (newValue) {
       case 0:
         tabMenu.dispatch({ type: 'Dashboard_Insight' });
-        navigate('/TabMenu');
+        history.push('/TabMenu');
+        //navigate('/TabMenu');
         break;
       case 1:
         tabMenu.dispatch({ type: 'Dashboard_RemedialAction' });
-        navigate('/TabMenu');
+        history.push('/TabMenu');
+        //navigate('/TabMenu');
         break;
       case 9:
         tabMenu.dispatch({ type: 'Settings_Config' });
-        navigate('/Settings');
+        history.push('/Settings');
+        // navigate('/Settings');
         break;
       case 10:
         tabMenu.dispatch({ type: 'Settings_User' });
-        navigate('/Settings');
+        history.push('/Settings');
+        //navigate('/Settings');
         break;
       case 11:
         tabMenu.dispatch({ type: 'Settings_Roles' });
-        navigate('/Settings');
+        history.push('/Settings');
+        // navigate('/Settings');
         break;
       case 12:
         tabMenu.dispatch({ type: 'Settings_Tag' });
-        navigate('/Settings');
+        history.push('/Settings');
+        // navigate('/Settings');
         break;
       default:
         break;
@@ -281,6 +294,14 @@ function Header() {
             </IconButton>
 
             <Menu />
+            <IconButton
+              size="large"
+              aria-label="show 8 new notifications"
+              color="inherit"
+              onClick={LogoutHandler}
+            >
+              <LogoutIcon />
+            </IconButton>
           </div>
         </Toolbar>
       </AppBar>

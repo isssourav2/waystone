@@ -9,7 +9,7 @@ import { CssBaseline } from '@mui/material';
 import { useOktaAuth } from '@okta/okta-react';
 import logo from '../../images/logo.png';
 import LockOpenIcon from '@mui/icons-material/LockOpen';
-
+import { Redirect } from 'react-router-dom';
 
 const Login = () => {
   const { authState, oktaAuth } = useOktaAuth();
@@ -17,13 +17,11 @@ const Login = () => {
     oktaAuth.signInWithRedirect({ originalUri: '/profile' });
   if (!authState) {
     return <div>Loading authentication...</div>;
-  } else if (!authState.isAuthenticated) {
+  } else {
     return (
       <>
-        
-        <Box  className="login-wrap">
+        <Box className="login-wrap">
           {' '}
-          
           <div style={{ marginBottom: '3em' }}></div>
           <Card>
             <CardContent className="login-box">
@@ -32,15 +30,14 @@ const Login = () => {
                 <h2>Sign UP</h2>
               </CardContent>
               <Button size="large" onClick={loginHandler} className="btn">
-                <LockOpenIcon/>Login
+                <LockOpenIcon />
+                Login
               </Button>
             </CardContent>
           </Card>
         </Box>
       </>
     );
-  } else {
-    return <div>Authenticate</div>;
   }
 };
 
