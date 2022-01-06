@@ -14,7 +14,7 @@ import LockOpenIcon from '@mui/icons-material/LockOpen';
 const Login = () => {
   const { authState, oktaAuth } = useOktaAuth();
   const loginHandler = () =>
-    oktaAuth.signInWithRedirect({ originalUri: '/TabMenu' });
+    oktaAuth.signInWithRedirect({ originalUri: '/profile' });
   if (!authState) {
     return <div>Loading authentication...</div>;
   } else if (!authState.isAuthenticated) {

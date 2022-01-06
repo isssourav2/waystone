@@ -17,10 +17,8 @@ const OctaApp = () => {
   const history = useHistory();
 
   const restoreOriginalUri = async (_oktaAuth, originalUri) => {
-    debugger;
-    console.log(history);
-    history.push(originalUri);
-    //history.replace(toRelativeUrl(originalUri || '/', window.location.origin));
+    //history.push(originalUri);
+    history.replace(toRelativeUrl(originalUri || '/', window.location.origin));
   };
   return (
     <Security oktaAuth={oktaAuth} restoreOriginalUri={restoreOriginalUri}>

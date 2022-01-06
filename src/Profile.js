@@ -8,12 +8,15 @@ const Profile = () => {
   const [messages, setMessages] = useState([]);
 
   useEffect(() => {
+    debugger;
     if (!authState || !authState.isAuthenticated) {
       // When user isn't authenticated, forget any user info
       setUserInfo(null);
     } else {
       oktaAuth.getUser().then((info) => {
         setUserInfo(info);
+        console.log(info.name);
+        localStorage.setItem('loginName', info.name);
         history.push('/TabMenu');
       });
     }

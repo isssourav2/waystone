@@ -107,6 +107,9 @@ const Drawer = styled(MuiDrawer, {
 }));
 
 function Header() {
+  //GET FROM LOCALSTORAGE
+  const loginName = localStorage.getItem('loginName');
+
   const tabMenu = useContext(TabMenuContext);
   const [open, setOpen] = React.useState(false);
   const [dashboardSubOpen, setdashboardSubOpen] = React.useState(false);
@@ -262,7 +265,7 @@ function Header() {
             <img src={profile} alt="profile" />
             <div class="profile-name">
               {' '}
-              <span>Hi,</span> Abdalla
+              <span>Hi,</span> {loginName}
             </div>
           </div>
 
