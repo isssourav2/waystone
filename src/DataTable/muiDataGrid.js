@@ -9,6 +9,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 
 function MuiDataGrid({ rows, columns }) {
   console.log(rows);
+  const ref = React.useRef();
   return (
     <Box
       sx={{
@@ -27,6 +28,7 @@ function MuiDataGrid({ rows, columns }) {
       }}
     >
       <DataGrid
+        ref={ref}
         rows={rows}
         columns={columns}
         loading={rows.length === 0}

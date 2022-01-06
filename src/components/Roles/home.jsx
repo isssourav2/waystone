@@ -27,10 +27,14 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Paper from '@mui/material/Paper';
 import Alert from '@mui/material/Alert';
+import Checkbox from '@mui/material/Checkbox';
+import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
+import { MuiDataGrid } from '../../DataTable';
 import '../../style/style.css';
 
 import DataGridPro from '../../components/DataGridPro';
-
 
 function PaperComponent(props) {
   return <Paper {...props} />;
@@ -48,6 +52,83 @@ const Insert = () => {
 };
 
 const Home = () => {
+  //render data
+  const columns = [
+    { field: 'roleName', headerName: 'Roll Name', width: 180, editable: true },
+    {
+      field: 'roleDescription',
+      headerName: 'Roll Description',
+      width: 180,
+      editable: true,
+    },
+    {
+      field: 'isActive',
+      headerName: 'Active',
+      width: 180,
+      editable: true,
+    },
+    {
+      field: 'entryDate',
+      headerName: 'Entry Date',
+      width: 180,
+      editable: true,
+    },
+    {
+      field: 'updateDate',
+      headerName: 'Update Date',
+      width: 180,
+      editable: true,
+    },
+
+    // {
+    //   field: 'isActive',
+    //   headerName: 'Active',
+    //   width: 180,
+    //   renderCell: (params) => (
+    //     <strong>
+    //       {params.value === true ? (
+    //         <Checkbox checked onChange={() => console.log(params.value)} />
+    //       ) : (
+    //         <Checkbox onChange={() => console.log(params.value)} />
+    //       )}
+    //     </strong>
+    //   ),
+    // },
+
+    {
+      field: 'actions',
+      type: 'actions',
+      headerName: 'Actions',
+      flex: 1,
+      disableClickEventBubbling: true,
+      getActions: (params) => [
+        <IconButton className="link-tool" onClick={viewHandleOpen}>
+          <RemoveRedEyeIcon />
+        </IconButton>,
+        <IconButton className="link-tool" onClick={handleClickOpen}>
+          <EditIcon />
+        </IconButton>,
+        <IconButton className="link-tool" onClick={dialogHandleOpen}>
+          <DeleteIcon />
+        </IconButton>,
+      ],
+    },
+  ];
+  //rows Model
+  //const rows = React.useRef();
+  const [rows, setRows] = React.useState([]);
+  React.useEffect(() => {
+    fetch('https://localhost:7056/api/Role')
+      .then((res) => res.json())
+      .then((result) => {
+        //console.log(result);
+        result.map((res) => {
+          res['id'] = res.roleId;
+        });
+        setRows(result);
+      });
+  }, [0]);
+  //console.log(rows);
   //Role Modal
   const [open, setOpen] = React.useState(false);
 
@@ -180,29 +261,13 @@ const Home = () => {
           <Grid item xs={12}>
             <Grid container spacing={2}>
               <Grid item xs={12}>
-                <DataTable
+                {<MuiDataGrid rows={rows} columns={columns} />}
+                {/* <DataTable
                   PermissionOpen={PermissionhandleClickOpen}
                   ClickOpen={handleClickOpen}
                   viewOpen={viewHandleOpen}
                   dialogOpen={dialogHandleOpen}
-                />
-              </Grid>
-
-              <Grid item xs={9}>
-                <Grid className="pagination-count">
-                  <Typography sx={{ textAlign: 'left' }} variant="h6">
-                    {' '}
-                    showing 1 to 5
-                  </Typography>{' '}
-                </Grid>
-              </Grid>
-              <Grid item xs={3}>
-                <Grid className="pagination-box">
-                  {' '}
-                  <Stack>
-                    <Pagination count={10} shape="rounded" />
-                  </Stack>
-                </Grid>
+                /> */}
               </Grid>
             </Grid>
           </Grid>
@@ -355,14 +420,18 @@ const Home = () => {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button autoFocus onClick={dialogHandleClose} className="box-btn-cancel">
+          <Button
+            autoFocus
+            onClick={dialogHandleClose}
+            className="box-btn-cancel"
+          >
             close
           </Button>
-          <Button onClick={dialogHandleClose} className="btn">Delete</Button>
+          <Button onClick={dialogHandleClose} className="btn">
+            Delete
+          </Button>
         </DialogActions>
       </Dialog>
-      
-      
     </>
   );
 };
