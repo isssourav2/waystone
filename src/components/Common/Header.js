@@ -20,7 +20,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import { ExpandLess, ExpandMore, StarBorder } from '@mui/icons-material';
 import InboxIcon from '@mui/icons-material/Inbox';
 import Badge from '@mui/material/Badge';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom-latest';
 import Menu from '../menu';
 import NearMeIcon from '@mui/icons-material/NearMe';
 import FolderIcon from '@mui/icons-material/Folder';
@@ -30,7 +30,7 @@ import profile from '../../images/profile.png';
 import logo from '../../images/logo.png';
 import AppsIcon from '@mui/icons-material/Apps';
 import StarIcon from '@mui/icons-material/Star';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom-latest';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import { TabMenuContext } from '../../Context/TabMenuContext';
 
