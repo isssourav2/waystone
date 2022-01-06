@@ -1362,6 +1362,56 @@ nav.MuiList-root {
   width: 100%;
 }
 
+.login-wrap{
+  background-image: url(../images/bg-login.jpg);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  height: 100vh;
+  width: 100%;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-wrap .MuiPaper-elevation{
+  border: 0;
+  box-shadow: none;
+  background-color:transparent;
+}
+
+.login-wrap .login-box{
+  background-color:#fff;
+  width: 400px !important;
+  height: 270px;
+  margin: 0 auto;
+  display:flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.login-wrap .MuiSvgIcon-fontSizeMedium{
+  font-size: 15px;
+  margin-right: 10px;
+  margin-left: -20px;
+}
+
+.login-wrap .btn{
+  width: 150px;
+  height: 37px;
+}
+
+.login-head{
+  height: 100px;
+}
+.login-head h2{
+  font-size: 20px;
+  color:  #1f3038;
+}
+
+
+
+
 @media (max-width: 1100px) {
   .col-box .css-i4bv87-MuiSvgIcon-root {
     font-size: 20px;

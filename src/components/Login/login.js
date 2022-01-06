@@ -7,6 +7,9 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { CssBaseline } from '@mui/material';
 import { useOktaAuth } from '@okta/okta-react';
+import logo from '../../images/logo.png';
+import LockOpenIcon from '@mui/icons-material/LockOpen';
+
 
 const Login = () => {
   const { authState, oktaAuth } = useOktaAuth();
@@ -17,26 +20,19 @@ const Login = () => {
   } else if (!authState.isAuthenticated) {
     return (
       <>
-        <CssBaseline />
-        <Box
-          sx={{
-            display: 'flex',
-            marginTop: '40vh',
-            flexDirection: 'column',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-          }}
-        >
+        
+        <Box  className="login-wrap">
           {' '}
-          <Typography>
-            Coming together is a 'beginning' ,keeping together is 'progress'
-            ,working together is 'Success' - Henry Ford
-          </Typography>
+          
           <div style={{ marginBottom: '3em' }}></div>
-          <Card sx={{ minWidth: 275 }}>
-            <CardContent>
-              <Button size="large" onClick={loginHandler}>
-                Login
+          <Card>
+            <CardContent className="login-box">
+              <CardContent className="login-head">
+                <img src={logo} alt="logo" />
+                <h2>Sign UP</h2>
+              </CardContent>
+              <Button size="large" onClick={loginHandler} className="btn">
+                <LockOpenIcon/>Login
               </Button>
             </CardContent>
           </Card>
