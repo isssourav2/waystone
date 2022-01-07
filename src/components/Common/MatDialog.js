@@ -58,6 +58,7 @@ BootstrapDialogTitle.propTypes = {
 function MatDialog({
   open,
   handleClose,
+  onHandleClick,
   children,
   title,
   isCancel,
@@ -65,33 +66,35 @@ function MatDialog({
   isAction,
 }) {
   return (
-    
- 
-      <BootstrapDialog className="modelPopUp"
-        onClose={handleClose}
-        aria-labelledby="customized-dialog-title"
-        open={open}
-      >
-        <BootstrapDialogTitle
-          id="customized-dialog-title"
-          onClose={handleClose}
-        >
-          <Typography variant="h3" style={{ marginRight: '3em' }}>
-            {title}
-          </Typography>
-        </BootstrapDialogTitle>
-        <DialogContent dividers>{children}</DialogContent>
-        {isAction && (
-          <DialogActions dividers className="css-hlj6pa-MuiDialogActions-root">
-            <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-              {isCancel && <Button onClick={handleClose} className="box-btn-cancel">Cancel</Button>}
-              {isSubmit && <Button autoFocus className="btn">Save changes</Button>}
-            </Box>
-          </DialogActions>
-        )}
-      </BootstrapDialog>
-  
-    
+    <BootstrapDialog
+      className="modelPopUp"
+      onClose={handleClose}
+      aria-labelledby="customized-dialog-title"
+      open={open}
+    >
+      <BootstrapDialogTitle id="customized-dialog-title" onClose={handleClose}>
+        <Typography variant="h3" style={{ marginRight: '3em' }}>
+          {title}
+        </Typography>
+      </BootstrapDialogTitle>
+      <DialogContent dividers>{children}</DialogContent>
+      {isAction && (
+        <DialogActions dividers className="css-hlj6pa-MuiDialogActions-root">
+          <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+            {isCancel && (
+              <Button onClick={handleClose} className="box-btn-cancel">
+                Cancel
+              </Button>
+            )}
+            {isSubmit && (
+              <Button autoFocus className="btn" onClick={onHandleClick}>
+                Save changes
+              </Button>
+            )}
+          </Box>
+        </DialogActions>
+      )}
+    </BootstrapDialog>
   );
 }
 

@@ -31,6 +31,7 @@ import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { MuiDataGrid } from '../../../DataTable';
+import axios from 'axios';
 import '../../../style/style.css';
 
 function PaperComponent(props) {
@@ -47,8 +48,25 @@ function Alerts({ alert, color }) {
 const Insert = () => {
   Alert();
 };
-
+const SaveRoll = async (role) => {
+  const res = await axios.post('https://localhost:7056/api/Role', role);
+  return res.data;
+};
 const Home = () => {
+  const submitHandler = () => {
+    const response = SaveRoll(Role);
+    response.then((save) => {
+      console.log('reponse:', save);
+      GetRollData();
+      handleClose();
+    });
+  };
+  const onRoleDescriptionChange = (val) => {
+    Role.roleDescription = val;
+  };
+  const onRoleNameChange = (val) => {
+    Role.roleName = val;
+  };
   //render data
   const columns = [
     { field: 'roleName', headerName: 'Role Name', width: 180, editable: true },
@@ -114,7 +132,13 @@ const Home = () => {
   //rows Model
   //const rows = React.useRef();
   const [rows, setRows] = React.useState([]);
-  React.useEffect(() => {
+  const [Role, setRole] = React.useState({
+    roleName: '',
+    roleDescription: '',
+    isActive: false,
+    entryDate: '2022-01-07',
+  });
+  const GetRollData = () => {
     fetch('https://localhost:7056/api/Role')
       .then((res) => res.json())
       .then((result) => {
@@ -124,8 +148,11 @@ const Home = () => {
         });
         setRows(result);
       });
+  };
+  React.useEffect(() => {
+    GetRollData();
   }, [0]);
-  //console.log(rows);
+  // console.log(Role);
   //Role Modal
   const [open, setOpen] = React.useState(false);
 
@@ -306,6 +333,7 @@ const Home = () => {
         open={open}
         title="Role"
         handleClose={handleClose}
+        onHandleClick={submitHandler}
         isAction="true"
         isCancel="true"
         isSubmit="true"
@@ -320,7 +348,10 @@ const Home = () => {
         >
           <FormControl variant="standard">
             <InputLabel htmlFor="component-simple">Role Name</InputLabel>
-            <Input id="component-simple" />
+            <Input
+              id="component-simple"
+              onInput={(e) => onRoleNameChange(e.target.value)}
+            />
           </FormControl>
         </Box>
         <Box
@@ -333,7 +364,10 @@ const Home = () => {
         >
           <FormControl variant="standard">
             <InputLabel htmlFor="component-simple">Description</InputLabel>
-            <Input id="component-simple" />
+            <Input
+              id="component-simple"
+              onInput={(e) => onRoleDescriptionChange(e.target.value)}
+            />
           </FormControl>
         </Box>
       </MatDialog>

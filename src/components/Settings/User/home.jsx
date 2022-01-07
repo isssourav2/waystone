@@ -30,6 +30,9 @@ import Checkbox from '@mui/material/Checkbox';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
+import MenuItem from '@mui/material/MenuItem';
+import NativeSelect from '@mui/material/NativeSelect';
+import axios from 'axios';
 import '../../../style/style.css';
 import { MuiDataGrid } from '../../../DataTable';
 function PaperComponent(props) {
@@ -106,8 +109,17 @@ const Home = () => {
       ],
     },
   ];
-
+  const rollData = async () => {
+    const res = await axios.get('https://localhost:7056/api/Role');
+    return res.data;
+  };
   const [rows, setRows] = React.useState([]);
+  const [SelectOptions, setSelectOptions] = React.useState([]);
+  const [selRole, setselRole] = React.useState(0);
+  const handleRoleChange = (event) => {
+    //setSelRole(event.target.value);
+  };
+
   React.useEffect(() => {
     fetch('https://localhost:7056/api/User')
       .then((res) => res.json())
@@ -118,8 +130,17 @@ const Home = () => {
         });
         setRows(result);
       });
+    //call roll data
+    rollData().then((result) => {
+      //console.log('data', result);
+      // const options = result.map((d) => ({
+      //   value: d.roleId,
+      //   label: d.roleName,
+      // }));
+      setSelectOptions(result);
+    });
   }, [0]);
-
+  console.log('data', SelectOptions);
   //Role Modal
   const [open, setOpen] = React.useState(false);
 
@@ -350,12 +371,32 @@ const Home = () => {
                 label="Department"
                 type="Text"
               />
-
-              <TextField
+              {/* <Select options={SelectOptions} /> */}
+              <FormControl fullWidth>
+                <InputLabel variant="standard" htmlFor="uncontrolled-native">
+                  Role Name
+                </InputLabel>
+                <NativeSelect
+                  defaultValue={30}
+                  inputProps={{
+                    name: 'role',
+                    id: 'uncontrolled-native',
+                  }}
+                >
+                  <>
+                    {SelectOptions.map((rol) => {
+                      <option value={rol.roleId}>{rol.roleName}</option>;
+                    })}
+                  </>
+                  {/* <option value={20}>Twenty</option>
+                  <option value={30}>Thirty</option> */}
+                </NativeSelect>
+              </FormControl>
+              {/* <TextField
                 id="outlined-password-input"
                 label="User Role"
                 type="Text"
-              />
+              /> */}
             </div>
           </Box>
         </Box>

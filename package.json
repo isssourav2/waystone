@@ -18,6 +18,7 @@
     "@testing-library/jest-dom": "^5.15.0",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
+    "axios": "^0.24.0",
     "date-fns": "^2.27.0",
     "i": "^0.3.7",
     "react": "^17.0.2",
@@ -25,6 +26,7 @@
     "react-router-dom": "^5.2.1",
     "react-router-dom-latest": "npm:react-router-dom@^6.0.2",
     "react-scripts": "4.0.3",
+    "react-select": "^5.2.1",
     "styled-components": "^5.3.3",
     "web-vitals": "^1.1.2"
   },
