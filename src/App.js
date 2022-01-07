@@ -7,9 +7,6 @@ import {
   Settings,
   User,
   Email,
-  Tags,
-  Login,
-  Connections,
 } from './components';
 
 import { CssBaseline } from '@mui/material';
@@ -37,9 +34,8 @@ const App = () => {
           <Route path="/User" element={<User />} />
           <Route path="/Settings" element={<Settings />} />
           <Route path="/Email" element={<Email />} />
-          <Route path="/Tags" element={<Tags />} />
 
-          <Route path="/Connections" element={<Connections />} />
+          {/* <Route path="/Connections" element={<Connections />} /> */}
         </Routes>
       </Router>
       <OldRouter>

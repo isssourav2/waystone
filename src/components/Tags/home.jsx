@@ -125,15 +125,15 @@ const Home = () => {
                     size="small"
                     onClick={handleClickOpen}
                   >
-                    <AddIcon /> Create 
+                    <AddIcon /> Create
                   </Button>
                 </Box>
               </Grid>
 
               <Grid item xs={6}>
-                <IconButton className="print-box">
+                {/* <IconButton className="print-box">
                   <PrintIcon />
-                </IconButton>
+                </IconButton> */}
               </Grid>
             </Grid>
           </Box>
@@ -167,20 +167,20 @@ const Home = () => {
               </Grid>
 
               <Grid item xs={9}>
-                <Grid className="pagination-count">
+                {/* <Grid className="pagination-count">
                   <Typography sx={{ textAlign: 'left' }} variant="h6">
                     {' '}
                     showing 1 to 5
                   </Typography>{' '}
-                </Grid>
+                </Grid> */}
               </Grid>
               <Grid item xs={3}>
-                <Grid className="pagination-box">
+                {/* <Grid className="pagination-box">
                   {' '}
                   <Stack>
                     <Pagination count={10} shape="rounded" />
                   </Stack>
-                </Grid>
+                </Grid> */}
               </Grid>
             </Grid>
           </Grid>
@@ -226,77 +226,53 @@ const Home = () => {
         isCancel="true"
         isSubmit="true"
       >
-        <Box
-          component="form"
-         
-          noValidate
-          autoComplete="off"
-        >
-          
-         
-        </Box>
-        <Box
-          component="form"
-         
-          noValidate
-          autoComplete="off"
-        >
+        <Box component="form" noValidate autoComplete="off"></Box>
+        <Box component="form" noValidate autoComplete="off">
+          <Box
+            component="form"
+            sx={{
+              '& .MuiTextField-root': { m: 1, width: '25ch' },
+            }}
+            noValidate
+            autoComplete="off"
+          >
+            <div>
+              <TextField
+                id="outlined-password-input"
+                label="User Name"
+                type="Text"
+              />
 
+              <TextField
+                id="outlined-password-input"
+                label="First Name"
+                type="Text"
+              />
 
+              <TextField
+                id="outlined-password-input"
+                label="Last Name"
+                type="Text"
+              />
 
-      <Box
-      component="form"
-      sx={{
-        '& .MuiTextField-root': { m: 1, width: '25ch' },
-      }}
-      noValidate
-      autoComplete="off"
-    >
-      <div>
+              <TextField
+                id="outlined-password-input"
+                label="Email"
+                type="Text"
+              />
+              <TextField
+                id="outlined-password-input"
+                label="Department"
+                type="Text"
+              />
 
-      <TextField
-          id="outlined-password-input"
-          label="User Name"
-          type="Text"
-        />
-
-        <TextField
-          id="outlined-password-input"
-          label="First Name"
-          type="Text"
-        />
-
-        <TextField
-          id="outlined-password-input"
-          label="Last Name"
-          type="Text"
-        />
-
-        <TextField
-          id="outlined-password-input"
-          label="Email"
-          type="Text"
-        />
-        <TextField
-          id="outlined-password-input"
-          label="Department"
-          type="Text"
-        />
-        
-        <TextField
-          id="outlined-password-input"
-          label="User Role"
-          type="Text"
-        />
-        
-
-
-      </div>
-    </Box>
-
-
-
-         
+              <TextField
+                id="outlined-password-input"
+                label="User Role"
+                type="Text"
+              />
+            </div>
+          </Box>
         </Box>
       </MatDialog>
       <MatDialog
@@ -325,7 +301,6 @@ const Home = () => {
         isCancel="true"
         isSubmit="true"
       >
-       
         <Typography className="text-row">
           <label>Tag Name</label>
         </Typography>
@@ -374,7 +349,9 @@ const Home = () => {
           <Button autoFocus onClick={handleClose} className="box-btn left">
             close
           </Button>
-          <Button onClick={handleClose} className="box-btn ">Delete</Button>
+          <Button onClick={handleClose} className="box-btn ">
+            Delete
+          </Button>
         </DialogActions>
       </Dialog>
     </>

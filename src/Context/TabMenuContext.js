@@ -5,6 +5,7 @@ const initialState = {
   TabMenuOpen: 0,
   SubActiveValue: -1,
   TabMenuSettings: 0,
+  TabMenuDataSource: 0,
 };
 
 const TabMenuReducer = (state, action) => {
@@ -13,10 +14,6 @@ const TabMenuReducer = (state, action) => {
       return { TabMenuOpen: 0, SubActiveValue: 0 };
     case 'Dashboard_RemedialAction':
       return { TabMenuOpen: 1, SubActiveValue: 1 };
-    case 'DataSource_Source':
-      return { TabMenuOpen: 2, SubActiveValue: 2 };
-    case 'DataSource_Connection':
-      return { TabMenuOpen: 3, SubActiveValue: 3 };
     case 'JobScheduling_Jobs':
       return { TabMenuOpen: 4, SubActiveValue: 4 };
     case 'JobScheduling_Schedule':
@@ -35,6 +32,10 @@ const TabMenuReducer = (state, action) => {
       return { TabMenuSettings: 2, SubActiveValue: 11 };
     case 'Settings_Tag':
       return { TabMenuSettings: 3, SubActiveValue: 12 };
+    case 'DataSource_Source':
+      return { TabMenuDataSource: 0, SubActiveValue: 13 };
+    case 'DataSource_Connection':
+      return { TabMenuDataSource: 1, SubActiveValue: 14 };
     default:
       return { TabMenuOpen: -1, SubActiveValue: -1 };
   }

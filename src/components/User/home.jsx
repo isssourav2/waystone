@@ -120,7 +120,6 @@ const Home = () => {
       });
   }, [0]);
 
-
   //Role Modal
   const [open, setOpen] = React.useState(false);
 
@@ -221,9 +220,9 @@ const Home = () => {
               </Grid>
 
               <Grid item xs={6}>
-                <IconButton className="print-box">
+                {/* <IconButton className="print-box">
                   <PrintIcon />
-                </IconButton>
+                </IconButton> */}
               </Grid>
             </Grid>
           </Box>

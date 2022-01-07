@@ -180,6 +180,12 @@ function Header() {
       setjobScheduleSubOpen(false);
       setSettingsSubOpen(true);
       setOpen(true);
+    } else if (SubActiveValue == 9 || SubActiveValue == 10) {
+      setdashboardSubOpen(false);
+      setdataSourceSubOpen(true);
+      setjobScheduleSubOpen(false);
+      setSettingsSubOpen(false);
+      setOpen(true);
     } else {
       setdashboardSubOpen(false);
       setdataSourceSubOpen(false);
@@ -249,6 +255,16 @@ function Header() {
       case 12:
         tabMenu.dispatch({ type: 'Settings_Tag' });
         history.push('/Settings');
+        // navigate('/Settings');
+        break;
+      case 13:
+        tabMenu.dispatch({ type: 'DataSource_Source' });
+        history.push('/DataSource');
+        // navigate('/Settings');
+        break;
+      case 14:
+        tabMenu.dispatch({ type: 'DataSource_Connection' });
+        history.push('/DataSource');
         // navigate('/Settings');
         break;
       default:
@@ -378,8 +394,8 @@ function Header() {
               <List component="ul" disablePadding>
                 <ListItem
                   button
-                  onClick={() => handleChange(0)}
-                  selected={SubActiveValue === 0}
+                  onClick={() => handleChange(13)}
+                  selected={SubActiveValue === 13}
                 >
                   <ListItemText primary="Source" />
                 </ListItem>
@@ -387,8 +403,8 @@ function Header() {
               <List component="ul" disablePadding>
                 <ListItem
                   button
-                  onClick={() => handleChange(1)}
-                  selected={SubActiveValue === 1}
+                  onClick={() => handleChange(14)}
+                  selected={SubActiveValue === 14}
                 >
                   <ListItemText primary="Connection" />
                 </ListItem>
