@@ -12,7 +12,7 @@ import PrintIcon from '@mui/icons-material/Print';
 import SearchIcon from '@mui/icons-material/Search';
 import { DataGrid, GridRowsProp, GridColDef } from '@mui/x-data-grid';
 import TextField from '@mui/material/TextField';
-import MatDialog from '../Common/MatDialog';
+import MatDialog from '../../Common/MatDialog';
 
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
@@ -27,7 +27,6 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Paper from '@mui/material/Paper';
 
-
 import Tab from '@mui/material/Tab';
 import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
@@ -35,19 +34,15 @@ import TabPanel from '@mui/lab/TabPanel';
 import MailIcon from '@mui/icons-material/Mail';
 import SettingsIcon from '@mui/icons-material/Settings';
 
-
-
-
-import '../../style/style.css';
+import '../../../style/style.css';
 function PaperComponent(props) {
   return <Paper {...props} />;
 }
 const Home = () => {
-
-   //Tab
-    const handleChange = (event, newValue) => {
-     setValue(newValue);
-   };
+  //Tab
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
 
   //Role Modal
   const [open, setOpen] = React.useState(false);
@@ -136,171 +131,149 @@ const Home = () => {
                   }}
                 >
                   <Typography variant="h2">Settings: Config</Typography>
-                 
                 </Box>
               </Grid>
 
-              <Grid item xs={6}>
-                
-              </Grid>
+              <Grid item xs={6}></Grid>
             </Grid>
           </Box>
 
           <Box sx={{ flexGrow: 1 }}>
             <Grid container spacing={2} className="tab-group">
               <Grid item xs={12}>
+                <Box sx={{ width: '100%', typography: 'body1' }}>
+                  <TabContext value={value}>
+                    <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+                      <TabList
+                        onChange={handleChange}
+                        aria-label="lab API tabs example"
+                      >
+                        <Tab label="Scheduler Settings" value="1" />
+                        <Tab label="Email Settings" value="2" />
+                      </TabList>
+                    </Box>
+                    <TabPanel value="1">
+                      <Typography variant="h3">
+                        {' '}
+                        <SettingsIcon /> Scheduler Settings
+                      </Typography>
 
-
-
-
-              <Box sx={{ width: '100%', typography: 'body1' }}>
-                <TabContext value={value}>
-                  <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-                    <TabList onChange={handleChange} aria-label="lab API tabs example">
-                      <Tab label="Scheduler Settings" value="1" />
-                      <Tab label="Email Settings" value="2" />
-                      
-                    </TabList>
-
-                  </Box>
-                  <TabPanel value="1">
-                        <Typography variant="h3"> <SettingsIcon/> Scheduler Settings</Typography>
-
-                        <Box className="tabform"
-                          component="form"
-                        
-                          noValidate
-                          autoComplete="off"
-                        >
-                          <div class="tabform-box">
-
+                      <Box
+                        className="tabform"
+                        component="form"
+                        noValidate
+                        autoComplete="off"
+                      >
+                        <div class="tabform-box">
                           <TextField
-                              id="outlined-password-input"
-                              required
-                              label="01:00 AM"
-                              type="Text"
-                              placeholder="01:00 AM"
-                            />
-
-                            
-
-                            <TextField
-                              required
-                              id="outlined-password-input"
-                              label="Time Interval (HH)"
-                              type="Text"
-                              placeholder="1"
-                            />
-
-                           
-                            
-                            <Button className="box-btn" variant="contained" size="small">
-                              Submit
-                            </Button>
-
-                            
-
-                          </div>
-                        </Box>
-
-
-
-
-                  </TabPanel>
-                  <TabPanel value="2">
-                      <Typography variant="h3"> <MailIcon/> Email Settings</Typography>
-
-
-
-                      <Box className="tabform"
-                          component="form"
-                        
-                          noValidate
-                          autoComplete="off"
-                        >
-                          <div class="tabform-box">
-
-                          <TextField
-                              id="outlined-password-input"
-                              required
-                              label="Form"
-                              type="Text"
-                              placeholder="mb_riskire@waystone.com"
-                            />
-
-                            <em className="note">Please provide only one email id</em>
-
-                            <TextField
-                              required
-                              id="outlined-password-input"
-                              label="Host"
-                              type="Text"
-                              placeholder="smtp.office365.com"
-                            />
-
-                            <TextField
-                              required
-                              id="outlined-password-input"
-                              label="Port"
-                              type="Text"
-                              placeholder="586"
-                            />
-
-                            <TextField
-                              required
-                              id="outlined-password-input"
-                              label="User Name"
-                              type="Text"
-                              placeholder="mb_riskire@waystone.com"
-                            />
-                            <TextField
-
-                              required
-                              id="outlined-password-input"
-                              label="Password"
-                              type="Text"
-                              placeholder="Enter Password"
-                            />
-                            
-                            <TextField
+                            id="outlined-password-input"
                             required
-                              id="outlined-password-input"
-                              label="To"
-                              type="Text"
-                              placeholder="mb_riskire@waystone.com"
-                            />
-                            <em className="note">Email id must be comma separated e.g- info@info.com, info1@info.com.</em>
+                            label="01:00 AM"
+                            type="Text"
+                            placeholder="01:00 AM"
+                          />
 
-                            
-                            <Button className="box-btn" variant="contained" size="small">
-                              Submit
-                            </Button>
+                          <TextField
+                            required
+                            id="outlined-password-input"
+                            label="Time Interval (HH)"
+                            type="Text"
+                            placeholder="1"
+                          />
 
-                            
+                          <Button
+                            className="box-btn"
+                            variant="contained"
+                            size="small"
+                          >
+                            Submit
+                          </Button>
+                        </div>
+                      </Box>
+                    </TabPanel>
+                    <TabPanel value="2">
+                      <Typography variant="h3">
+                        {' '}
+                        <MailIcon /> Email Settings
+                      </Typography>
 
-                          </div>
-                        </Box>
+                      <Box
+                        className="tabform"
+                        component="form"
+                        noValidate
+                        autoComplete="off"
+                      >
+                        <div class="tabform-box">
+                          <TextField
+                            id="outlined-password-input"
+                            required
+                            label="Form"
+                            type="Text"
+                            placeholder="mb_riskire@waystone.com"
+                          />
 
+                          <em className="note">
+                            Please provide only one email id
+                          </em>
 
+                          <TextField
+                            required
+                            id="outlined-password-input"
+                            label="Host"
+                            type="Text"
+                            placeholder="smtp.office365.com"
+                          />
 
+                          <TextField
+                            required
+                            id="outlined-password-input"
+                            label="Port"
+                            type="Text"
+                            placeholder="586"
+                          />
 
+                          <TextField
+                            required
+                            id="outlined-password-input"
+                            label="User Name"
+                            type="Text"
+                            placeholder="mb_riskire@waystone.com"
+                          />
+                          <TextField
+                            required
+                            id="outlined-password-input"
+                            label="Password"
+                            type="Text"
+                            placeholder="Enter Password"
+                          />
 
+                          <TextField
+                            required
+                            id="outlined-password-input"
+                            label="To"
+                            type="Text"
+                            placeholder="mb_riskire@waystone.com"
+                          />
+                          <em className="note">
+                            Email id must be comma separated e.g- info@info.com,
+                            info1@info.com.
+                          </em>
 
-                  </TabPanel>
-                </TabContext>
-              </Box>
-
-
-
-
-
-
+                          <Button
+                            className="box-btn"
+                            variant="contained"
+                            size="small"
+                          >
+                            Submit
+                          </Button>
+                        </div>
+                      </Box>
+                    </TabPanel>
+                  </TabContext>
+                </Box>
               </Grid>
-             
             </Grid>
           </Box>
-
-         
         </div>
       </Box>
       <Popover
@@ -343,77 +316,53 @@ const Home = () => {
         isCancel="true"
         isSubmit="true"
       >
-        <Box
-          component="form"
-         
-          noValidate
-          autoComplete="off"
-        >
-          
-         
-        </Box>
-        <Box
-          component="form"
-         
-          noValidate
-          autoComplete="off"
-        >
+        <Box component="form" noValidate autoComplete="off"></Box>
+        <Box component="form" noValidate autoComplete="off">
+          <Box
+            component="form"
+            sx={{
+              '& .MuiTextField-root': { m: 1, width: '25ch' },
+            }}
+            noValidate
+            autoComplete="off"
+          >
+            <div>
+              <TextField
+                id="outlined-password-input"
+                label="User Name"
+                type="Text"
+              />
 
+              <TextField
+                id="outlined-password-input"
+                label="First Name"
+                type="Text"
+              />
 
+              <TextField
+                id="outlined-password-input"
+                label="Last Name"
+                type="Text"
+              />
 
-      <Box
-      component="form"
-      sx={{
-        '& .MuiTextField-root': { m: 1, width: '25ch' },
-      }}
-      noValidate
-      autoComplete="off"
-    >
-      <div>
+              <TextField
+                id="outlined-password-input"
+                label="Email"
+                type="Text"
+              />
+              <TextField
+                id="outlined-password-input"
+                label="Department"
+                type="Text"
+              />
 
-      <TextField
-          id="outlined-password-input"
-          label="User Name"
-          type="Text"
-        />
-
-        <TextField
-          id="outlined-password-input"
-          label="First Name"
-          type="Text"
-        />
-
-        <TextField
-          id="outlined-password-input"
-          label="Last Name"
-          type="Text"
-        />
-
-        <TextField
-          id="outlined-password-input"
-          label="Email"
-          type="Text"
-        />
-        <TextField
-          id="outlined-password-input"
-          label="Department"
-          type="Text"
-        />
-        
-        <TextField
-          id="outlined-password-input"
-          label="User Role"
-          type="Text"
-        />
-        
-
-
-      </div>
-    </Box>
-
-
-
-         
+              <TextField
+                id="outlined-password-input"
+                label="User Role"
+                type="Text"
+              />
+            </div>
+          </Box>
         </Box>
       </MatDialog>
       <MatDialog
@@ -499,7 +448,9 @@ const Home = () => {
           <Button autoFocus onClick={handleClose} className="box-btn left">
             close
           </Button>
-          <Button onClick={handleClose} className="box-btn ">Delete</Button>
+          <Button onClick={handleClose} className="box-btn ">
+            Delete
+          </Button>
         </DialogActions>
       </Dialog>
     </>

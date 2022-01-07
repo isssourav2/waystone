@@ -1,13 +1,4 @@
-import {
-  TabMenu,
-  Welcome,
-  Stepper,
-  Roles,
-  Application,
-  Settings,
-  User,
-  Email,
-} from './components';
+import { TabMenu, Welcome, Stepper, Settings } from './components';
 
 import { CssBaseline } from '@mui/material';
 import OctaApp from './lib/octaApp';
@@ -29,11 +20,8 @@ const App = () => {
           <Route path="/help" element={<Welcome />} />
           <Route path="/Stepper" element={<Stepper />} />
           {/* <Route path="/TabMenu" element={<TabMenu />} /> */}
-          <Route path="/Application" element={<Application />} />
-          <Route path="/Roles" element={<Roles />} />
-          <Route path="/User" element={<User />} />
+
           <Route path="/Settings" element={<Settings />} />
-          <Route path="/Email" element={<Email />} />
 
           {/* <Route path="/Connections" element={<Connections />} /> */}
         </Routes>

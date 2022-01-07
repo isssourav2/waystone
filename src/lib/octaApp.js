@@ -8,11 +8,7 @@ import {
 import {
   TabMenu,
   Welcome,
-  Roles,
-  Application,
   Settings,
-  User,
-  Email,
   Login,
   TabDataSource,
 } from '../components';
@@ -38,11 +34,8 @@ const OctaApp = () => {
         <OldRoute path="/help" component={Welcome} />
         <OldRoute path="/Stepper" component={Stepper} />
         {/* <Route path="/TabMenu" component={<TabMenu />} /> */}
-        <OldRoute path="/Application" component={Application} />
-        <OldRoute path="/Roles" component={Roles} />
-        <OldRoute path="/User" component={User} />
+
         <OldRoute path="/Settings" component={Settings} />
-        <OldRoute path="/Email" component={Email} />
         <OldRoute path="/DataSource" component={TabDataSource} />
         {/* <OldRoute path="/Connections" component={Connections} /> */}
         <OldRoute path="/TabMenu" component={TabMenu} />
