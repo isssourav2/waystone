@@ -59,13 +59,13 @@ const Home = () => {
       editable: true,
     },
     {
-      field: 'roleName',
+      field: 'roleId',
       headerName: 'User Role',
       width: 180,
       editable: true,
     },
     {
-      field: 'active',
+      field: 'isActive',
       headerName: 'Active',
       width: 180,
       renderCell: (params) => (
@@ -107,90 +107,19 @@ const Home = () => {
     },
   ];
 
-  const rows = [
-    {
-      id: 1,
-      userName: 'Aadams',
-      firstName: 'Andrew',
-      lastName: 'Adams',
-      email: 'aadams@waystone.com',
-      department: 'Risk',
-      roleName: 'Standard User',
-      active: true,
-    },
-    {
-      id: 2,
-      userName: 'Aali',
-      firstName: 'Asghar',
-      lastName: 'Ali',
-      email: 'aali@waystone.com',
-      department: 'HST',
-      roleName: 'Super User',
-      active: true,
-    },
-    {
-      id: 3,
-      userName: 'Aalzaid',
-      firstName: 'Abdalla',
-      lastName: 'Alzaid',
-      email: 'aalzaid@waystone.com',
-      department: 'Technology',
-      roleName: 'Super User',
-      active: true,
-    },
-    {
-      id: 4,
-      userName: 'Akiely',
-      firstName: 'Aoife',
-      lastName: 'Kiely',
-      email: 'akiely@waystone.com',
-      department: 'Regulatory',
-      roleName: 'Standard User',
-      active: true,
-    },
-    {
-      id: 5,
-      userName: 'Alamont',
-      firstName: 'Andrew',
-      lastName: 'Lamont',
-      email: 'alamont@waystone.com',
-      department: 'Risk',
-      roleName: 'Standard User',
-      active: false,
-    },
-    {
-      id: 6,
-      userName: 'Aadams',
-      firstName: 'Andrew',
-      lastName: 'Adams',
-      email: 'aadams@waystone.com',
-      department: 'Risk',
-      roleName: 'Standard User',
-      active: true,
-    },
-    {
-      id: 7,
-      userName: 'Aali',
-      firstName: 'Asghar',
-      lastName: 'Ali',
-      email: 'aali@waystone.com',
-      department: 'HST',
-      roleName: 'Super User',
-      active: true,
-    },
-    {
-      id: 8,
-      userName: 'Aalzaid',
-      firstName: 'Abdalla',
-      lastName: 'Alzaid',
-      email: 'aalzaid@waystone.com',
-      department: 'Technology',
-      roleName: 'Super User',
-      active: true,
-    },
+  const [rows, setRows] = React.useState([]);
+  React.useEffect(() => {
+    fetch('https://localhost:7056/api/User')
+      .then((res) => res.json())
+      .then((result) => {
+        //console.log(result);
+        result.map((res) => {
+          res['id'] = res.userId;
+        });
+        setRows(result);
+      });
+  }, [0]);
 
-   
-  ];
 
   //Role Modal
   const [open, setOpen] = React.useState(false);
