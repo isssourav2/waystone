@@ -54,10 +54,10 @@ const Insert = () => {
 const Home = () => {
   //render data
   const columns = [
-    { field: 'roleName', headerName: 'Roll Name', width: 180, editable: true },
+    { field: 'roleName', headerName: 'Role Name', width: 180, editable: true },
     {
       field: 'roleDescription',
-      headerName: 'Roll Description',
+      headerName: 'Role Description',
       width: 180,
       editable: true,
     },

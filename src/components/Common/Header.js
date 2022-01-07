@@ -496,7 +496,7 @@ function Header() {
                   onClick={() => handleChange(10)}
                   selected={SubActiveValue === 10}
                 >
-                  <ListItemText primary="User" />
+                  <ListItemText primary="Users" />
                 </ListItem>
               </List>
               <List component="ul" disablePadding>
@@ -514,7 +514,7 @@ function Header() {
                   onClick={() => handleChange(12)}
                   selected={SubActiveValue === 12}
                 >
-                  <ListItemText primary="Tag" />
+                  <ListItemText primary="Tags" />
                 </ListItem>
               </List>
             </Collapse>
