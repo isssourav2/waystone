@@ -80,7 +80,7 @@ const Home = () => {
         <Source />
       </TabPanel>
       <TabPanel value={tabMenuOpenIndex} index={1} className="frame">
-        Hello connection
+        <Connections />
       </TabPanel>
     </Box>
   );
