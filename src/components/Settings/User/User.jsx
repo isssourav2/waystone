@@ -1,8 +1,7 @@
 import React from 'react';
 import Home from './home';
-import Header from '../Common/Header';
 import Box from '@mui/material/Box';
-const Email = () => {
+const User = () => {
   return (
     <Box sx={{ display: 'flex' }}>
       {/* <Header /> */}
@@ -11,4 +10,4 @@ const Email = () => {
   );
 };
 
-export default Email;
+export default User;

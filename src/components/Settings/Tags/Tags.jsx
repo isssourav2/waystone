@@ -1,8 +1,7 @@
 import React from 'react';
 import Home from './home';
-import Header from '../Common/Header';
 import Box from '@mui/material/Box';
-const User = () => {
+const Tags = () => {
   return (
     <Box sx={{ display: 'flex' }}>
       {/* <Header /> */}
@@ -11,4 +10,4 @@ const User = () => {
   );
 };
 
-export default User;
+export default Tags;

@@ -12,7 +12,7 @@ import PrintIcon from '@mui/icons-material/Print';
 import SearchIcon from '@mui/icons-material/Search';
 import { DataGrid, GridRowsProp, GridColDef } from '@mui/x-data-grid';
 import TextField from '@mui/material/TextField';
-import MatDialog from '../Common/MatDialog';
+import MatDialog from '../../Common/MatDialog';
 import DataTable from './DataTable.jsx';
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
@@ -26,100 +26,11 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Paper from '@mui/material/Paper';
-import Checkbox from '@mui/material/Checkbox';
-import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
-import EditIcon from '@mui/icons-material/Edit';
-import DeleteIcon from '@mui/icons-material/Delete';
-import '../../style/style.css';
-import { MuiDataGrid } from '../../DataTable';
+import '../../../style/style.css';
 function PaperComponent(props) {
   return <Paper {...props} />;
 }
-
 const Home = () => {
-  const columns = [
-    { field: 'userName', headerName: 'User Name', width: 180, editable: true },
-    {
-      field: 'firstName',
-      headerName: 'First Name',
-      width: 180,
-      editable: true,
-    },
-    { field: 'lastName', headerName: 'Last Name', width: 180, editable: true },
-    {
-      field: 'email',
-      headerName: 'Email',
-      width: 200,
-      editable: true,
-    },
-    {
-      field: 'department',
-      headerName: 'Department',
-      width: 180,
-      editable: true,
-    },
-    {
-      field: 'roleId',
-      headerName: 'User Role',
-      width: 180,
-      editable: true,
-    },
-    {
-      field: 'isActive',
-      headerName: 'Active',
-      width: 180,
-      renderCell: (params) => (
-        <strong>
-          {params.value === true ? (
-            <Checkbox checked onChange={() => console.log(params.value)} />
-          ) : (
-            <Checkbox onChange={() => console.log(params.value)} />
-          )}
-        </strong>
-      ),
-    },
-    {
-      field: 'actions',
-      type: 'actions',
-      headerName: 'Actions',
-      flex: 1,
-      disableClickEventBubbling: true,
-      getActions: (params) => [
-        <IconButton
-          className="link-tool"
-          onClick={() => console.log(params.row)}
-        >
-          <RemoveRedEyeIcon />
-        </IconButton>,
-        <IconButton
-          className="link-tool"
-          onClick={() => console.log(params.row)}
-        >
-          <EditIcon />
-        </IconButton>,
-        <IconButton
-          className="link-tool"
-          onClick={() => console.log(params.row.id)}
-        >
-          <DeleteIcon />
-        </IconButton>,
-      ],
-    },
-  ];
-
-  const [rows, setRows] = React.useState([]);
-  React.useEffect(() => {
-    fetch('https://localhost:7056/api/User')
-      .then((res) => res.json())
-      .then((result) => {
-        //console.log(result);
-        result.map((res) => {
-          res['id'] = res.userId;
-        });
-        setRows(result);
-      });
-  }, [0]);
-
   //Role Modal
   const [open, setOpen] = React.useState(false);
 
@@ -206,7 +117,7 @@ const Home = () => {
                     display: 'flex',
                   }}
                 >
-                  <Typography variant="h2">Users</Typography>
+                  <Typography variant="h2">Tags</Typography>
                   <Button
                     className="box-btn"
                     variant="contained"
@@ -214,7 +125,7 @@ const Home = () => {
                     size="small"
                     onClick={handleClickOpen}
                   >
-                    <AddIcon /> Create User
+                    <AddIcon /> Create
                   </Button>
                 </Box>
               </Grid>
@@ -247,26 +158,30 @@ const Home = () => {
           <Grid item xs={12}>
             <Grid container spacing={2}>
               <Grid item xs={12}>
-                {<MuiDataGrid rows={rows} columns={columns} />}
-                {/* <MuiDataGrid /> */}
+                <DataTable
+                  PermissionOpen={PermissionhandleClickOpen}
+                  ClickOpen={handleClickOpen}
+                  viewOpen={viewHandleOpen}
+                  dialogOpen={dialogHandleOpen}
+                />
               </Grid>
 
-              {/* <Grid item xs={9}>
-                <Grid className="pagination-count">
+              <Grid item xs={9}>
+                {/* <Grid className="pagination-count">
                   <Typography sx={{ textAlign: 'left' }} variant="h6">
                     {' '}
                     showing 1 to 5
                   </Typography>{' '}
-                </Grid>
+                </Grid> */}
               </Grid>
               <Grid item xs={3}>
-                <Grid className="pagination-box">
+                {/* <Grid className="pagination-box">
                   {' '}
                   <Stack>
                     <Pagination count={10} shape="rounded" />
                   </Stack>
-                </Grid>
-              </Grid> */}
+                </Grid> */}
+              </Grid>
             </Grid>
           </Grid>
         </div>
@@ -380,23 +295,14 @@ const Home = () => {
       </MatDialog>
       <MatDialog
         open={PermissionOpen}
-        title="Permission"
+        title="Tags"
         handleClose={PermissionhandleClose}
         isAction="true"
         isCancel="true"
         isSubmit="true"
       >
         <Typography className="text-row">
-          <label>Role Name</label> <span>Power User | BD Team</span>
-        </Typography>
-
-        <Typography className="text-row">
-          <label>Role Description</label>{' '}
-          <span>Access to Everything (excl. Configuration, Manage</span>
-        </Typography>
-
-        <Typography className="text-row">
-          <label>Permission</label>
+          <label>Tag Name</label>
         </Typography>
 
         <Box
@@ -411,7 +317,7 @@ const Home = () => {
           <TextareaAutosize
             aria-label="minimum height"
             minRows={3}
-            placeholder="Minimum 3 rows"
+            placeholder="Enter Tag Name"
             style={{ width: 200 }}
             onKeyDown={handleTaggedChange}
           />

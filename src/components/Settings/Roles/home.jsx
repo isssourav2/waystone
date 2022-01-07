@@ -12,8 +12,7 @@ import PrintIcon from '@mui/icons-material/Print';
 import SearchIcon from '@mui/icons-material/Search';
 import { DataGrid, GridRowsProp, GridColDef } from '@mui/x-data-grid';
 import TextField from '@mui/material/TextField';
-import MatDialog from '../Common/MatDialog';
-import DataTable from './DataTable.jsx';
+import MatDialog from '../../Common/MatDialog';
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import Input from '@mui/material/Input';
@@ -31,10 +30,8 @@ import Checkbox from '@mui/material/Checkbox';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { MuiDataGrid } from '../../DataTable';
-import '../../style/style.css';
-
-import DataGridPro from '../../components/DataGridPro';
+import { MuiDataGrid } from '../../../DataTable';
+import '../../../style/style.css';
 
 function PaperComponent(props) {
   return <Paper {...props} />;
