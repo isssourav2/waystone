@@ -92,6 +92,7 @@ const Home = () => {
       field: 'updateDate',
       headerName: 'Update Date',
       width: 180,
+      hide: true,
       editable: true,
     },
 
@@ -135,7 +136,7 @@ const Home = () => {
   const [Role, setRole] = React.useState({
     roleName: '',
     roleDescription: '',
-    isActive: false,
+    isActive: true,
     entryDate: '2022-01-07',
   });
   const GetRollData = () => {

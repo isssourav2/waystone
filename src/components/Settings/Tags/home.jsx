@@ -26,16 +26,48 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Paper from '@mui/material/Paper';
+import Alert from '@mui/material/Alert';
 import Checkbox from '@mui/material/Checkbox';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import '../../../style/style.css';
 import { MuiDataGrid } from '../../../DataTable';
+import axios from 'axios';
 function PaperComponent(props) {
   return <Paper {...props} />;
 }
+
+function Alerts({ alert, color }) {
+  return (
+    <Alert severity={alert} color={color}>
+      Insert Successfully done!
+    </Alert>
+  );
+}
+
+const Insert = () => {
+  Alert();
+};
+const SaveTag = async (tag) => {
+  const res = await axios.post('https://localhost:7056/api/Tag', tag);
+  return res.data;
+};
+
 const Home = () => {
+
+  const submitHandler = () => {
+    const response = SaveTag(Tag);
+    response.then((save) => {
+      console.log('reponse:', save);
+      GetTagData();
+      handleClose();
+    });
+  };
+
+  const onTagNameChange = (val) => {
+    Tag.tagName = val;
+  };
 
   const columns = [
     { field: 'tagName', headerName: 'Tag Name', width: 180, editable: true },
@@ -69,8 +101,13 @@ const Home = () => {
     },
   ];
 
+
   const [rows, setRows] = React.useState([]);
-  React.useEffect(() => {
+  const [Tag, setTag] = React.useState({
+    tagName: '',
+  });
+
+  const GetTagData = () => {
     fetch('https://localhost:7056/api/Tag')
       .then((res) => res.json())
       .then((result) => {
@@ -80,8 +117,14 @@ const Home = () => {
         });
         setRows(result);
       });
+  };
+  React.useEffect(() => {
+    GetTagData();
   }, [0]);
 
+
+ 
+  
 
   //Role Modal
   const [open, setOpen] = React.useState(false);
@@ -268,8 +311,9 @@ const Home = () => {
       </Popover>
       <MatDialog
         open={open}
-        title="User"
-        handleClose={handleClose}
+        title="Tag"
+        handleClose={handleClose}        
+        onHandleClick={submitHandler}
         isAction="true"
         isCancel="true"
         isSubmit="true"
@@ -284,42 +328,15 @@ const Home = () => {
             noValidate
             autoComplete="off"
           >
-            <div>
-              <TextField
-                id="outlined-password-input"
-                label="User Name"
-                type="Text"
-              />
 
-              <TextField
-                id="outlined-password-input"
-                label="First Name"
-                type="Text"
-              />
-
-              <TextField
-                id="outlined-password-input"
-                label="Last Name"
-                type="Text"
-              />
-
-              <TextField
-                id="outlined-password-input"
-                label="Email"
-                type="Text"
-              />
-              <TextField
-                id="outlined-password-input"
-                label="Department"
-                type="Text"
-              />
-
-              <TextField
-                id="outlined-password-input"
-                label="User Role"
-                type="Text"
-              />
-            </div>
+          <FormControl variant="standard">
+            <InputLabel htmlFor="component-simple">Tag Name</InputLabel>
+            <Input
+              id="component-simple"
+              onInput={(e) => onTagNameChange(e.target.value)}
+            />
+          </FormControl>
+            
           </Box>
         </Box>
       </MatDialog>
