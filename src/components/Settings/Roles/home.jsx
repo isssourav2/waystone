@@ -217,7 +217,7 @@ const Home = () => {
                     display: 'flex',
                   }}
                 >
-                  <Typography variant="h2">Settings: Roles</Typography>
+                  <Typography variant="h2"> Roles</Typography>
                   <Button
                     className="box-btn"
                     variant="contained"
@@ -225,7 +225,7 @@ const Home = () => {
                     size="small"
                     onClick={handleClickOpen}
                   >
-                    <AddIcon /> Create Roles
+                    <AddIcon /> Create Role
                   </Button>
                 </Box>
               </Grid>

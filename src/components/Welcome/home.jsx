@@ -37,7 +37,7 @@ const home = () => {
             <Grid item xs={12}>
               <Typography>
                 <h2>About PPM</h2>
-                <p>
+                <p style={{textAlign:'justify'}}>
                 The PPM (Pre-Processing Module) is a Data Retrieval & Data ETL (Extract, Transform, Load) platform, the main goal of the platform is to retrieve files from different SDP's (data providers), transform those files in-flight as per the business requirement and then pushes the data from those files downstream to Risk and Reporting applications.{' '}
                 </p>
               </Typography>

@@ -26,11 +26,63 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Paper from '@mui/material/Paper';
+import Checkbox from '@mui/material/Checkbox';
+import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
 import '../../../style/style.css';
+import { MuiDataGrid } from '../../../DataTable';
 function PaperComponent(props) {
   return <Paper {...props} />;
 }
 const Home = () => {
+
+  const columns = [
+    { field: 'tagName', headerName: 'Tag Name', width: 180, editable: true },
+    
+    {
+      field: 'actions',
+      type: 'actions',
+      headerName: 'Actions',
+      flex: 1,
+      disableClickEventBubbling: true,
+      getActions: (params) => [
+        <IconButton
+          className="link-tool"
+          onClick={() => console.log(params.row)}
+        >
+          <RemoveRedEyeIcon />
+        </IconButton>,
+        <IconButton
+          className="link-tool"
+          onClick={() => console.log(params.row)}
+        >
+          <EditIcon />
+        </IconButton>,
+        <IconButton
+          className="link-tool"
+          onClick={() => console.log(params.row.id)}
+        >
+          <DeleteIcon />
+        </IconButton>,
+      ],
+    },
+  ];
+
+  const [rows, setRows] = React.useState([]);
+  React.useEffect(() => {
+    fetch('https://localhost:7056/api/Tag')
+      .then((res) => res.json())
+      .then((result) => {
+        //console.log(result);
+        result.map((res) => {
+          res['id'] = res.tagId;
+        });
+        setRows(result);
+      });
+  }, [0]);
+
+
   //Role Modal
   const [open, setOpen] = React.useState(false);
 
@@ -125,7 +177,7 @@ const Home = () => {
                     size="small"
                     onClick={handleClickOpen}
                   >
-                    <AddIcon /> Create
+                    <AddIcon /> Create Tag
                   </Button>
                 </Box>
               </Grid>
@@ -158,30 +210,26 @@ const Home = () => {
           <Grid item xs={12}>
             <Grid container spacing={2}>
               <Grid item xs={12}>
-                <DataTable
-                  PermissionOpen={PermissionhandleClickOpen}
-                  ClickOpen={handleClickOpen}
-                  viewOpen={viewHandleOpen}
-                  dialogOpen={dialogHandleOpen}
-                />
+                {<MuiDataGrid rows={rows} columns={columns} />}
+                {/* <MuiDataGrid /> */}
               </Grid>
 
-              <Grid item xs={9}>
-                {/* <Grid className="pagination-count">
+              {/* <Grid item xs={9}>
+                <Grid className="pagination-count">
                   <Typography sx={{ textAlign: 'left' }} variant="h6">
                     {' '}
                     showing 1 to 5
                   </Typography>{' '}
-                </Grid> */}
+                </Grid>
               </Grid>
               <Grid item xs={3}>
-                {/* <Grid className="pagination-box">
+                <Grid className="pagination-box">
                   {' '}
                   <Stack>
                     <Pagination count={10} shape="rounded" />
                   </Stack>
-                </Grid> */}
-              </Grid>
+                </Grid>
+              </Grid> */}
             </Grid>
           </Grid>
         </div>
