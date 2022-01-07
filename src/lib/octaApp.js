@@ -13,9 +13,8 @@ import {
   Settings,
   User,
   Email,
-  Tags,
   Login,
-  Connections,
+  TabDataSource,
 } from '../components';
 import { Security, LoginCallback, SecureRoute } from '@okta/okta-react';
 import { OktaAuth, toRelativeUrl } from '@okta/okta-auth-js';
@@ -44,9 +43,8 @@ const OctaApp = () => {
         <OldRoute path="/User" component={User} />
         <OldRoute path="/Settings" component={Settings} />
         <OldRoute path="/Email" component={Email} />
-        <OldRoute path="/Tags" component={Tags} />
-
-        <OldRoute path="/Connections" component={Connections} />
+        <OldRoute path="/DataSource" component={TabDataSource} />
+        {/* <OldRoute path="/Connections" component={Connections} /> */}
         <OldRoute path="/TabMenu" component={TabMenu} />
         <OldRoute path={CALLBACK_PATH} exact component={LoginCallback} />
         <SecureRoute path="/profile" component={Profile} />

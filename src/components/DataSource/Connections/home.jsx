@@ -12,7 +12,7 @@ import PrintIcon from '@mui/icons-material/Print';
 import SearchIcon from '@mui/icons-material/Search';
 import { DataGrid, GridRowsProp, GridColDef } from '@mui/x-data-grid';
 import TextField from '@mui/material/TextField';
-import MatDialog from '../Common/MatDialog';
+import MatDialog from '../../Common/MatDialog';
 import DataTable from './DataTable.jsx';
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
@@ -26,30 +26,25 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 
-
 import Autocomplete from '@mui/material/Autocomplete';
 
-
 import Paper from '@mui/material/Paper';
-import '../../style/style.css';
+import '../../../style/style.css';
 function PaperComponent(props) {
   return <Paper {...props} />;
 }
 const Home = () => {
-
   const doctype = [
-    { label: 'Select'},
-    { label: 'Import'},
-    { label: 'Export'},
-
+    { label: 'Select' },
+    { label: 'Import' },
+    { label: 'Export' },
   ];
 
- const protocoltype = [
-    { label: 'SMB Share'},
-    { label: 'SFTP'},
-    { label: 'Email'},
-    { label: 'FTP'},
-
+  const protocoltype = [
+    { label: 'SMB Share' },
+    { label: 'SFTP' },
+    { label: 'Email' },
+    { label: 'FTP' },
   ];
 
   //Role Modal
@@ -146,7 +141,7 @@ const Home = () => {
                     size="small"
                     onClick={handleClickOpen}
                   >
-                    <AddIcon /> Create 
+                    <AddIcon /> Create
                   </Button>
                 </Box>
               </Grid>
@@ -247,93 +242,67 @@ const Home = () => {
         isCancel="true"
         isSubmit="true"
       >
-        <Box
-          component="form"
-         
-          noValidate
-          autoComplete="off"
-        >
-          
-         
-        </Box>
-        <Box
-          component="form"
-         
-          noValidate
-          autoComplete="off"
-        >
+        <Box component="form" noValidate autoComplete="off"></Box>
+        <Box component="form" noValidate autoComplete="off">
+          <Box
+            component="form"
+            sx={{
+              '& .MuiTextField-root': { m: 1, width: '25ch' },
+            }}
+            noValidate
+            autoComplete="off"
+          >
+            <div>
+              <Autocomplete
+                disablePortal
+                id="combo-box-demo"
+                options={doctype}
+                sx={{ width: 300 }}
+                renderInput={(params) => <TextField {...params} label="Type" />}
+              />
 
+              <TextField
+                id="outlined-password-input"
+                label="Name"
+                type="Text"
+              />
 
+              <Autocomplete
+                disablePortal
+                id="combo-box-demo"
+                options={protocoltype}
+                sx={{ width: 300 }}
+                renderInput={(params) => (
+                  <TextField {...params} label="Protocol" />
+                )}
+              />
 
-      <Box
-      component="form"
-      sx={{
-        '& .MuiTextField-root': { m: 1, width: '25ch' },
-      }}
-      noValidate
-      autoComplete="off"
-    >
-      <div>
+              <TextField
+                id="outlined-password-input"
+                label="Host"
+                type="Text"
+              />
 
-      <Autocomplete
-          disablePortal
-          id="combo-box-demo"
-          options={doctype}
-          sx={{ width: 300 }}
-          renderInput={(params) => <TextField {...params} label="Type" />}
-        />
+              <TextField
+                id="outlined-password-input"
+                label="Port"
+                type="Text"
+              />
 
-      <TextField
-          id="outlined-password-input"
-          label="Name"
-          type="Text"
-        />
-
-        <Autocomplete
-          disablePortal
-          id="combo-box-demo"
-          options={protocoltype}
-          sx={{ width: 300 }}
-          renderInput={(params) => <TextField {...params} label="Protocol" />}
-        />
-
-
-        <TextField
-          id="outlined-password-input"
-          label="Host"
-          type="Text"
-        />
-
-        <TextField
-          id="outlined-password-input"
-          label="Port"
-          type="Text"
-        />
-
-        <TextField
-          id="outlined-password-input"
-          label="User Name"
-          type="Text"
-        />
-        <TextField
-          id="outlined-password-input"
-          label="Password"
-          type="Text"
-        />
-        
-        
-        
-
-
-      </div>
-    </Box>
-
-
-
-         
+              <TextField
+                id="outlined-password-input"
+                label="User Name"
+                type="Text"
+              />
+              <TextField
+                id="outlined-password-input"
+                label="Password"
+                type="Text"
+              />
+            </div>
+          </Box>
         </Box>
       </MatDialog>
-     
     </>
   );
 };

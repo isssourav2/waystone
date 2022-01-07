@@ -5,7 +5,7 @@ import Box from '@mui/material/Box';
 const Email = () => {
   return (
     <Box sx={{ display: 'flex' }}>
-      <Header />
+      {/* <Header /> */}
       <Home />
     </Box>
   );

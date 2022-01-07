@@ -234,9 +234,9 @@ const Home = () => {
               </Grid>
 
               <Grid item xs={6}>
-                <IconButton className="print-box">
+                {/* <IconButton className="print-box">
                   <PrintIcon />
-                </IconButton>
+                </IconButton> */}
               </Grid>
             </Grid>
           </Box>

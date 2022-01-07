@@ -5,9 +5,9 @@ import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import { Dashboard } from '../..';
-import { Roles, User, Tags, Email } from '../../../components';
 import { TabMenuContext } from '../../../Context/TabMenuContext';
-
+import Connections from '../Connections/Connections';
+import Source from '../Source/Source';
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -42,24 +42,17 @@ function a11yProps(index) {
 }
 const Home = () => {
   const tabMenu = useContext(TabMenuContext);
-  const tabMenuOpenIndex = tabMenu.state.TabMenuSettings;
+  const tabMenuOpenIndex = tabMenu.state.TabMenuDataSource;
 
   // const [value, setValue] = React.useState(0);
   const handleChange = (event, newValue) => {
     //setValue(newValue);
-    console.log('settings', newValue);
     switch (newValue) {
       case 0:
-        tabMenu.dispatch({ type: 'Settings_Config' });
+        tabMenu.dispatch({ type: 'DataSource_Source' });
         break;
       case 1:
-        tabMenu.dispatch({ type: 'Settings_User' });
-        break;
-      case 2:
-        tabMenu.dispatch({ type: 'Settings_Roles' });
-        break;
-      case 3:
-        tabMenu.dispatch({ type: 'Settings_Tag' });
+        tabMenu.dispatch({ type: 'DataSource_Connection' });
         break;
 
       default:
@@ -78,24 +71,16 @@ const Home = () => {
           onChange={handleChange}
           aria-label="basic tabs example"
         >
-          <Tab label="Config" {...a11yProps(0)} />
-          <Tab label="Users" {...a11yProps(1)} />
-          <Tab label="Roles" {...a11yProps(2)} />
-          <Tab label="Tags" {...a11yProps(3)} />
+          <Tab label="Source" {...a11yProps(0)} />
+          <Tab label="Connection" {...a11yProps(1)} />
         </Tabs>
       </Box>
 
       <TabPanel value={tabMenuOpenIndex} index={0} className="frame">
-        <Email />
+        <Source />
       </TabPanel>
       <TabPanel value={tabMenuOpenIndex} index={1} className="frame">
-        <User />
-      </TabPanel>
-      <TabPanel value={tabMenuOpenIndex} index={2} className="frame">
-        <Roles />
-      </TabPanel>
-      <TabPanel value={tabMenuOpenIndex} index={3} className="frame">
-        <Tags />
+        Hello connection
       </TabPanel>
     </Box>
   );
