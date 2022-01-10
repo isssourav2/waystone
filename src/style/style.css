@@ -1033,6 +1033,11 @@ div#root .MuiBox-root.css-0 {
   cursor: pointer;
 }
 
+
+.css-11o2879-MuiDrawer-docked .menu-link ul.MuiList-root,.css-11o2879-MuiDrawer-docked .icon-next{
+  display:none;
+} 
+
 .allert-col {
   border: #f2f2f2 1px solid;
   color: #1f3038;
@@ -1173,7 +1178,7 @@ nav.MuiList-root {
   background-color: #fff !important;
 }
 
-.modelPopUp .MuiDialog-paper input[type='text'] {
+.modelPopUp .MuiDialog-paper input[type='text'],.modelPopUp .MuiDialog-paper input[type='Email'] {
   font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
   font-size: 14px;
   width: 100%;
@@ -1363,7 +1368,7 @@ nav.MuiList-root {
 }
 
 .login-wrap{
-  background-image: url(../images/bg-login.jpg);
+  background-image: url(../images/bg-login2.png);
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
@@ -1378,37 +1383,53 @@ nav.MuiList-root {
   border: 0;
   box-shadow: none;
   background-color:transparent;
+  box-shadow: #e1dddd 0px 0px 10px;
 }
 
 .login-wrap .login-box{
   background-color:#fff;
-  width: 400px !important;
-  height: 270px;
+  width: 600px !important;
   margin: 0 auto;
   display:flex;
   flex-wrap: wrap;
   justify-content: center;
+  box-shadow: #333 0px 0px 10px ;
 }
 
 .login-wrap .MuiSvgIcon-fontSizeMedium{
-  font-size: 15px;
+  font-size: 20px;
   margin-right: 10px;
   margin-left: -20px;
 }
 
 .login-wrap .btn{
-  width: 150px;
-  height: 37px;
+  width: 245px;
+  height: 45px;
+  font-size: 17px !important;
+  text-transform: none;
 }
 
-.login-head{
-  height: 100px;
-}
+
 .login-head h2{
-  font-size: 20px;
+  font-size: 26px;
+  font-weight: 300;
+  color:  #1f3038;
+  margin: 0 0 10px 0;
+}
+
+.login-head p{
+  font-weight: 300;
   color:  #1f3038;
 }
 
+.login-head p strong{
+  color: #0bb202;
+}
+
+
+.login-head img{
+  max-width: 450px;
+}
 
 
 
