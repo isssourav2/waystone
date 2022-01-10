@@ -114,6 +114,7 @@ const Home = () => {
     return res.data;
   };
   const [rows, setRows] = React.useState([]);
+  const [userName, setUserName] = React.useState('');
   const [SelectOptions, setSelectOptions] = React.useState([]);
   const [selRole, setselRole] = React.useState(0);
   const handleRoleChange = (event) => {
@@ -347,6 +348,8 @@ const Home = () => {
                 id="outlined-password-input"
                 label="User Name"
                 type="Text"
+                value={userName}
+                onChange={(e) => setUserName(e.target.value)}
               />
 
               <TextField
