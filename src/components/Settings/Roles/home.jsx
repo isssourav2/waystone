@@ -176,18 +176,21 @@ const Home = () => {
     {
       field: 'isActive',
       headerName: 'Active',
+      hide: true,
       width: 180,
       editable: true,
     },
     {
       field: 'entryDate',
       headerName: 'Entry Date',
+      hide: true,
       width: 180,
       editable: true,
     },
     {
       field: 'updateDate',
       headerName: 'Update Date',
+      hide: true,
       width: 180,
       hide: true,
       editable: true,
