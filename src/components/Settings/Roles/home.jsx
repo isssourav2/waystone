@@ -254,6 +254,7 @@ const Home = () => {
   const handleClose = () => {
     setOpen(false);
   };
+
   //Dialog Modal
   const [dialogOpen, setdialogOpen] = React.useState(false);
   const dialogHandleClose = () => {
