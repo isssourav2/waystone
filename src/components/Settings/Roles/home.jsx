@@ -189,6 +189,7 @@ const Home = () => {
       field: 'updateDate',
       headerName: 'Update Date',
       width: 180,
+      hide: true,
       editable: true,
     },
 
