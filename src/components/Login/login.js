@@ -7,7 +7,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { CssBaseline } from '@mui/material';
 import { useOktaAuth } from '@okta/okta-react';
-import logo from '../../images/logo.png';
+import logo from '../../images/logo2.png';
 import LockOpenIcon from '@mui/icons-material/LockOpen';
 import { Redirect } from 'react-router-dom';
 
@@ -27,7 +27,8 @@ const Login = () => {
             <CardContent className="login-box">
               <CardContent className="login-head">
                 <img src={logo} alt="logo" />
-                <h2>Sign UP</h2>
+                <h2>Employee Single Sign-On via Okta</h2>
+                <p > To access <strong>PPM</strong>, use your Active Directory credentials.</p>
               </CardContent>
               <Button size="large" onClick={loginHandler} className="btn">
                 <LockOpenIcon />
