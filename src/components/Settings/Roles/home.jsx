@@ -31,42 +31,139 @@ import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { MuiDataGrid } from '../../../DataTable';
+
 import axios from 'axios';
 import '../../../style/style.css';
 
 function PaperComponent(props) {
   return <Paper {...props} />;
 }
-function Alerts({ alert, color }) {
-  return (
-    <Alert severity={alert} color={color}>
-      Insert Successfully done!
-    </Alert>
-  );
-}
 
-const Insert = () => {
-  Alert();
-};
-const SaveRoll = async (role) => {
-  const res = await axios.post('https://localhost:7056/api/Role', role);
-  return res.data;
-};
 const Home = () => {
+  //Crud operation
   const submitHandler = () => {
+    Role.roleName = roleName;
+    Role.roleDescription = roleDescription;
+    console.log('insert data:', Role);
     const response = SaveRoll(Role);
     response.then((save) => {
       console.log('reponse:', save);
       GetRollData();
+      window.alert('Insert Successfully done!!');
+      clearData();
+      // InsertAlert();
       handleClose();
     });
   };
-  const onRoleDescriptionChange = (val) => {
-    Role.roleDescription = val;
+  //Alert
+  // function Alerts({ alert, color, message }) {
+  //   return (
+  //     <Alert severity={alert} color={color}>
+  //       {message}
+  //     </Alert>
+  //   );
+  // }
+
+  // const InsertAlert = () => {
+  //   Alert('success', 'blue', 'Insert Successfully done!');
+  // };
+  // const UpdateAlert = () => {
+  //   Alert('info', 'green', 'Update Successfully done!');
+  // };
+  // const DeleteAlert = () => {
+  //   Alert('error', 'blue', 'Delete Successfully done!');
+  // };
+
+  //Alert
+  const GetRollData = () => {
+    fetch('https://localhost:7056/api/Role')
+      .then((res) => res.json())
+      .then((result) => {
+        //console.log(result);
+        result.map((res) => {
+          res['id'] = res.roleId;
+        });
+        setRows(result);
+      });
   };
+  React.useEffect(() => {
+    GetRollData();
+  }, [0]);
+
+  const UpdateHandler = () => {
+    Role.roleName = roleName;
+    Role.roleDescription = roleDescription;
+    Role.roleId = row.roleId;
+    console.log('Update data:', Role);
+    const response = UpdateRoll(Role);
+    response.then((save) => {
+      console.log('reponse:', save);
+      window.alert('Update Successfully done!!');
+      GetRollData();
+      clearData();
+      handleClose();
+    });
+  };
+  const viewHandleOpen = (param) => {
+    setRow(param.row);
+    setviewOpen(true);
+  };
+
+  const EditHandler = (param) => {
+    setRow(param);
+    setRoleName(param.roleName);
+    setRoleDescription(param.roleDescription);
+    //setRole(param);
+    setOpen(true);
+  };
+  //rows Model
+  //const rows = React.useRef();
+  const SaveRoll = async (role) => {
+    const res = await axios.post('https://localhost:7056/api/Role', role);
+    return res.data;
+  };
+  const UpdateRoll = async (role) => {
+    const res = await axios.put('https://localhost:7056/api/Role', role);
+    return res.data;
+  };
+  const DeleteRoll = async (role) => {
+    console.log('delete function hitt');
+    const res = await axios.delete(
+      `https://localhost:7056/api/Role/${role.roleId}`
+    );
+    return res.data;
+  };
+  const deleteHandler = (param) => {
+    setRow(param);
+  };
+
+  const clearData = () => {
+    setRoleName('');
+    setRoleDescription('');
+  };
+  //Crud operation
   const onRoleNameChange = (val) => {
-    Role.roleName = val;
+    setRoleName(val);
+    //Role.roleName = val;
   };
+  const onRoleDescriptionChange = (val) => {
+    //Role.roleDescription = val;
+    setRoleDescription(val);
+  };
+  const [rows, setRows] = React.useState([]);
+  //set particular row for edit and delete and view
+  const [row, setRow] = React.useState({ roleId: 0 });
+  const [Role, setRole] = React.useState({
+    roleId: 0,
+    roleName: '',
+    roleDescription: '',
+    isActive: false,
+    entryDate: '2022-01-07T00:00:00',
+    updateDate: null,
+  });
+  const [roleName, setRoleName] = React.useState('');
+  const [roleDescription, setRoleDescription] = React.useState('');
+
   //render data
   const columns = [
     { field: 'roleName', headerName: 'Role Name', width: 180, editable: true },
@@ -117,41 +214,35 @@ const Home = () => {
       flex: 1,
       disableClickEventBubbling: true,
       getActions: (params) => [
-        <IconButton className="link-tool" onClick={viewHandleOpen}>
+        <IconButton
+          className="link-tool"
+          onClick={() => viewHandleOpen(params)}
+        >
           <RemoveRedEyeIcon />
         </IconButton>,
-        <IconButton className="link-tool" onClick={handleClickOpen}>
+        <IconButton
+          className="link-tool"
+          onClick={() => EditHandler(params.row)}
+        >
           <EditIcon />
         </IconButton>,
-        <IconButton className="link-tool" onClick={dialogHandleOpen}>
+        <IconButton
+          className="link-tool"
+          onClick={() => dialogHandleOpen(params.row)}
+        >
           <DeleteIcon />
         </IconButton>,
       ],
     },
   ];
-  //rows Model
-  //const rows = React.useRef();
-  const [rows, setRows] = React.useState([]);
-  const [Role, setRole] = React.useState({
-    roleName: '',
-    roleDescription: '',
-    isActive: false,
-    entryDate: '2022-01-07',
-  });
-  const GetRollData = () => {
-    fetch('https://localhost:7056/api/Role')
-      .then((res) => res.json())
-      .then((result) => {
-        //console.log(result);
-        result.map((res) => {
-          res['id'] = res.roleId;
-        });
-        setRows(result);
-      });
-  };
-  React.useEffect(() => {
-    GetRollData();
-  }, [0]);
+
+  // const [Role, setRole] = React.useState({
+  //   roleName: '',
+  //   roleDescription: '',
+  //   isActive: false,
+  //   entryDate: '2022-01-07',
+  // });
+
   // console.log(Role);
   //Role Modal
   const [open, setOpen] = React.useState(false);
@@ -167,19 +258,22 @@ const Home = () => {
   const dialogHandleClose = () => {
     setdialogOpen(false);
   };
-  const dialogHandleOpen = () => {
+  const deleteHandleClose = () => {
+    DeleteRoll(row).then((save) => {
+      console.log('reponse:', save);
+      GetRollData();
+      clearData();
+      window.alert('Delete Successfully done!!');
+      dialogHandleClose();
+    });
+  };
+  const dialogHandleOpen = (param) => {
+    deleteHandler(param);
     setdialogOpen(true);
   };
-  const deleteHandle = () => {};
-  const InsertHandle = () => {};
-  const UpdateHandle = () => {};
 
   //View Role Modal
   const [viewOpen, setviewOpen] = React.useState(false);
-
-  const viewHandleOpen = () => {
-    setviewOpen(true);
-  };
 
   const viewHandleClose = () => {
     setviewOpen(false);
@@ -202,12 +296,11 @@ const Home = () => {
   const [tags, setTags] = React.useState([]);
 
   const handleTagChange = (tag) => {
-    console.log(tag);
     setTags((oldtag) => [...oldtag, tag]);
     setAnchorEl(null);
   };
 
-  console.log(tags);
+  console.log(Role);
   tagged.push('Dashboard');
   tagged.push('Role Creation');
   tagged.push('User Creation');
@@ -333,7 +426,7 @@ const Home = () => {
         open={open}
         title="Role"
         handleClose={handleClose}
-        onHandleClick={submitHandler}
+        onHandleClick={row.roleId === 0 ? submitHandler : UpdateHandler}
         isAction="true"
         isCancel="true"
         isSubmit="true"
@@ -350,8 +443,15 @@ const Home = () => {
             <InputLabel htmlFor="component-simple">Role Name</InputLabel>
             <Input
               id="component-simple"
+              name="roleName"
+              value={roleName}
               onInput={(e) => onRoleNameChange(e.target.value)}
             />
+            {/* <input
+              type="text"
+              value={row.roleName}
+              onChange={(e) => onRoleNameChange(e.target.value)}
+            /> */}
           </FormControl>
         </Box>
         <Box
@@ -366,6 +466,8 @@ const Home = () => {
             <InputLabel htmlFor="component-simple">Description</InputLabel>
             <Input
               id="component-simple"
+              name="roleDescription"
+              value={roleDescription}
               onInput={(e) => onRoleDescriptionChange(e.target.value)}
             />
           </FormControl>
@@ -381,11 +483,11 @@ const Home = () => {
       >
         <Box component="form" noValidate autoComplete="off">
           <Typography className="text-row">
-            <label>Role Name</label> Role1
+            <label>Role Name</label> {row && row.roleName}
           </Typography>
 
           <Typography className="text-row">
-            <label>Role Description</label> Role1
+            <label>Role Description</label> {row && row.roleDescription}
           </Typography>
         </Box>
       </MatDialog>
@@ -458,7 +560,7 @@ const Home = () => {
           >
             close
           </Button>
-          <Button onClick={dialogHandleClose} className="btn">
+          <Button onClick={deleteHandleClose} className="btn">
             Delete
           </Button>
         </DialogActions>
