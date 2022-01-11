@@ -12,7 +12,7 @@ import PrintIcon from '@mui/icons-material/Print';
 import SearchIcon from '@mui/icons-material/Search';
 import { DataGrid, GridRowsProp, GridColDef } from '@mui/x-data-grid';
 import TextField from '@mui/material/TextField';
-import MatDialog from '../Common/MatDialog';
+import MatDialog from '../../Common/MatDialog';
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import Input from '@mui/material/Input';
@@ -31,9 +31,9 @@ import DeleteIcon from '@mui/icons-material/Delete';
 
 import Autocomplete from '@mui/material/Autocomplete';
 
-import { MuiDataGrid } from '../../DataTable';
+import { MuiDataGrid } from '../../../DataTable';
 import Paper from '@mui/material/Paper';
-import '../../style/style.css';
+import '../../../style/style.css';
 function PaperComponent(props) {
   return <Paper {...props} />;
 }

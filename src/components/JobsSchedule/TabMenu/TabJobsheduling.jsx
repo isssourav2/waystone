@@ -1,8 +1,8 @@
 import React from 'react';
-import Home from './home';
-import Header from '../Common/Header';
 import Box from '@mui/material/Box';
-const Application = () => {
+import Home from './home';
+import Header from '../../Common/Header';
+const TabJobsheduling = () => {
   return (
     <Box sx={{ display: 'flex' }}>
       <Header />
@@ -11,4 +11,4 @@ const Application = () => {
   );
 };
 
-export default Application;
+export default TabJobsheduling;
