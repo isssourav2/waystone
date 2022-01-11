@@ -492,14 +492,7 @@ const Home = () => {
           </FormControl>
         </Box>
       </MatDialog>
-      <MatDialog
-        open={viewOpen}
-        title="Role"
-        handleClose={viewHandleClose}
-        isAction="true"
-        isCancel="true"
-        isSubmit="true"
-      >
+      <MatDialog open={viewOpen} title="Role" handleClose={viewHandleClose}>
         <Box component="form" noValidate autoComplete="off">
           <Typography className="text-row">
             <label>Role Name</label> {row && row.roleName}
