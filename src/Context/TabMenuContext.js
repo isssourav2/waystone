@@ -6,6 +6,7 @@ const initialState = {
   SubActiveValue: -1,
   TabMenuSettings: 0,
   TabMenuDataSource: 0,
+  TabJobSchedule: 0,
 };
 
 const TabMenuReducer = (state, action) => {
@@ -36,6 +37,17 @@ const TabMenuReducer = (state, action) => {
       return { TabMenuDataSource: 0, SubActiveValue: 13 };
     case 'DataSource_Connection':
       return { TabMenuDataSource: 1, SubActiveValue: 14 };
+    //JobShedule
+    case 'JobSchedule_Jobs':
+      return { TabJobSchedule: 0, SubActiveValue: 15 };
+    case 'JobSchedule_Schedule':
+      return { TabJobSchedule: 1, SubActiveValue: 16 };
+    case 'JobSchedule_Calender':
+      return { TabJobSchedule: 2, SubActiveValue: 17 };
+    case 'JobSchedule_Application':
+      return { TabJobSchedule: 3, SubActiveValue: 18 };
+    case 'JobSchedule_Application_Template':
+      return { TabJobSchedule: 4, SubActiveValue: 19 };
     default:
       return { TabMenuOpen: -1, SubActiveValue: -1 };
   }
