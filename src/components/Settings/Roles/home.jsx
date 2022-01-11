@@ -160,6 +160,7 @@ const Home = () => {
     isActive: false,
     entryDate: '2022-01-07T00:00:00',
     updateDate: null,
+    userCount: 0,
   });
   const [roleName, setRoleName] = React.useState('');
   const [roleDescription, setRoleDescription] = React.useState('');
