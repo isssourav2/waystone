@@ -55,7 +55,7 @@ const home = () => {
                 <List sx={{ width: '100%', bgcolor: 'background.paper' }}>
                   <ListItem alignItems="flex-start">
                     <ListItemText
-                      primary="Brunch this weekend?"
+                      primary="Version 1.8.4"
                       secondary={
                         <React.Fragment>
                           <Typography
@@ -64,10 +64,10 @@ const home = () => {
                             variant="body2"
                             color="text.primary"
                           >
-                            Ali Connors
+                           
                           </Typography>
                           {
-                            " — I'll be in your neighborhood doing errands this…"
+                            " Released on 2nd November 2021"
                           }
                         </React.Fragment>
                       }
@@ -82,7 +82,7 @@ const home = () => {
 
                   <ListItem alignItems="flex-start">
                     <ListItemText
-                      primary="Summer BBQ"
+                      primary="Version 1.8.3"
                       secondary={
                         <React.Fragment>
                           <Typography
@@ -91,9 +91,9 @@ const home = () => {
                             variant="body2"
                             color="text.primary"
                           >
-                            to Scott, Alex, Jennifer
+                           
                           </Typography>
-                          {" — Wish I could come, but I'm out of town this…"}
+                          {"Released on 2nd October 2021"}
                         </React.Fragment>
                       }
                     />
@@ -106,7 +106,7 @@ const home = () => {
 
                   <ListItem alignItems="flex-start">
                     <ListItemText
-                      primary="Oui Oui"
+                      primary="Version 1.8.2"
                       secondary={
                         <React.Fragment>
                           <Typography
@@ -115,10 +115,10 @@ const home = () => {
                             variant="body2"
                             color="text.primary"
                           >
-                            Sandra Adams
+                           
                           </Typography>
                           {
-                            ' — Do you have Paris recommendations? Have you ever…'
+                            'Released on 2nd November 2021'
                           }
                         </React.Fragment>
                       }
