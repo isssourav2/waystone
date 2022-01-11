@@ -86,7 +86,7 @@ const Home = () => {
       width: 180,
       editable: true,
     },
-   
+
     {
       field: 'actions',
       type: 'actions',
@@ -124,11 +124,10 @@ const Home = () => {
       Protocol: 'Email',
       Host: 'smtp@gmail.com',
       Port: '587',
-      UserName: 'PPMV2'
+      UserName: 'PPMV2',
     },
   ];
 
-  
   //Role Modal
   const [open, setOpen] = React.useState(false);
 
@@ -256,10 +255,14 @@ const Home = () => {
           <Grid item xs={12}>
             <Grid container spacing={2}>
               <Grid item xs={12}>
-                {<MuiDataGrid rows={rows} columns={columns}
-                checkboxSelection="true"
-                disableSelectionOnClick="true"
-                />}
+                {
+                  <MuiDataGrid
+                    rows={rows}
+                    columns={columns}
+                    checkboxSelection="true"
+                    disableSelectionOnClick="true"
+                  />
+                }
                 {/* <MuiDataGrid /> */}
               </Grid>
 
@@ -319,6 +322,7 @@ const Home = () => {
         open={open}
         title="Connections"
         handleClose={handleClose}
+        isCancel="false"
         isAction="true"
         isCancel="true"
         isSubmit="true"
@@ -388,9 +392,9 @@ const Home = () => {
         open={viewOpen}
         title="Role"
         handleClose={viewHandleClose}
-        isAction="true"
-        isCancel="true"
-        isSubmit="true"
+        isAction="false"
+        isCancel="false"
+        isSubmit="false"
       >
         <Box component="form" noValidate autoComplete="off">
           <Typography className="text-row">
