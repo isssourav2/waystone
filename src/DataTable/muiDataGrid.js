@@ -7,7 +7,12 @@ import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 
-function MuiDataGrid({ rows, columns }) {
+function MuiDataGrid({
+  rows,
+  columns,
+  checkboxSelection,
+  disableSelectionOnClick,
+}) {
   console.log(rows);
   const ref = React.useRef();
   return (
@@ -32,6 +37,8 @@ function MuiDataGrid({ rows, columns }) {
         rows={rows}
         columns={columns}
         loading={rows.length === 0}
+        checkboxSelection={checkboxSelection}
+        disableSelectionOnClick={disableSelectionOnClick}
         components={{
           Toolbar: GridToolbar,
         }}

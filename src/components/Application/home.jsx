@@ -38,48 +38,21 @@ function PaperComponent(props) {
   return <Paper {...props} />;
 }
 const Home = () => {
-
   const columns = [
-    { field: 'userName', headerName: 'User Name', width: 180, editable: true },
     {
-      field: 'firstName',
-      headerName: 'First Name',
-      width: 180,
+      field: 'userName',
+      headerName: 'Application Name',
+      width: 600,
       editable: true,
     },
-    { field: 'lastName', headerName: 'Last Name', width: 180, editable: true },
+
     {
-      field: 'email',
-      headerName: 'Email',
-      width: 200,
+      field: 'lastName',
+      headerName: 'Application Description',
+      width: 300,
       editable: true,
     },
-    {
-      field: 'department',
-      headerName: 'Department',
-      width: 180,
-      editable: true,
-    },
-    {
-      field: 'roleName',
-      headerName: 'User Role',
-      width: 180,
-      editable: true,
-    },
-    {
-      field: 'active',
-      headerName: 'Active',
-      width: 180,
-      renderCell: (params) => (
-        <strong>
-          {params.value === true ? (
-            <Checkbox checked onChange={() => console.log(params.value)} />
-          ) : (
-            <Checkbox onChange={() => console.log(params.value)} />
-          )}
-        </strong>
-      ),
-    },
+
     {
       field: 'actions',
       type: 'actions',
@@ -112,108 +85,46 @@ const Home = () => {
   const rows = [
     {
       id: 1,
-      userName: 'Sourav',
-      firstName: 'Sourav',
-      lastName: 'Das',
-      email: 'sourav.das@gmail.com',
-      department: 'kolkata',
-      roleName: 'Super User',
+      userName: 'Insight',
+      lastName: '',
       active: true,
     },
     {
       id: 2,
-      userName: 'Admin',
-      firstName: 'Admin',
+      userName: 'Internal',
       lastName: '',
-      email: 'Admin@gmail.com',
-      department: 'Admin',
-      roleName: 'Admin',
       active: true,
     },
     {
       id: 3,
-      userName: 'Subhrajit',
-      firstName: 'Subhrajit',
-      lastName: 'Majumdar',
-      email: 'Subhrajit.majumdar@gmail.com',
-      department: 'kolkata',
-      roleName: 'Super-User',
+      userName: 'OpsCore',
+      lastName: '',
       active: true,
     },
     {
       id: 4,
-      userName: 'Debashis',
-      firstName: 'Debashis',
-      lastName: 'Pal',
-      email: 'debashis.pal@gmail.com',
-      department: 'kolkata',
-      roleName: 'Admin',
+      userName: 'Rabbit',
+      lastName: '',
       active: true,
     },
     {
       id: 5,
-      userName: 'Debojoyti',
-      firstName: 'Debojoyti',
-      lastName: 'Pal',
-      email: 'debojoyti.pal@gmail.com',
-      department: 'kolkata',
-      roleName: 'Super-User',
-      active: false,
-    },
-    {
-      id: 6,
-      userName: 'Bhaskar',
-      firstName: 'Bhaskar',
+      userName: 'RiskCore',
       lastName: '',
-      email: 'Bhaskar.kar@gmail.com',
-      department: 'kolkata',
-      roleName: 'Super-user',
-      active: false,
-    },
-    {
-      id: 7,
-      userName: 'Amlan',
-      firstName: 'Amlan',
-      lastName: 'kar',
-      email: 'amlan.kar@gmail.com',
-      department: 'kolkata',
-      roleName: 'Admin',
-      active: false,
-    },
-    {
-      id: 8,
-      userName: 'DipakKP',
-      firstName: 'Dipak Kumar',
-      lastName: 'Prasad',
-      email: 'dipak.d@gmail.com',
-      department: 'kolkata',
-      roleName: 'Super-User',
-      active: false,
-    },
-    {
-      id: 9,
-      userName: 'ParthoPr',
-      firstName: 'Partho Pratim',
-      lastName: 'Sarkar',
-      email: 'partho.pratim@gmail.com',
-      department: 'kolkata',
-      roleName: 'Sandard-User',
-      active: false,
+      active: true,
     },
   ];
   const doctype = [
-    { label: 'Select'},
-    { label: 'Import'},
-    { label: 'Export'},
-
+    { label: 'Select' },
+    { label: 'Import' },
+    { label: 'Export' },
   ];
 
- const protocoltype = [
-    { label: 'SMB Share'},
-    { label: 'SFTP'},
-    { label: 'Email'},
-    { label: 'FTP'},
-
+  const protocoltype = [
+    { label: 'SMB Share' },
+    { label: 'SFTP' },
+    { label: 'Email' },
+    { label: 'FTP' },
   ];
 
   //Role Modal
@@ -302,7 +213,7 @@ const Home = () => {
                     display: 'flex',
                   }}
                 >
-                  <Typography variant="h2">Connections</Typography>
+                  <Typography variant="h2">Application</Typography>
                   <Button
                     className="box-btn"
                     variant="contained"
@@ -310,7 +221,7 @@ const Home = () => {
                     size="small"
                     onClick={handleClickOpen}
                   >
-                    <AddIcon /> Create 
+                    <AddIcon /> Create
                   </Button>
                 </Box>
               </Grid>
@@ -349,24 +260,7 @@ const Home = () => {
                   viewOpen={viewHandleOpen}
                   dialogOpen={dialogHandleOpen}
                 /> */}
-                 {<MuiDataGrid rows={rows} columns={columns} />}
-              </Grid>
-
-              <Grid item xs={9}>
-                <Grid className="pagination-count">
-                  <Typography sx={{ textAlign: 'left' }} variant="h6">
-                    {' '}
-                    showing 1 to 5
-                  </Typography>{' '}
-                </Grid>
-              </Grid>
-              <Grid item xs={3}>
-                <Grid className="pagination-box">
-                  {' '}
-                  <Stack>
-                    <Pagination count={10} shape="rounded" />
-                  </Stack>
-                </Grid>
+                {<MuiDataGrid rows={rows} columns={columns} />}
               </Grid>
             </Grid>
           </Grid>
@@ -406,99 +300,38 @@ const Home = () => {
       </Popover>
       <MatDialog
         open={open}
-        title="Connections"
+        title="Application"
         handleClose={handleClose}
         isAction="true"
         isCancel="true"
         isSubmit="true"
       >
-        <Box
-          component="form"
-         
-          noValidate
-          autoComplete="off"
-        >
-          
-         
-        </Box>
-        <Box
-          component="form"
-         
-          noValidate
-          autoComplete="off"
-        >
+        <Box component="form" noValidate autoComplete="off"></Box>
+        <Box component="form" noValidate autoComplete="off">
+          <Box
+            component="form"
+            sx={{
+              '& .MuiTextField-root': { m: 1, width: '25ch' },
+            }}
+            noValidate
+            autoComplete="off"
+          >
+            <div>
+              <TextField
+                id="outlined-password-input"
+                label="Application Name"
+                type="Text"
+              />
 
-
-
-      <Box
-      component="form"
-      sx={{
-        '& .MuiTextField-root': { m: 1, width: '25ch' },
-      }}
-      noValidate
-      autoComplete="off"
-    >
-      <div>
-
-      <Autocomplete
-          disablePortal
-          id="combo-box-demo"
-          options={doctype}
-          sx={{ width: 300 }}
-          renderInput={(params) => <TextField {...params} label="Type" />}
-        />
-
-      <TextField
-          id="outlined-password-input"
-          label="Name"
-          type="Text"
-        />
-
-        <Autocomplete
-          disablePortal
-          id="combo-box-demo"
-          options={protocoltype}
-          sx={{ width: 300 }}
-          renderInput={(params) => <TextField {...params} label="Protocol" />}
-        />
-
-
-        <TextField
-          id="outlined-password-input"
-          label="Host"
-          type="Text"
-        />
-
-        <TextField
-          id="outlined-password-input"
-          label="Port"
-          type="Text"
-        />
-
-        <TextField
-          id="outlined-password-input"
-          label="User Name"
-          type="Text"
-        />
-        <TextField
-          id="outlined-password-input"
-          label="Password"
-          type="Text"
-        />
-        
-        
-        
-
-
-      </div>
-    </Box>
-
-
-
-         
+              <TextField
+                id="outlined-password-input"
+                label="Application Description"
+                type="Text"
+              />
+            </div>
+          </Box>
         </Box>
       </MatDialog>
-     
     </>
   );
 };

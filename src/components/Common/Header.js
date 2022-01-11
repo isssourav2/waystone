@@ -535,7 +535,7 @@ function Header() {
               </List>
             </Collapse>
           </List>
-          <List>
+          <List component="nav">
             {/* <h3>Help</h3> */}
             <ul>
               <li onClick={helpHandleClick}>

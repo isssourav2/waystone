@@ -25,28 +25,134 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-
-import Autocomplete from '@mui/material/Autocomplete';
-
 import Paper from '@mui/material/Paper';
+import Checkbox from '@mui/material/Checkbox';
+import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
+import MenuItem from '@mui/material/MenuItem';
+import NativeSelect from '@mui/material/NativeSelect';
+import axios from 'axios';
 import '../../../style/style.css';
+import { MuiDataGrid } from '../../../DataTable';
 function PaperComponent(props) {
   return <Paper {...props} />;
 }
+
 const Home = () => {
-  const doctype = [
-    { label: 'Select' },
-    { label: 'Import' },
-    { label: 'Export' },
+  const columns = [
+    { field: 'Name', headerName: 'Name', width: 180, editable: true },
+    {
+      field: 'Address',
+      headerName: 'Address',
+      width: 180,
+      editable: true,
+    },
+    {
+      field: 'email',
+      headerName: 'Email',
+      width: 200,
+      editable: true,
+    },
+    {
+      field: ' Phone',
+      headerName: 'Phone',
+      width: 180,
+      editable: true,
+    },
+    {
+      field: 'Contact',
+      headerName: 'Contact',
+      width: 180,
+      editable: true,
+    },
+    ,
+    // {
+    //   field: 'isActive',
+    //   headerName: 'Active',
+    //   width: 180,
+    //   renderCell: (params) => (
+    //     <strong>
+    //       {params.value === true ? (
+    //         <Checkbox checked onChange={() => console.log(params.value)} />
+    //       ) : (
+    //         <Checkbox onChange={() => console.log(params.value)} />
+    //       )}
+    //     </strong>
+    //   ),
+    // }
+    {
+      field: 'actions',
+      type: 'actions',
+      headerName: 'Actions',
+      flex: 1,
+      disableClickEventBubbling: true,
+      getActions: (params) => [
+        <IconButton
+          className="link-tool"
+          onClick={() => console.log(params.row)}
+        >
+          <RemoveRedEyeIcon />
+        </IconButton>,
+        <IconButton
+          className="link-tool"
+          onClick={() => console.log(params.row)}
+        >
+          <EditIcon />
+        </IconButton>,
+        <IconButton
+          className="link-tool"
+          onClick={() => console.log(params.row.id)}
+        >
+          <DeleteIcon />
+        </IconButton>,
+      ],
+    },
   ];
-
-  const protocoltype = [
-    { label: 'SMB Share' },
-    { label: 'SFTP' },
-    { label: 'Email' },
-    { label: 'FTP' },
+  const rows = [
+    {
+      id: 1,
+      Name: 'ALPS',
+      Address: 'Brazil',
+      Email: 'fatemah@hst.ie',
+      Phone: '0074072299',
+      Contact: '1',
+    },
   ];
+  // const rollData = async () => {
+  //   const res = await axios.get('https://localhost:7056/api/Role');
+  //   return res.data;
+  // };
+  // const [rows, setRows] = React.useState([]);
+  // const [userName, setUserName] = React.useState('');
+  // const [SelectOptions, setSelectOptions] = React.useState([]);
+  // const [selRole, setselRole] = React.useState(0);
+  const handleRoleChange = (event) => {
+    //setSelRole(event.target.value);
+  };
 
+  // React.useEffect(() => {
+  //   fetch('https://localhost:7056/api/User')
+  //     .then((res) => res.json())
+  //     .then((result) => {
+  //       //console.log(result);
+  //       result.map((res) => {
+  //         res['id'] = res.userId;
+  //       });
+  //       setRows(result);
+  //     });
+  //   //call roll data
+  //   rollData().then((result) => {
+  //     //console.log('data', result);
+  //     // const options = result.map((d) => ({
+  //     //   value: d.roleId,
+  //     //   label: d.roleName,
+  //     // }));
+  //     setSelectOptions(result);
+  //   });
+  // }, [0]);
+
+  //console.log('data', SelectOptions);
   //Role Modal
   const [open, setOpen] = React.useState(false);
 
@@ -147,9 +253,9 @@ const Home = () => {
               </Grid>
 
               <Grid item xs={6}>
-                <IconButton className="print-box">
+                {/* <IconButton className="print-box">
                   <PrintIcon />
-                </IconButton>
+                </IconButton> */}
               </Grid>
             </Grid>
           </Box>
@@ -174,15 +280,18 @@ const Home = () => {
           <Grid item xs={12}>
             <Grid container spacing={2}>
               <Grid item xs={12}>
-                <DataTable
-                  PermissionOpen={PermissionhandleClickOpen}
-                  ClickOpen={handleClickOpen}
-                  viewOpen={viewHandleOpen}
-                  dialogOpen={dialogHandleOpen}
-                />
+                {
+                  <MuiDataGrid
+                    rows={rows}
+                    columns={columns}
+                    checkboxSelection="true"
+                    disableSelectionOnClick="true"
+                  />
+                }
+                {/* <MuiDataGrid /> */}
               </Grid>
 
-              <Grid item xs={9}>
+              {/* <Grid item xs={9}>
                 <Grid className="pagination-count">
                   <Typography sx={{ textAlign: 'left' }} variant="h6">
                     {' '}
@@ -197,7 +306,7 @@ const Home = () => {
                     <Pagination count={10} shape="rounded" />
                   </Stack>
                 </Grid>
-              </Grid>
+              </Grid> */}
             </Grid>
           </Grid>
         </div>
@@ -253,7 +362,6 @@ const Home = () => {
             autoComplete="off"
           >
             <div>
-             
               <TextField
                 id="outlined-password-input"
                 label="Source Name"
@@ -262,10 +370,8 @@ const Home = () => {
 
               <TextareaAutosize
                 id="outlined-password-input"
-               
                 label="Source Name"
                 placeholder="Source Name"
-              
               />
 
               <TextField
@@ -279,12 +385,98 @@ const Home = () => {
                 label="Phone"
                 type="Text"
               />
-
-            
             </div>
           </Box>
         </Box>
       </MatDialog>
+      <MatDialog
+        open={viewOpen}
+        title="Role"
+        handleClose={viewHandleClose}
+        isAction="true"
+        isCancel="true"
+        isSubmit="true"
+      >
+        <Box component="form" noValidate autoComplete="off">
+          <Typography className="text-row">
+            <label>Role Name</label> Role1
+          </Typography>
+
+          <Typography className="text-row">
+            <label>Role Description</label> Role1
+          </Typography>
+        </Box>
+      </MatDialog>
+      <MatDialog
+        open={PermissionOpen}
+        title="Permission"
+        handleClose={PermissionhandleClose}
+        isAction="true"
+        isCancel="true"
+        isSubmit="true"
+      >
+        <Typography className="text-row">
+          <label>Role Name</label> <span>Power User | BD Team</span>
+        </Typography>
+
+        <Typography className="text-row">
+          <label>Role Description</label>{' '}
+          <span>Access to Everything (excl. Configuration, Manage</span>
+        </Typography>
+
+        <Typography className="text-row">
+          <label>Permission</label>
+        </Typography>
+
+        <Box
+          className="box-tag"
+          component="form"
+          sx={{
+            '& > :not(style)': { m: 1 },
+          }}
+          noValidate
+          autoComplete="off"
+        >
+          <TextareaAutosize
+            aria-label="minimum height"
+            minRows={3}
+            placeholder="Minimum 3 rows"
+            style={{ width: 200 }}
+            onKeyDown={handleTaggedChange}
+          />
+          {tags.map((tag) => (
+            <Item key={tag} className="box-btn tag">
+              <IconButton>
+                <CloseIcon />
+              </IconButton>
+              {tag}
+            </Item>
+          ))}
+        </Box>
+      </MatDialog>
+      <Dialog
+        open={dialogOpen}
+        onClose={dialogHandleClose}
+        PaperComponent={PaperComponent}
+        aria-labelledby="draggable-dialog-title"
+      >
+        <DialogTitle style={{ cursor: 'move' }} id="draggable-dialog-title">
+          Delete
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            Are you sure you want delete this records?
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button autoFocus onClick={handleClose} className="box-btn left">
+            close
+          </Button>
+          <Button onClick={handleClose} className="box-btn ">
+            Delete
+          </Button>
+        </DialogActions>
+      </Dialog>
     </>
   );
 };
