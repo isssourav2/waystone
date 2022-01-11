@@ -79,7 +79,7 @@ const Home = () => {
     fetch('https://localhost:7056/api/Role')
       .then((res) => res.json())
       .then((result) => {
-        //console.log(result);
+        console.log('Roles:', result);
         result.map((res) => {
           res['id'] = res.roleId;
         });
@@ -164,9 +164,19 @@ const Home = () => {
   const [roleName, setRoleName] = React.useState('');
   const [roleDescription, setRoleDescription] = React.useState('');
 
+  const getRoleName = (params) => {
+    console.log('Role Name', params);
+    // return `${params..roleName}`
+  };
+
   //render data
   const columns = [
-    { field: 'roleName', headerName: 'Role Name', width: 180, editable: true },
+    {
+      field: 'roleName',
+      headerName: 'Role Name',
+      width: 180,
+      editable: true,
+    },
     {
       field: 'roleDescription',
       headerName: 'Role Description',
@@ -188,6 +198,11 @@ const Home = () => {
       editable: true,
     },
     {
+      field: 'userCount',
+      headerName: 'Users',
+      width: 180,
+    },
+    {
       field: 'updateDate',
       headerName: 'Update Date',
       hide: true,
@@ -196,20 +211,18 @@ const Home = () => {
       editable: true,
     },
 
-    // {
-    //   field: 'isActive',
-    //   headerName: 'Active',
-    //   width: 180,
-    //   renderCell: (params) => (
-    //     <strong>
-    //       {params.value === true ? (
-    //         <Checkbox checked onChange={() => console.log(params.value)} />
-    //       ) : (
-    //         <Checkbox onChange={() => console.log(params.value)} />
-    //       )}
-    //     </strong>
-    //   ),
-    // },
+    {
+      field: 'Permission',
+      headerName: 'Permission',
+      width: 180,
+      renderCell: (params) => (
+        <strong>
+          <span onClick={PermissionhandleClickOpen} className="count">
+            4
+          </span>
+        </strong>
+      ),
+    },
 
     {
       field: 'actions',
