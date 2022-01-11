@@ -17,11 +17,11 @@ const App = () => {
         <CssBaseline />
         {/* App js */}
         <Routes>
-          <Route path="/help" element={<Welcome />} />
-          <Route path="/Stepper" element={<Stepper />} />
+          {/* <Route path="/help" element={<Welcome />} /> */}
+          {/* <Route path="/Stepper" element={<Stepper />} /> */}
           {/* <Route path="/TabMenu" element={<TabMenu />} /> */}
 
-          <Route path="/Settings" element={<Settings />} />
+          {/* <Route path="/Settings" element={<Settings />} /> */}
 
           {/* <Route path="/Connections" element={<Connections />} /> */}
         </Routes>

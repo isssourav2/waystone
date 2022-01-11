@@ -10,6 +10,7 @@ import {
   Welcome,
   Settings,
   Login,
+  Application,
   TabDataSource,
 } from '../components';
 import { Security, LoginCallback, SecureRoute } from '@okta/okta-react';
@@ -32,9 +33,9 @@ const OctaApp = () => {
       <Switch>
         <OldRoute path="/" exact component={Login} />
         <OldRoute path="/help" component={Welcome} />
-        <OldRoute path="/Stepper" component={Stepper} />
+        <OldRoute path="/Application" component={Application} />
         {/* <Route path="/TabMenu" component={<TabMenu />} /> */}
-
+        <OldRoute path="/Stepper" component={Stepper} />
         <OldRoute path="/Settings" component={Settings} />
         <OldRoute path="/DataSource" component={TabDataSource} />
         {/* <OldRoute path="/Connections" component={Connections} /> */}

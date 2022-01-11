@@ -35,7 +35,7 @@ import { useHistory } from 'react-router-dom';
 // import { useNavigate } from 'react-router-dom-latest';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import { TabMenuContext } from '../../Context/TabMenuContext';
-
+import PowerSettingsNewIcon from '@mui/icons-material/PowerSettingsNew';
 //icons
 import HelpIcon from '@mui/icons-material/Help';
 import SettingsIcon from '@mui/icons-material/Settings';
@@ -309,7 +309,7 @@ function Header() {
               </Badge>
             </IconButton>
 
-            <Menu />
+            {/* <Menu /> */}
             <IconButton
               size="large"
               aria-label="show 8 new notifications"
