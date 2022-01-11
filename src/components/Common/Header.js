@@ -186,6 +186,18 @@ function Header() {
       setjobScheduleSubOpen(false);
       setSettingsSubOpen(false);
       setOpen(true);
+    } else if (
+      SubActiveValue == 4 ||
+      SubActiveValue == 5 ||
+      SubActiveValue == 6 ||
+      SubActiveValue == 7 ||
+      SubActiveValue == 8
+    ) {
+      setdashboardSubOpen(false);
+      setdataSourceSubOpen(false);
+      setjobScheduleSubOpen(true);
+      setSettingsSubOpen(false);
+      setOpen(true);
     } else {
       setdashboardSubOpen(false);
       setdataSourceSubOpen(false);
@@ -266,6 +278,32 @@ function Header() {
         tabMenu.dispatch({ type: 'DataSource_Connection' });
         history.push('/DataSource');
         // navigate('/Settings');
+        break;
+      //JobShedule
+      case 4:
+        tabMenu.dispatch({ type: 'JobScheduling_Jobs' });
+        history.push('/TabJobsheduling');
+        //navigate('/TabJobsheduling');
+        break;
+      case 5:
+        tabMenu.dispatch({ type: 'JobScheduling_Schedule' });
+        history.push('/TabJobsheduling');
+        // navigate('/TabJobsheduling');
+        break;
+      case 6:
+        tabMenu.dispatch({ type: 'JobScheduling_Calender' });
+        history.push('/TabJobsheduling');
+        // navigate('/TabJobsheduling');
+        break;
+      case 7:
+        tabMenu.dispatch({ type: 'JobScheduling_Application' });
+        history.push('/TabJobsheduling');
+        // navigate('/TabJobsheduling');
+        break;
+      case 8:
+        tabMenu.dispatch({ type: 'JobScheduling_ApplicationTemplate' });
+        history.push('/TabJobsheduling');
+        // navigate('/TabJobsheduling');
         break;
       default:
         break;
@@ -433,8 +471,8 @@ function Header() {
               <List component="ul" disablePadding>
                 <ListItem
                   button
-                  onClick={() => handleChange(0)}
-                  selected={SubActiveValue === 0}
+                  onClick={() => handleChange(4)}
+                  selected={SubActiveValue === 4}
                 >
                   <ListItemText primary="Jobs" />
                 </ListItem>
@@ -442,8 +480,8 @@ function Header() {
               <List component="ul" disablePadding>
                 <ListItem
                   button
-                  onClick={() => handleChange(1)}
-                  selected={SubActiveValue === 1}
+                  onClick={() => handleChange(5)}
+                  selected={SubActiveValue === 5}
                 >
                   <ListItemText primary="Schedules" />
                 </ListItem>
@@ -451,8 +489,8 @@ function Header() {
               <List component="ul" disablePadding>
                 <ListItem
                   button
-                  onClick={() => handleChange(1)}
-                  selected={SubActiveValue === 1}
+                  onClick={() => handleChange(6)}
+                  selected={SubActiveValue === 6}
                 >
                   <ListItemText primary="Calender" />
                 </ListItem>
@@ -460,8 +498,8 @@ function Header() {
               <List component="ul" disablePadding>
                 <ListItem
                   button
-                  onClick={() => handleChange(1)}
-                  selected={SubActiveValue === 1}
+                  onClick={() => handleChange(7)}
+                  selected={SubActiveValue === 7}
                 >
                   <ListItemText primary="Application" />
                 </ListItem>
@@ -469,8 +507,8 @@ function Header() {
               <List component="ul" disablePadding>
                 <ListItem
                   button
-                  onClick={() => handleChange(1)}
-                  selected={SubActiveValue === 1}
+                  onClick={() => handleChange(8)}
+                  selected={SubActiveValue === 8}
                 >
                   <ListItemText primary="Application Template" />
                 </ListItem>

@@ -9,6 +9,7 @@ export { default as User } from './Settings/User/User';
 export { default as Email } from './Settings/Email/Email';
 export { default as Tags } from './Settings/Tags/Tags';
 export { default as Login } from './Login/login';
-export { default as Application } from './Application/Application';
+export { default as Application } from './JobsSchedule/Application/Application';
+export { default as TabJobsheduling } from './JobsSchedule/TabMenu/TabJobsheduling';
 
 export { default as TabDataSource } from './DataSource/TabMenu/TabDataSource';
