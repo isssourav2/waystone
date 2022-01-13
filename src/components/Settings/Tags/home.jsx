@@ -38,35 +38,61 @@ function PaperComponent(props) {
   return <Paper {...props} />;
 }
 
-function Alerts({ alert, color }) {
-  return (
-    <Alert severity={alert} color={color}>
-      Insert Successfully done!
-    </Alert>
-  );
-}
 
-const Insert = () => {
-  Alert();
-};
-const SaveTag = async (tag) => {
-  const res = await axios.post('https://localhost:7056/api/Tag', tag);
-  return res.data;
-};
+
 
 const Home = () => {
 
   const submitHandler = () => {
+    Tag.tagName = tagName;
+    console.log(tagName);
     const response = SaveTag(Tag);
     response.then((save) => {
       console.log('reponse:', save);
       GetTagData();
+      window.alert('Insert Successfully done!!');
+      clearData();
       handleClose();
     });
   };
 
+  const UpdateHandler = () => {
+    Tag.tagName = tagName;
+    Tag.tagId = row.tagId;
+
+    const response = UpdateTag(Tag);
+    response.then((save) => {
+      window.alert('Update Successfully done!!');
+      GetTagData();
+      clearData();
+      handleClose();
+    });
+  };
+
+  const deleteHandleClose = () => {
+
+      DeleteTag(row).then((save) => {
+      GetTagData();
+      clearData();
+      window.alert('Delete Successfully done!!');
+      dialogHandleClose();
+    });
+  };
+
+  const EditHandler = (param) => {
+    setRow(param);
+    setTagName(param.tagName);
+    setOpen(true);
+  };
+  
+
   const onTagNameChange = (val) => {
-    Tag.tagName = val;
+    //Tag.tagName = val;
+    setTagName(val);
+  };
+
+  const clearData = () => {
+    setTagName('');
   };
 
   const columns = [
@@ -81,19 +107,19 @@ const Home = () => {
       getActions: (params) => [
         <IconButton
           className="link-tool"
-          onClick={() => console.log(params.row)}
+          onClick={() => viewHandleOpen(params)}
         >
           <RemoveRedEyeIcon />
         </IconButton>,
         <IconButton
           className="link-tool"
-          onClick={() => console.log(params.row)}
+          onClick={() => EditHandler(params.row)}
         >
           <EditIcon />
         </IconButton>,
         <IconButton
           className="link-tool"
-          onClick={() => console.log(params.row.id)}
+          onClick={() => dialogHandleOpen(params.row)}
         >
           <DeleteIcon />
         </IconButton>,
@@ -103,9 +129,13 @@ const Home = () => {
 
 
   const [rows, setRows] = React.useState([]);
+  const [row, setRow] = React.useState({ tagId: 0 });
   const [Tag, setTag] = React.useState({
+    tagId: 0,
     tagName: '',
   });
+
+  const [tagName, setTagName] = React.useState('');
 
   const GetTagData = () => {
     fetch('https://localhost:7056/api/Tag')
@@ -123,7 +153,23 @@ const Home = () => {
   }, [0]);
 
 
- 
+  
+
+  const SaveTag = async (tag) => {
+    const res = await axios.post('https://localhost:7056/api/Tag', tag);
+    return res.data;
+  };
+  const UpdateTag = async (tag) => {
+    const res = await axios.put('https://localhost:7056/api/Tag', tag);
+    return res.data;
+  };
+  const DeleteTag = async (tag) => {
+    const res = await axios.delete(
+      `https://localhost:7056/api/Tag/${tag.tagId}`
+    );
+    return res.data;
+  };
+
   
 
   //Role Modal
@@ -134,71 +180,41 @@ const Home = () => {
   };
   const handleClose = () => {
     setOpen(false);
+    clearData();
   };
   //Dialog Modal
   const [dialogOpen, setdialogOpen] = React.useState(false);
   const dialogHandleClose = () => {
     setdialogOpen(false);
+    clearData();
   };
-  const dialogHandleOpen = () => {
+  const dialogHandleOpen = (param) => {
+    deleteHandler(param);
     setdialogOpen(true);
   };
   //View Role Modal
   const [viewOpen, setviewOpen] = React.useState(false);
 
-  const viewHandleOpen = () => {
+  const viewHandleOpen = (param) => {
+    setRow(param.row);
     setviewOpen(true);
   };
 
   const viewHandleClose = () => {
     setviewOpen(false);
+    clearData();
   };
-  //Permision Modal
-  const [PermissionOpen, setPermissionOpen] = React.useState(false);
+  
+  const deleteHandler = (param) => {
+    setRow(param);
+  };
 
-  const PermissionhandleClickOpen = () => {
-    setPermissionOpen(true);
-  };
-
-  const PermissionhandleClose = () => {
-    setPermissionOpen(false);
-  };
   //tagged collection
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const [value, setValue] = React.useState('');
 
+  const [value, setValue] = React.useState('');
   const tagged = [];
   const [tags, setTags] = React.useState([]);
 
-  const handleTagChange = (tag) => {
-    console.log(tag);
-    setTags((oldtag) => [...oldtag, tag]);
-    setAnchorEl(null);
-  };
-  console.log(tags);
-  tagged.push('Dashboard');
-  tagged.push('Role Creation');
-  tagged.push('User Creation');
-  tagged.push('Connection');
-  tagged.push('Notification');
-  tagged.push('Setup');
-  tagged.push('Source');
-  tagged.push('Application');
-  tagged.push('Insight');
-  tagged.push('Job Creation');
-  tagged.push('Tags');
-  tagged.push('Fields');
-
-  const handleTaggedChange = (event) => {
-    if (event.key == 'Enter') {
-      setValue(event.nativeEvent.target.value);
-      setAnchorEl(event.currentTarget);
-    }
-  };
-  const taggedOpen = Boolean(anchorEl);
-  const handleTaggedClose = () => {
-    setAnchorEl(null);
-  };
   const id = open ? 'simple-popover' : undefined;
   return (
     <>
@@ -241,7 +257,7 @@ const Home = () => {
                   <TextField
                     style={{ backgroundColor: 'white', height: '1em' }}
                     id="filled-basic"
-                    placeholder="Filled"
+                    placeholder="Tag Name"
                     variant="filled"
                   />
                   <SearchIcon style={{ textAlign: 'right' }} />
@@ -254,124 +270,22 @@ const Home = () => {
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 {<MuiDataGrid rows={rows} columns={columns} />}
-                {/* <MuiDataGrid /> */}
               </Grid>
-
-              {/* <Grid item xs={9}>
-                <Grid className="pagination-count">
-                  <Typography sx={{ textAlign: 'left' }} variant="h6">
-                    {' '}
-                    showing 1 to 5
-                  </Typography>{' '}
-                </Grid>
-              </Grid>
-              <Grid item xs={3}>
-                <Grid className="pagination-box">
-                  {' '}
-                  <Stack>
-                    <Pagination count={10} shape="rounded" />
-                  </Stack>
-                </Grid>
-              </Grid> */}
             </Grid>
           </Grid>
         </div>
       </Box>
-      <Popover
-        id={id}
-        open={taggedOpen}
-        anchorEl={anchorEl}
-        onClose={handleTaggedClose}
-        anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'left',
-        }}
-      >
-        <Box
-          sx={{
-            p: 2,
-            bgcolor: 'background.default',
-            display: 'grid',
-            gridTemplateColumns: { md: '1fr' },
-            gridTemplateRows: { md: '1fr' },
-            cursor: 'pointer',
-            gap: 2,
-          }}
-        >
-          {tagged.map((tag) => (
-            <paperItem
-              key={tag}
-              elevation={tag}
-              onClick={() => handleTagChange(tag)}
-            >
-              {tag}
-            </paperItem>
-          ))}
-        </Box>
-      </Popover>
+     
       <MatDialog
         open={open}
         title="Tag"
         handleClose={handleClose}        
-        onHandleClick={submitHandler}
+        onHandleClick={row.tagId === 0 ? submitHandler : UpdateHandler}
         isAction="true"
         isCancel="true"
         isSubmit="true"
       >
-        <Box component="form" noValidate autoComplete="off"></Box>
-        <Box component="form" noValidate autoComplete="off">
-          <Box
-            component="form"
-            sx={{
-              '& .MuiTextField-root': { m: 1, width: '25ch' },
-            }}
-            noValidate
-            autoComplete="off"
-          >
-
-          <FormControl variant="standard">
-            <InputLabel htmlFor="component-simple">Tag Name</InputLabel>
-            <Input
-              id="component-simple"
-              onInput={(e) => onTagNameChange(e.target.value)}
-            />
-          </FormControl>
-            
-          </Box>
-        </Box>
-      </MatDialog>
-      <MatDialog
-        open={viewOpen}
-        title="Role"
-        handleClose={viewHandleClose}
-        isAction="true"
-        isCancel="true"
-        isSubmit="true"
-      >
-        <Box component="form" noValidate autoComplete="off">
-          <Typography className="text-row">
-            <label>Role Name</label> Role1
-          </Typography>
-
-          <Typography className="text-row">
-            <label>Role Description</label> Role1
-          </Typography>
-        </Box>
-      </MatDialog>
-      <MatDialog
-        open={PermissionOpen}
-        title="Tags"
-        handleClose={PermissionhandleClose}
-        isAction="true"
-        isCancel="true"
-        isSubmit="true"
-      >
-        <Typography className="text-row">
-          <label>Tag Name</label>
-        </Typography>
-
-        <Box
-          className="box-tag"
+         <Box
           component="form"
           sx={{
             '& > :not(style)': { m: 1 },
@@ -379,23 +293,32 @@ const Home = () => {
           noValidate
           autoComplete="off"
         >
-          <TextareaAutosize
-            aria-label="minimum height"
-            minRows={3}
-            placeholder="Enter Tag Name"
-            style={{ width: 200 }}
-            onKeyDown={handleTaggedChange}
-          />
-          {tags.map((tag) => (
-            <Item key={tag} className="box-btn tag">
-              <IconButton>
-                <CloseIcon />
-              </IconButton>
-              {tag}
-            </Item>
-          ))}
+
+          <FormControl variant="standard">
+            <InputLabel htmlFor="component-simple">Tag Name</InputLabel>
+            <Input
+              id="component-simple"
+              name="tagName"
+              value={tagName}
+              onInput={(e) => onTagNameChange(e.target.value)}
+            />
+          </FormControl>            
+          </Box>
+
+      </MatDialog>
+      <MatDialog
+        open={viewOpen}
+        title="Tag"
+        handleClose={viewHandleClose}        
+      >
+        <Box component="form" noValidate autoComplete="off">
+          <Typography className="text-row">
+            <label>Tag Name</label> {row && row.tagName}
+          </Typography>
+         
         </Box>
       </MatDialog>
+      
       <Dialog
         open={dialogOpen}
         onClose={dialogHandleClose}
@@ -411,10 +334,14 @@ const Home = () => {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button autoFocus onClick={handleClose} className="box-btn left">
+          <Button
+            autoFocus
+            onClick={dialogHandleClose}
+            className="box-btn-cancel"
+          >
             close
           </Button>
-          <Button onClick={handleClose} className="box-btn ">
+          <Button onClick={deleteHandleClose} className="btn">
             Delete
           </Button>
         </DialogActions>
