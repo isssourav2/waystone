@@ -64,6 +64,7 @@ function MatDialog({
   isCancel,
   isSubmit,
   isAction,
+  isSubmitDisable,
 }) {
   return (
     <BootstrapDialog
@@ -87,7 +88,12 @@ function MatDialog({
               </Button>
             )}
             {isSubmit && (
-              <Button autoFocus className="btn" onClick={onHandleClick}>
+              <Button
+                autoFocus
+                disabled={isSubmitDisable}
+                className="btn"
+                onClick={onHandleClick}
+              >
                 Save changes
               </Button>
             )}
