@@ -49,9 +49,9 @@ const Home = () => {
     const response = SaveRoll(Role);
     response.then((save) => {
       GetRollData();
-      window.alert('Insert Successfully done!!');
+      // window.alert('Insert Successfully done!!');
       clearData();
-      // InsertAlert();
+      // InsertAlert('Insert Successfully done!!');
       handleClose();
     });
   };
@@ -64,9 +64,9 @@ const Home = () => {
   //   );
   // }
 
-  // const InsertAlert = () => {
-  //   Alert('success', 'blue', 'Insert Successfully done!');
-  // };
+  const InsertAlert = (successMessage) => {
+    return <Alert severity="success">{successMessage}</Alert>;
+  };
   // const UpdateAlert = () => {
   //   Alert('info', 'green', 'Update Successfully done!');
   // };
@@ -143,6 +143,8 @@ const Home = () => {
   };
 
   const clearData = () => {
+    row.roleId = 0;
+    Role.roleId = 0;
     setRoleName('');
     setRoleDescription('');
   };
@@ -304,12 +306,14 @@ const Home = () => {
     setOpen(true);
   };
   const handleClose = () => {
+    clearData();
     setOpen(false);
   };
 
   //Dialog Modal
   const [dialogOpen, setdialogOpen] = React.useState(false);
   const dialogHandleClose = () => {
+    clearData();
     setdialogOpen(false);
   };
   const deleteHandleClose = () => {
@@ -329,6 +333,7 @@ const Home = () => {
   const [viewOpen, setviewOpen] = React.useState(false);
 
   const viewHandleClose = () => {
+    clearData();
     setviewOpen(false);
   };
   //Permision Modal
@@ -340,6 +345,7 @@ const Home = () => {
   };
 
   const PermissionhandleClose = () => {
+    clearData();
     setPermissionOpen(false);
   };
   //tagged collection
@@ -494,20 +500,13 @@ const Home = () => {
           noValidate
           autoComplete="off"
         >
-          <FormControl variant="standard">
-            <InputLabel htmlFor="component-simple">Role Name</InputLabel>
-            <Input
-              id="component-simple"
-              name="roleName"
-              value={roleName}
-              onInput={(e) => onRoleNameChange(e.target.value)}
-            />
-            {/* <input
-              type="text"
-              value={row.roleName}
-              onChange={(e) => onRoleNameChange(e.target.value)}
-            /> */}
-          </FormControl>
+          <TextField
+            id="outlined-password-input"
+            label="Role Name"
+            type="Text"
+            value={roleName}
+            onInput={(e) => onRoleNameChange(e.target.value)}
+          />
         </Box>
         <Box
           component="form"
@@ -517,15 +516,13 @@ const Home = () => {
           noValidate
           autoComplete="off"
         >
-          <FormControl variant="standard">
-            <InputLabel htmlFor="component-simple">Description</InputLabel>
-            <Input
-              id="component-simple"
-              name="roleDescription"
-              value={roleDescription}
-              onInput={(e) => onRoleDescriptionChange(e.target.value)}
-            />
-          </FormControl>
+          <TextField
+            id="outlined-password-input"
+            label="Role Description"
+            type="Text"
+            value={roleDescription}
+            onInput={(e) => onRoleDescriptionChange(e.target.value)}
+          />
         </Box>
       </MatDialog>
       <MatDialog open={viewOpen} title="Role" handleClose={viewHandleClose}>
