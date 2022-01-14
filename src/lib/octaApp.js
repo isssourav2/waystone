@@ -11,6 +11,7 @@ import {
   Settings,
   Login,
   Application,
+  Notification,
   TabJobsheduling,
   TabDataSource,
 } from '../components';
@@ -37,7 +38,7 @@ const OctaApp = () => {
         {/* <OldRoute path="/Application" component={Application} /> */}
         <OldRoute path="/TabJobsheduling" component={TabJobsheduling} />
         {/* <Route path="/TabMenu" component={<TabMenu />} /> */}
-
+        <OldRoute path="/Notification" component={Notification} />
         <OldRoute path="/Stepper" component={Stepper} />
         <OldRoute path="/Settings" component={Settings} />
         <OldRoute path="/DataSource" component={TabDataSource} />

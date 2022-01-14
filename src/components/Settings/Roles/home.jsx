@@ -31,7 +31,8 @@ import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { MuiDataGrid } from '../../../DataTable';
-
+import Autocomplete from '@mui/material/Autocomplete';
+import { FixedTags } from '../../';
 import axios from 'axios';
 import '../../../style/style.css';
 
@@ -44,10 +45,9 @@ const Home = () => {
   const submitHandler = () => {
     Role.roleName = roleName;
     Role.roleDescription = roleDescription;
-    console.log('insert data:', Role);
+
     const response = SaveRoll(Role);
     response.then((save) => {
-      console.log('reponse:', save);
       GetRollData();
       window.alert('Insert Successfully done!!');
       clearData();
@@ -79,25 +79,31 @@ const Home = () => {
     fetch('https://localhost:7056/api/Role')
       .then((res) => res.json())
       .then((result) => {
-        console.log('Roles:', result);
         result.map((res) => {
           res['id'] = res.roleId;
         });
         setRows(result);
       });
   };
+  const GetMenuForTag = () => {
+    fetch('https://localhost:7056/api/Menu')
+      .then((res) => res.json())
+      .then((result) => {
+        setTagged(result);
+      });
+  };
   React.useEffect(() => {
     GetRollData();
+    GetMenuForTag();
   }, [0]);
 
   const UpdateHandler = () => {
     Role.roleName = roleName;
     Role.roleDescription = roleDescription;
     Role.roleId = row.roleId;
-    console.log('Update data:', Role);
+
     const response = UpdateRoll(Role);
     response.then((save) => {
-      console.log('reponse:', save);
       window.alert('Update Successfully done!!');
       GetRollData();
       clearData();
@@ -127,7 +133,6 @@ const Home = () => {
     return res.data;
   };
   const DeleteRoll = async (role) => {
-    console.log('delete function hitt');
     const res = await axios.delete(
       `https://localhost:7056/api/Role/${role.roleId}`
     );
@@ -150,7 +155,36 @@ const Home = () => {
     //Role.roleDescription = val;
     setRoleDescription(val);
   };
+
   const [rows, setRows] = React.useState([]);
+  const [Tagged, setTagged] = React.useState([]);
+  // const [menuMasterTag, setMenuMasterTag] = React.useState([]);
+  //Post MenuMasterTag
+  const PermissionSaveRole = async (MenuMasterPermission) => {
+    const res = await axios.post(
+      'https://localhost:7056/api/MenuwithRole',
+      MenuMasterPermission
+    );
+    return res.data;
+  };
+  const menuMasterPosting = () => {
+    const menuMasterTag = [];
+    tagValue.map((tag, i) => {
+      const menuTag = {};
+      // menuTag.menuMaster = tag;
+      // menuTag.role = perRow;
+      menuTag.roleId = perRow.roleId;
+      menuTag.menuId = tag.menuId;
+      menuMasterTag.push(menuTag);
+    });
+    const Response = PermissionSaveRole(menuMasterTag);
+    Response.then((save) => {
+      alert('permission Saved Successfully!!');
+      setPermissionOpen(false);
+    });
+    // console.log('Tag Object:', menuMasterTag);
+    //console.log('Role Object:', perRow);
+  };
   //set particular row for edit and delete and view
   const [row, setRow] = React.useState({ roleId: 0 });
   const [Role, setRole] = React.useState({
@@ -166,7 +200,6 @@ const Home = () => {
   const [roleDescription, setRoleDescription] = React.useState('');
 
   const getRoleName = (params) => {
-    console.log('Role Name', params);
     // return `${params..roleName}`
   };
 
@@ -218,7 +251,10 @@ const Home = () => {
       width: 180,
       renderCell: (params) => (
         <strong>
-          <span onClick={PermissionhandleClickOpen} className="count">
+          <span
+            onClick={() => PermissionhandleClickOpen(params)}
+            className="count"
+          >
             4
           </span>
         </strong>
@@ -261,7 +297,6 @@ const Home = () => {
   //   entryDate: '2022-01-07',
   // });
 
-  // console.log(Role);
   //Role Modal
   const [open, setOpen] = React.useState(false);
 
@@ -279,7 +314,6 @@ const Home = () => {
   };
   const deleteHandleClose = () => {
     DeleteRoll(row).then((save) => {
-      console.log('reponse:', save);
       GetRollData();
       clearData();
       window.alert('Delete Successfully done!!');
@@ -299,8 +333,9 @@ const Home = () => {
   };
   //Permision Modal
   const [PermissionOpen, setPermissionOpen] = React.useState(false);
-
-  const PermissionhandleClickOpen = () => {
+  const [perRow, setPerRow] = React.useState({});
+  const PermissionhandleClickOpen = (params) => {
+    setPerRow(params.row);
     setPermissionOpen(true);
   };
 
@@ -309,7 +344,7 @@ const Home = () => {
   };
   //tagged collection
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const [value, setValue] = React.useState('');
+  //const [value, setValue] = React.useState('');
 
   const tagged = [];
   const [tags, setTags] = React.useState([]);
@@ -319,26 +354,27 @@ const Home = () => {
     setAnchorEl(null);
   };
 
-  console.log(Role);
-  tagged.push('Dashboard');
-  tagged.push('Role Creation');
-  tagged.push('User Creation');
-  tagged.push('Connection');
-  tagged.push('Notification');
-  tagged.push('Setup');
-  tagged.push('Source');
-  tagged.push('Application');
-  tagged.push('Insight');
-  tagged.push('Job Creation');
-  tagged.push('Tags');
-  tagged.push('Fields');
-
-  const handleTaggedChange = (event) => {
-    if (event.key == 'Enter') {
-      setValue(event.nativeEvent.target.value);
-      setAnchorEl(event.currentTarget);
-    }
+  // tagged.push({ Id: 1, Name: 'Dashboard' });
+  // tagged.push({ Id: 2, Name: 'Role Creation' });
+  // tagged.push({ Id: 3, Name: 'User Creation' });
+  // tagged.push({ Id: 4, Name: 'Connection' });
+  // tagged.push({ Id: 5, Name: 'Notification' });
+  // tagged.push({ Id: 6, Name: 'Setup' });
+  // tagged.push({ Id: 7, Name: 'Source' });
+  // tagged.push({ Id: 8, Name: 'Application' });
+  // tagged.push({ Id: 9, Name: 'Insight' });
+  // tagged.push({ Id: 10, Name: 'Job Creation' });
+  // tagged.push({ Id: 11, Name: 'Tags' });
+  // tagged.push({ Id: 12, Name: 'Fields' });
+  const fixedOptions = [Tagged[2]];
+  const [tagValue, setTagValue] = React.useState([...fixedOptions, Tagged[5]]);
+  const handleTaggedChange = (event, newValue) => {
+    setTagValue([
+      // ...fixedOptions,
+      ...newValue.filter((option) => fixedOptions.indexOf(option) === -1),
+    ]);
   };
+
   const taggedOpen = Boolean(anchorEl);
   const handleTaggedClose = () => {
     setAnchorEl(null);
@@ -507,6 +543,7 @@ const Home = () => {
         open={PermissionOpen}
         title="Permission"
         handleClose={PermissionhandleClose}
+        onHandleClick={menuMasterPosting}
         isAction="true"
         isCancel="true"
         isSubmit="true"
@@ -533,21 +570,7 @@ const Home = () => {
           noValidate
           autoComplete="off"
         >
-          <TextareaAutosize
-            aria-label="minimum height"
-            minRows={3}
-            placeholder="Minimum 3 rows"
-            style={{ width: 200 }}
-            onKeyDown={handleTaggedChange}
-          />
-          {tags.map((tag) => (
-            <Item key={tag} className="box-btn tag">
-              <IconButton>
-                <CloseIcon />
-              </IconButton>
-              {tag}
-            </Item>
-          ))}
+          <FixedTags tags={Tagged} onTagChangeHandler={handleTaggedChange} />
         </Box>
       </MatDialog>
       <Dialog
