@@ -92,10 +92,16 @@ const Home = () => {
         setTagged(result);
       });
   };
+  const [validateCount, setValidateCount] = React.useState(0);
   React.useEffect(() => {
     GetRollData();
     GetMenuForTag();
-  }, [0]);
+    if (validateCount === 0) {
+      setBtnDisabled(false);
+    } else {
+      setBtnDisabled(true);
+    }
+  }, [validateCount]);
 
   const UpdateHandler = () => {
     Role.roleName = roleName;
@@ -149,12 +155,30 @@ const Home = () => {
     setRoleDescription('');
   };
   //Crud operation
+  let i = 0;
   const onRoleNameChange = (val) => {
+    if (val === '') {
+      setvalidationRoleNameId(true);
+      setValidateCount(i++);
+    } else {
+      setvalidationRoleNameId(false);
+      //setBtnDisabled(false);
+      setValidateCount(0);
+    }
     setRoleName(val);
     //Role.roleName = val;
   };
   const onRoleDescriptionChange = (val) => {
     //Role.roleDescription = val;
+    if (val === '') {
+      setValidationDescriptionId(true);
+      setValidateCount(i++);
+      // setBtnDisabled(true);
+    } else {
+      setValidationDescriptionId(false);
+      setValidateCount(0);
+      // setBtnDisabled(false);
+    }
     setRoleDescription(val);
   };
 
@@ -386,6 +410,12 @@ const Home = () => {
     setAnchorEl(null);
   };
   const id = open ? 'simple-popover' : undefined;
+  //let validationDescriptionId = false;
+  const [validationDescriptionId, setValidationDescriptionId] =
+    React.useState(false);
+  const [validationRoleNameId, setvalidationRoleNameId] = React.useState(false);
+  const [btnDisabled, setBtnDisabled] = React.useState(true);
+
   return (
     <>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
@@ -487,6 +517,7 @@ const Home = () => {
         open={open}
         title="Role"
         handleClose={handleClose}
+        isSubmitDisable={btnDisabled}
         onHandleClick={row.roleId === 0 ? submitHandler : UpdateHandler}
         isAction="true"
         isCancel="true"
@@ -500,13 +531,24 @@ const Home = () => {
           noValidate
           autoComplete="off"
         >
-          <TextField
-            id="outlined-password-input"
-            label="Role Name"
-            type="Text"
-            value={roleName}
-            onInput={(e) => onRoleNameChange(e.target.value)}
-          />
+          {validationRoleNameId ? (
+            <TextField
+              error
+              id="outlined-error"
+              label="Role Name"
+              type="Text"
+              value={roleName}
+              onInput={(e) => onRoleNameChange(e.target.value)}
+            />
+          ) : (
+            <TextField
+              id="outlined-password-input"
+              label="Role Name"
+              type="Text"
+              value={roleName}
+              onInput={(e) => onRoleNameChange(e.target.value)}
+            />
+          )}
         </Box>
         <Box
           component="form"
@@ -516,13 +558,24 @@ const Home = () => {
           noValidate
           autoComplete="off"
         >
-          <TextField
-            id="outlined-password-input"
-            label="Role Description"
-            type="Text"
-            value={roleDescription}
-            onInput={(e) => onRoleDescriptionChange(e.target.value)}
-          />
+          {validationDescriptionId ? (
+            <TextField
+              error
+              id="outlined-error"
+              label="Role Description"
+              type="Text"
+              value={roleDescription}
+              onInput={(e) => onRoleDescriptionChange(e.target.value)}
+            />
+          ) : (
+            <TextField
+              id="outlined-password-input"
+              label="Role Description"
+              type="Text"
+              value={roleDescription}
+              onInput={(e) => onRoleDescriptionChange(e.target.value)}
+            />
+          )}
         </Box>
       </MatDialog>
       <MatDialog open={viewOpen} title="Role" handleClose={viewHandleClose}>
