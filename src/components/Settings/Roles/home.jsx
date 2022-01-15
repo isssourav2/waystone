@@ -43,17 +43,32 @@ function PaperComponent(props) {
 const Home = () => {
   //Crud operation
   const submitHandler = () => {
-    Role.roleName = roleName;
-    Role.roleDescription = roleDescription;
+    if (Validation(roleName, roleDescription)) {
+      Role.roleName = roleName;
+      Role.roleDescription = roleDescription;
 
-    const response = SaveRoll(Role);
-    response.then((save) => {
-      GetRollData();
-      // window.alert('Insert Successfully done!!');
-      clearData();
-      // InsertAlert('Insert Successfully done!!');
-      handleClose();
-    });
+      const response = SaveRoll(Role);
+      response.then((save) => {
+        GetRollData();
+        // window.alert('Insert Successfully done!!');
+        clearData();
+        // InsertAlert('Insert Successfully done!!');
+        handleClose();
+      });
+    }
+  };
+  const Validation = (roleName, roleDescription) => {
+    if (roleName == '') {
+      setvalidationRoleNameId(true);
+      setValidateCount(++i);
+      return false;
+    } else if (roleDescription == '') {
+      setValidationDescriptionId(true);
+      setValidateCount(++i);
+      return false;
+    } else {
+      return true;
+    }
   };
   //Alert
   // function Alerts({ alert, color, message }) {
@@ -96,26 +111,22 @@ const Home = () => {
   React.useEffect(() => {
     GetRollData();
     GetMenuForTag();
-    debugger;
-    if (validateCount === 0) {
-      setBtnDisabled(false);
-    } else {
-      setBtnDisabled(true);
-    }
-  }, [validateCount]);
+  }, [0]);
 
   const UpdateHandler = () => {
-    Role.roleName = roleName;
-    Role.roleDescription = roleDescription;
-    Role.roleId = row.roleId;
+    if (Validation(roleName, roleDescription)) {
+      Role.roleName = roleName;
+      Role.roleDescription = roleDescription;
+      Role.roleId = row.roleId;
 
-    const response = UpdateRoll(Role);
-    response.then((save) => {
-      window.alert('Update Successfully done!!');
-      GetRollData();
-      clearData();
-      handleClose();
-    });
+      const response = UpdateRoll(Role);
+      response.then((save) => {
+        window.alert('Update Successfully done!!');
+        GetRollData();
+        clearData();
+        handleClose();
+      });
+    }
   };
   const viewHandleOpen = (param) => {
     setRow(param.row);
@@ -155,7 +166,7 @@ const Home = () => {
     setValidationDescriptionId(false);
     setvalidationRoleNameId(false);
     setRoleName('');
-    setBtnDisabled(true);
+    setValidateCount(0);
     setRoleDescription('');
   };
   //Crud operation
@@ -419,7 +430,7 @@ const Home = () => {
   const [validationDescriptionId, setValidationDescriptionId] =
     React.useState(false);
   const [validationRoleNameId, setvalidationRoleNameId] = React.useState(false);
-  const [btnDisabled, setBtnDisabled] = React.useState(true);
+  const [btnDisabled, setBtnDisabled] = React.useState(false);
 
   return (
     <>
