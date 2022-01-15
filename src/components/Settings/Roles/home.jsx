@@ -92,10 +92,11 @@ const Home = () => {
         setTagged(result);
       });
   };
-  const [validateCount, setValidateCount] = React.useState(0);
+  const [validateCount, setValidateCount] = React.useState(1);
   React.useEffect(() => {
     GetRollData();
     GetMenuForTag();
+    debugger;
     if (validateCount === 0) {
       setBtnDisabled(false);
     } else {
@@ -151,15 +152,19 @@ const Home = () => {
   const clearData = () => {
     row.roleId = 0;
     Role.roleId = 0;
+    setValidationDescriptionId(false);
+    setvalidationRoleNameId(false);
     setRoleName('');
+    setBtnDisabled(true);
     setRoleDescription('');
   };
   //Crud operation
-  let i = 0;
+  var i = 0;
   const onRoleNameChange = (val) => {
+    debugger;
     if (val === '') {
       setvalidationRoleNameId(true);
-      setValidateCount(i++);
+      setValidateCount(++i);
     } else {
       setvalidationRoleNameId(false);
       //setBtnDisabled(false);
@@ -172,7 +177,7 @@ const Home = () => {
     //Role.roleDescription = val;
     if (val === '') {
       setValidationDescriptionId(true);
-      setValidateCount(i++);
+      setValidateCount(++i);
       // setBtnDisabled(true);
     } else {
       setValidationDescriptionId(false);
