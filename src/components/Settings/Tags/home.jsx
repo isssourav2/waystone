@@ -71,7 +71,7 @@ const Home = () => {
 
   const deleteHandleClose = () => {
 
-      DeleteTag(row).then((save) => {
+    DeleteTag(row).then((save) => {
       GetTagData();
       clearData();
       window.alert('Delete Successfully done!!');
@@ -84,7 +84,7 @@ const Home = () => {
     setTagName(param.tagName);
     setOpen(true);
   };
-  
+
 
   const onTagNameChange = (val) => {
     //Tag.tagName = val;
@@ -92,12 +92,15 @@ const Home = () => {
   };
 
   const clearData = () => {
+    row.tagId = 0;
+    Tag.tagId = 0;
     setTagName('');
+
   };
 
   const columns = [
     { field: 'tagName', headerName: 'Tag Name', width: 180, editable: true },
-    
+
     {
       field: 'actions',
       type: 'actions',
@@ -153,7 +156,7 @@ const Home = () => {
   }, [0]);
 
 
-  
+
 
   const SaveTag = async (tag) => {
     const res = await axios.post('https://localhost:7056/api/Tag', tag);
@@ -170,7 +173,7 @@ const Home = () => {
     return res.data;
   };
 
-  
+
 
   //Role Modal
   const [open, setOpen] = React.useState(false);
@@ -201,10 +204,9 @@ const Home = () => {
   };
 
   const viewHandleClose = () => {
-    setviewOpen(false);
-    clearData();
+    setviewOpen(false);    
   };
-  
+
   const deleteHandler = (param) => {
     setRow(param);
   };
@@ -275,17 +277,17 @@ const Home = () => {
           </Grid>
         </div>
       </Box>
-     
+
       <MatDialog
         open={open}
         title="Tag"
-        handleClose={handleClose}        
+        handleClose={handleClose}
         onHandleClick={row.tagId === 0 ? submitHandler : UpdateHandler}
         isAction="true"
         isCancel="true"
         isSubmit="true"
       >
-         <Box
+        <Box
           component="form"
           sx={{
             '& > :not(style)': { m: 1 },
@@ -294,31 +296,31 @@ const Home = () => {
           autoComplete="off"
         >
 
-          <FormControl variant="standard">
-            <InputLabel htmlFor="component-simple">Tag Name</InputLabel>
-            <Input
-              id="component-simple"
-              name="tagName"
-              value={tagName}
-              onInput={(e) => onTagNameChange(e.target.value)}
-            />
-          </FormControl>            
-          </Box>
+          <TextField
+            id="outlined-password-input"
+            label="Tag Name"
+            type="Text"
+            value={tagName}
+            onInput={(e) => onTagNameChange(e.target.value)}
+          />
+
+
+        </Box>
 
       </MatDialog>
       <MatDialog
         open={viewOpen}
         title="Tag"
-        handleClose={viewHandleClose}        
+        handleClose={viewHandleClose}
       >
         <Box component="form" noValidate autoComplete="off">
           <Typography className="text-row">
             <label>Tag Name</label> {row && row.tagName}
           </Typography>
-         
+
         </Box>
       </MatDialog>
-      
+
       <Dialog
         open={dialogOpen}
         onClose={dialogHandleClose}
