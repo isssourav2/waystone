@@ -22,9 +22,9 @@ export default function FixedTags({ tags, onTagChangeHandler }) {
           />
         ))
       }
-      style={{ width: 500 }}
+      style={{ width: 400 }}
       renderInput={(params) => (
-        <TextField {...params} label="Fixed tag" placeholder="Favorites" />
+        <TextField {...params} label="Select Menu" placeholder="Menu List" />
       )}
     />
   );

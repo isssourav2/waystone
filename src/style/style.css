@@ -632,6 +632,15 @@ button.css-78trlr-MuiButtonBase-root-MuiIconButton-root
   float: right;
 }
 
+.empty-box {
+  background-color: #fff !important;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0px 0 5px 10px;
+  margin: 50px 0px 45px 0px !important;
+}
+
 .search-box {
   border: #05bd0d 1px solid !important;
   background-color: #fff !important;
@@ -1142,6 +1151,7 @@ nav.MuiList-root {
   width: 100%;
   max-width: 500px;
   padding: 30px;
+  overflow: hidden;
 }
 
 .modelPopUp .MuiDialog-paper h3 {

@@ -155,7 +155,7 @@ const Home = () => {
                     <TabPanel value="1">
                       <Typography variant="h3">
                         {' '}
-                        <SettingsIcon /> Scheduler Settings
+                        
                       </Typography>
 
                       <Box
@@ -194,7 +194,7 @@ const Home = () => {
                     <TabPanel value="2">
                       <Typography variant="h3">
                         {' '}
-                        <MailIcon /> Email Settings
+                        
                       </Typography>
 
                       <Box
@@ -207,7 +207,7 @@ const Home = () => {
                           <TextField
                             id="outlined-password-input"
                             required
-                            label="Form"
+                            label="From"
                             type="Text"
                             placeholder="mb_riskire@waystone.com"
                           />

@@ -44,6 +44,7 @@ function PaperComponent(props) {
 const Home = () => {
 
   const submitHandler = () => {
+    if (Validation(tagName)){
     Tag.tagName = tagName;
     console.log(tagName);
     const response = SaveTag(Tag);
@@ -54,9 +55,11 @@ const Home = () => {
       clearData();
       handleClose();
     });
+  }
   };
 
   const UpdateHandler = () => {
+    if (Validation(tagName)){
     Tag.tagName = tagName;
     Tag.tagId = row.tagId;
 
@@ -67,6 +70,7 @@ const Home = () => {
       clearData();
       handleClose();
     });
+  }
   };
 
   const deleteHandleClose = () => {
@@ -88,12 +92,23 @@ const Home = () => {
 
   const onTagNameChange = (val) => {
     //Tag.tagName = val;
+    if (val === '') {
+      setvalidationTagNameId(true);
+      setValidateCount(++i);
+    } else {
+      setvalidationTagNameId(false);
+      //setBtnDisabled(false);
+      setValidateCount(0);
+    }
     setTagName(val);
+
   };
 
   const clearData = () => {
     row.tagId = 0;
     Tag.tagId = 0;
+    setvalidationTagNameId(false);
+    setValidateCount(0);
     setTagName('');
 
   };
@@ -130,7 +145,8 @@ const Home = () => {
     },
   ];
 
-
+  var i = 0;
+  const [validateCount, setValidateCount] = React.useState(1);
   const [rows, setRows] = React.useState([]);
   const [row, setRow] = React.useState({ tagId: 0 });
   const [Tag, setTag] = React.useState({
@@ -175,8 +191,10 @@ const Home = () => {
 
 
 
-  //Role Modal
+  
   const [open, setOpen] = React.useState(false);
+  const [validationTagNameId, setvalidationTagNameId] = React.useState(false);
+  
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -211,7 +229,15 @@ const Home = () => {
     setRow(param);
   };
 
-  //tagged collection
+  const Validation = (tagName) => {
+    if (tagName == '') {
+      setvalidationTagNameId(true);
+      setValidateCount(++i);
+      return false;
+    } else {
+      return true;
+    }
+  };
 
   const [value, setValue] = React.useState('');
   const tagged = [];
@@ -255,14 +281,8 @@ const Home = () => {
             <Grid container spacing={2}>
               <Grid item xs={10}></Grid>
               <Grid item xs={2}>
-                <div className="search-box">
-                  <TextField
-                    style={{ backgroundColor: 'white', height: '1em' }}
-                    id="filled-basic"
-                    placeholder="Tag Name"
-                    variant="filled"
-                  />
-                  <SearchIcon style={{ textAlign: 'right' }} />
+                <div className="empty-box">
+                  
                 </div>
               </Grid>
             </Grid>
@@ -295,15 +315,24 @@ const Home = () => {
           noValidate
           autoComplete="off"
         >
-
-          <TextField
-            id="outlined-password-input"
-            label="Tag Name"
-            type="Text"
-            value={tagName}
-            onInput={(e) => onTagNameChange(e.target.value)}
-          />
-
+{validationTagNameId ? (
+            <TextField
+              error
+              id="outlined-error"
+              label="Tag Name"
+              type="Text"
+              value={tagName}
+              onInput={(e) => onTagNameChange(e.target.value)}
+            />
+          ) : (
+            <TextField
+              id="outlined-password-input"
+              label="Tag Name"
+              type="Text"
+              value={tagName}
+              onInput={(e) => onTagNameChange(e.target.value)}
+            />
+          )}
 
         </Box>
 

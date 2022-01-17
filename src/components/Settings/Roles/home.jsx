@@ -50,7 +50,7 @@ const Home = () => {
       const response = SaveRoll(Role);
       response.then((save) => {
         GetRollData();
-        // window.alert('Insert Successfully done!!');
+         window.alert('Insert Successfully done!!');
         clearData();
         // InsertAlert('Insert Successfully done!!');
         handleClose();
@@ -105,12 +105,13 @@ const Home = () => {
       .then((res) => res.json())
       .then((result) => {
         setTagged(result);
+        console.log("menu",result);
       });
   };
   const [validateCount, setValidateCount] = React.useState(1);
   React.useEffect(() => {
     GetRollData();
-    GetMenuForTag();
+    GetMenuForTag();    
   }, [0]);
 
   const UpdateHandler = () => {
@@ -219,6 +220,7 @@ const Home = () => {
       menuTag.menuId = tag.menuId;
       menuMasterTag.push(menuTag);
     });
+
     const Response = PermissionSaveRole(menuMasterTag);
     Response.then((save) => {
       alert('permission Saved Successfully!!');
@@ -288,7 +290,7 @@ const Home = () => {
     },
 
     {
-      field: 'Permission',
+      field: 'permissionCount',
       headerName: 'Permission',
       width: 180,
       renderCell: (params) => (
@@ -297,7 +299,7 @@ const Home = () => {
             onClick={() => PermissionhandleClickOpen(params)}
             className="count"
           >
-            4
+            {params.row.permissionCount}
           </span>
         </strong>
       ),
@@ -379,8 +381,10 @@ const Home = () => {
   //Permision Modal
   const [PermissionOpen, setPermissionOpen] = React.useState(false);
   const [perRow, setPerRow] = React.useState({});
-  const PermissionhandleClickOpen = (params) => {
-    setPerRow(params.row);
+  const PermissionhandleClickOpen = (param) => {
+    console.log(param);
+    setPerRow(param.row);
+    setRow(param.row);
     setPermissionOpen(true);
   };
 
@@ -615,12 +619,12 @@ const Home = () => {
         isSubmit="true"
       >
         <Typography className="text-row">
-          <label>Role Name</label> <span>Power User | BD Team</span>
+          <label>Role Name</label> <span>{row && row.roleName}</span>
         </Typography>
 
         <Typography className="text-row">
           <label>Role Description</label>{' '}
-          <span>Access to Everything (excl. Configuration, Manage</span>
+          <span>{row && row.roleDescription}</span>
         </Typography>
 
         <Typography className="text-row">
@@ -636,7 +640,7 @@ const Home = () => {
           noValidate
           autoComplete="off"
         >
-          <FixedTags tags={Tagged} onTagChangeHandler={handleTaggedChange} />
+          <FixedTags  tags={Tagged} onTagChangeHandler={handleTaggedChange} />
         </Box>
       </MatDialog>
       <Dialog
