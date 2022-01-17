@@ -50,7 +50,7 @@ const Home = () => {
       const response = SaveRoll(Role);
       response.then((save) => {
         GetRollData();
-         window.alert('Insert Successfully done!!');
+        window.alert('Insert Successfully done!!');
         clearData();
         // InsertAlert('Insert Successfully done!!');
         handleClose();
@@ -105,13 +105,13 @@ const Home = () => {
       .then((res) => res.json())
       .then((result) => {
         setTagged(result);
-        console.log("menu",result);
+        console.log('menu', result);
       });
   };
   const [validateCount, setValidateCount] = React.useState(1);
   React.useEffect(() => {
     GetRollData();
-    GetMenuForTag();    
+    GetMenuForTag();
   }, [0]);
 
   const UpdateHandler = () => {
@@ -201,6 +201,7 @@ const Home = () => {
 
   const [rows, setRows] = React.useState([]);
   const [Tagged, setTagged] = React.useState([]);
+  console.log('Tag Records:', Tagged);
   // const [menuMasterTag, setMenuMasterTag] = React.useState([]);
   //Post MenuMasterTag
   const PermissionSaveRole = async (MenuMasterPermission) => {
@@ -224,6 +225,7 @@ const Home = () => {
     const Response = PermissionSaveRole(menuMasterTag);
     Response.then((save) => {
       alert('permission Saved Successfully!!');
+      GetRollData();
       setPermissionOpen(false);
     });
     // console.log('Tag Object:', menuMasterTag);
@@ -419,10 +421,17 @@ const Home = () => {
   const fixedOptions = [Tagged[2]];
   const [tagValue, setTagValue] = React.useState([...fixedOptions, Tagged[5]]);
   const handleTaggedChange = (event, newValue) => {
-    setTagValue([
-      // ...fixedOptions,
-      ...newValue.filter((option) => fixedOptions.indexOf(option) === -1),
-    ]);
+    debugger;
+    if (newValue[0].menuName === 'All') {
+      setTagValue([
+        // ...fixedOptions,
+      ]);
+    } else {
+      setTagValue([
+        // ...fixedOptions,
+        ...newValue.filter((option) => fixedOptions.indexOf(option) === -1),
+      ]);
+    }
   };
 
   const taggedOpen = Boolean(anchorEl);
@@ -640,7 +649,7 @@ const Home = () => {
           noValidate
           autoComplete="off"
         >
-          <FixedTags  tags={Tagged} onTagChangeHandler={handleTaggedChange} />
+          <FixedTags tags={Tagged} onTagChangeHandler={handleTaggedChange} />
         </Box>
       </MatDialog>
       <Dialog
