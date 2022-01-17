@@ -62,7 +62,7 @@ const Home = () => {
       editable: true,
     },
     {
-      field: 'roleId',
+      field: 'roleName',
       headerName: 'User Role',
       width: 180,
       editable: true,
