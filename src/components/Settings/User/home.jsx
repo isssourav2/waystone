@@ -296,13 +296,33 @@ const Home = () => {
       headerName: 'Active',
       width: 180,
       renderCell: (params) => (
-        <strong>
-          {params.value === true ? (
-            <Checkbox checked onChange={() => console.log(params.value)} />
+        <>
+          {params.row.isActive === true ? (
+            <Checkbox
+              checked
+              onChange={(e) => {
+                debugger;
+                rows.filter((r) => r.id === params.row.id)[0].isActive =
+                  e.target.checked;
+                //filterval[0].isActive = e.target.checked || true;
+                setRows([...rows]);
+
+                // setRows(filterval[0]);
+              }}
+            />
           ) : (
-            <Checkbox onChange={() => console.log(params.value)} />
+            <Checkbox
+              onChange={(e) => {
+                debugger;
+                rows.filter((r) => r.id === params.row.id)[0].isActive =
+                  e.target.checked;
+                //filterval[0].isActive = e.target.checked || true;
+                setRows([...rows]);
+                //setRows(filterval);
+              }}
+            />
           )}
-        </strong>
+        </>
       ),
     },
     {
