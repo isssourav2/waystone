@@ -59,6 +59,7 @@ const Home = () => {
     return res.data;
   };
   const UpdateUser = async (user) => {
+    console.log('11');
     const res = await axios.put('https://localhost:7056/api/User', user);
     return res.data;
   };
@@ -372,6 +373,7 @@ const Home = () => {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
+    row.userId='3fa85f64-5717-4562-b3fc-2c963f66afa6';
     setOpen(true);
   };
   const handleClose = () => {
