@@ -40,6 +40,224 @@ function PaperComponent(props) {
 }
 
 const Home = () => {
+  //Crud operation
+  const [User, setUser] = React.useState({
+    userId: '3fa85f64-5717-4562-b3fc-2c963f66afa6',
+    userName: '',
+    firstName: '',
+    lastName: '',
+    email: '',
+    department: '',
+    roleId: 0,
+    roleName: '',
+    isActive: false,
+    entryDate: '2022-01-07T00:00:00',
+    updateDate: null,
+  });
+  const SaveUser = async (user) => {
+    const res = await axios.post('https://localhost:7056/api/User', user);
+    return res.data;
+  };
+  const UpdateUser = async (user) => {
+    const res = await axios.put('https://localhost:7056/api/User', user);
+    return res.data;
+  };
+  const DeleteUser = async (user) => {
+    const res = await axios.delete(
+      `https://localhost:7056/api/User/${user.userId}`
+    );
+    return res.data;
+  };
+  const deleteHandler = (param) => {
+    setRow(param);
+  };
+
+  const submitHandler = () => {
+    if (Validation(UserName, FirstName, LastName, Email)) {
+      User.userName = UserName;
+      User.firstName = FirstName;
+      User.lastName = LastName;
+      User.email = Email;
+      User.roleId = RoleId;
+      User.department = Department;
+      console.log('insert', User);
+      const response = SaveUser(User);
+      response.then((save) => {
+        GetUserData();
+        window.alert('Insert Successfully done!!');
+        clearData();
+        // InsertAlert('Insert Successfully done!!');
+        handleClose();
+      });
+    }
+  };
+  const EditHandler = (param) => {
+    setRow(param);
+    setUserName(param.userName);
+    setFirstName(param.firstName);
+    setLastName(param.lastName);
+    setEmail(param.email);
+    setDepartment(param.department);
+    setRoleId(param.roleId);
+    //setRole(param);
+    setOpen(true);
+  };
+  const UpdateHandler = () => {
+    console.log('update');
+    if (Validation(UserName, FirstName, LastName, Email)) {
+      User.userName = UserName;
+      User.firstName = FirstName;
+      User.lastName = LastName;
+      User.email = Email;
+      User.roleId = RoleId;
+      User.department = Department;
+      User.userId = row.userId;
+
+      const response = UpdateUser(User);
+      response.then((save) => {
+        window.alert('Update Successfully done!!');
+        GetUserData();
+        clearData();
+        handleClose();
+      });
+    }
+  };
+  const deleteHandleClose = () => {
+    console.log('delete data:', row);
+    DeleteUser(row).then((del) => {
+      GetUserData();
+      clearData();
+      window.alert('Delete Successfully done!!');
+      dialogHandleClose();
+    });
+  };
+
+  const Validation = (UserName, FirstName, LastName, Email) => {
+    if (UserName == '') {
+      setvalidationUserName(true);
+      setValidateCount(++i);
+      return false;
+    } else if (FirstName == '') {
+      setvalidationFirstName(true);
+      setValidateCount(++i);
+      return false;
+    } else if (LastName == '') {
+      setvalidationLastName(true);
+      setValidateCount(++i);
+      return false;
+    } else if (Email == '') {
+      setvalidationEmail(true);
+      setValidateCount(++i);
+      return false;
+    } else {
+      setValidateCount(0);
+      return true;
+    }
+  };
+
+  const clearData = () => {
+    row.userId = '3fa85f64-5717-4562-b3fc-2c963f66afa6';
+    User.userId = '3fa85f64-5717-4562-b3fc-2c963f66afa6';
+    setvalidationUserName(false);
+    setvalidationFirstName(false);
+    setvalidationLastName(false);
+    setvalidationEmail(false);
+    setUserName('');
+    setFirstName('');
+    setLastName('');
+    setEmail('');
+    setDepartment('');
+    setIsActive(false);
+    setEntryDate(new Date());
+    setUpdateDate(new Date());
+    setValidateCount(0);
+  };
+
+  //set column
+  const [RoleId, setRoleId] = React.useState(0);
+  const [UserName, setUserName] = React.useState('');
+  const [FirstName, setFirstName] = React.useState('');
+  const [LastName, setLastName] = React.useState('');
+  const [Email, setEmail] = React.useState('');
+  const [Department, setDepartment] = React.useState('');
+  const [IsActive, setIsActive] = React.useState(false);
+  const [EntryDate, setEntryDate] = React.useState(new Date());
+  const [UpdateDate, setUpdateDate] = React.useState(new Date());
+  //validation function
+  const [validationUserName, setvalidationUserName] = React.useState(false);
+  const [validationFirstName, setvalidationFirstName] = React.useState(false);
+  const [validationLastName, setvalidationLastName] = React.useState(false);
+  const [validationEmail, setvalidationEmail] = React.useState(false);
+
+  const [btnDisabled, setBtnDisabled] = React.useState(false);
+  const [validateCount, setValidateCount] = React.useState(1);
+  //assign Methode for onchanges
+  var i = 0;
+  const onUserNameChange = (val) => {
+    if (val === '') {
+      setvalidationUserName(true);
+      setValidateCount(++i);
+    } else {
+      setvalidationUserName(false);
+      //setBtnDisabled(false);
+      setValidateCount(0);
+    }
+    setUserName(val);
+    //user.userName = val;
+  };
+  const onUserFirstName = (val) => {
+    if (val === '') {
+      setvalidationFirstName(true);
+      setValidateCount(++i);
+    } else {
+      setvalidationFirstName(false);
+      //setBtnDisabled(false);
+      setValidateCount(0);
+    }
+    setFirstName(val);
+    //Role.roleName = val;
+  };
+  const onUserLastNameChange = (val) => {
+    if (val === '') {
+      setvalidationLastName(true);
+      setValidateCount(++i);
+    } else {
+      setvalidationLastName(false);
+      //setBtnDisabled(false);
+      setValidateCount(0);
+    }
+    setLastName(val);
+    //Role.roleName = val;
+  };
+  const onEmailChange = (val) => {
+    if (val === '') {
+      setvalidationEmail(true);
+      setValidateCount(++i);
+    } else {
+      setvalidationEmail(false);
+      //setBtnDisabled(false);
+      setValidateCount(0);
+    }
+    setEmail(val);
+    //Role.roleName = val;
+  };
+  const onDepartmentChange = (val) => {
+    setDepartment(val);
+    //Role.roleName = val;
+  };
+  const onRoleIdChange = (val) => {
+    setRoleId(val);
+  };
+  const onIsActiveChange = (val) => {
+    setIsActive(val);
+  };
+  const onEntryDateChange = (val) => {
+    setEntryDate(val);
+  };
+  const onUpdateDateChange = (val) => {
+    setUpdateDate(val);
+  };
+
   const columns = [
     { field: 'userName', headerName: 'User Name', width: 180, editable: true },
     {
@@ -63,7 +281,7 @@ const Home = () => {
     },
     {
       field: 'roleName',
-      headerName: 'User Role',
+      headerName: 'User User',
       width: 180,
       editable: true,
     },
@@ -90,19 +308,19 @@ const Home = () => {
       getActions: (params) => [
         <IconButton
           className="link-tool"
-          onClick={() => console.log(params.row)}
+          onClick={() => viewHandleOpen(params)}
         >
           <RemoveRedEyeIcon />
         </IconButton>,
         <IconButton
           className="link-tool"
-          onClick={() => console.log(params.row)}
+          onClick={() => EditHandler(params.row)}
         >
           <EditIcon />
         </IconButton>,
         <IconButton
           className="link-tool"
-          onClick={() => console.log(params.row.id)}
+          onClick={() => dialogHandleOpen(params.row)}
         >
           <DeleteIcon />
         </IconButton>,
@@ -114,14 +332,17 @@ const Home = () => {
     return res.data;
   };
   const [rows, setRows] = React.useState([]);
-  const [userName, setUserName] = React.useState('');
+  // const [userName, setUserName] = React.useState('');
+
   const [SelectOptions, setSelectOptions] = React.useState([]);
-  const [selRole, setselRole] = React.useState(0);
-  const handleRoleChange = (event) => {
-    //setSelRole(event.target.value);
-  };
+  const [row, setRow] = React.useState({ userId: 0 });
 
   React.useEffect(() => {
+    GetUserData();
+    //call roll data
+    GetRoll();
+  }, [0]);
+  const GetUserData = () => {
     fetch('https://localhost:7056/api/User')
       .then((res) => res.json())
       .then((result) => {
@@ -131,18 +352,23 @@ const Home = () => {
         });
         setRows(result);
       });
-    //call roll data
+  };
+  const GetRoll = () => {
     rollData().then((result) => {
       //console.log('data', result);
       // const options = result.map((d) => ({
       //   value: d.roleId,
       //   label: d.roleName,
       // }));
+      result.map((d) => {
+        SelectOptions.push(d);
+      });
+      //const [SelectOptions] = [...result];
       setSelectOptions(result);
     });
-  }, [0]);
-  console.log('data', SelectOptions);
-  //Role Modal
+  };
+  console.log('select Option value', SelectOptions);
+  //User Modal
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -156,65 +382,22 @@ const Home = () => {
   const dialogHandleClose = () => {
     setdialogOpen(false);
   };
-  const dialogHandleOpen = () => {
+  const dialogHandleOpen = (param) => {
+    deleteHandler(param);
     setdialogOpen(true);
   };
-  //View Role Modal
+  //View User Modal
   const [viewOpen, setviewOpen] = React.useState(false);
 
-  const viewHandleOpen = () => {
+  const viewHandleOpen = (param) => {
+    setRow(param.row);
     setviewOpen(true);
   };
 
   const viewHandleClose = () => {
     setviewOpen(false);
   };
-  //Permision Modal
-  const [PermissionOpen, setPermissionOpen] = React.useState(false);
 
-  const PermissionhandleClickOpen = () => {
-    setPermissionOpen(true);
-  };
-
-  const PermissionhandleClose = () => {
-    setPermissionOpen(false);
-  };
-  //tagged collection
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const [value, setValue] = React.useState('');
-
-  const tagged = [];
-  const [tags, setTags] = React.useState([]);
-
-  const handleTagChange = (tag) => {
-    console.log(tag);
-    setTags((oldtag) => [...oldtag, tag]);
-    setAnchorEl(null);
-  };
-  console.log(tags);
-  tagged.push('Dashboard');
-  tagged.push('Role Creation');
-  tagged.push('User Creation');
-  tagged.push('Connection');
-  tagged.push('Notification');
-  tagged.push('Setup');
-  tagged.push('Source');
-  tagged.push('Application');
-  tagged.push('Insight');
-  tagged.push('Job Creation');
-  tagged.push('Tags');
-  tagged.push('Fields');
-
-  const handleTaggedChange = (event) => {
-    if (event.key == 'Enter') {
-      setValue(event.nativeEvent.target.value);
-      setAnchorEl(event.currentTarget);
-    }
-  };
-  const taggedOpen = Boolean(anchorEl);
-  const handleTaggedClose = () => {
-    setAnchorEl(null);
-  };
   const id = open ? 'simple-popover' : undefined;
   return (
     <>
@@ -293,42 +476,17 @@ const Home = () => {
           </Grid>
         </div>
       </Box>
-      <Popover
-        id={id}
-        open={taggedOpen}
-        anchorEl={anchorEl}
-        onClose={handleTaggedClose}
-        anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'left',
-        }}
-      >
-        <Box
-          sx={{
-            p: 2,
-            bgcolor: 'background.default',
-            display: 'grid',
-            gridTemplateColumns: { md: '1fr' },
-            gridTemplateRows: { md: '1fr' },
-            cursor: 'pointer',
-            gap: 2,
-          }}
-        >
-          {tagged.map((tag) => (
-            <paperItem
-              key={tag}
-              elevation={tag}
-              onClick={() => handleTagChange(tag)}
-            >
-              {tag}
-            </paperItem>
-          ))}
-        </Box>
-      </Popover>
+
       <MatDialog
         open={open}
         title="User"
         handleClose={handleClose}
+        isSubmitDisable={btnDisabled}
+        onHandleClick={
+          row.userId === '3fa85f64-5717-4562-b3fc-2c963f66afa6'
+            ? submitHandler
+            : UpdateHandler
+        }
         isAction="true"
         isCancel="true"
         isSubmit="true"
@@ -344,60 +502,105 @@ const Home = () => {
             autoComplete="off"
           >
             <div>
-              <TextField
-                id="outlined-password-input"
-                label="User Name"
-                type="Text"
-                value={userName}
-                onChange={(e) => setUserName(e.target.value)}
-              />
+              {validationUserName ? (
+                <TextField
+                  error
+                  id="outlined-error"
+                  label="User Name"
+                  type="Text"
+                  value={UserName}
+                  onInput={(e) => onUserNameChange(e.target.value)}
+                />
+              ) : (
+                <TextField
+                  id="outlined-password-input"
+                  label="User Name"
+                  type="Text"
+                  value={UserName}
+                  onInput={(e) => onUserNameChange(e.target.value)}
+                />
+              )}
+              {validationFirstName ? (
+                <TextField
+                  error
+                  id="outlined-error"
+                  label="First Name"
+                  type="Text"
+                  value={FirstName}
+                  onInput={(e) => onUserFirstName(e.target.value)}
+                />
+              ) : (
+                <TextField
+                  id="outlined-password-input"
+                  label="First Name"
+                  type="Text"
+                  value={FirstName}
+                  onInput={(e) => onUserFirstName(e.target.value)}
+                />
+              )}
+              {validationLastName ? (
+                <TextField
+                  error
+                  id="outlined-error"
+                  label="Last Name"
+                  type="Text"
+                  value={LastName}
+                  onInput={(e) => onUserLastNameChange(e.target.value)}
+                />
+              ) : (
+                <TextField
+                  id="outlined-password-input"
+                  label="Last Name"
+                  type="Text"
+                  value={LastName}
+                  onInput={(e) => onUserLastNameChange(e.target.value)}
+                />
+              )}
+              {validationEmail ? (
+                <TextField
+                  error
+                  id="outlined-error"
+                  label="Email"
+                  type="Text"
+                  value={Email}
+                  onInput={(e) => onEmailChange(e.target.value)}
+                />
+              ) : (
+                <TextField
+                  id="outlined-password-input"
+                  label="Email"
+                  type="Text"
+                  value={Email}
+                  onInput={(e) => onEmailChange(e.target.value)}
+                />
+              )}
 
-              <TextField
-                id="outlined-password-input"
-                label="First Name"
-                type="Text"
-              />
-
-              <TextField
-                id="outlined-password-input"
-                label="Last Name"
-                type="Text"
-              />
-
-              <TextField
-                id="outlined-password-input"
-                label="Email"
-                type="Text"
-              />
               <TextField
                 id="outlined-password-input"
                 label="Department"
                 type="Text"
+                value={Department}
+                onInput={(e) => onDepartmentChange(e.target.value)}
               />
-              {/* <Select options={SelectOptions} /> */}
+
               <FormControl fullWidth>
-                <InputLabel variant="standard" htmlFor="uncontrolled-native">
-                  Role Name
-                </InputLabel>
                 <NativeSelect
                   defaultValue={30}
                   inputProps={{
-                    name: 'role',
+                    name: 'User',
                     id: 'uncontrolled-native',
                   }}
+                  onChange={(e) => onRoleIdChange(e.target.value)}
                 >
-                  <>
-                    {SelectOptions.map((rol) => {
-                      <option value={rol.roleId}>{rol.roleName}</option>;
-                    })}
-                  </>
-                  {/* <option value={20}>Twenty</option>
-                  <option value={30}>Thirty</option> */}
+                  {SelectOptions.map((rol) => {
+                    return <option value={rol.roleId}>{rol.roleName}</option>;
+                  })}
                 </NativeSelect>
               </FormControl>
+
               {/* <TextField
                 id="outlined-password-input"
-                label="User Role"
+                label="User User"
                 type="Text"
               /> */}
             </div>
@@ -406,7 +609,7 @@ const Home = () => {
       </MatDialog>
       <MatDialog
         open={viewOpen}
-        title="Role"
+        title="User"
         handleClose={viewHandleClose}
         isAction="true"
         isCancel="true"
@@ -414,61 +617,28 @@ const Home = () => {
       >
         <Box component="form" noValidate autoComplete="off">
           <Typography className="text-row">
-            <label>Role Name</label> Role1
+            <label>User Name</label>
+            {row && row.userName}
           </Typography>
 
           <Typography className="text-row">
-            <label>Role Description</label> Role1
+            <label>First Name</label> {row && row.firstName}
+          </Typography>
+          <Typography className="text-row">
+            <label>Last Name</label> {row && row.lastName}
+          </Typography>
+          <Typography className="text-row">
+            <label>Email</label> {row && row.email}
+          </Typography>
+          <Typography className="text-row">
+            <label>Department</label> {row && row.department}
+          </Typography>
+          <Typography className="text-row">
+            <label>Role Name</label> {row && row.roleName}
           </Typography>
         </Box>
       </MatDialog>
-      <MatDialog
-        open={PermissionOpen}
-        title="Permission"
-        handleClose={PermissionhandleClose}
-        isAction="true"
-        isCancel="true"
-        isSubmit="true"
-      >
-        <Typography className="text-row">
-          <label>Role Name</label> <span>Power User | BD Team</span>
-        </Typography>
 
-        <Typography className="text-row">
-          <label>Role Description</label>{' '}
-          <span>Access to Everything (excl. Configuration, Manage</span>
-        </Typography>
-
-        <Typography className="text-row">
-          <label>Permission</label>
-        </Typography>
-
-        <Box
-          className="box-tag"
-          component="form"
-          sx={{
-            '& > :not(style)': { m: 1 },
-          }}
-          noValidate
-          autoComplete="off"
-        >
-          <TextareaAutosize
-            aria-label="minimum height"
-            minRows={3}
-            placeholder="Minimum 3 rows"
-            style={{ width: 200 }}
-            onKeyDown={handleTaggedChange}
-          />
-          {tags.map((tag) => (
-            <Item key={tag} className="box-btn tag">
-              <IconButton>
-                <CloseIcon />
-              </IconButton>
-              {tag}
-            </Item>
-          ))}
-        </Box>
-      </MatDialog>
       <Dialog
         open={dialogOpen}
         onClose={dialogHandleClose}
@@ -484,10 +654,14 @@ const Home = () => {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button autoFocus onClick={handleClose} className="box-btn left">
+          <Button
+            autoFocus
+            onClick={dialogHandleClose}
+            className="box-btn left"
+          >
             close
           </Button>
-          <Button onClick={handleClose} className="box-btn ">
+          <Button onClick={deleteHandleClose} className="box-btn ">
             Delete
           </Button>
         </DialogActions>
