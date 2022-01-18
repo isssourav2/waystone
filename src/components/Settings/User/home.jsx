@@ -32,6 +32,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import MenuItem from '@mui/material/MenuItem';
 import NativeSelect from '@mui/material/NativeSelect';
+import Select from '@mui/material/Select';
 import axios from 'axios';
 import '../../../style/style.css';
 import { MuiDataGrid } from '../../../DataTable';
@@ -94,6 +95,7 @@ const Home = () => {
   };
   const EditHandler = (param) => {
     setRow(param);
+    setselectRole(param.roleId);
     setUserName(param.userName);
     setFirstName(param.firstName);
     setLastName(param.lastName);
@@ -168,6 +170,7 @@ const Home = () => {
     setLastName('');
     setEmail('');
     setDepartment('');
+    setselectRole(0);
     setIsActive(false);
     setEntryDate(new Date());
     setUpdateDate(new Date());
@@ -247,6 +250,8 @@ const Home = () => {
     //Role.roleName = val;
   };
   const onRoleIdChange = (val) => {
+    debugger;
+    setselectRole(val);
     setRoleId(val);
   };
   const onIsActiveChange = (val) => {
@@ -336,6 +341,7 @@ const Home = () => {
   // const [userName, setUserName] = React.useState('');
 
   const [SelectOptions, setSelectOptions] = React.useState([]);
+  const [selectRole, setselectRole] = React.useState(0);
   const [row, setRow] = React.useState({ userId: 0 });
 
   React.useEffect(() => {
@@ -361,11 +367,12 @@ const Home = () => {
       //   value: d.roleId,
       //   label: d.roleName,
       // }));
-      result.map((d) => {
-        SelectOptions.push(d);
-      });
-      //const [SelectOptions] = [...result];
-      setSelectOptions(result);
+      // result.map((d) => {
+      //   SelectOptions.push(d);
+      // });
+      const Options = [{ roleId: 0, roleName: 'Select User' }, ...result];
+      //console.log('options value', Options);
+      setSelectOptions(Options);
     });
   };
   console.log('select Option value', SelectOptions);
@@ -373,7 +380,7 @@ const Home = () => {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
-    row.userId='3fa85f64-5717-4562-b3fc-2c963f66afa6';
+    row.userId = '3fa85f64-5717-4562-b3fc-2c963f66afa6';
     setOpen(true);
   };
   const handleClose = () => {
@@ -587,18 +594,28 @@ const Home = () => {
               />
 
               <FormControl fullWidth>
-                <NativeSelect
+                {/* <NativeSelect
                   defaultValue={30}
                   inputProps={{
                     name: 'User',
                     id: 'uncontrolled-native',
                   }}
                   onChange={(e) => onRoleIdChange(e.target.value)}
+                > */}
+                <Select
+                  value={selectRole}
+                  onChange={(e) => onRoleIdChange(e.target.value)}
                 >
                   {SelectOptions.map((rol) => {
-                    return <option value={rol.roleId}>{rol.roleName}</option>;
+                    return (
+                      <MenuItem value={rol.roleId}>{rol.roleName}</MenuItem>
+                    );
                   })}
-                </NativeSelect>
+                </Select>
+                {/* {SelectOptions.map((rol) => {
+                  return <option value={rol.roleId}>{rol.roleName}</option>;
+                })} */}
+                {/* </NativeSelect> */}
               </FormControl>
 
               {/* <TextField
