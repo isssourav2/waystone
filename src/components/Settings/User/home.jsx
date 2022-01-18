@@ -101,6 +101,7 @@ const Home = () => {
     setLastName(param.lastName);
     setEmail(param.email);
     setDepartment(param.department);
+    setIsActive(param.isActive);
     setRoleId(param.roleId);
     //setRole(param);
     setOpen(true);
@@ -115,7 +116,7 @@ const Home = () => {
       User.roleId = RoleId;
       User.department = Department;
       User.userId = row.userId;
-
+      User.isActive = IsActive;
       const response = UpdateUser(User);
       response.then((save) => {
         window.alert('Update Successfully done!!');
