@@ -375,6 +375,7 @@ const Home = () => {
     setOpen(true);
   };
   const handleClose = () => {
+    clearData();
     setOpen(false);
   };
   //Dialog Modal
