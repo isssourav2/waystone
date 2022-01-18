@@ -170,10 +170,9 @@ const Home = () => {
     setValidateCount(0);
     setRoleDescription('');
   };
-  //Crud operation
+
   var i = 0;
   const onRoleNameChange = (val) => {
-    debugger;
     if (val === '') {
       setvalidationRoleNameId(true);
       setValidateCount(++i);
@@ -200,6 +199,7 @@ const Home = () => {
   };
 
   const [rows, setRows] = React.useState([]);
+  //Crud operation
   const [Tagged, setTagged] = React.useState([]);
   console.log('Tag Records:', Tagged);
   // const [menuMasterTag, setMenuMasterTag] = React.useState([]);
