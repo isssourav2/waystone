@@ -74,10 +74,10 @@ const Home = () => {
 
     const response = UpdateTag(Source);
     response.then((save) => {
-      window.alert('Update Successfully done!!');
-      GetSourceData();
+      window.alert('Update Successfully done!!');      
       clearData();
       handleClose();
+      GetSourceData();
     });
   }
   };
