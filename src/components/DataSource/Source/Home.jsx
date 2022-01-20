@@ -26,61 +26,150 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Paper from '@mui/material/Paper';
+import Alert from '@mui/material/Alert';
 import Checkbox from '@mui/material/Checkbox';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
-import MenuItem from '@mui/material/MenuItem';
-import NativeSelect from '@mui/material/NativeSelect';
-import axios from 'axios';
 import '../../../style/style.css';
 import { MuiDataGrid } from '../../../DataTable';
+import axios from 'axios';
 function PaperComponent(props) {
   return <Paper {...props} />;
 }
 
+
+
+
 const Home = () => {
+
+  const submitHandler = () => {
+    if (Validation(SourceName,SourceAddress,SourceEmail,SourcePhone)){
+    Source.sourceName = SourceName;
+    Source.sourceAddress = SourceAddress;
+    Source.sourceEmail = SourceEmail;
+    Source.sourcePhone = SourcePhone;
+
+    const response = SaveSource(Source);
+    response.then((save) => {
+      console.log('reponse:', save);
+      GetSourceData();
+      window.alert('Insert Successfully done!!');
+      clearData();
+      handleClose();
+    });
+  }
+  };
+
+  const UpdateHandler = () => {
+    if (Validation(SourceName,SourceAddress,SourceEmail,SourcePhone)){
+      Source.sourceName = SourceName;
+      Source.sourceAddress = SourceAddress;
+      Source.sourceEmail = SourceEmail;
+      Source.sourcePhone = SourcePhone;
+      Source.sourceId = row.sourceId;
+      Source.entryDate = EntryDate;
+
+      console.log(Source);
+
+    const response = UpdateTag(Source);
+    response.then((save) => {
+      window.alert('Update Successfully done!!');      
+      clearData();
+      handleClose();
+      GetSourceData();
+    });
+  }
+  };
+
+  const deleteHandleClose = () => {
+
+    DeleteTag(row).then((save) => {
+      GetSourceData();
+      clearData();
+      window.alert('Delete Successfully done!!');
+      dialogHandleClose();
+    });
+  };
+
+  const EditHandler = (param) => {
+    setRow(param);
+    setSourceName(param.sourceName);
+    setSourceAddress(param.sourceAddress);
+    setSourceEmail(param.sourceEmail);
+    setSourcePhone(param.sourcePhone);
+    setEntryDate(param.entryDate);    
+    setOpen(true);
+  };
+
+
+  const onSourceNameChange = (val) => {
+    if (val === '') {
+      setvalidationSourceName(true);
+      setValidateCount(++i);
+    } else {
+      setvalidationSourceName(false);
+      setValidateCount(0);
+    }
+    setSourceName(val);
+  };
+
+  const onSourceAddressChange = (val) => {
+    if (val === '') {
+      setvalidationSourceAddress(true);
+      setValidateCount(++i);
+    } else {
+      setvalidationSourceAddress(false);
+      setValidateCount(0);
+    }
+    setSourceAddress(val);
+  };
+
+  const onSourceEmailChange = (val) => {
+    if (val === '') {
+      setvalidationSourceEmail(true);
+      setValidateCount(++i);
+    } else {
+      setvalidationSourceEmail(false);
+      setValidateCount(0);
+    }
+    setSourceEmail(val);
+  };
+
+  const onSourcePhoneChange = (val) => {
+    if (val === '') {
+      setvalidationSourcePhone(true);
+      setValidateCount(++i);
+    } else {
+      setvalidationSourcePhone(false);
+      setValidateCount(0);
+    }
+    setSourcePhone(val);
+  };
+
+  const clearData = () => {
+    row.sourceId = 0;
+    Source.sourceId = 0;
+
+    setvalidationSourceName(false);
+    setvalidationSourceAddress(false);
+    setvalidationSourceEmail(false);
+    setvalidationSourcePhone(false);
+    setSourceName('');
+    setSourceAddress('');
+    setSourceEmail('');
+    setSourcePhone('');
+
+    setValidateCount(0);
+
+  };
+
   const columns = [
-    { field: 'Name', headerName: 'Name', width: 180, editable: true },
-    {
-      field: 'Address',
-      headerName: 'Address',
-      width: 180,
-      editable: true,
-    },
-    {
-      field: 'email',
-      headerName: 'Email',
-      width: 200,
-      editable: true,
-    },
-    {
-      field: ' Phone',
-      headerName: 'Phone',
-      width: 180,
-      editable: true,
-    },
-    {
-      field: 'Contact',
-      headerName: 'Contact',
-      width: 180,
-      editable: true,
-    },
-    ,
-    // {
-    //   field: 'isActive',
-    //   headerName: 'Active',
-    //   width: 180,
-    //   renderCell: (params) => (
-    //     <strong>
-    //       {params.value === true ? (
-    //         <Checkbox checked onChange={() => console.log(params.value)} />
-    //       ) : (
-    //         <Checkbox onChange={() => console.log(params.value)} />
-    //       )}
-    //     </strong>
-    //   ),
-    // }
+    { field: 'sourceName', headerName: 'Name', width: 180, editable: true },
+    { field: 'sourceAddress', headerName: 'Address', width: 180, editable: true },
+    { field: 'sourceEmail', headerName: 'Email', width: 180, editable: true },
+    { field: 'sourcePhone', headerName: 'Phone', width: 180, editable: true },
+
     {
       field: 'actions',
       type: 'actions',
@@ -90,142 +179,157 @@ const Home = () => {
       getActions: (params) => [
         <IconButton
           className="link-tool"
-          onClick={() => console.log(params.row)}
+          onClick={() => viewHandleOpen(params)}
         >
           <RemoveRedEyeIcon />
         </IconButton>,
         <IconButton
           className="link-tool"
-          onClick={() => console.log(params.row)}
+          onClick={() => EditHandler(params.row)}
         >
           <EditIcon />
         </IconButton>,
         <IconButton
           className="link-tool"
-          onClick={() => console.log(params.row.id)}
+          onClick={() => dialogHandleOpen(params.row)}
         >
           <DeleteIcon />
         </IconButton>,
       ],
     },
   ];
-  const rows = [
-    {
-      id: 1,
-      Name: 'ALPS',
-      Address: 'Brazil',
-      Email: 'fatemah@hst.ie',
-      Phone: '0074072299',
-      Contact: '1',
-    },
-  ];
-  // const rollData = async () => {
-  //   const res = await axios.get('https://localhost:7056/api/Role');
-  //   return res.data;
-  // };
-  // const [rows, setRows] = React.useState([]);
-  // const [userName, setUserName] = React.useState('');
-  // const [SelectOptions, setSelectOptions] = React.useState([]);
-  // const [selRole, setselRole] = React.useState(0);
-  const handleRoleChange = (event) => {
-    //setSelRole(event.target.value);
+
+  var i = 0;
+  const [validateCount, setValidateCount] = React.useState(1);
+  const [rows, setRows] = React.useState([]);
+  const [row, setRow] = React.useState({ sourceId: 0 });
+  const [Source, setSource] = React.useState({
+    sourceId: 0,
+    sourceName: '',
+    sourceAddress: '',
+    sourceEmail: '',
+    sourcePhone: '',
+    entryDate:null,
+  });
+
+  const [EntryDate, setEntryDate] = React.useState('');
+  const [SourceName, setSourceName] = React.useState('');
+  const [SourceAddress, setSourceAddress] = React.useState('');
+  const [SourceEmail, setSourceEmail] = React.useState('');
+  const [SourcePhone, setSourcePhone] = React.useState('');
+
+  const GetSourceData = () => {
+    fetch('https://localhost:7056/api/Source')
+      .then((res) => res.json())
+      .then((result) => {
+        //console.log(result);
+        result.map((res) => {
+          res['id'] = res.sourceId;
+        });
+        setRows(result);
+      });
+  };
+  React.useEffect(() => {
+    GetSourceData();
+  }, [0]);
+
+
+
+
+  const SaveSource = async (source) => {
+    const res = await axios.post('https://localhost:7056/api/Source', source);
+    return res.data;
+  };
+  const UpdateTag = async (source) => {
+    const res = await axios.put('https://localhost:7056/api/Source', source);
+    return res.data;
+  };
+  const DeleteTag = async (source) => {
+    const res = await axios.delete(
+      `https://localhost:7056/api/Source/${source.sourceId}`
+    );
+    return res.data;
   };
 
-  // React.useEffect(() => {
-  //   fetch('https://localhost:7056/api/User')
-  //     .then((res) => res.json())
-  //     .then((result) => {
-  //       //console.log(result);
-  //       result.map((res) => {
-  //         res['id'] = res.userId;
-  //       });
-  //       setRows(result);
-  //     });
-  //   //call roll data
-  //   rollData().then((result) => {
-  //     //console.log('data', result);
-  //     // const options = result.map((d) => ({
-  //     //   value: d.roleId,
-  //     //   label: d.roleName,
-  //     // }));
-  //     setSelectOptions(result);
-  //   });
-  // }, [0]);
 
-  //console.log('data', SelectOptions);
-  //Role Modal
+
+  
   const [open, setOpen] = React.useState(false);
+
+  const [validationSourceName, setvalidationSourceName] = React.useState(false);
+  const [validationSourceAddress, setvalidationSourceAddress] = React.useState(false);
+  const [validationSourceEmail, setvalidationSourceEmail] = React.useState(false);
+  const [validationSourcePhone, setvalidationSourcePhone] = React.useState(false);
+  
 
   const handleClickOpen = () => {
     setOpen(true);
   };
   const handleClose = () => {
     setOpen(false);
+    clearData();
   };
   //Dialog Modal
   const [dialogOpen, setdialogOpen] = React.useState(false);
   const dialogHandleClose = () => {
     setdialogOpen(false);
+    clearData();
   };
-  const dialogHandleOpen = () => {
+  const dialogHandleOpen = (param) => {
+    deleteHandler(param);
     setdialogOpen(true);
   };
   //View Role Modal
   const [viewOpen, setviewOpen] = React.useState(false);
 
-  const viewHandleOpen = () => {
+  const viewHandleOpen = (param) => {
+    setRow(param.row);
     setviewOpen(true);
   };
 
   const viewHandleClose = () => {
-    setviewOpen(false);
-  };
-  //Permision Modal
-  const [PermissionOpen, setPermissionOpen] = React.useState(false);
-
-  const PermissionhandleClickOpen = () => {
-    setPermissionOpen(true);
+    setviewOpen(false);    
   };
 
-  const PermissionhandleClose = () => {
-    setPermissionOpen(false);
+  const deleteHandler = (param) => {
+    setRow(param);
   };
-  //tagged collection
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const [value, setValue] = React.useState('');
 
-  const tagged = [];
-  const [tags, setTags] = React.useState([]);
-
-  const handleTagChange = (tag) => {
-    console.log(tag);
-    setTags((oldtag) => [...oldtag, tag]);
-    setAnchorEl(null);
-  };
-  console.log(tags);
-  tagged.push('Dashboard');
-  tagged.push('Role Creation');
-  tagged.push('User Creation');
-  tagged.push('Connection');
-  tagged.push('Notification');
-  tagged.push('Setup');
-  tagged.push('Source');
-  tagged.push('Application');
-  tagged.push('Insight');
-  tagged.push('Job Creation');
-  tagged.push('Tags');
-  tagged.push('Fields');
-
-  const handleTaggedChange = (event) => {
-    if (event.key == 'Enter') {
-      setValue(event.nativeEvent.target.value);
-      setAnchorEl(event.currentTarget);
+  const Validation = (SourceName,SourceAddress,SourceEmail,SourcePhone) => {
+    let regEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    
+    if (SourceName == '') {
+      setvalidationSourceName(true);
+      setValidateCount(++i);
+      return false;
+    } else if (SourceAddress == '') {
+      setvalidationSourceAddress(true);
+      setValidateCount(++i);
+      return false;
+    } else if (SourceEmail == '') {
+      setvalidationSourceEmail(true);
+      setValidateCount(++i);
+      return false;
+    }else if(!regEmail.test(SourceEmail)){
+      setvalidationSourceEmail(true);
+      setValidateCount(++i);
+      return false;
+    }
+    
+    else if (SourcePhone == '') {
+      setvalidationSourcePhone(true);
+      setValidateCount(++i);
+      return false;
+    } else {
+      setValidateCount(0);
+      return true;
     }
   };
-  const taggedOpen = Boolean(anchorEl);
-  const handleTaggedClose = () => {
-    setAnchorEl(null);
-  };
+
+  const [value, setValue] = React.useState('');
+  const sourced = [];
+  const [sources, setSources] = React.useState([]);
+
   const id = open ? 'simple-popover' : undefined;
   return (
     <>
@@ -247,7 +351,7 @@ const Home = () => {
                     size="small"
                     onClick={handleClickOpen}
                   >
-                    <AddIcon /> Create
+                    <AddIcon /> Create Source
                   </Button>
                 </Box>
               </Grid>
@@ -264,11 +368,11 @@ const Home = () => {
             <Grid container spacing={2}>
               <Grid item xs={10}></Grid>
               <Grid item xs={2}>
-                <div className="search-box">
+              <div className="search-box">
                   <TextField
                     style={{ backgroundColor: 'white', height: '1em' }}
                     id="filled-basic"
-                    placeholder="Filled"
+                    placeholder="Search"
                     variant="filled"
                   />
                   <SearchIcon style={{ textAlign: 'right' }} />
@@ -280,156 +384,23 @@ const Home = () => {
           <Grid item xs={12}>
             <Grid container spacing={2}>
               <Grid item xs={12}>
-                {
-                  <MuiDataGrid
-                    rows={rows}
-                    columns={columns}
-                    checkboxSelection="true"
-                    disableSelectionOnClick="true"
-                  />
-                }
-                {/* <MuiDataGrid /> */}
+                {<MuiDataGrid rows={rows} columns={columns} />}
               </Grid>
-
-              {/* <Grid item xs={9}>
-                <Grid className="pagination-count">
-                  <Typography sx={{ textAlign: 'left' }} variant="h6">
-                    {' '}
-                    showing 1 to 5
-                  </Typography>{' '}
-                </Grid>
-              </Grid>
-              <Grid item xs={3}>
-                <Grid className="pagination-box">
-                  {' '}
-                  <Stack>
-                    <Pagination count={10} shape="rounded" />
-                  </Stack>
-                </Grid>
-              </Grid> */}
             </Grid>
           </Grid>
         </div>
       </Box>
-      <Popover
-        id={id}
-        open={taggedOpen}
-        anchorEl={anchorEl}
-        onClose={handleTaggedClose}
-        anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'left',
-        }}
-      >
-        <Box
-          sx={{
-            p: 2,
-            bgcolor: 'background.default',
-            display: 'grid',
-            gridTemplateColumns: { md: '1fr' },
-            gridTemplateRows: { md: '1fr' },
-            cursor: 'pointer',
-            gap: 2,
-          }}
-        >
-          {tagged.map((tag) => (
-            <paperItem
-              key={tag}
-              elevation={tag}
-              onClick={() => handleTagChange(tag)}
-            >
-              {tag}
-            </paperItem>
-          ))}
-        </Box>
-      </Popover>
+
       <MatDialog
         open={open}
         title="Source"
         handleClose={handleClose}
+        onHandleClick={row.sourceId === 0 ? submitHandler : UpdateHandler}
         isAction="true"
         isCancel="true"
         isSubmit="true"
       >
-        <Box component="form" noValidate autoComplete="off"></Box>
-        <Box component="form" noValidate autoComplete="off">
-          <Box
-            component="form"
-            sx={{
-              '& .MuiTextField-root': { m: 1, width: '25ch' },
-            }}
-            noValidate
-            autoComplete="off"
-          >
-            <div>
-              <TextField
-                id="outlined-password-input"
-                label="Source Name"
-                type="Text"
-              />
-
-              <TextareaAutosize
-                id="outlined-password-input"
-                label="Source Name"
-                placeholder="Source Name"
-              />
-
-              <TextField
-                id="outlined-password-input"
-                label="Email"
-                type="Email"
-              />
-
-              <TextField
-                id="outlined-password-input"
-                label="Phone"
-                type="Text"
-              />
-            </div>
-          </Box>
-        </Box>
-      </MatDialog>
-      <MatDialog
-        open={viewOpen}
-        title="Role"
-        handleClose={viewHandleClose}
-        isAction="true"
-        isCancel="true"
-        isSubmit="true"
-      >
-        <Box component="form" noValidate autoComplete="off">
-          <Typography className="text-row">
-            <label>Role Name</label> Role1
-          </Typography>
-
-          <Typography className="text-row">
-            <label>Role Description</label> Role1
-          </Typography>
-        </Box>
-      </MatDialog>
-      <MatDialog
-        open={PermissionOpen}
-        title="Permission"
-        handleClose={PermissionhandleClose}
-        isAction="true"
-        isCancel="true"
-        isSubmit="true"
-      >
-        <Typography className="text-row">
-          <label>Role Name</label> <span>Power User | BD Team</span>
-        </Typography>
-
-        <Typography className="text-row">
-          <label>Role Description</label>{' '}
-          <span>Access to Everything (excl. Configuration, Manage</span>
-        </Typography>
-
-        <Typography className="text-row">
-          <label>Permission</label>
-        </Typography>
-
         <Box
-          className="box-tag"
           component="form"
           sx={{
             '& > :not(style)': { m: 1 },
@@ -437,23 +408,143 @@ const Home = () => {
           noValidate
           autoComplete="off"
         >
-          <TextareaAutosize
-            aria-label="minimum height"
-            minRows={3}
-            placeholder="Minimum 3 rows"
-            style={{ width: 200 }}
-            onKeyDown={handleTaggedChange}
-          />
-          {tags.map((tag) => (
-            <Item key={tag} className="box-btn tag">
-              <IconButton>
-                <CloseIcon />
-              </IconButton>
-              {tag}
-            </Item>
-          ))}
+{validationSourceName ? (
+            <TextField
+              error
+              id="outlined-error"
+              label="Name"
+              type="Text"
+              value={SourceName}
+              onInput={(e) => onSourceNameChange(e.target.value)}
+            />
+          ) : (
+            <TextField
+              id="outlined-password-input"
+              label="Name"
+              type="Text"
+              value={SourceName}
+              onInput={(e) => onSourceNameChange(e.target.value)}
+            />
+          )}
+
         </Box>
+
+
+        <Box
+          component="form"
+          sx={{
+            '& > :not(style)': { m: 1 },
+          }}
+          noValidate
+          autoComplete="off"
+        >
+{validationSourceAddress ? (
+            <TextField
+              error
+              id="outlined-error"
+              label="Address"
+              type="Text"
+              value={SourceAddress}
+              onInput={(e) => onSourceAddressChange(e.target.value)}
+            />
+          ) : (
+            <TextField
+              id="outlined-password-input"
+              label="Address"
+              type="Text"
+              value={SourceAddress}
+              onInput={(e) => onSourceAddressChange(e.target.value)}
+            />
+          )}
+
+        </Box>
+
+        <Box
+          component="form"
+          sx={{
+            '& > :not(style)': { m: 1 },
+          }}
+          noValidate
+          autoComplete="off"
+        >
+{validationSourceEmail ? (
+            <TextField
+              error
+              id="outlined-error"
+              label="Email"
+              type="Text"
+              value={SourceEmail}
+              onInput={(e) => onSourceEmailChange(e.target.value)}
+            />
+          ) : (
+            <TextField
+              id="outlined-password-input"
+              label="Email"
+              type="Text"
+              value={SourceEmail}
+              onInput={(e) => onSourceEmailChange(e.target.value)}
+            />
+          )}
+
+        </Box>
+
+        <Box
+          component="form"
+          sx={{
+            '& > :not(style)': { m: 1 },
+          }}
+          noValidate
+          autoComplete="off"
+        >
+{validationSourcePhone ? (
+            <TextField
+              error
+              id="outlined-error"
+              label="Phone"
+              type="Text"
+              value={SourcePhone}
+              onInput={(e) => onSourcePhoneChange(e.target.value)}
+            />
+          ) : (
+            <TextField
+              id="outlined-password-input"
+              label="Phone"
+              type="Text"
+              value={SourcePhone}
+              onInput={(e) => onSourcePhoneChange(e.target.value)}
+            />
+          )}
+
+        </Box>
+
+
       </MatDialog>
+      <MatDialog
+        open={viewOpen}
+        title="Source"
+        handleClose={viewHandleClose}
+      >
+        <Box component="form" noValidate autoComplete="off">
+
+          <Typography className="text-row">
+            <label>Name</label> {row && row.sourceName}
+          </Typography>
+          <Typography className="text-row">
+            <label>Address</label> {row && row.sourceAddress}
+          </Typography>
+          <Typography className="text-row">
+            <label>Email</label> {row && row.sourceEmail}
+          </Typography>
+          <Typography className="text-row">
+            <label>Phone</label> {row && row.sourcePhone}
+          </Typography>
+
+
+
+        </Box>
+
+      </MatDialog>
+
       <Dialog
         open={dialogOpen}
         onClose={dialogHandleClose}
@@ -469,10 +560,14 @@ const Home = () => {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button autoFocus onClick={handleClose} className="box-btn left">
+          <Button
+            autoFocus
+            onClick={dialogHandleClose}
+            className="box-btn-cancel"
+          >
             close
           </Button>
-          <Button onClick={handleClose} className="box-btn ">
+          <Button onClick={deleteHandleClose} className="btn">
             Delete
           </Button>
         </DialogActions>

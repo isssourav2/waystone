@@ -492,7 +492,7 @@ function Header() {
                   onClick={() => handleChange(6)}
                   selected={SubActiveValue === 6}
                 >
-                  <ListItemText primary="Calender" />
+                  <ListItemText primary="Calendar" />
                 </ListItem>
               </List>
               <List component="ul" disablePadding>

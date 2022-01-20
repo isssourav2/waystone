@@ -65,10 +65,10 @@ const Home = () => {
 
     const response = UpdateTag(Tag);
     response.then((save) => {
-      window.alert('Update Successfully done!!');
-      GetTagData();
+      window.alert('Update Successfully done!!');      
       clearData();
       handleClose();
+      GetTagData();
     });
   }
   };
