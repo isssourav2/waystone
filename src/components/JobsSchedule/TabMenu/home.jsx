@@ -83,7 +83,7 @@ const Home = () => {
         >
           <Tab label="Jobs" {...a11yProps(0)} />
           <Tab label="Schedules" {...a11yProps(1)} />
-          <Tab label="Calender" {...a11yProps(2)} />
+          <Tab label="Calendar" {...a11yProps(2)} />
           <Tab label="Application" {...a11yProps(3)} />
           <Tab label="Application Template" {...a11yProps(4)} />
         </Tabs>
@@ -96,7 +96,7 @@ const Home = () => {
         Scheduled
       </TabPanel>
       <TabPanel value={tabMenuOpenIndex} index={2} className="frame">
-        Calender
+        Calendar
       </TabPanel>
       <TabPanel value={tabMenuOpenIndex} index={3} className="frame">
         <Application />

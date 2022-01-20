@@ -471,7 +471,7 @@ const Home = () => {
                   <TextField
                     style={{ backgroundColor: 'white', height: '1em' }}
                     id="filled-basic"
-                    placeholder="Filled"
+                    placeholder="Search"
                     variant="filled"
                   />
                   <SearchIcon style={{ textAlign: 'right' }} />

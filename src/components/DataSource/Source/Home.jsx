@@ -296,6 +296,8 @@ const Home = () => {
   };
 
   const Validation = (SourceName,SourceAddress,SourceEmail,SourcePhone) => {
+    let regEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    
     if (SourceName == '') {
       setvalidationSourceName(true);
       setValidateCount(++i);
@@ -308,7 +310,13 @@ const Home = () => {
       setvalidationSourceEmail(true);
       setValidateCount(++i);
       return false;
-    } else if (SourcePhone == '') {
+    }else if(!regEmail.test(SourceEmail)){
+      setvalidationSourceEmail(true);
+      setValidateCount(++i);
+      return false;
+    }
+    
+    else if (SourcePhone == '') {
       setvalidationSourcePhone(true);
       setValidateCount(++i);
       return false;
@@ -364,7 +372,7 @@ const Home = () => {
                   <TextField
                     style={{ backgroundColor: 'white', height: '1em' }}
                     id="filled-basic"
-                    placeholder="Filled"
+                    placeholder="Search"
                     variant="filled"
                   />
                   <SearchIcon style={{ textAlign: 'right' }} />
@@ -404,7 +412,7 @@ const Home = () => {
             <TextField
               error
               id="outlined-error"
-              label="Source"
+              label="Name"
               type="Text"
               value={SourceName}
               onInput={(e) => onSourceNameChange(e.target.value)}
@@ -412,7 +420,7 @@ const Home = () => {
           ) : (
             <TextField
               id="outlined-password-input"
-              label="Source"
+              label="Name"
               type="Text"
               value={SourceName}
               onInput={(e) => onSourceNameChange(e.target.value)}
