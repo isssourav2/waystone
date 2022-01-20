@@ -215,6 +215,22 @@ button.css-78trlr-MuiButtonBase-root-MuiIconButton-root
   position: relative;
 }
 
+
+.css-h4y409-MuiList-root li .icon-next{
+  position:absolute;
+  right: -15px;
+  top: 10px;
+}
+
+
+.css-h4y409-MuiList-root li .icon-next-down{
+  position:absolute;
+  right: -15px;
+  top: 10px;
+}
+
+
+
 .css-h4y409-MuiList-root a {
   color: #252a36;
   font-size: 13px;
@@ -1043,7 +1059,7 @@ div#root .MuiBox-root.css-0 {
 }
 
 
-.css-11o2879-MuiDrawer-docked .menu-link ul.MuiList-root,.css-11o2879-MuiDrawer-docked .icon-next{
+.css-11o2879-MuiDrawer-docked .menu-link ul.MuiList-root,.css-11o2879-MuiDrawer-docked .icon-next,.css-11o2879-MuiDrawer-docked .menu-link ul.MuiList-root,.css-11o2879-MuiDrawer-docked .icon-next-down{
   display:none;
 } 
 
@@ -1120,6 +1136,10 @@ div#root .MuiBox-root.css-0 {
   color: #1f3038 !important;
 }
 
+.menu-link li.m-active .css-i4bv87-MuiSvgIcon-root,.menu-link li:hover,.menu-link li:hover .css-i4bv87-MuiSvgIcon-root,.menu-link li.m-active span,.menu-link li:hover span{
+  color: #0bb202;
+}
+
 span.count {
   border: #1f3038 1px solid;
   padding: 5px;
@@ -1188,7 +1208,7 @@ nav.MuiList-root {
   background-color: #fff !important;
 }
 
-.modelPopUp .MuiDialog-paper input[type='text'],.modelPopUp .MuiDialog-paper input[type='Email'] {
+.modelPopUp .MuiDialog-paper input[type='text'],.modelPopUp .MuiDialog-paper input[type='Email']{
   font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
   font-size: 14px;
   width: 100%;
@@ -1197,6 +1217,12 @@ nav.MuiList-root {
   margin: 0 0 0px 0;
   border-radius: 10px !important;
 }
+
+
+.modelPopUp .css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input.MuiSelect-select{
+  padding: 6px 10px;
+  min-height: 7px;
+} 
 
 .modelPopUp .css-viou3o-MuiAutocomplete-root .MuiOutlinedInput-root {
   padding: 10px;
