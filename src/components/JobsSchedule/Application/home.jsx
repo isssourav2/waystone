@@ -13,6 +13,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import { DataGrid, GridRowsProp, GridColDef } from '@mui/x-data-grid';
 import TextField from '@mui/material/TextField';
 import MatDialog from '../../Common/MatDialog';
+import DataTable from './DataTable.jsx';
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import Input from '@mui/material/Input';
@@ -24,35 +25,122 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
+import Paper from '@mui/material/Paper';
+import Alert from '@mui/material/Alert';
 import Checkbox from '@mui/material/Checkbox';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
-
-import Autocomplete from '@mui/material/Autocomplete';
-
-import { MuiDataGrid } from '../../../DataTable';
-import Paper from '@mui/material/Paper';
 import '../../../style/style.css';
+import { MuiDataGrid } from '../../../DataTable';
+import axios from 'axios';
 function PaperComponent(props) {
   return <Paper {...props} />;
 }
+
+
+
+
 const Home = () => {
+
+  const submitHandler = () => {
+    if (Validation(ApplicationName,ApplicationDescription)){
+      Application.applicationName = ApplicationName;
+      Application.applicationDescription = ApplicationDescription;
+
+    const response = SaveApplication(Application);
+    response.then((save) => {
+      console.log('reponse:', save);
+      GetApplicationData();
+      window.alert('Insert Successfully done!!');
+      clearData();
+      handleClose();
+    });
+  }
+  };
+
+  const UpdateHandler = () => {
+    if (Validation(ApplicationName,ApplicationDescription)){
+      Application.applicationName = ApplicationName;
+      Application.applicationDescription = ApplicationDescription;
+      Application.applicationId = row.applicationId;
+      Application.entryDate = EntryDate;
+
+      console.log(Application);
+
+    const response = UpdateApplication(Application);
+    response.then((save) => {
+      window.alert('Update Successfully done!!');      
+      clearData();
+      handleClose();
+      GetApplicationData();
+    });
+  }
+  };
+
+  const deleteHandleClose = () => {
+
+    DeleteApplication(row).then((save) => {
+      GetApplicationData();
+      clearData();
+      window.alert('Delete Successfully done!!');
+      dialogHandleClose();
+    });
+  };
+
+  const EditHandler = (param) => {
+
+    setRow(param);
+    setApplicationName(param.applicationName);
+    setApplicationDescription(param.applicationDescription);
+    setEntryDate(param.entryDate);  
+    setApplicationId(param.applicationId);  
+    setOpen(true);
+  };
+
+
+  const onApplicationNameChange = (val) => {
+    if (val === '') {
+      setvalidationApplicationName(true);
+      setValidateCount(++i);
+    } else {
+      setvalidationApplicationName(false);
+      setValidateCount(0);
+    }
+    setApplicationName(val);
+  };
+
+  const onApplicationDescriptionChange = (val) => {
+    if (val === '') {
+      setvalidationApplicationDescription(true);
+      setValidateCount(++i);
+    } else {
+      setvalidationApplicationDescription(false);
+      setValidateCount(0);
+    }
+    setApplicationDescription(val);
+  };
+
+  
+
+  const clearData = () => {
+    row.applicationId = 0;
+    Application.applicationId = 0;
+
+    setvalidationApplicationName(false);
+    setvalidationApplicationDescription(false);
+    setApplicationName('');
+    setApplicationDescription('');
+    setApplicationId('');
+
+    setValidateCount(0);
+
+  };
+
   const columns = [
-    {
-      field: 'userName',
-      headerName: 'Application Name',
-      width: 600,
-      editable: true,
-    },
-
-    {
-      field: 'lastName',
-      headerName: 'Application Description',
-      width: 300,
-      editable: true,
-    },
-
+    { field: 'applicationName', headerName: 'Name', width: 180, editable: true },
+    { field: 'applicationDescription', headerName: 'Description', width: 180, editable: true },
+    
     {
       field: 'actions',
       type: 'actions',
@@ -62,19 +150,19 @@ const Home = () => {
       getActions: (params) => [
         <IconButton
           className="link-tool"
-          onClick={() => console.log(params.row)}
+          onClick={() => viewHandleOpen(params)}
         >
           <RemoveRedEyeIcon />
         </IconButton>,
         <IconButton
           className="link-tool"
-          onClick={() => console.log(params.row)}
+          onClick={() => EditHandler(params.row)}
         >
           <EditIcon />
         </IconButton>,
         <IconButton
           className="link-tool"
-          onClick={() => console.log(params.row.id)}
+          onClick={() => dialogHandleOpen(params.row)}
         >
           <DeleteIcon />
         </IconButton>,
@@ -82,124 +170,117 @@ const Home = () => {
     },
   ];
 
-  const rows = [
-    {
-      id: 1,
-      userName: 'Insight',
-      lastName: '',
-      active: true,
-    },
-    {
-      id: 2,
-      userName: 'Internal',
-      lastName: '',
-      active: true,
-    },
-    {
-      id: 3,
-      userName: 'OpsCore',
-      lastName: '',
-      active: true,
-    },
-    {
-      id: 4,
-      userName: 'Rabbit',
-      lastName: '',
-      active: true,
-    },
-    {
-      id: 5,
-      userName: 'RiskCore',
-      lastName: '',
-      active: true,
-    },
-  ];
-  const doctype = [
-    { label: 'Select' },
-    { label: 'Import' },
-    { label: 'Export' },
-  ];
+  var i = 0;
+  const [validateCount, setValidateCount] = React.useState(1);
+  const [rows, setRows] = React.useState([]);
+  const [row, setRow] = React.useState({ sourceId: 0 });
+  const [Application, setApplication] = React.useState({
+    applicationId: 0,
+    applicationName: '',
+    applicationDescription: '',
+    entryDate:null,
+  });
 
-  const protocoltype = [
-    { label: 'SMB Share' },
-    { label: 'SFTP' },
-    { label: 'Email' },
-    { label: 'FTP' },
-  ];
+  const [ApplicationId, setApplicationId] = React.useState(0);
+  const [EntryDate, setEntryDate] = React.useState('');
+  const [ApplicationName, setApplicationName] = React.useState('');
+  const [ApplicationDescription, setApplicationDescription] = React.useState('');
 
-  //Role Modal
+  const GetApplicationData = () => {
+    fetch('https://localhost:7056/api/Application')
+      .then((res) => res.json())
+      .then((result) => {
+        //console.log(result);
+        result.map((res) => {
+          res['id'] = res.applicationId;
+        });
+        setRows(result);
+      });
+  };
+  React.useEffect(() => {
+    GetApplicationData();
+  }, [0]);
+
+
+
+
+  const SaveApplication = async (application) => {
+    const res = await axios.post('https://localhost:7056/api/Application', application);
+    return res.data;
+  };
+  const UpdateApplication = async (application) => {
+    const res = await axios.put('https://localhost:7056/api/Application', application);
+    return res.data;
+  };
+  const DeleteApplication = async (application) => {
+    const res = await axios.delete(
+      `https://localhost:7056/api/Application/${application.applicationId}`
+    );
+    return res.data;
+  };
+
+
+
+  
   const [open, setOpen] = React.useState(false);
+
+  const [validationApplicationName, setvalidationApplicationName] = React.useState(false);
+  const [validationApplicationDescription, setvalidationApplicationDescription] = React.useState(false);
+   
 
   const handleClickOpen = () => {
     setOpen(true);
   };
   const handleClose = () => {
     setOpen(false);
+    clearData();
   };
   //Dialog Modal
   const [dialogOpen, setdialogOpen] = React.useState(false);
   const dialogHandleClose = () => {
     setdialogOpen(false);
+    clearData();
   };
-  const dialogHandleOpen = () => {
+  const dialogHandleOpen = (param) => {
+    deleteHandler(param);
     setdialogOpen(true);
   };
   //View Role Modal
   const [viewOpen, setviewOpen] = React.useState(false);
 
-  const viewHandleOpen = () => {
+  const viewHandleOpen = (param) => {
+    setRow(param.row);
     setviewOpen(true);
   };
 
   const viewHandleClose = () => {
-    setviewOpen(false);
-  };
-  //Permision Modal
-  const [PermissionOpen, setPermissionOpen] = React.useState(false);
-
-  const PermissionhandleClickOpen = () => {
-    setPermissionOpen(true);
+    setviewOpen(false);    
   };
 
-  const PermissionhandleClose = () => {
-    setPermissionOpen(false);
+  const deleteHandler = (param) => {
+    setRow(param);
   };
-  //tagged collection
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const [value, setValue] = React.useState('');
 
-  const tagged = [];
-  const [tags, setTags] = React.useState([]);
-
-  const handleTagChange = (tag) => {
-    console.log(tag);
-    setTags((oldtag) => [...oldtag, tag]);
-    setAnchorEl(null);
-  };
-  console.log(tags);
-  tagged.push('Dashboard');
-  tagged.push('Role Creation');
-  tagged.push('User Creation');
-  tagged.push('Connection');
-  tagged.push('Notification');
-  tagged.push('Setup');
-  tagged.push('Source');
-  tagged.push('Application');
-  tagged.push('Insight');
-  tagged.push('Job Creation');
-  tagged.push('Tags');
-  tagged.push('Fields');
-
-  const handleTaggedChange = (event) => {
-    if (event.key == 'Enter') {
-      setValue(event.nativeEvent.target.value);
-      setAnchorEl(event.currentTarget);
+  const Validation = (ApplicationName,ApplicationDescription) => {
+    
+    if (ApplicationName == '') {
+      setvalidationApplicationName(true);
+      setValidateCount(++i);
+      return false;
+    } else if (ApplicationDescription == '') {
+      setvalidationApplicationDescription(true);
+      setValidateCount(++i);
+      return false;
+    } else {
+      setValidateCount(0);
+      return true;
     }
   };
-  const taggedOpen = Boolean(anchorEl);
-  const handleTaggedClose = () => {
-    setAnchorEl(null);
-  };
+
+  const [value, setValue] = React.useState('');
+  const applicationd = [];
+  const [applications, setApplications] = React.useState([]);
+
   const id = open ? 'simple-popover' : undefined;
   return (
     <>
@@ -221,13 +302,15 @@ const Home = () => {
                     size="small"
                     onClick={handleClickOpen}
                   >
-                    <AddIcon /> Create
+                    <AddIcon /> Create Application
                   </Button>
                 </Box>
               </Grid>
 
               <Grid item xs={6}>
-                
+                {/* <IconButton className="print-box">
+                  <PrintIcon />
+                </IconButton> */}
               </Grid>
             </Grid>
           </Box>
@@ -236,11 +319,11 @@ const Home = () => {
             <Grid container spacing={2}>
               <Grid item xs={10}></Grid>
               <Grid item xs={2}>
-                <div className="search-box">
+              <div className="search-box">
                   <TextField
                     style={{ backgroundColor: 'white', height: '1em' }}
                     id="filled-basic"
-                    placeholder="Filled"
+                    placeholder="Search"
                     variant="filled"
                   />
                   <SearchIcon style={{ textAlign: 'right' }} />
@@ -252,84 +335,131 @@ const Home = () => {
           <Grid item xs={12}>
             <Grid container spacing={2}>
               <Grid item xs={12}>
-                {/* <DataTable
-                  PermissionOpen={PermissionhandleClickOpen}
-                  ClickOpen={handleClickOpen}
-                  viewOpen={viewHandleOpen}
-                  dialogOpen={dialogHandleOpen}
-                /> */}
                 {<MuiDataGrid rows={rows} columns={columns} />}
               </Grid>
             </Grid>
           </Grid>
         </div>
       </Box>
-      <Popover
-        id={id}
-        open={taggedOpen}
-        anchorEl={anchorEl}
-        onClose={handleTaggedClose}
-        anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'left',
-        }}
-      >
-        <Box
-          sx={{
-            p: 2,
-            bgcolor: 'background.default',
-            display: 'grid',
-            gridTemplateColumns: { md: '1fr' },
-            gridTemplateRows: { md: '1fr' },
-            cursor: 'pointer',
-            gap: 2,
-          }}
-        >
-          {tagged.map((tag) => (
-            <paperItem
-              key={tag}
-              elevation={tag}
-              onClick={() => handleTagChange(tag)}
-            >
-              {tag}
-            </paperItem>
-          ))}
-        </Box>
-      </Popover>
+
       <MatDialog
         open={open}
         title="Application"
         handleClose={handleClose}
+        onHandleClick={row.applicationId === 0 ? submitHandler : UpdateHandler}
         isAction="true"
         isCancel="true"
         isSubmit="true"
       >
-        <Box component="form" noValidate autoComplete="off"></Box>
-        <Box component="form" noValidate autoComplete="off">
-          <Box
-            component="form"
-            sx={{
-              '& .MuiTextField-root': { m: 1, width: '25ch' },
-            }}
-            noValidate
-            autoComplete="off"
-          >
-            <div>
-              <TextField
-                id="outlined-password-input"
-                label="Application Name"
-                type="Text"
-              />
+        <Box
+          component="form"
+          sx={{
+            '& > :not(style)': { m: 1 },
+          }}
+          noValidate
+          autoComplete="off"
+        >
+{validationApplicationName ? (
+            <TextField
+              error
+              id="outlined-error"
+              label="Name"
+              type="Text"
+              value={ApplicationName}
+              onInput={(e) => onApplicationNameChange(e.target.value)}
+            />
+          ) : (
+            <TextField
+              id="outlined-password-input"
+              label="Name"
+              type="Text"
+              value={ApplicationName}
+              onInput={(e) => onApplicationNameChange(e.target.value)}
+            />
+          )}
 
-              <TextField
-                id="outlined-password-input"
-                label="Application Description"
-                type="Text"
-              />
-            </div>
-          </Box>
         </Box>
+
+
+        <Box
+          component="form"
+          sx={{
+            '& > :not(style)': { m: 1 },
+          }}
+          noValidate
+          autoComplete="off"
+        >
+{validationApplicationDescription ? (
+            <TextField
+              error
+              id="outlined-error"
+              label="Description"
+              type="Text"
+              value={ApplicationDescription}
+              onInput={(e) => onApplicationDescriptionChange(e.target.value)}
+            />
+          ) : (
+            <TextField
+              id="outlined-password-input"
+              label="Description"
+              type="Text"
+              value={ApplicationDescription}
+              onInput={(e) => onApplicationDescriptionChange(e.target.value)}
+            />
+          )}
+
+        </Box>
+
+        
+
+
       </MatDialog>
+      <MatDialog
+        open={viewOpen}
+        title="Application"
+        handleClose={viewHandleClose}
+      >
+        <Box component="form" noValidate autoComplete="off">
+
+          <Typography className="text-row">
+            <label>Name</label> {row && row.applicationName}
+          </Typography>
+          <Typography className="text-row">
+            <label>Descriprion</label> {row && row.applicationDescription}
+          </Typography>
+          
+
+        </Box>
+
+      </MatDialog>
+
+      <Dialog
+        open={dialogOpen}
+        onClose={dialogHandleClose}
+        PaperComponent={PaperComponent}
+        aria-labelledby="draggable-dialog-title"
+      >
+        <DialogTitle style={{ cursor: 'move' }} id="draggable-dialog-title">
+          Delete
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            Are you sure you want delete this records?
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button
+            autoFocus
+            onClick={dialogHandleClose}
+            className="box-btn-cancel"
+          >
+            close
+          </Button>
+          <Button onClick={deleteHandleClose} className="btn">
+            Delete
+          </Button>
+        </DialogActions>
+      </Dialog>
     </>
   );
 };
