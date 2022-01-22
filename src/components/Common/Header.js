@@ -375,7 +375,7 @@ function Header() {
         <div class="menu-link">
           <List component="nav">
             <ul onClick={() => handleSubMenu('dashboard')}>
-              <li>
+              <li className="m-active">
                 <DashboardIcon /> <span>Dashboard</span>
                 {dashboardSubOpen ? (
                   <ExpandMore className="icon-next-down"/>
