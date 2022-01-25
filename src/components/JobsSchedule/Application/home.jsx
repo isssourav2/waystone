@@ -38,29 +38,35 @@ function PaperComponent(props) {
   return <Paper {...props} />;
 }
 
-
-
-
 const Home = () => {
-
+  const [rows, setRows] = React.useState([]);
+  const [row, setRow] = React.useState({ applicationId: 0 });
+  const [Application, setApplication] = React.useState({
+    applicationId: 0,
+    applicationName: '',
+    applicationDescription: '',
+    entryDate: '2022-01-07T00:00:00',
+    updateDate: null,
+  });
   const submitHandler = () => {
-    if (Validation(ApplicationName,ApplicationDescription)){
+    if (Validation(ApplicationName, ApplicationDescription)) {
+      // Application.applicationId = 0;
       Application.applicationName = ApplicationName;
       Application.applicationDescription = ApplicationDescription;
 
-    const response = SaveApplication(Application);
-    response.then((save) => {
-      console.log('reponse:', save);
-      GetApplicationData();
-      window.alert('Insert Successfully done!!');
-      clearData();
-      handleClose();
-    });
-  }
+      const response = SaveApplication(Application);
+      response.then((save) => {
+        console.log('reponse:', save);
+        GetApplicationData();
+        window.alert('Insert Successfully done!!');
+        clearData();
+        handleClose();
+      });
+    }
   };
 
   const UpdateHandler = () => {
-    if (Validation(ApplicationName,ApplicationDescription)){
+    if (Validation(ApplicationName, ApplicationDescription)) {
       Application.applicationName = ApplicationName;
       Application.applicationDescription = ApplicationDescription;
       Application.applicationId = row.applicationId;
@@ -68,18 +74,17 @@ const Home = () => {
 
       console.log(Application);
 
-    const response = UpdateApplication(Application);
-    response.then((save) => {
-      window.alert('Update Successfully done!!');      
-      clearData();
-      handleClose();
-      GetApplicationData();
-    });
-  }
+      const response = UpdateApplication(Application);
+      response.then((save) => {
+        window.alert('Update Successfully done!!');
+        clearData();
+        handleClose();
+        GetApplicationData();
+      });
+    }
   };
 
   const deleteHandleClose = () => {
-
     DeleteApplication(row).then((save) => {
       GetApplicationData();
       clearData();
@@ -89,15 +94,13 @@ const Home = () => {
   };
 
   const EditHandler = (param) => {
-
     setRow(param);
     setApplicationName(param.applicationName);
     setApplicationDescription(param.applicationDescription);
-    setEntryDate(param.entryDate);  
-    setApplicationId(param.applicationId);  
+    setEntryDate(param.entryDate);
+    setApplicationId(param.applicationId);
     setOpen(true);
   };
-
 
   const onApplicationNameChange = (val) => {
     if (val === '') {
@@ -121,8 +124,6 @@ const Home = () => {
     setApplicationDescription(val);
   };
 
-  
-
   const clearData = () => {
     row.applicationId = 0;
     Application.applicationId = 0;
@@ -131,16 +132,25 @@ const Home = () => {
     setvalidationApplicationDescription(false);
     setApplicationName('');
     setApplicationDescription('');
-    setApplicationId('');
+    setApplicationId(0);
 
     setValidateCount(0);
-
   };
 
   const columns = [
-    { field: 'applicationName', headerName: 'Name', width: 180, editable: true },
-    { field: 'applicationDescription', headerName: 'Description', width: 180, editable: true },
-    
+    {
+      field: 'applicationName',
+      headerName: 'Name',
+      width: 180,
+      editable: true,
+    },
+    {
+      field: 'applicationDescription',
+      headerName: 'Description',
+      width: 180,
+      editable: true,
+    },
+
     {
       field: 'actions',
       type: 'actions',
@@ -172,19 +182,12 @@ const Home = () => {
 
   var i = 0;
   const [validateCount, setValidateCount] = React.useState(1);
-  const [rows, setRows] = React.useState([]);
-  const [row, setRow] = React.useState({ sourceId: 0 });
-  const [Application, setApplication] = React.useState({
-    applicationId: 0,
-    applicationName: '',
-    applicationDescription: '',
-    entryDate:null,
-  });
 
   const [ApplicationId, setApplicationId] = React.useState(0);
   const [EntryDate, setEntryDate] = React.useState('');
   const [ApplicationName, setApplicationName] = React.useState('');
-  const [ApplicationDescription, setApplicationDescription] = React.useState('');
+  const [ApplicationDescription, setApplicationDescription] =
+    React.useState('');
 
   const GetApplicationData = () => {
     fetch('https://localhost:7056/api/Application')
@@ -200,16 +203,19 @@ const Home = () => {
   React.useEffect(() => {
     GetApplicationData();
   }, [0]);
-
-
-
-
+  console.log('Application Object', Application);
   const SaveApplication = async (application) => {
-    const res = await axios.post('https://localhost:7056/api/Application', application);
+    const res = await axios.post(
+      'https://localhost:7056/api/Application',
+      application
+    );
     return res.data;
   };
   const UpdateApplication = async (application) => {
-    const res = await axios.put('https://localhost:7056/api/Application', application);
+    const res = await axios.put(
+      'https://localhost:7056/api/Application',
+      application
+    );
     return res.data;
   };
   const DeleteApplication = async (application) => {
@@ -219,14 +225,14 @@ const Home = () => {
     return res.data;
   };
 
-
-
-  
   const [open, setOpen] = React.useState(false);
 
-  const [validationApplicationName, setvalidationApplicationName] = React.useState(false);
-  const [validationApplicationDescription, setvalidationApplicationDescription] = React.useState(false);
-   
+  const [validationApplicationName, setvalidationApplicationName] =
+    React.useState(false);
+  const [
+    validationApplicationDescription,
+    setvalidationApplicationDescription,
+  ] = React.useState(false);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -254,15 +260,14 @@ const Home = () => {
   };
 
   const viewHandleClose = () => {
-    setviewOpen(false);    
+    setviewOpen(false);
   };
 
   const deleteHandler = (param) => {
     setRow(param);
   };
 
-  const Validation = (ApplicationName,ApplicationDescription) => {
-    
+  const Validation = (ApplicationName, ApplicationDescription) => {
     if (ApplicationName == '') {
       setvalidationApplicationName(true);
       setValidateCount(++i);
@@ -319,7 +324,7 @@ const Home = () => {
             <Grid container spacing={2}>
               <Grid item xs={10}></Grid>
               <Grid item xs={2}>
-              <div className="search-box">
+                <div className="search-box">
                   <TextField
                     style={{ backgroundColor: 'white', height: '1em' }}
                     id="filled-basic"
@@ -359,7 +364,7 @@ const Home = () => {
           noValidate
           autoComplete="off"
         >
-{validationApplicationName ? (
+          {validationApplicationName ? (
             <TextField
               error
               id="outlined-error"
@@ -377,9 +382,7 @@ const Home = () => {
               onInput={(e) => onApplicationNameChange(e.target.value)}
             />
           )}
-
         </Box>
-
 
         <Box
           component="form"
@@ -389,7 +392,7 @@ const Home = () => {
           noValidate
           autoComplete="off"
         >
-{validationApplicationDescription ? (
+          {validationApplicationDescription ? (
             <TextField
               error
               id="outlined-error"
@@ -407,12 +410,7 @@ const Home = () => {
               onInput={(e) => onApplicationDescriptionChange(e.target.value)}
             />
           )}
-
         </Box>
-
-        
-
-
       </MatDialog>
       <MatDialog
         open={viewOpen}
@@ -420,17 +418,13 @@ const Home = () => {
         handleClose={viewHandleClose}
       >
         <Box component="form" noValidate autoComplete="off">
-
           <Typography className="text-row">
             <label>Name</label> {row && row.applicationName}
           </Typography>
           <Typography className="text-row">
             <label>Descriprion</label> {row && row.applicationDescription}
           </Typography>
-          
-
         </Box>
-
       </MatDialog>
 
       <Dialog
