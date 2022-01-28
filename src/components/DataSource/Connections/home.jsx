@@ -367,6 +367,15 @@ const Home = () => {
                 label="Host"
                 type="Text"
               />
+              {/* <div>
+                <label htmlFor="txtHost">Host</label>
+                <input
+                  className="outlined-password-input"
+                  type="text"
+                  name="Host"
+                  id="txtHost"
+                />
+              </div> */}
 
               <TextField
                 id="outlined-password-input"
