@@ -1469,6 +1469,133 @@ nav.MuiList-root {
 
 
 
+
+.Step-container-notification{
+  position: relative;
+}
+
+.Step-container-notification .css-1u4zpwo-MuiSvgIcon-root-MuiStepIcon-root.Mui-active{
+  color:#0bb202;
+  position: relative;
+}
+
+
+.Step-container-notification .css-8wcvy5-MuiStep-root .css-vnkopk-MuiStepLabel-iconContainer{
+  width: 46px;
+  height: 46px;
+  padding: 9px;
+  border-radius:50%;
+  border:#0bb202 2px solid;
+}
+
+.css-16ubnlw-MuiStepLabel-labelContainer{
+  background-color: #cfcfcf;
+  min-height: 30px;
+
+}
+
+.Mui-active.css-qivjh0-MuiStepLabel-label{
+  background-color: #0bb202;
+  padding: 5px 15px;
+  color: #fff;
+
+}
+
+.Step-container-notification .css-8wcvy5-MuiStep-root{
+  display:flex;
+}
+
+.Step-container-notification .MuiStepLabel-root,.Step-container-notification .MuiStepContent-root{
+  width: 36%;
+}
+
+.Step-container-notification .MuiStepLabel-labelContainer{
+  color:#000;
+  overflow: hidden;
+  margin-left: 5px;
+}
+
+.Step-container-notification .css-qivjh0-MuiStepLabel-label.Mui-active{
+  color: #fff;
+  border:#0bb202 1px solid;
+}
+
+.Step-container-notification .MuiStepLabel-label.Mui-completed{
+  padding: 5px 15px;
+}
+
+.Step-container-notification .MuiStepLabel-label.Mui-disabled{
+  padding: 5px 15px;
+}
+
+.Step-container-notification .css-1u4zpwo-MuiSvgIcon-root-MuiStepIcon-root.Mui-completed{
+  color: #0bb202;
+}
+
+.Step-container-notification .MuiStepLabel-label.Mui-completed{
+  background-color: #0bb202;
+  color: #fff;
+}
+
+.Step-container-notification .css-8wcvy5-MuiStep-root .Mui-disabled .css-vnkopk-MuiStepLabel-iconContainer{
+  border: rgba(0, 0, 0, 0.38) 2px solid;
+}
+
+.Step-container-notification{
+  position: relative;
+  border-radius: 5px;
+  padding: 20px;
+  min-height: 463px;
+}
+
+.Step-container-notification .css-1pe7n21-MuiStepConnector-root{
+  margin-left: 25px;
+}
+
+
+.Step-container-notification .css-14yr603-MuiStepContent-root{
+  border-left: 0;
+}
+
+.Step-container-notification::before{
+  position: absolute;
+  left: 36%;
+  top: 0px;
+  height: 100%;
+  content: '';
+  display: block;
+  width: 64%;
+  box-shadow: #0c0c0c36 -4px 0px 7px 0px;
+  background-color: #fff;
+  border-radius: 10px;
+}
+
+.css-9l5vo-MuiCollapse-wrapperInner{
+  z-index: 9;
+  position:absolute;
+  top:30px;
+  width: 60%;
+}
+
+
+.Step-container-notification table{
+  width: 63%;
+}
+
+.Step-container-notification table tr td{
+  width: 30%;
+  padding: 0px 0px 20px;
+  text-transform: uppercase;
+}
+
+.Step-container-notification table tr td strong{
+  display: block;
+}
+
+
+
+
+
 @media (max-width: 1100px) {
   .col-box .css-i4bv87-MuiSvgIcon-root {
     font-size: 20px;
