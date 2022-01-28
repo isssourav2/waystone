@@ -96,7 +96,9 @@ const Home = () => {
       .then((res) => res.json())
       .then((result) => {
         console.log('scheduler', result);
-        debugger;
+
+        reloadSchduleData();
+        reloadEmailData();
         if (result.totalCount != 0) {
           SetDecideSchedulerSubmit(true);
           SetScheduleId(result.message);
@@ -112,6 +114,40 @@ const Home = () => {
         }
       });
   }, [scheduleTime, From]);
+
+  //methode defined for reload data from
+  async function reloadScheduleSettingData() {
+    const response = axios.get(
+      'https://localhost:7056/api/SchedulerSetting/GetSettings'
+    );
+    return await (
+      await response
+    ).data;
+  }
+  async function reloadEmailSettingData() {
+    const response = await axios.get(
+      'https://localhost:7056/api/EmailSetting/GetEmailSetting'
+    );
+    return await response.data;
+  }
+  const reloadSchduleData = () => {
+    reloadScheduleSettingData().then((dt) => {
+      console.log('schdule data', dt);
+      SetScheduleTime(dt.scheduleTime.split(':')[1]);
+      SetTimeInterval(dt.timeInterval);
+    });
+  };
+  const reloadEmailData = () => {
+    reloadEmailSettingData().then((dt) => {
+      debugger;
+      SetFrom(dt.from);
+      SetHost(dt.host);
+      SetPort(dt.port);
+      SetUserName(dt.userName);
+      SetPassword(dt.password);
+      SetTo(dt.to);
+    });
+  };
   //api calling schedule
   const SaveScheduler = async (ScheduleSetting) => {
     const res = await axios.post(
@@ -121,13 +157,13 @@ const Home = () => {
     return res.data;
   };
   const UpdateScheduler = async (ScheduleSetting) => {
-    debugger;
     const res = await axios.put(
       'https://localhost:7056/api/SchedulerSetting',
       ScheduleSetting
     );
     return res.data;
   };
+
   //scheduleSetting
   const scheduleSettingSubmitHandler = () => {
     console.log('sehdule object', ScheduleSetting);
@@ -139,10 +175,11 @@ const Home = () => {
       const response = SaveScheduler(ScheduleSetting);
       response.then((save) => {
         window.alert('Insert Successfully done!!');
-        //clearData();
+        reloadSchduleData();
       });
     }
   };
+
   const scheduleSettingValidation = (scheduleTime, timeInterval) => {
     if (scheduleTime == '') {
       setvalidationscheduleTimeId(true);
@@ -165,7 +202,7 @@ const Home = () => {
       const response = UpdateScheduler(ScheduleSetting);
       response.then((save) => {
         window.alert('Update Successfully done!!');
-        //clearData();
+        reloadSchduleData();
       });
     }
   };
@@ -198,7 +235,7 @@ const Home = () => {
       const response = SaveEmailSetting(emailSetting);
       response.then((save) => {
         window.alert('Insert Successfully done!!');
-        //clearData();
+        reloadEmailData();
       });
     }
   };
@@ -244,7 +281,7 @@ const Home = () => {
       const response = UpdateEmailSetting(emailSetting);
       response.then((save) => {
         window.alert('Update Successfully done!!');
-        //clearData();
+        reloadEmailData();
       });
     }
   };
