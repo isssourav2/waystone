@@ -6,12 +6,9 @@ import StepLabel from '@mui/material/StepLabel';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
-const steps = [
-  'Select campaign settings',
-  'Create an ad group',
-  'Create an ad',
-];
-const Home = () => {
+const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad'];
+
+export default function HorizontalLinearStepper() {
   const [activeStep, setActiveStep] = React.useState(0);
   const [skipped, setSkipped] = React.useState(new Set());
 
@@ -58,16 +55,7 @@ const Home = () => {
   };
 
   return (
-    <Box
-      sx={{
-        width: '70% !important',
-        marginTop: '6em',
-        marginLeft: 'auto',
-        marginRight: 'auto',
-        display: 'flex',
-        flexDirection: 'column',
-      }}
-    >
+    <Box sx={{ width: '100%' }}>
       <Stepper activeStep={activeStep}>
         {steps.map((label, index) => {
           const stepProps = {};
@@ -99,8 +87,7 @@ const Home = () => {
         </React.Fragment>
       ) : (
         <React.Fragment>
-          {/* <Typography sx={{ mt: 2, mb: 1 }}>Step {activeStep + 1}</Typography> */}
-
+          <Typography sx={{ mt: 2, mb: 1 }}>Step {activeStep + 1}</Typography>
           <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
             <Button
               color="inherit"
@@ -125,6 +112,4 @@ const Home = () => {
       )}
     </Box>
   );
-};
-
-export default Home;
+}
