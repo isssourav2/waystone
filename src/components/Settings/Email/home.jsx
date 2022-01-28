@@ -133,7 +133,9 @@ const Home = () => {
   const reloadSchduleData = () => {
     reloadScheduleSettingData().then((dt) => {
       console.log('schdule data', dt);
-      SetScheduleTime(dt.scheduleTime.split(':')[1]);
+      SetScheduleTime(
+        `${dt.scheduleTime.split(':')[1]} : ${dt.scheduleTime.split(':')[2]} AM`
+      );
       SetTimeInterval(dt.timeInterval);
     });
   };
@@ -628,7 +630,7 @@ const Home = () => {
                               error
                               id="outlined-error"
                               label="Password"
-                              type="Text"
+                              type="Password"
                               placeholder="Enter Password"
                               value={Password}
                               onInput={(e) => onPasswordChange(e.target.value)}
@@ -638,7 +640,7 @@ const Home = () => {
                               required
                               id="outlined-password-input"
                               label="Password"
-                              type="Text"
+                              type="Password"
                               placeholder="Enter Password"
                               value={Password}
                               onInput={(e) => onPasswordChange(e.target.value)}
