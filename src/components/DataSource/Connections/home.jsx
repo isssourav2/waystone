@@ -153,7 +153,7 @@ const Home = () => {
 
   const submitHandler = () => {
     if (Validation(Name, Protocol, Port, Password)) {
-      Connection.name = UserName;
+      Connection.name = Name;
       Connection.source = Source;
       Connection.protocol = Protocol;
       Connection.host = Host;
@@ -178,7 +178,7 @@ const Home = () => {
     debugger;
     if (Validation(Name, Protocol, Port, Password)) {
       Connection.id = row.id;
-      Connection.name = UserName;
+      Connection.name = Name;
       Connection.source = Source;
       Connection.protocol = Protocol;
       Connection.host = Host;
