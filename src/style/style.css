@@ -1488,13 +1488,13 @@ nav.MuiList-root {
   border:#0bb202 2px solid;
 }
 
-.css-16ubnlw-MuiStepLabel-labelContainer{
+.Step-container-notification .css-16ubnlw-MuiStepLabel-labelContainer{
   background-color: #cfcfcf;
   min-height: 30px;
 
 }
 
-.Mui-active.css-qivjh0-MuiStepLabel-label{
+.Step-container-notification .Mui-active.css-qivjh0-MuiStepLabel-label{
   background-color: #0bb202;
   padding: 5px 15px;
   color: #fff;
@@ -1570,7 +1570,7 @@ nav.MuiList-root {
   border-radius: 10px;
 }
 
-.css-9l5vo-MuiCollapse-wrapperInner{
+.Step-container-notification .css-9l5vo-MuiCollapse-wrapperInner{
   z-index: 9;
   position:absolute;
   top:30px;
@@ -1598,6 +1598,105 @@ nav.MuiList-root {
   top:0;
 }
 
+
+
+
+.Step-container-horizontal{
+  position: relative;
+} 
+
+
+.Step-container-horizontal .MuiStepContent-root{
+  position:absolute;
+  left: 0;
+  top:100px;
+  width: calc(100% - 20px);
+  padding: 0 10px;
+}
+
+.Step-container-horizontal .css-1mz1l2x-MuiStepContent-root{
+  padding: 0 10px;
+  margin-left: 0;
+}
+
+
+.Step-container-horizontal .css-1q5sdqw,.Step-container-horizontal .css-1di5t78-MuiPaper-root{
+  padding: 0 10px;
+}
+
+.Step-container-horizontal .css-1di5t78-MuiPaper-root{
+
+  padding: 50px 10px;
+}
+
+.Step-container-horizontal .css-14yr603-MuiStepContent-root{
+  margin-left: 0;
+  border: 0;
+}
+
+.text-center{
+  display:flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.text-center .btn{
+  margin-right: 15px;
+}
+
+
+
+.two-col-form{
+  margin: 0 -10px  !important;
+  width:100%;
+  display:flex;
+  flex-wrap: wrap;
+  padding: 30px 0;
+}
+
+.form-col{
+  margin: 0 10px 20px !important;
+  width:calc(50% - 20px);
+}
+
+
+
+.Step-container-horizontal .MuiStepLabel-horizontal.Mui-disabled{
+  border: #bdbdbd 2px solid;
+}
+
+.Step-container-horizontal .css-ascpo7-MuiStepLabel-root{
+  border: #05bd0d 2px solid;
+  padding: 10px;
+  border-radius: 25px;
+
+}
+
+.Step-container-horizontal .css-1u4zpwo-MuiSvgIcon-root-MuiStepIcon-root.Mui-active{
+  color: #05bd0d; 
+}
+
+.Step-container-horizontal .css-1u4zpwo-MuiSvgIcon-root-MuiStepIcon-root.Mui-completed,.css-qivjh0-MuiStepLabel-label.Mui-completed{
+  color: #fff !important; 
+}
+
+.Step-container-horizontal .MuiStep-root.MuiStep-horizontal.Mui-completed .MuiStepLabel-horizontal{
+  background-color: #05bd0d;
+}
+
+.Step-container-horizontal .css-z7uhs0-MuiStepConnector-line{
+  border-top-width: 2px;
+  border-top-style: dashed;
+  border-color: #05bd0d;
+}
+
+.MuiStepConnector-horizontal .Mui-completed .css-z7uhs0-MuiStepConnector-line{
+  border-color: #05bd0d;
+}
+
+.Step-container-horizontal .Mui-active .css-z7uhs0-MuiStepConnector-line{
+  color: #05bd0d; 
+}
 
 @media (max-width: 1100px) {
   .col-box .css-i4bv87-MuiSvgIcon-root {
