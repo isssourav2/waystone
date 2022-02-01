@@ -64,6 +64,17 @@ const Home = () => {
     const res = await axios.put('https://localhost:7056/api/User', user);
     return res.data;
   };
+  const GetUserData = () => {
+    fetch('https://localhost:7056/api/User')
+      .then((res) => res.json())
+      .then((result) => {
+        //console.log(result);
+        result.map((res) => {
+          res['id'] = res.userId;
+        });
+        setRows(result);
+      });
+  };
   const DeleteUser = async (user) => {
     const res = await axios.delete(
       `https://localhost:7056/api/User/${user.userId}`
@@ -370,17 +381,7 @@ const Home = () => {
     //call roll data
     GetRoll();
   }, [0]);
-  const GetUserData = () => {
-    fetch('https://localhost:7056/api/User')
-      .then((res) => res.json())
-      .then((result) => {
-        //console.log(result);
-        result.map((res) => {
-          res['id'] = res.userId;
-        });
-        setRows(result);
-      });
-  };
+
   const GetRoll = () => {
     rollData().then((result) => {
       //console.log('data', result);
@@ -401,7 +402,7 @@ const Home = () => {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
-    row.userId = '3fa85f64-5717-4562-b3fc-2c963f66afa6';
+    row.id = 0;
     setOpen(true);
   };
   const handleClose = () => {
