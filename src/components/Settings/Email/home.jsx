@@ -35,6 +35,7 @@ import MailIcon from '@mui/icons-material/Mail';
 import SettingsIcon from '@mui/icons-material/Settings';
 
 import '../../../style/style.css';
+import daysToWeeks from 'date-fns/esm/fp/daysToWeeks/index.js';
 function PaperComponent(props) {
   return <Paper {...props} />;
 }
@@ -133,10 +134,14 @@ const Home = () => {
   const reloadSchduleData = () => {
     reloadScheduleSettingData().then((dt) => {
       console.log('schdule data', dt);
-      SetScheduleTime(
-        `${dt.scheduleTime.split(':')[1]} : ${dt.scheduleTime.split(':')[2]} AM`
-      );
-      SetTimeInterval(dt.timeInterval);
+      if (dt.scheduleTime) {
+        SetScheduleTime(
+          `${dt.scheduleTime.split(':')[1]} : ${
+            dt.scheduleTime.split(':')[2]
+          } AM`
+        );
+        SetTimeInterval(dt.timeInterval);
+      }
     });
   };
   const reloadEmailData = () => {
