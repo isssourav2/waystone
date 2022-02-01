@@ -36,12 +36,190 @@ import axios from 'axios';
 import '../../../style/style.css';
 import { MuiDataGrid } from '../../../DataTable';
 import Autocomplete from '@mui/material/Autocomplete';
-
+import ConnectionTab from './ConnectionTab/ConnectionTab';
 function PaperComponent(props) {
   return <Paper {...props} />;
 }
 
 const Home = () => {
+  //Crud operation
+  const [Connection, SetConnection] = React.useState({
+    createdBy: '3fa85f64-5717-4562-b3fc-2c963f66afa6',
+    updatedBy: '3fa85f64-5717-4562-b3fc-2c963f66afa6',
+    createdDate: '2022-02-01T06:13:53.218Z',
+    updatedDate: '2022-02-01T06:13:53.218Z',
+    id: 0,
+    name: '',
+    source: '',
+    protocol: '',
+    host: '',
+    port: 0,
+    ConnectionName: '',
+    password: '',
+  });
+  //set column
+  const [Name, setName] = React.useState('');
+  const [Source, setSource] = React.useState('');
+  const [Protocol, setProtocol] = React.useState('');
+  const [Host, setHost] = React.useState('');
+  const [Port, setPort] = React.useState(0);
+  const [UserName, setUserName] = React.useState('');
+  const [Password, setPassword] = React.useState('');
+  const [SahFingerPrint, setSahFingerPrint] = React.useState('');
+  //validation function
+  const [validationName, setvalidationName] = React.useState(false);
+  const [validationProtocol, setvalidationProtocol] = React.useState(false);
+  const [validationPort, setvalidationPort] = React.useState(false);
+  const [validationPassword, setvalidationPassword] = React.useState(false);
+  const [validateCount, setValidateCount] = React.useState(1);
+  var i = 0;
+
+  const onNameChange = (val) => {
+    if (val === '') {
+      setvalidationName(true);
+      setValidateCount(++i);
+    } else {
+      setvalidationName(false);
+      //setBtnDisabled(false);
+      setValidateCount(0);
+    }
+    setName(val);
+    //user.userName = val;
+  };
+  const onSourceChange = (val) => {
+    setSource(val);
+  };
+  const onProtocolChange = (val) => {
+    if (val === '') {
+      setvalidationProtocol(true);
+      setValidateCount(++i);
+    } else {
+      setvalidationProtocol(false);
+      //setBtnDisabled(false);
+      setValidateCount(0);
+    }
+    setProtocol(val);
+    //user.userName = val;
+  };
+  const onHostChange = (val) => {
+    setHost(val);
+  };
+  const onPortChange = (val) => {
+    if (val === '') {
+      setvalidationPort(true);
+      setValidateCount(++i);
+    } else {
+      setvalidationPort(false);
+      //setBtnDisabled(false);
+      setValidateCount(0);
+    }
+    setPort(val);
+    //user.userName = val;
+  };
+  const onUserNameChange = (val) => {
+    setUserName(val);
+  };
+  const onPasswordChange = (val) => {
+    if (val === '') {
+      setvalidationPassword(true);
+      setValidateCount(++i);
+    } else {
+      setvalidationPassword(false);
+      //setBtnDisabled(false);
+      setValidateCount(0);
+    }
+    setPassword(val);
+    //user.userName = val;
+  };
+  const onSahFingerPrintChange = (val) => {
+    setSahFingerPrint(val);
+  };
+
+  const SaveConnection = async (connection) => {
+    const res = await axios.post(
+      'https://localhost:7056/api/Connection',
+      connection
+    );
+    return res.data;
+  };
+  const UpdateConnection = async (connection) => {
+    console.log('11');
+    const res = await axios.put(
+      'https://localhost:7056/api/Connection',
+      connection
+    );
+    return res.data;
+  };
+
+  const submitHandler = () => {
+    if (Validation(Name, Protocol, Port, Password)) {
+      Connection.name = UserName;
+      Connection.source = Source;
+      Connection.protocol = Protocol;
+      Connection.host = Host;
+      Connection.port = Port;
+      Connection.userName = UserName;
+      Connection.password = Password;
+      Connection.sahFingerPrint = SahFingerPrint;
+
+      console.log('insert', Connection);
+      const response = SaveConnection(Connection);
+      response.then(() => {
+        GetConnectionData();
+        window.alert('Insert Successfully done!!');
+        clearData();
+        // InsertAlert('Insert Successfully done!!');
+        handleClose();
+      });
+    }
+  };
+
+  const UpdateHandler = () => {
+    debugger;
+    if (Validation(Name, Protocol, Port, Password)) {
+      Connection.id = row.id;
+      Connection.name = UserName;
+      Connection.source = Source;
+      Connection.protocol = Protocol;
+      Connection.host = Host;
+      Connection.port = Port;
+      Connection.userName = UserName;
+      Connection.password = Password;
+      Connection.sahFingerPrint = SahFingerPrint;
+      const response = UpdateConnection(Connection);
+      response.then(() => {
+        window.alert('Update Successfully done!!');
+        GetConnectionData();
+        clearData();
+        handleClose();
+      });
+    }
+  };
+
+  const Validation = (Name, Protocol, Port, Password) => {
+    if (Name == '') {
+      setvalidationName(true);
+      setValidateCount(++i);
+      return false;
+    } else if (Protocol == '') {
+      setvalidationProtocol(true);
+      setValidateCount(++i);
+      return false;
+    } else if (Port == '') {
+      setvalidationPort(true);
+      setValidateCount(++i);
+      return false;
+    } else if (Password == '') {
+      setvalidationPassword(true);
+      setValidateCount(++i);
+      return false;
+    } else {
+      setValidateCount(0);
+      return true;
+    }
+  };
+  //Grid Rows
+  const [rows, setRows] = React.useState([]);
   const doctype = [
     { label: 'Select' },
     { label: 'Import' },
@@ -54,39 +232,24 @@ const Home = () => {
     { label: 'Email' },
     { label: 'FTP' },
   ];
+  //grid column
   const columns = [
-    { field: 'Name', headerName: 'Name', width: 180, editable: true },
+    { field: 'name', headerName: 'Name', width: 180, editable: true },
     {
-      field: 'Source',
-      headerName: 'Source',
-      width: 180,
-      editable: true,
-    },
-    {
-      field: 'Protocol',
+      field: 'protocol',
       headerName: 'Protocol',
-      width: 200,
-      editable: true,
-    },
-    {
-      field: 'Host',
-      headerName: 'Host',
       width: 180,
       editable: true,
     },
+    { field: 'host', headerName: 'Host', width: 180, editable: true },
     {
-      field: 'Port',
+      field: 'port',
       headerName: 'Port',
       width: 180,
       editable: true,
     },
-    {
-      field: 'UserName',
-      headerName: 'User Name',
-      width: 180,
-      editable: true,
-    },
-
+    { field: 'userName', headerName: 'UserName', width: 180, editable: true },
+    { field: 'password', headerName: 'Password', width: 180, editable: true },
     {
       field: 'actions',
       type: 'actions',
@@ -96,37 +259,77 @@ const Home = () => {
       getActions: (params) => [
         <IconButton
           className="link-tool"
-          onClick={() => console.log(params.row)}
+          onClick={() => viewHandleOpen(params)}
         >
           <RemoveRedEyeIcon />
         </IconButton>,
         <IconButton
           className="link-tool"
-          onClick={() => console.log(params.row)}
+          onClick={() => EditHandler(params.row)}
         >
           <EditIcon />
         </IconButton>,
         <IconButton
           className="link-tool"
-          onClick={() => console.log(params.row.id)}
+          onClick={() => dialogHandleOpen(params.row)}
         >
           <DeleteIcon />
         </IconButton>,
       ],
     },
   ];
+  const GetConnectionData = () => {
+    fetch('https://localhost:7056/api/Connection')
+      .then((res) => res.json())
+      .then((result) => {
+        //console.log(result);
+        setRows(result);
+      });
+  };
+  //useEffect
+  React.useEffect(() => {
+    GetConnectionData();
+  }, [0]);
 
-  const rows = [
-    {
-      id: 1,
-      Name: 'SMB |TESTING',
-      Source: 'BBH HOLDINGS LTD',
-      Protocol: 'Email',
-      Host: 'smtp@gmail.com',
-      Port: '587',
-      UserName: 'PPMV2',
-    },
-  ];
+  //Edit functionality
+  const EditHandler = (param) => {
+    setRow(param);
+    setName(param.name);
+    setSource(param.source);
+    setProtocol(param.protocol);
+    setHost(param.host);
+    setPort(param.port);
+    setUserName(param.userName);
+    setPassword(param.password);
+    setSahFingerPrint(param.sahFingerPrint);
+    //setRole(param);
+    setOpen(true);
+  };
+  const DeleteConnection = async (connection) => {
+    const res = await axios.delete(
+      `https://localhost:7056/api/Connection/${connection.id}`
+    );
+    return res.data;
+  };
+  const clearData = () => {
+    row.id = 0;
+    Connection.id = 0;
+    setvalidationName(false);
+    setvalidationProtocol(false);
+    setvalidationPort(false);
+    setvalidationPassword(false);
+    setName('');
+    setSource('');
+    setProtocol('');
+    setHost('');
+    setPort(0);
+    setUserName('');
+    setPassword('');
+    setSahFingerPrint('');
+    setValidateCount(0);
+  };
+  //row
+  const [row, setRow] = React.useState({ id: 0 });
 
   //Role Modal
   const [open, setOpen] = React.useState(false);
@@ -135,73 +338,66 @@ const Home = () => {
     setOpen(true);
   };
   const handleClose = () => {
+    clearData();
     setOpen(false);
   };
   //Dialog Modal
+  const deleteHandler = (param) => {
+    setRow(param);
+  };
+  const deleteHandleClose = () => {
+    debugger;
+    console.log('delete data:', row);
+    DeleteConnection(row).then((del) => {
+      GetConnectionData();
+      clearData();
+      window.alert('Delete Successfully done!!');
+      dialogHandleClose();
+    });
+  };
   const [dialogOpen, setdialogOpen] = React.useState(false);
   const dialogHandleClose = () => {
     setdialogOpen(false);
   };
-  const dialogHandleOpen = () => {
+  const dialogHandleOpen = (param) => {
+    deleteHandler(param);
     setdialogOpen(true);
   };
   //View Role Modal
   const [viewOpen, setviewOpen] = React.useState(false);
 
-  const viewHandleOpen = () => {
+  const viewHandleOpen = (param) => {
+    setRow(param.row);
     setviewOpen(true);
   };
 
   const viewHandleClose = () => {
     setviewOpen(false);
   };
-  //Permision Modal
-  const [PermissionOpen, setPermissionOpen] = React.useState(false);
 
-  const PermissionhandleClickOpen = () => {
-    setPermissionOpen(true);
+  let ConnectionObject = {
+    validationName,
+    validationProtocol,
+    validationPort,
+    validationPassword,
+    Name,
+    Source,
+    Protocol,
+    Host,
+    Port,
+    UserName,
+    Password,
+    SahFingerPrint,
+    onNameChange,
+    onSourceChange,
+    onProtocolChange,
+    onHostChange,
+    onPortChange,
+    onUserNameChange,
+    onPasswordChange,
+    onSahFingerPrintChange,
   };
 
-  const PermissionhandleClose = () => {
-    setPermissionOpen(false);
-  };
-  //tagged collection
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const [value, setValue] = React.useState('');
-
-  const tagged = [];
-  const [tags, setTags] = React.useState([]);
-
-  const handleTagChange = (tag) => {
-    console.log(tag);
-    setTags((oldtag) => [...oldtag, tag]);
-    setAnchorEl(null);
-  };
-  console.log(tags);
-  tagged.push('Dashboard');
-  tagged.push('Role Creation');
-  tagged.push('User Creation');
-  tagged.push('Connection');
-  tagged.push('Notification');
-  tagged.push('Setup');
-  tagged.push('Source');
-  tagged.push('Application');
-  tagged.push('Insight');
-  tagged.push('Job Creation');
-  tagged.push('Tags');
-  tagged.push('Fields');
-
-  const handleTaggedChange = (event) => {
-    if (event.key == 'Enter') {
-      setValue(event.nativeEvent.target.value);
-      setAnchorEl(event.currentTarget);
-    }
-  };
-  const taggedOpen = Boolean(anchorEl);
-  const handleTaggedClose = () => {
-    setAnchorEl(null);
-  };
-  const id = open ? 'simple-popover' : undefined;
   return (
     <>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
@@ -286,180 +482,66 @@ const Home = () => {
           </Grid>
         </div>
       </Box>
-      <Popover
-        id={id}
-        open={taggedOpen}
-        anchorEl={anchorEl}
-        onClose={handleTaggedClose}
-        anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'left',
-        }}
-      >
-        <Box
-          sx={{
-            p: 2,
-            bgcolor: 'background.default',
-            display: 'grid',
-            gridTemplateColumns: { md: '1fr' },
-            gridTemplateRows: { md: '1fr' },
-            cursor: 'pointer',
-            gap: 2,
-          }}
-        >
-          {tagged.map((tag) => (
-            <paperItem
-              key={tag}
-              elevation={tag}
-              onClick={() => handleTagChange(tag)}
-            >
-              {tag}
-            </paperItem>
-          ))}
-        </Box>
-      </Popover>
+
       <MatDialog
         open={open}
         title="Connections"
         handleClose={handleClose}
-        isCancel="false"
+        onHandleClick={row.id === 0 ? submitHandler : UpdateHandler}
         isAction="true"
         isCancel="true"
         isSubmit="true"
       >
-        <Box component="form" noValidate autoComplete="off"></Box>
-        <Box component="form" noValidate autoComplete="off">
-          <Box
-            component="form"
-            sx={{
-              '& .MuiTextField-root': { m: 1, width: '25ch' },
-            }}
-            noValidate
-            autoComplete="off"
-          >
-            <div>
-              <Autocomplete
-                disablePortal
-                id="combo-box-demo"
-                options={doctype}
-                sx={{ width: 300 }}
-                renderInput={(params) => <TextField {...params} label="Type" />}
-              />
+        <ConnectionTab
+          {...ConnectionObject}
 
-              <TextField
-                id="outlined-password-input"
-                label="Name"
-                type="Text"
-              />
-
-              <Autocomplete
-                disablePortal
-                id="combo-box-demo"
-                options={protocoltype}
-                sx={{ width: 300 }}
-                renderInput={(params) => (
-                  <TextField {...params} label="Protocol" />
-                )}
-              />
-
-              <TextField
-                id="outlined-password-input"
-                label="Host"
-                type="Text"
-              />
-              {/* <div>
-                <label htmlFor="txtHost">Host</label>
-                <input
-                  className="outlined-password-input"
-                  type="text"
-                  name="Host"
-                  id="txtHost"
-                />
-              </div> */}
-
-              <TextField
-                id="outlined-password-input"
-                label="Port"
-                type="Text"
-              />
-
-              <TextField
-                id="outlined-password-input"
-                label="User Name"
-                type="Text"
-              />
-              <TextField
-                id="outlined-password-input"
-                label="Password"
-                type="Text"
-              />
-            </div>
-          </Box>
-        </Box>
+          //   {
+          //     ()
+          //   }
+        />
       </MatDialog>
       <MatDialog
         open={viewOpen}
-        title="Role"
+        title="Connection"
         handleClose={viewHandleClose}
-        isAction="false"
-        isCancel="false"
-        isSubmit="false"
       >
         <Box component="form" noValidate autoComplete="off">
           <Typography className="text-row">
-            <label>Role Name</label> Role1
+            <label>Name</label>
+            {row && row.name}
           </Typography>
+          {row.source != '' && (
+            <Typography className="text-row">
+              <label>Source</label> {row.source}
+            </Typography>
+          )}
 
           <Typography className="text-row">
-            <label>Role Description</label> Role1
+            <label>Protocol</label>
+            {row && row.protocol}
           </Typography>
-        </Box>
-      </MatDialog>
-      <MatDialog
-        open={PermissionOpen}
-        title="Permission"
-        handleClose={PermissionhandleClose}
-        isAction="true"
-        isCancel="true"
-        isSubmit="true"
-      >
-        <Typography className="text-row">
-          <label>Role Name</label> <span>Power User | BD Team</span>
-        </Typography>
-
-        <Typography className="text-row">
-          <label>Role Description</label>{' '}
-          <span>Access to Everything (excl. Configuration, Manage</span>
-        </Typography>
-
-        <Typography className="text-row">
-          <label>Permission</label>
-        </Typography>
-
-        <Box
-          className="box-tag"
-          component="form"
-          sx={{
-            '& > :not(style)': { m: 1 },
-          }}
-          noValidate
-          autoComplete="off"
-        >
-          <TextareaAutosize
-            aria-label="minimum height"
-            minRows={3}
-            placeholder="Minimum 3 rows"
-            style={{ width: 200 }}
-            onKeyDown={handleTaggedChange}
-          />
-          {tags.map((tag) => (
-            <Item key={tag} className="box-btn tag">
-              <IconButton>
-                <CloseIcon />
-              </IconButton>
-              {tag}
-            </Item>
-          ))}
+          <Typography className="text-row">
+            <label>Host</label>
+            {row && row.host}
+          </Typography>
+          <Typography className="text-row">
+            <label>Port</label>
+            {row && row.port}
+          </Typography>
+          <Typography className="text-row">
+            <label>UserName</label>
+            {row && row.userName}
+          </Typography>
+          <Typography className="text-row">
+            <label>Password</label>
+            {row && row.password}
+          </Typography>
+          {row.sahFingerPrint != '' && (
+            <Typography className="text-row">
+              <label>Password</label>
+              {row && row.sahFingerPrint}
+            </Typography>
+          )}
         </Box>
       </MatDialog>
       <Dialog
@@ -477,10 +559,14 @@ const Home = () => {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button autoFocus onClick={handleClose} className="box-btn left">
+          <Button
+            autoFocus
+            onClick={dialogHandleClose}
+            className="box-btn left"
+          >
             close
           </Button>
-          <Button onClick={handleClose} className="box-btn ">
+          <Button onClick={deleteHandleClose} className="box-btn ">
             Delete
           </Button>
         </DialogActions>
