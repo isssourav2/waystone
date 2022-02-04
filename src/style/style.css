@@ -215,21 +215,17 @@ button.css-78trlr-MuiButtonBase-root-MuiIconButton-root
   position: relative;
 }
 
-
-.css-h4y409-MuiList-root li .icon-next{
-  position:absolute;
+.css-h4y409-MuiList-root li .icon-next {
+  position: absolute;
   right: -15px;
   top: 10px;
 }
 
-
-.css-h4y409-MuiList-root li .icon-next-down{
-  position:absolute;
+.css-h4y409-MuiList-root li .icon-next-down {
+  position: absolute;
   right: -15px;
   top: 10px;
 }
-
-
 
 .css-h4y409-MuiList-root a {
   color: #252a36;
@@ -1058,10 +1054,12 @@ div#root .MuiBox-root.css-0 {
   cursor: pointer;
 }
 
-
-.css-11o2879-MuiDrawer-docked .menu-link ul.MuiList-root,.css-11o2879-MuiDrawer-docked .icon-next,.css-11o2879-MuiDrawer-docked .menu-link ul.MuiList-root,.css-11o2879-MuiDrawer-docked .icon-next-down{
-  display:none;
-} 
+.css-11o2879-MuiDrawer-docked .menu-link ul.MuiList-root,
+.css-11o2879-MuiDrawer-docked .icon-next,
+.css-11o2879-MuiDrawer-docked .menu-link ul.MuiList-root,
+.css-11o2879-MuiDrawer-docked .icon-next-down {
+  display: none;
+}
 
 .allert-col {
   border: #f2f2f2 1px solid;
@@ -1136,7 +1134,11 @@ div#root .MuiBox-root.css-0 {
   color: #1f3038 !important;
 }
 
-.menu-link li.m-active .css-i4bv87-MuiSvgIcon-root,.menu-link li:hover,.menu-link li:hover .css-i4bv87-MuiSvgIcon-root,.menu-link li.m-active span,.menu-link li:hover span{
+.menu-link li.m-active .css-i4bv87-MuiSvgIcon-root,
+.menu-link li:hover,
+.menu-link li:hover .css-i4bv87-MuiSvgIcon-root,
+.menu-link li.m-active span,
+.menu-link li:hover span {
   color: #0bb202;
 }
 
@@ -1208,7 +1210,8 @@ nav.MuiList-root {
   background-color: #fff !important;
 }
 
-.modelPopUp .MuiDialog-paper input[type='text'],.modelPopUp .MuiDialog-paper input[type='Email']{
+.modelPopUp .MuiDialog-paper input[type='text'],
+.modelPopUp .MuiDialog-paper input[type='Email'] {
   font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
   font-size: 14px;
   width: 100%;
@@ -1218,11 +1221,11 @@ nav.MuiList-root {
   border-radius: 10px !important;
 }
 
-
-.modelPopUp .css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input.MuiSelect-select{
+.modelPopUp
+  .css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input.MuiSelect-select {
   padding: 6px 10px;
   min-height: 7px;
-} 
+}
 
 .modelPopUp .css-viou3o-MuiAutocomplete-root .MuiOutlinedInput-root {
   padding: 10px;
@@ -1403,161 +1406,160 @@ nav.MuiList-root {
   width: 100%;
 }
 
-.login-wrap{
+.login-wrap {
   background-image: url(../images/bg-login2.png);
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
   height: 100vh;
   width: 100%;
-  display:flex;
+  display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.login-wrap .MuiPaper-elevation{
+.login-wrap .MuiPaper-elevation {
   border: 0;
   box-shadow: none;
-  background-color:transparent;
+  background-color: transparent;
   box-shadow: #e1dddd 0px 0px 10px;
 }
 
-.login-wrap .login-box{
-  background-color:#fff;
+.login-wrap .login-box {
+  background-color: #fff;
   width: 600px !important;
   margin: 0 auto;
-  display:flex;
+  display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  box-shadow: #333 0px 0px 10px ;
+  box-shadow: #333 0px 0px 10px;
 }
 
-.login-wrap .MuiSvgIcon-fontSizeMedium{
+.login-wrap .MuiSvgIcon-fontSizeMedium {
   font-size: 20px;
   margin-right: 10px;
   margin-left: -20px;
 }
 
-.login-wrap .btn{
+.login-wrap .btn {
   width: 245px;
   height: 45px;
   font-size: 17px !important;
   text-transform: none;
 }
 
-
-.login-head h2{
+.login-head h2 {
   font-size: 26px;
   font-weight: 300;
-  color:  #1f3038;
+  color: #1f3038;
   margin: 0 0 10px 0;
 }
 
-.login-head p{
+.login-head p {
   font-weight: 300;
-  color:  #1f3038;
+  color: #1f3038;
 }
 
-.login-head p strong{
+.login-head p strong {
   color: #0bb202;
 }
 
-
-.login-head img{
+.login-head img {
   max-width: 450px;
 }
 
-
-
-
-.Step-container-notification{
+.Step-container-notification {
   position: relative;
 }
 
-.Step-container-notification .css-1u4zpwo-MuiSvgIcon-root-MuiStepIcon-root.Mui-active{
-  color:#0bb202;
+.Step-container-notification
+  .css-1u4zpwo-MuiSvgIcon-root-MuiStepIcon-root.Mui-active {
+  color: #0bb202;
   position: relative;
 }
 
-
-.Step-container-notification .css-8wcvy5-MuiStep-root .css-vnkopk-MuiStepLabel-iconContainer{
+.Step-container-notification
+  .css-8wcvy5-MuiStep-root
+  .css-vnkopk-MuiStepLabel-iconContainer {
   width: 46px;
   height: 46px;
   padding: 9px;
-  border-radius:50%;
-  border:#0bb202 2px solid;
+  border-radius: 50%;
+  border: #0bb202 2px solid;
 }
 
-.Step-container-notification .css-16ubnlw-MuiStepLabel-labelContainer{
+.Step-container-notification .css-16ubnlw-MuiStepLabel-labelContainer {
   background-color: #cfcfcf;
   min-height: 30px;
-
 }
 
-.Step-container-notification .Mui-active.css-qivjh0-MuiStepLabel-label{
+.Step-container-notification .Mui-active.css-qivjh0-MuiStepLabel-label {
   background-color: #0bb202;
   padding: 5px 15px;
   color: #fff;
-
 }
 
-.Step-container-notification .css-8wcvy5-MuiStep-root{
-  display:flex;
+.Step-container-notification .css-8wcvy5-MuiStep-root {
+  display: flex;
 }
 
-.Step-container-notification .MuiStepLabel-root,.Step-container-notification .MuiStepContent-root{
+.Step-container-notification .MuiStepLabel-root,
+.Step-container-notification .MuiStepContent-root {
   width: 36%;
 }
 
-.Step-container-notification .MuiStepLabel-labelContainer{
-  color:#000;
+.Step-container-notification .MuiStepLabel-labelContainer {
+  color: #000;
   overflow: hidden;
   margin-left: 5px;
 }
 
-.Step-container-notification .css-qivjh0-MuiStepLabel-label.Mui-active{
+.Step-container-notification .css-qivjh0-MuiStepLabel-label.Mui-active {
   color: #fff;
-  border:#0bb202 1px solid;
+  border: #0bb202 1px solid;
 }
 
-.Step-container-notification .MuiStepLabel-label.Mui-completed{
+.Step-container-notification .MuiStepLabel-label.Mui-completed {
   padding: 5px 15px;
 }
 
-.Step-container-notification .MuiStepLabel-label.Mui-disabled{
+.Step-container-notification .MuiStepLabel-label.Mui-disabled {
   padding: 5px 15px;
 }
 
-.Step-container-notification .css-1u4zpwo-MuiSvgIcon-root-MuiStepIcon-root.Mui-completed{
+.Step-container-notification
+  .css-1u4zpwo-MuiSvgIcon-root-MuiStepIcon-root.Mui-completed {
   color: #0bb202;
 }
 
-.Step-container-notification .MuiStepLabel-label.Mui-completed{
+.Step-container-notification .MuiStepLabel-label.Mui-completed {
   background-color: #0bb202;
   color: #fff;
 }
 
-.Step-container-notification .css-8wcvy5-MuiStep-root .Mui-disabled .css-vnkopk-MuiStepLabel-iconContainer{
+.Step-container-notification
+  .css-8wcvy5-MuiStep-root
+  .Mui-disabled
+  .css-vnkopk-MuiStepLabel-iconContainer {
   border: rgba(0, 0, 0, 0.38) 2px solid;
 }
 
-.Step-container-notification{
+.Step-container-notification {
   position: relative;
   border-radius: 5px;
   padding: 20px;
   min-height: 463px;
 }
 
-.Step-container-notification .css-1pe7n21-MuiStepConnector-root{
+.Step-container-notification .css-1pe7n21-MuiStepConnector-root {
   margin-left: 25px;
 }
 
-
-.Step-container-notification .css-14yr603-MuiStepContent-root{
+.Step-container-notification .css-14yr603-MuiStepContent-root {
   border-left: 0;
 }
 
-.Step-container-notification::before{
+.Step-container-notification::before {
   position: absolute;
   left: 36%;
   top: 0px;
@@ -1570,132 +1572,163 @@ nav.MuiList-root {
   border-radius: 10px;
 }
 
-.Step-container-notification .css-9l5vo-MuiCollapse-wrapperInner{
+.Step-container-notification .css-9l5vo-MuiCollapse-wrapperInner {
   z-index: 9;
-  position:absolute;
-  top:30px;
+  position: absolute;
+  top: 30px;
   width: 60%;
 }
 
-
-.Step-container-notification table{
+.Step-container-notification table {
   width: 63%;
 }
 
-.Step-container-notification table tr td{
+.Step-container-notification table tr td {
   width: 30%;
   padding: 0px 0px 20px;
   text-transform: uppercase;
 }
 
-.Step-container-notification table tr td strong{
+.Step-container-notification table tr td strong {
   display: block;
 }
 
-
-.menu-link .css-9l5vo-MuiCollapse-wrapperInner{
+.menu-link .css-9l5vo-MuiCollapse-wrapperInner {
   position: relative;
-  top:0;
+  top: 0;
 }
 
-
-
-
-.Step-container-horizontal{
+.Step-container-horizontal {
   position: relative;
-} 
+}
 
-
-.Step-container-horizontal .MuiStepContent-root{
-  position:absolute;
+.Step-container-horizontal .MuiStepContent-root {
+  position: absolute;
   left: 0;
-  top:100px;
+  top: 100px;
   width: calc(100% - 20px);
   padding: 0 10px;
 }
 
-.Step-container-horizontal .css-1mz1l2x-MuiStepContent-root{
+.Step-container-horizontal .css-1mz1l2x-MuiStepContent-root {
   padding: 0 10px;
   margin-left: 0;
 }
 
-
-.Step-container-horizontal .css-1q5sdqw,.Step-container-horizontal .css-1di5t78-MuiPaper-root{
+.Step-container-horizontal .css-1q5sdqw,
+.Step-container-horizontal .css-1di5t78-MuiPaper-root {
   padding: 0 10px;
 }
 
-.Step-container-horizontal .css-1di5t78-MuiPaper-root{
-
+.Step-container-horizontal .css-1di5t78-MuiPaper-root {
   padding: 50px 10px;
 }
 
-.Step-container-horizontal .css-14yr603-MuiStepContent-root{
+.Step-container-horizontal .css-14yr603-MuiStepContent-root {
   margin-left: 0;
   border: 0;
 }
 
-.text-center{
-  display:flex;
+.text-center {
+  display: flex;
   flex-wrap: wrap;
   align-items: center;
+  justify-content: center;
 }
 
-.text-center .btn{
+/* Edited by Sourav Das */
+
+.text-center .btn {
   margin-right: 15px;
 }
 
-
-
-.two-col-form{
-  margin: 0 -10px  !important;
-  width:100%;
-  display:flex;
+.two-col-form {
+  margin: 0 -10px !important;
+  width: 100%;
+  display: flex;
   flex-wrap: wrap;
   padding: 30px 0;
 }
 
-.form-col{
+.form-col {
   margin: 0 10px 20px !important;
-  width:calc(50% - 20px);
+  width: calc(50% - 20px);
 }
 
+.form-col-single {
+  width: calc(100% - 20px);
+  margin: 0 10px 20px !important;
+}
+/* created by Sourav Das */
+.file-exported {
+  display: flex;
+  flex-wrap: wrap;
+}
+/* Badge counter by sourav das */
+.badge-counter {
+  margin-left: 1em;
+  display: flex;
+}
+.badge-counter .icon-counter {
+  padding: 0 5px 0 5px;
+  border-radius: 2px;
+  border: 1px solid #121212;
+}
+.badge-counter .label-counter {
+  padding: 0 3em 0 2.5em;
+  border: 1px solid #121212;
+  font-size: 1.2em;
+}
+.form-col .MuiAutocomplete-root {
+  width: calc(100% - 0px) !important;
+}
 
-
-.Step-container-horizontal .MuiStepLabel-horizontal.Mui-disabled{
+.Step-container-horizontal .MuiStepLabel-horizontal.Mui-disabled {
   border: #bdbdbd 2px solid;
 }
 
-.Step-container-horizontal .css-ascpo7-MuiStepLabel-root{
+.Step-container-horizontal .css-ascpo7-MuiStepLabel-root {
   border: #05bd0d 2px solid;
   padding: 10px;
   border-radius: 25px;
-
 }
 
-.Step-container-horizontal .css-1u4zpwo-MuiSvgIcon-root-MuiStepIcon-root.Mui-active{
-  color: #05bd0d; 
+.Step-container-horizontal
+  .css-1u4zpwo-MuiSvgIcon-root-MuiStepIcon-root.Mui-active {
+  color: #05bd0d;
 }
 
-.Step-container-horizontal .css-1u4zpwo-MuiSvgIcon-root-MuiStepIcon-root.Mui-completed,.css-qivjh0-MuiStepLabel-label.Mui-completed{
-  color: #fff !important; 
+.Step-container-horizontal
+  .css-1u4zpwo-MuiSvgIcon-root-MuiStepIcon-root.Mui-completed,
+.css-qivjh0-MuiStepLabel-label.Mui-completed {
+  color: #fff !important;
 }
 
-.Step-container-horizontal .MuiStep-root.MuiStep-horizontal.Mui-completed .MuiStepLabel-horizontal{
+.Step-container-horizontal
+  .MuiStep-root.MuiStep-horizontal.Mui-completed
+  .MuiStepLabel-horizontal {
   background-color: #05bd0d;
 }
 
-.Step-container-horizontal .css-z7uhs0-MuiStepConnector-line{
+.Step-container-horizontal .css-z7uhs0-MuiStepConnector-line {
   border-top-width: 2px;
   border-top-style: dashed;
   border-color: #05bd0d;
 }
 
-.MuiStepConnector-horizontal .Mui-completed .css-z7uhs0-MuiStepConnector-line{
+.MuiStepConnector-horizontal .Mui-completed .css-z7uhs0-MuiStepConnector-line {
   border-color: #05bd0d;
 }
 
-.Step-container-horizontal .Mui-active .css-z7uhs0-MuiStepConnector-line{
-  color: #05bd0d; 
+.Step-container-horizontal .Mui-active .css-z7uhs0-MuiStepConnector-line {
+  color: #05bd0d;
+}
+
+/* flex implement radio button by sourav das */
+.radio-flex {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 @media (max-width: 1100px) {
