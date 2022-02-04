@@ -104,8 +104,10 @@ const Home = () => {
     fetch('https://localhost:7056/api/Menu')
       .then((res) => res.json())
       .then((result) => {
+        result.map((res) => {
+          res['name'] = res.roleName;
+        });
         setTagged(result);
-        console.log('menu', result);
       });
   };
   const [validateCount, setValidateCount] = React.useState(1);
@@ -418,11 +420,11 @@ const Home = () => {
   // tagged.push({ Id: 10, Name: 'Job Creation' });
   // tagged.push({ Id: 11, Name: 'Tags' });
   // tagged.push({ Id: 12, Name: 'Fields' });
-  const fixedOptions = [Tagged[2]];
+  const fixedOptions = [Tagged[0]];
   const [tagValue, setTagValue] = React.useState([...fixedOptions, Tagged[5]]);
   const handleTaggedChange = (event, newValue) => {
     debugger;
-    if (newValue[0].menuName === 'All') {
+    if (newValue[0].name === 'All') {
       setTagValue([
         // ...fixedOptions,
       ]);

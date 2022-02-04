@@ -12,11 +12,11 @@ export default function FixedTags({ tags, onTagChangeHandler }) {
       id="fixed-tags-demo"
       onChange={(event, newValue) => onTagChangeHandler(event, newValue)}
       options={tags}
-      getOptionLabel={(option) => option.menuName}
+      getOptionLabel={(option) => option.name}
       renderTags={(tagValue, getTagProps) =>
         tagValue.map((option, index) => (
           <Chip
-            label={option.menuName}
+            label={option.name}
             {...getTagProps({ index })}
             disabled={fixedOptions.indexOf(option) !== -1}
           />
