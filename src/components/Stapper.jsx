@@ -885,6 +885,123 @@ const Home = () => {
           </Grid>
         </Box>
       </div>
+
+      <MatDialog
+        open={viewOpen}
+        title="File Reading And Identification"
+        handleClose={viewHandleClose}
+      >
+        <FormControl className="text-row">
+          <InputLabel htmlFor="grouped-native-select">Based Value</InputLabel>
+          <Select
+            native
+            defaultValue=""
+            id="grouped-native-select"
+            label="Grouping"
+          >
+            <option aria-label="None" value="" />
+            <optgroup label="Category 1">
+              <option value={1}>Select</option>
+              <option value={2}>Select</option>
+            </optgroup>
+          </Select>
+        </FormControl>
+
+        <FormControl className="text-row">
+          <InputLabel htmlFor="grouped-native-select">
+            CheckIn File Content
+          </InputLabel>
+          <Select
+            native
+            defaultValue=""
+            id="grouped-native-select"
+            label="Grouping"
+          >
+            <option aria-label="None" value="" />
+            <optgroup label="Category 1">
+              <option value={1}>Select</option>
+              <option value={2}>Select</option>
+            </optgroup>
+          </Select>
+        </FormControl>
+
+        <FormControl className="text-row">
+          <InputLabel htmlFor="grouped-native-select">
+            Cell Or Header
+          </InputLabel>
+          <Select
+            native
+            defaultValue=""
+            id="grouped-native-select"
+            label="Grouping"
+          >
+            <option aria-label="None" value="" />
+            <optgroup label="Category 1">
+              <option value={1}>Select</option>
+              <option value={2}>Select</option>
+            </optgroup>
+          </Select>
+        </FormControl>
+
+        <FormControl className="text-row">
+          <InputLabel htmlFor="grouped-native-select">
+            CellOrHeaderValue
+          </InputLabel>
+          <Select
+            native
+            defaultValue=""
+            id="grouped-native-select"
+            label="Grouping"
+          >
+            <option aria-label="None" value="" />
+            <optgroup label="Category 1">
+              <option value={1}>Select</option>
+              <option value={2}>Select</option>
+            </optgroup>
+          </Select>
+        </FormControl>
+
+        <FormControl className="text-row">
+          <InputLabel htmlFor="grouped-native-select">Operation</InputLabel>
+          <Select
+            native
+            defaultValue=""
+            id="grouped-native-select"
+            label="Grouping"
+          >
+            <option aria-label="None" value="" />
+            <optgroup label="Category 1">
+              <option value={1}>Select</option>
+              <option value={2}>Select</option>
+            </optgroup>
+          </Select>
+        </FormControl>
+
+        <FormControl className="text-row">
+          <InputLabel htmlFor="grouped-native-select">SearchValue</InputLabel>
+          <Select
+            native
+            defaultValue=""
+            id="grouped-native-select"
+            label="Grouping"
+          >
+            <option aria-label="None" value="" />
+            <optgroup label="Category 1">
+              <option value={1}>Select</option>
+              <option value={2}>Select</option>
+            </optgroup>
+          </Select>
+        </FormControl>
+
+        <div class="MuiBox-root css-gg4vpm">
+          <button class="box-btn-cancel " type="button">
+            Cancel{' '}
+          </button>
+          <button class="btn" type="button">
+            Save changes
+          </button>
+        </div>
+      </MatDialog>
     </Box>
   );
 };
