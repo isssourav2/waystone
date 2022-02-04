@@ -863,7 +863,7 @@ const Home = () => {
 
       </MatDialog>
 
-    </Box >
+    </Box>
 
 
 
