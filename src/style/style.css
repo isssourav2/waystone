@@ -1666,17 +1666,28 @@ nav.MuiList-root {
 }
 /* Badge counter by sourav das */
 .badge-counter {
-  margin-left: 1em;
+  margin:20px 0 0  0;
   display: flex;
+
 }
 .badge-counter .icon-counter {
   padding: 0 5px 0 5px;
   border-radius: 2px;
-  border: 1px solid #121212;
+  border: #05bd0d 1px solid;
 }
+
+.badge-counter .icon-counter:hover,.badge-counter .css-i4bv87-MuiSvgIcon-root:hover {
+  background-color: #05bd0d;
+  color: #fff !important;
+}
+
+.badge-counter .icon-counter:hover .css-i4bv87-MuiSvgIcon-root{
+  color: #fff !important;
+}
+
 .badge-counter .label-counter {
-  padding: 0 3em 0 2.5em;
-  border: 1px solid #121212;
+  padding: 5px 10px;
+  border: #05bd0d 1px solid;
   font-size: 1.2em;
 }
 .form-col .MuiAutocomplete-root {
@@ -1730,6 +1741,10 @@ nav.MuiList-root {
   flex-direction: row;
   justify-content: space-between;
 }
+
+
+
+
 
 @media (max-width: 1100px) {
   .col-box .css-i4bv87-MuiSvgIcon-root {
