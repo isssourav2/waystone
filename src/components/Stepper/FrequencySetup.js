@@ -5,6 +5,7 @@ import Select from '@mui/material/Select';
 import TextField from '@mui/material/TextField';
 import IconButton from '@mui/material/IconButton';
 import AddIcon from '@mui/icons-material/Add';
+import MenuItem from '@mui/material/MenuItem';
 import RemoveIcon from '@mui/icons-material/Remove';
 function FrequencySetup() {
   const [val1, SetVal1] = React.useState(0);
@@ -13,6 +14,25 @@ function FrequencySetup() {
   const [AsAt, SetAsAt] = React.useState(true);
   const [FromTo, SetFromTo] = React.useState(true);
 
+  const [SelectFrequency, SetSelectFrequency] = React.useState(0);
+  const [FrequencyOptions, SetSelectFrequencyOptions] = React.useState([]);
+  const GetFrequency = () => {
+    fetch('https://localhost:7056/api/Tag')
+      .then((res) => res.json())
+      .then((result) => {
+        //console.log(result);
+        const Options = [{ tagId: 0, tagName: 'Select User' }, ...result];
+        SetSelectFrequencyOptions(Options);
+      });
+  };
+
+  React.useEffect(() => {
+    GetFrequency();
+  }, [0]);
+  const onFrequencyChange = (val) => {
+    SetSelectFrequency(val);
+  };
+  console.log('Select value', FrequencyOptions);
   const minusVal2 = () => {
     debugger;
     let val = val2;
@@ -55,16 +75,13 @@ function FrequencySetup() {
 
         <FormControl className="form-col">
           <InputLabel htmlFor="grouped-native-select">Frequency Tag</InputLabel>
-          <Select native defaultValue="" id="grouped-native-select" label="">
-            <option aria-label="None" value="" />
-            <optgroup label="Category 1">
-              <option value={1}>Option 1</option>
-              <option value={2}>Option 2</option>
-            </optgroup>
-            <optgroup label="Category 2">
-              <option value={3}>Option 3</option>
-              <option value={4}>Option 4</option>
-            </optgroup>
+          <Select
+            value={SelectFrequency}
+            onChange={(e) => onFrequencyChange(e.target.value)}
+          >
+            {FrequencyOptions.map((freq) => {
+              return <MenuItem value={freq.tagId}>{freq.tagName}</MenuItem>;
+            })}
           </Select>
         </FormControl>
 

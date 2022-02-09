@@ -8,6 +8,7 @@ import Typography from '@mui/material/Typography';
 function ConnectionSetup() {
   const [SelectConnection, SetSelectConnection] = React.useState({});
   const [ConnectionOptions, SetSelectConnectionOptions] = React.useState([]);
+  const [RequiredDoc, SetRequiredDoc] = React.useState(false);
   const GetConnection = () => {
     fetch('https://localhost:7056/api/Connection')
       .then((res) => res.json())
@@ -20,10 +21,16 @@ function ConnectionSetup() {
 
   const onConnectChange = (val) => {
     SetSelectConnection(val);
+    if (val.protocol === 'SMB Share') {
+      SetRequiredDoc(true);
+    } else {
+      SetRequiredDoc(false);
+    }
   };
 
   React.useEffect(() => {
     GetConnection();
+    SetRequiredDoc(false);
   }, [0]);
   console.log('Connection', SelectConnection);
   return (
@@ -46,8 +53,10 @@ function ConnectionSetup() {
         <Typography variant="h5">Host | {SelectConnection.host}</Typography>
         <Typography variant="h5">Port | {SelectConnection.port}</Typography>
       </div>
-      <div className="two-col-form">
+      <Typography variant="h6" style={{ padding: '30px 17px' }}>
         Remote Dir Path
+      </Typography>
+      <div className="two-col-form" style={{ padding: '30px 17px' }}>
         <TextField
           id="outlined-uncontrolled"
           disabled="true"
@@ -55,30 +64,30 @@ function ConnectionSetup() {
         />
         <TextField id="outlined-uncontrolled" label="Directory Path" />
       </div>
-
-      <TextField
-        className="form-col"
-        id="outlined-uncontrolled"
-        label="File Name"
-      />
-
-      <TextField
-        className="form-col"
-        id="outlined-uncontrolled"
-        label="Sent To"
-      />
-
-      <TextField
-        className="form-col"
-        id="outlined-uncontrolled"
-        label="Subject Header"
-      />
-
-      <TextField
-        className="form-col"
-        id="outlined-uncontrolled"
-        label="Received From"
-      />
+      {RequiredDoc && (
+        <>
+          <TextField
+            className="form-col"
+            id="outlined-uncontrolled"
+            label="File Name"
+          />
+          <TextField
+            className="form-col"
+            id="outlined-uncontrolled"
+            label="Sent To"
+          />
+          <TextField
+            className="form-col"
+            id="outlined-uncontrolled"
+            label="Subject Header"
+          />
+          <TextField
+            className="form-col"
+            id="outlined-uncontrolled"
+            label="Received From"
+          />
+        </>
+      )}
     </div>
   );
 }
