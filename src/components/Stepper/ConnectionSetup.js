@@ -46,12 +46,15 @@ function ConnectionSetup() {
         <Typography variant="h5">Host | {SelectConnection.host}</Typography>
         <Typography variant="h5">Port | {SelectConnection.port}</Typography>
       </div>
-
-      <TextField
-        className="form-col"
-        id="outlined-uncontrolled"
-        label="Directory Path"
-      />
+      <div className="two-col-form">
+        Remote Dir Path
+        <TextField
+          id="outlined-uncontrolled"
+          disabled="true"
+          value={SelectConnection.host}
+        />
+        <TextField id="outlined-uncontrolled" label="Directory Path" />
+      </div>
 
       <TextField
         className="form-col"
