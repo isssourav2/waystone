@@ -262,7 +262,6 @@ const Home = () => {
     //Role.roleName = val;
   };
   const onRoleIdChange = (val) => {
-    debugger;
     setselectRole(val);
     setRoleId(val);
   };
