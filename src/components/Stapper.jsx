@@ -47,23 +47,23 @@ const steps = [
     description: ``,
   },
   {
-    label: 'Step5',
+    label: 'Step5 File Reading And Identification',
     description: ``,
   },
   {
-    label: 'Step6',
+    label: 'Step6 File Manipulation',
     description: ``,
   },
   {
-    label: 'Step7',
+    label: 'Step7 Advance File Manipulation',
     description: ``,
   },
   {
-    label: 'Step8',
+    label: 'Step8 File Validation',
     description: ``,
   },
   {
-    label: 'Step9',
+    label: 'Step9 File Delivery',
     description: ``,
   },
 ];
