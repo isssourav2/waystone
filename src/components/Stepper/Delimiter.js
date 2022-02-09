@@ -3,6 +3,8 @@ import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import Select from '@mui/material/Select';
 import TextField from '@mui/material/TextField';
+import IconButton from '@mui/material/IconButton';
+import AddIcon from '@mui/icons-material/Add';
 function Delimiter() {
   return (
     <div class="two-col-form">
@@ -47,10 +49,14 @@ function Delimiter() {
       </FormControl>
 
       <TextField
+        type="password"
         className="form-col"
         id="outlined-uncontrolled"
         label="File Password(if any)"
       />
+      <IconButton className="icon-counter" aria-label="Add">
+        <AddIcon />
+      </IconButton>
     </div>
   );
 }

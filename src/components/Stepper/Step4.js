@@ -3,6 +3,8 @@ import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import Select from '@mui/material/Select';
 import TextField from '@mui/material/TextField';
+import IconButton from '@mui/material/IconButton';
+import AddIcon from '@mui/icons-material/Add';
 function Step4() {
   return (
     <div class="two-col-form">
@@ -46,11 +48,11 @@ function Step4() {
         </Select>
       </FormControl>
 
-      <TextField
+      {/* <TextField
         className="form-col"
         id="outlined-uncontrolled"
         label="File Password(if any)"
-      />
+      /> */}
     </div>
   );
 }

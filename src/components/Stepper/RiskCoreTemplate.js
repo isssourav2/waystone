@@ -9,6 +9,7 @@ import Select from '@mui/material/Select';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 import FixedTags from '../Common/FixedTags';
+import MenuItem from '@mui/material/MenuItem';
 const StyledFormControlLabel = styled((props) => (
   <FormControlLabel {...props} />
 ))(({ theme, checked }) => ({
@@ -64,6 +65,7 @@ function RiskCoreTemplate() {
   React.useEffect(() => {
     GetTagged();
     GetApplication();
+    GetRiskCoreTemplate();
   }, [0]);
   const fixedOptions = [Tagged[0]];
   const [tagValue, setTagValue] = React.useState([...fixedOptions, Tagged[5]]);
@@ -97,6 +99,17 @@ function RiskCoreTemplate() {
         ...newValue.filter((option) => fixedAppOptions.indexOf(option) === -1),
       ]);
     }
+  };
+  const [SelectRiskCoreTemplate, SetSelectRiskCoreTemplate] = React.useState(0);
+  const [RiskCoreTemplate, SetRiskCoreTemplate] = React.useState([]);
+  const GetRiskCoreTemplate = () => {
+    fetch('https://localhost:7056/api/RiskCoreTemplate')
+      .then((res) => res.json())
+      .then((result) => {
+        //console.log(result);
+        const Options = [{ id: 0, name: 'Select User' }, ...result];
+        SetRiskCoreTemplate(Options);
+      });
   };
 
   console.log('Tagged Value', tagValue);
@@ -154,20 +167,12 @@ function RiskCoreTemplate() {
             RiskCore Import Template
           </InputLabel>
           <Select
-            native
-            defaultValue=""
-            id="grouped-native-select"
-            label="Grouping"
+            value={SelectRiskCoreTemplate}
+            onChange={(e) => SetSelectRiskCoreTemplate(e.target.value)}
           >
-            <option aria-label="None" value="" />
-            <optgroup label="Category 1">
-              <option value={1}>Option 1</option>
-              <option value={2}>Option 2</option>
-            </optgroup>
-            <optgroup label="Category 2">
-              <option value={3}>Option 3</option>
-              <option value={4}>Option 4</option>
-            </optgroup>
+            {RiskCoreTemplate.map((freq) => {
+              return <MenuItem value={freq.id}>{freq.name}</MenuItem>;
+            })}
           </Select>
         </FormControl>
       </div>
