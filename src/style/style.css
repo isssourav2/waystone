@@ -1685,6 +1685,8 @@ nav.MuiList-root {
   color: #fff !important;
 }
 
+.badge-counter .label-counter
+
 .badge-counter .label-counter {
   padding: 5px 10px;
   border: #05bd0d 1px solid;
@@ -1743,7 +1745,17 @@ nav.MuiList-root {
 }
 
 
+.css-17yyoxz-MuiFormControlLabel-root .MuiFormControlLabel-label,.css-vqmohf-MuiButtonBase-root-MuiRadio-root{
+  color: #fff !important;
+}
 
+.label-counter{
+  width: 25px;
+  line-height: 25px;
+  text-align: center;
+  border-top: #05bd0d 1px solid;
+  border-bottom: #05bd0d 1px solid;
+}
 
 
 @media (max-width: 1100px) {
