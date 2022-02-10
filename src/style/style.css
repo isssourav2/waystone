@@ -1703,7 +1703,8 @@ nav.MuiList-root {
 .Step-container-horizontal .css-ascpo7-MuiStepLabel-root {
   border: #05bd0d 2px solid;
   padding: 10px;
-  border-radius: 25px;
+  border-radius: 70px;
+  min-height: 60px;
 }
 
 .Step-container-horizontal
@@ -1715,6 +1716,12 @@ nav.MuiList-root {
   .css-1u4zpwo-MuiSvgIcon-root-MuiStepIcon-root.Mui-completed,
 .css-qivjh0-MuiStepLabel-label.Mui-completed {
   color: #fff !important;
+  
+}
+
+.Step-container-horizontal .MuiStepLabel-label{
+  font-size: 12px !important;
+  width: 116px;
 }
 
 .Step-container-horizontal
@@ -1755,6 +1762,28 @@ nav.MuiList-root {
   text-align: center;
   border-top: #05bd0d 1px solid;
   border-bottom: #05bd0d 1px solid;
+}
+
+.drag-col{
+  border: #05bd0d 1px solid;
+  padding: 10px 10px 0px;
+  border-radius: 5px;
+  width: 100%;
+  min-width:386px;
+  min-height: 400px;
+}
+
+.drag-wrap-col{
+  width: 25%;
+  padding: 0 8px;
+}
+
+.drag-col-paper{
+  background-color: #05bd0d;
+  padding: 10px;
+  color: #fff;
+  border-radius: 5px;
+  margin: 0 0 10px 0;
 }
 
 
