@@ -93,11 +93,11 @@ function Delimiter() {
         </IconButton>
       </div>
       <div class="two-col-form">
-        <ul>
+        <List>
           {FilePassword.map((item, index) => {
             return (
               <ListItem>
-                <ListItemText primary={item.name} key={item.id} />
+                <ListItemText primary={item.name} key={index} />
                 <ListItemIcon
                   style={{ marginLeft: '20px' }}
                   onClick={() => onRemove(item.name)}
@@ -107,7 +107,7 @@ function Delimiter() {
               </ListItem>
             );
           })}
-        </ul>
+        </List>
       </div>
     </>
   );

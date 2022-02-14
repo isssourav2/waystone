@@ -3,7 +3,11 @@ import { useState, useRef } from 'react';
 import Chip from '@mui/material/Chip';
 import Autocomplete from '@mui/material/Autocomplete';
 import { TextField, Popper, ButtonGroup, Button } from '@mui/material';
-export default function FixedTags({ tags, onTagChangeHandler }) {
+export default function FixedTags({
+  tags,
+  onTagChangeHandler,
+  label = 'Select',
+}) {
   const fixedOptions = [tags[2]];
   const [value, setValue] = React.useState([...fixedOptions, tags[5]]);
   return (
@@ -24,7 +28,7 @@ export default function FixedTags({ tags, onTagChangeHandler }) {
       }
       style={{ width: 400 }}
       renderInput={(params) => (
-        <TextField {...params} label="Select Menu" placeholder="Menu List" />
+        <TextField {...params} label={label} placeholder="Menu List" />
       )}
     />
   );

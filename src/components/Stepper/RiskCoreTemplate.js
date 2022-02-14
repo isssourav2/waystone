@@ -143,7 +143,11 @@ function RiskCoreTemplate() {
           label="Job Name"
         />
         <div className="form-col">
-          <FixedTags tags={Tagged} onTagChangeHandler={handleTaggedChange} />
+          <FixedTags
+            tags={Tagged}
+            label="Select Tags(s)"
+            onTagChangeHandler={handleTaggedChange}
+          />
         </div>
         {/* <TextField
       className="form-col"
@@ -153,6 +157,7 @@ function RiskCoreTemplate() {
         <div className="form-col">
           <FixedTags
             tags={Application}
+            label="Select Application(s)"
             onTagChangeHandler={handleApplicationChange}
           />
         </div>
