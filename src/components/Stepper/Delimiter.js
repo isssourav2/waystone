@@ -29,7 +29,7 @@ function Delimiter() {
       FilePassword.splice(index, 1);
     }
     filePass.push(FilePassword);
-    SetFilePassword(filePass);
+    SetFilePassword(...filePass);
   };
   console.log('file pasword', FilePassword);
   return (
