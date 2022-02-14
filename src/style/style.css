@@ -1666,9 +1666,8 @@ nav.MuiList-root {
 }
 /* Badge counter by sourav das */
 .badge-counter {
-  margin:20px 0 0  0;
+  margin: 20px 0 0 0;
   display: flex;
-
 }
 .badge-counter .icon-counter {
   padding: 0 5px 0 5px;
@@ -1676,18 +1675,17 @@ nav.MuiList-root {
   border: #05bd0d 1px solid;
 }
 
-.badge-counter .icon-counter:hover,.badge-counter .css-i4bv87-MuiSvgIcon-root:hover {
+.badge-counter .icon-counter:hover,
+.badge-counter .css-i4bv87-MuiSvgIcon-root:hover {
   background-color: #05bd0d;
   color: #fff !important;
 }
 
-.badge-counter .icon-counter:hover .css-i4bv87-MuiSvgIcon-root{
+.badge-counter .icon-counter:hover .css-i4bv87-MuiSvgIcon-root {
   color: #fff !important;
 }
 
-.badge-counter .label-counter
-
-.badge-counter .label-counter {
+.badge-counter .label-counter .badge-counter .label-counter {
   padding: 5px 10px;
   border: #05bd0d 1px solid;
   font-size: 1.2em;
@@ -1716,10 +1714,9 @@ nav.MuiList-root {
   .css-1u4zpwo-MuiSvgIcon-root-MuiStepIcon-root.Mui-completed,
 .css-qivjh0-MuiStepLabel-label.Mui-completed {
   color: #fff !important;
-  
 }
 
-.Step-container-horizontal .MuiStepLabel-label{
+.Step-container-horizontal .MuiStepLabel-label {
   font-size: 12px !important;
   width: 116px;
 }
@@ -1751,12 +1748,12 @@ nav.MuiList-root {
   justify-content: space-between;
 }
 
-
-.css-17yyoxz-MuiFormControlLabel-root .MuiFormControlLabel-label,.css-vqmohf-MuiButtonBase-root-MuiRadio-root{
+.css-17yyoxz-MuiFormControlLabel-root .MuiFormControlLabel-label,
+.css-vqmohf-MuiButtonBase-root-MuiRadio-root {
   color: #fff !important;
 }
 
-.label-counter{
+.label-counter {
   width: 25px;
   line-height: 25px;
   text-align: center;
@@ -1764,28 +1761,28 @@ nav.MuiList-root {
   border-bottom: #05bd0d 1px solid;
 }
 
-.drag-col{
+.drag-col {
   border: #05bd0d 1px solid;
   padding: 10px 10px 0px;
   border-radius: 5px;
   width: 100%;
-  min-width:386px;
+  min-width: 386px;
   min-height: 400px;
 }
 
-.drag-wrap-col{
+.drag-wrap-col {
   width: 25%;
   padding: 0 8px;
 }
 
-.drag-col-paper{
+.drag-col-paper {
   background-color: #05bd0d;
   padding: 10px;
   color: #fff;
   border-radius: 5px;
   margin: 0 0 10px 0;
+  min-height: 45px;
 }
-
 
 @media (max-width: 1100px) {
   .col-box .css-i4bv87-MuiSvgIcon-root {
@@ -1861,4 +1858,9 @@ nav.MuiList-root {
   .MuiTypography-subtitle1 {
     font-size: 14px !important;
   }
+}
+
+/* add and remove class draggable control */
+.drag-col-paper.Requested input[type='text'] {
+  display: none;
 }
