@@ -29,6 +29,8 @@ import Step5 from './Stepper/Step5';
 import Step6 from './Stepper/Step6';
 import Step7 from './Stepper/Step7';
 import Step8 from './Stepper/Step8';
+import Step9 from './Stepper/Step9';
+
 const steps = [
   {
     label: 'Stap 1 Job',

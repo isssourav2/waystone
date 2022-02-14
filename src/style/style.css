@@ -1861,6 +1861,8 @@ nav.MuiList-root {
 }
 
 /* add and remove class draggable control */
-.drag-col-paper.Requested input[type='text'] {
+.drag-col-paper.ManipulationRules input[type='text'],
+.drag-col-paper.ManipulationRules input[type='checkbox'],
+.drag-col-paper.ManipulationRules input[type='radio'] {
   display: none;
 }
