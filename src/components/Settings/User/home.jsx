@@ -118,6 +118,7 @@ const Home = () => {
     setOpen(true);
   };
   const UpdateHandler = () => {
+    alert(User.userId);
     console.log('update');
     if (Validation(UserName, FirstName, LastName, Email)) {
       User.userName = UserName;
@@ -373,7 +374,7 @@ const Home = () => {
 
   const [SelectOptions, setSelectOptions] = React.useState([]);
   const [selectRole, setselectRole] = React.useState(0);
-  const [row, setRow] = React.useState({ userId: 0 });
+  const [row, setRow] = React.useState({ userId: '3fa85f64-5717-4562-b3fc-2c963f66afa6' });
 
   React.useEffect(() => {
     GetUserData();
