@@ -173,6 +173,7 @@ function RiskCoreTemplate() {
           </InputLabel>
           <Select
             value={SelectRiskCoreTemplate}
+            label={SelectRiskCoreTemplate}
             onChange={(e) => SetSelectRiskCoreTemplate(e.target.value)}
           >
             {RiskCoreTemplate.map((freq) => {
