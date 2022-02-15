@@ -83,7 +83,7 @@ const Home = () => {
   };
   const ScheduleSetting = {
     id: 0,
-    scheduleTime: '2022-01-25T11:20:08.360Z',
+    scheduleTime: '',
     timeInterval: 0,
     entryDate: '2022-01-25T11:20:08.360Z',
     entryBy: '3fa85f64-5717-4562-b3fc-2c963f66afa6',
@@ -114,7 +114,7 @@ const Home = () => {
           SetEmailId(result.message);
         }
       });
-  }, [scheduleTime, From]);
+  }, [0]);
 
   //methode defined for reload data from
   async function reloadScheduleSettingData() {
@@ -135,11 +135,12 @@ const Home = () => {
     reloadScheduleSettingData().then((dt) => {
       console.log('schdule data', dt);
       if (dt.scheduleTime) {
-        SetScheduleTime(
-          `${dt.scheduleTime.split(':')[1]} : ${
-            dt.scheduleTime.split(':')[2]
-          } AM`
-        );
+        // SetScheduleTime(
+        //   `${dt.scheduleTime.split(':')[1]} : ${
+        //     dt.scheduleTime.split(':')[2]
+        //   } AM`
+        // );
+        SetScheduleTime(GetScheduleTime(dt.scheduleTime));
         SetTimeInterval(dt.timeInterval);
       }
     });
@@ -171,12 +172,21 @@ const Home = () => {
     return res.data;
   };
 
+  const GetScheduleTime = (timeString) => {
+    debugger;
+    //var timeString = '18:00:00';
+    var H = +timeString.substr(0, 2);
+    // var h = H % 12 || 12;
+    var ampm = H < 12 || H === 24 ? 'AM' : 'PM';
+    timeString = H + timeString.substr(2, 3) + ampm;
+    return timeString;
+  };
   //scheduleSetting
   const scheduleSettingSubmitHandler = () => {
-    console.log('sehdule object', ScheduleSetting);
+    console.log('sehdule object', scheduleTime);
     if (scheduleSettingValidation(scheduleTime, timeInterval)) {
       //datetime
-      ScheduleSetting.scheduleTime = new Date(scheduleTime);
+      ScheduleSetting.scheduleTime = scheduleTime;
       ScheduleSetting.timeInterval = timeInterval;
 
       const response = SaveScheduler(ScheduleSetting);
@@ -201,8 +211,9 @@ const Home = () => {
     }
   };
   const scheduleSettingUpdateHandler = () => {
+    console.log('sehdule object', scheduleTime);
     if (scheduleSettingValidation(scheduleTime, timeInterval)) {
-      ScheduleSetting.scheduleTime = new Date(scheduleTime);
+      ScheduleSetting.scheduleTime = scheduleTime;
       ScheduleSetting.timeInterval = timeInterval;
       ScheduleSetting.id = scheduleId;
 
@@ -336,6 +347,7 @@ const Home = () => {
 
   //Email Settings
   const onFromChange = (val) => {
+    debugger;
     if (val === '') {
       setvalidationFromId(true);
       setValidateCount(++i);
