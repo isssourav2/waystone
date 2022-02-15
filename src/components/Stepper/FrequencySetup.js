@@ -154,7 +154,14 @@ function FrequencySetup() {
           </div>
           <br />
           <div>
-            Enter Range <input type="text" value="0" disabled={FromTo} /> Days
+            Enter Range{' '}
+            <input
+              type="text"
+              className="label-counter"
+              value="0"
+              disabled={FromTo}
+            />{' '}
+            Days
           </div>
           <br />
           For Instance : Effective date: 20/04/2018, From To (delta): +3 Range

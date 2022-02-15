@@ -56,7 +56,7 @@ const Home = () => {
   const [Password, SetPassword] = React.useState('');
   const [To, SetTo] = React.useState('');
 
-  const [value, setValue] = React.useState('');
+  const [value, setValue] = React.useState('1');
 
   const [btnDisabled, setBtnDisabled] = React.useState(false);
   const [validateCount, setValidateCount] = React.useState(1);
