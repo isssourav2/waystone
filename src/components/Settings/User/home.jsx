@@ -86,7 +86,7 @@ const Home = () => {
   };
 
   const submitHandler = () => {
-    if (Validation(UserName, FirstName, LastName, Email)) {
+    if (Validation(UserName, FirstName, LastName, Email, RoleId)) {
       User.userName = UserName;
       User.firstName = FirstName;
       User.lastName = LastName;
@@ -120,7 +120,7 @@ const Home = () => {
   const UpdateHandler = () => {
     alert(User.userId);
     console.log('update');
-    if (Validation(UserName, FirstName, LastName, Email)) {
+    if (Validation(UserName, FirstName, LastName, Email, RoleId)) {
       User.userName = UserName;
       User.firstName = FirstName;
       User.lastName = LastName;
@@ -148,7 +148,8 @@ const Home = () => {
     });
   };
 
-  const Validation = (UserName, FirstName, LastName, Email) => {
+  const Validation = (UserName, FirstName, LastName, Email, RoleId) => {
+    debugger;
     if (UserName == '') {
       setvalidationUserName(true);
       setValidateCount(++i);
@@ -163,6 +164,10 @@ const Home = () => {
       return false;
     } else if (Email == '') {
       setvalidationEmail(true);
+      setValidateCount(++i);
+      return false;
+    } else if (RoleId == '' || RoleId == 0) {
+      setvalidationRoleId(true);
       setValidateCount(++i);
       return false;
     } else {
@@ -205,6 +210,7 @@ const Home = () => {
   const [validationFirstName, setvalidationFirstName] = React.useState(false);
   const [validationLastName, setvalidationLastName] = React.useState(false);
   const [validationEmail, setvalidationEmail] = React.useState(false);
+  const [validationRoleId, setvalidationRoleId] = React.useState(false);
 
   const [btnDisabled, setBtnDisabled] = React.useState(false);
   const [validateCount, setValidateCount] = React.useState(1);
@@ -263,6 +269,15 @@ const Home = () => {
     //Role.roleName = val;
   };
   const onRoleIdChange = (val) => {
+    debugger;
+    if (val === '' || val === 0) {
+      setvalidationRoleId(true);
+      setValidateCount(++i);
+    } else {
+      setvalidationRoleId(false);
+      //setBtnDisabled(false);
+      setValidateCount(0);
+    }
     setselectRole(val);
     setRoleId(val);
   };
@@ -374,7 +389,9 @@ const Home = () => {
 
   const [SelectOptions, setSelectOptions] = React.useState([]);
   const [selectRole, setselectRole] = React.useState(0);
-  const [row, setRow] = React.useState({ userId: '3fa85f64-5717-4562-b3fc-2c963f66afa6' });
+  const [row, setRow] = React.useState({
+    userId: '3fa85f64-5717-4562-b3fc-2c963f66afa6',
+  });
 
   React.useEffect(() => {
     GetUserData();
@@ -624,16 +641,31 @@ const Home = () => {
                   }}
                   onChange={(e) => onRoleIdChange(e.target.value)}
                 > */}
-                <Select
-                  value={selectRole}
-                  onChange={(e) => onRoleIdChange(e.target.value)}
-                >
-                  {SelectOptions.map((rol) => {
-                    return (
-                      <MenuItem value={rol.roleId}>{rol.roleName}</MenuItem>
-                    );
-                  })}
-                </Select>
+
+                {validationRoleId ? (
+                  <Select
+                    error
+                    value={selectRole}
+                    onChange={(e) => onRoleIdChange(e.target.value)}
+                  >
+                    {SelectOptions.map((rol) => {
+                      return (
+                        <MenuItem value={rol.roleId}>{rol.roleName}</MenuItem>
+                      );
+                    })}
+                  </Select>
+                ) : (
+                  <Select
+                    value={selectRole}
+                    onChange={(e) => onRoleIdChange(e.target.value)}
+                  >
+                    {SelectOptions.map((rol) => {
+                      return (
+                        <MenuItem value={rol.roleId}>{rol.roleName}</MenuItem>
+                      );
+                    })}
+                  </Select>
+                )}
                 {/* {SelectOptions.map((rol) => {
                   return <option value={rol.roleId}>{rol.roleName}</option>;
                 })} */}
