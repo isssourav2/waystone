@@ -46,13 +46,42 @@ function Step9() {
       SetRequiredDoc(false);
     }
   };
-
+  const [SelectRiskCoreTemplate, SetSelectRiskCoreTemplate] = React.useState(0);
+  const [RiskCoreTemplate, SetRiskCoreTemplate] = React.useState([]);
+  const GetRiskCoreTemplate = () => {
+    fetch('https://localhost:7056/api/RiskCoreTemplate')
+      .then((res) => res.json())
+      .then((result) => {
+        //console.log(result);
+        const Options = [...result];
+        SetRiskCoreTemplate(Options);
+      });
+  };
   React.useEffect(() => {
     GetConnection();
+    GetRiskCoreTemplate();
     SetRequiredDoc(false);
   }, [0]);
   return (
     <div class="two-col-form">
+      <FormControl className="form-col">
+        <InputLabel htmlFor="grouped-native-select">
+          Application Name
+        </InputLabel>
+        <Select id="demo-simple-select-helper">
+          <MenuItem value="Internal">Internal</MenuItem>
+          <MenuItem value="External">External</MenuItem>
+        </Select>
+      </FormControl>
+      <FormControl className="form-col">
+        <InputLabel htmlFor="grouped-native-select">
+          Application Templates Name
+        </InputLabel>
+        <Select id="demo-simple-select-helper">
+          <MenuItem value="Temp1">Template 1</MenuItem>
+          <MenuItem value="Temp2">Template 2</MenuItem>
+        </Select>
+      </FormControl>
       <FormControl className="form-col">
         <InputLabel htmlFor="grouped-native-select">Connection</InputLabel>
         <Select
@@ -71,41 +100,31 @@ function Step9() {
         <Typography variant="h5">Host | {SelectConnection.host}</Typography>
         <Typography variant="h5">Port | {SelectConnection.port}</Typography>
       </div>
-      <Typography variant="h6" style={{ padding: '30px 17px' }}>
-        Remote Dir Path
-      </Typography>
-      <div className="two-col-form" style={{ padding: '30px 17px' }}>
-        <TextField
-          id="outlined-uncontrolled"
-          disabled="true"
-          value={SelectConnection.host}
-        />
+
+      <div className="two-col-form">
         <TextField id="outlined-uncontrolled" label="Directory Path" />
       </div>
-      {RequiredDoc && (
-        <>
-          <TextField
-            className="form-col"
-            id="outlined-uncontrolled"
-            label="File Name"
-          />
-          <TextField
-            className="form-col"
-            id="outlined-uncontrolled"
-            label="Sent To"
-          />
-          <TextField
-            className="form-col"
-            id="outlined-uncontrolled"
-            label="Subject Header"
-          />
-          <TextField
-            className="form-col"
-            id="outlined-uncontrolled"
-            label="Received From"
-          />
-        </>
-      )}
+
+      <>
+        <FormControl className="form-col-single">
+          <InputLabel
+            id="demo-simple-select-helper-label"
+            htmlFor="grouped-native-select"
+          >
+            RiskCore Import Template
+          </InputLabel>
+          <Select
+            id="demo-simple-select-helper"
+            value={SelectRiskCoreTemplate}
+            label={SelectRiskCoreTemplate}
+            onChange={(e) => SetSelectRiskCoreTemplate(e.target.value)}
+          >
+            {RiskCoreTemplate.map((freq) => {
+              return <MenuItem value={freq.id}>{freq.name}</MenuItem>;
+            })}
+          </Select>
+        </FormControl>
+      </>
     </div>
   );
 }
