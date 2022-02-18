@@ -168,10 +168,14 @@ function RiskCoreTemplate() {
     /> */}
 
         <FormControl className="form-col-single">
-          <InputLabel htmlFor="grouped-native-select">
+          <InputLabel
+            id="demo-simple-select-helper-label"
+            htmlFor="grouped-native-select"
+          >
             RiskCore Import Template
           </InputLabel>
           <Select
+            id="demo-simple-select-helper"
             value={SelectRiskCoreTemplate}
             label={SelectRiskCoreTemplate}
             onChange={(e) => SetSelectRiskCoreTemplate(e.target.value)}

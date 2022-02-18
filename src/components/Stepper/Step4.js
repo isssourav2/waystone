@@ -21,11 +21,10 @@ import '../../style/style.css';
 import { MuiDataGrid } from '../../DataTable';
 import axios from 'axios';
 
-import FormControl from '@mui/material/FormControl';	
+import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
-
 
 function PaperComponent(props) {
   return <Paper {...props} />;
@@ -145,7 +144,7 @@ const Step4 = () => {
     tagName: '',
   });
 
-   const [tagName, setTagName] = React.useState('');
+  const [tagName, setTagName] = React.useState('');
 
   const GetFileReadData = () => {
     fetch('https://localhost:7056/api/FileRead')
@@ -220,28 +219,24 @@ const Step4 = () => {
     }
   };
 
-
   const [value, setValue] = React.useState('');
   const tagged = [];
   const [tags, setTags] = React.useState([]);
   const id = open ? 'simple-popover' : undefined;
 
-
   const [basedOn, setBasedOn] = React.useState('');
-  const [checkIn,setCheckIn]=React.useState('');
-  const [cellOrHeader, setCellOrHeader]=React.useState('');
-  const [operation, setOperation]=React.useState('');
-  const [readFromNextColCell, setReadFromNextColCell]=React.useState('');
+  const [checkIn, setCheckIn] = React.useState('');
+  const [cellOrHeader, setCellOrHeader] = React.useState('');
+  const [operation, setOperation] = React.useState('');
+  const [readFromNextColCell, setReadFromNextColCell] = React.useState('');
 
   const dropdownOnChange = (event) => {
     setBasedOn(event.target.value);
-     setCheckIn(event.target.value);
-     setCellOrHeader(event.target.value);
-     setOperation(event.target.value);
-     setReadFromNextColCell(event.target.value);
-   };
-
-
+    setCheckIn(event.target.value);
+    setCellOrHeader(event.target.value);
+    setOperation(event.target.value);
+    setReadFromNextColCell(event.target.value);
+  };
 
   return (
     <>
@@ -312,98 +307,85 @@ const Step4 = () => {
           noValidate
           autoComplete="off"
         >
-                 
-             
-              <FormControl fullWidth>
- 
+          <FormControl fullWidth>
             <InputLabel id="demo-simple-select-label">BasedOn</InputLabel>
-  <Select
-    labelId="basedOn-select-label"
-    id="basedOn-select"
-    value={basedOn}
-    label="BasedOn"
-    onChange={(e)=>dropdownOnChange(setBasedOn)}
-  >    
-    <MenuItem value={1}>Value</MenuItem>
-    <MenuItem value={2}>Format</MenuItem>
-   </Select>
-</FormControl>
+            <Select
+              labelId="basedOn-select-label"
+              id="basedOn-select"
+              value={basedOn}
+              label="BasedOn"
+              onChange={(e) => dropdownOnChange(setBasedOn)}
+            >
+              <MenuItem value={1}>Value</MenuItem>
+              <MenuItem value={2}>Format</MenuItem>
+            </Select>
+          </FormControl>
 
-<FormControl fullWidth>
- 
+          <FormControl fullWidth>
             <InputLabel id="checkIn-select-label">CheckIn</InputLabel>
-  <Select
-    labelId="checkIn-select-label"
-    id="checkIn-select"
-    value={checkIn}
-    label="CheckIn"
-    onChange={(e)=>dropdownOnChange(setCheckIn)}
-  >    
-    <MenuItem value={1}>File Content</MenuItem>
-    <MenuItem value={2}>File Name</MenuItem>
-   </Select>
-</FormControl>
-<FormControl fullWidth>
- 
+            <Select
+              labelId="checkIn-select-label"
+              id="checkIn-select"
+              value={checkIn}
+              label="CheckIn"
+              onChange={(e) => dropdownOnChange(setCheckIn)}
+            >
+              <MenuItem value={1}>File Content</MenuItem>
+              <MenuItem value={2}>File Name</MenuItem>
+            </Select>
+          </FormControl>
+          <FormControl fullWidth>
             <InputLabel id="cellOrHeader-select-label">CellOrHeader</InputLabel>
-  <Select
-    labelId="cellOrHeader-select-label"
-    id="cellOrHeader-select"
-    value={cellOrHeader}
-    label="CellOrHeader"
-    onChange={(e)=>dropdownOnChange(setCellOrHeader)}
-  >    
-    <MenuItem value={1}>Cell</MenuItem>
-    <MenuItem value={2}>Header</MenuItem>
-   </Select>
-</FormControl>
-<TextField
-              id="cellOrHeaderValue-input"
-              label="CellOrHeaderValue"
-              type="Text"
-            />
-            <FormControl fullWidth>
- 
- <InputLabel id="operation-select-label">Operation</InputLabel>
-<Select
-labelId="operation-select-label"
-id="operation-select"
-value={operation}
-label="Operation"
-onChange={(e)=>dropdownOnChange(setOperation)}
->    
-<MenuItem value={1}>StartsWith</MenuItem>
-<MenuItem value={2}>EndsWith</MenuItem>
-<MenuItem value={3}>Contains</MenuItem>
-</Select>
-</FormControl>
-<TextField
-              id="searchValue-input"
-              label="SearchValue"
-              type="Text"
-            />
-<FormControl fullWidth>
- 
- <InputLabel id="readFromNextColCell-select-label">ReadFromNextColCell</InputLabel>
-<Select
-labelId="readFromNextColCell-select-label"
-id="readFromNextColCell-select"
-value={readFromNextColCell}
-label="ReadFromNextColCell"
-onChange={(e)=>dropdownOnChange(setReadFromNextColCell)}
->    
-<MenuItem value={1}>Not Set</MenuItem>
-<MenuItem value={2}>True</MenuItem>
-<MenuItem value={3}>False</MenuItem>
-</Select>
-</FormControl>
+            <Select
+              labelId="cellOrHeader-select-label"
+              id="cellOrHeader-select"
+              value={cellOrHeader}
+              label="CellOrHeader"
+              onChange={(e) => dropdownOnChange(setCellOrHeader)}
+            >
+              <MenuItem value={1}>Cell</MenuItem>
+              <MenuItem value={2}>Header</MenuItem>
+            </Select>
+          </FormControl>
+          <TextField
+            id="cellOrHeaderValue-input"
+            label="CellOrHeaderValue"
+            type="Text"
+          />
+          <FormControl fullWidth>
+            <InputLabel id="operation-select-label">Operation</InputLabel>
+            <Select
+              labelId="operation-select-label"
+              id="operation-select"
+              value={operation}
+              label="Operation"
+              onChange={(e) => dropdownOnChange(setOperation)}
+            >
+              <MenuItem value={1}>StartsWith</MenuItem>
+              <MenuItem value={2}>EndsWith</MenuItem>
+              <MenuItem value={3}>Contains</MenuItem>
+            </Select>
+          </FormControl>
+          <TextField id="searchValue-input" label="SearchValue" type="Text" />
+          <FormControl fullWidth>
+            <InputLabel id="readFromNextColCell-select-label">
+              ReadFromNextColCell
+            </InputLabel>
+            <Select
+              labelId="readFromNextColCell-select-label"
+              id="readFromNextColCell-select"
+              value={readFromNextColCell}
+              label="ReadFromNextColCell"
+              onChange={(e) => dropdownOnChange(setReadFromNextColCell)}
+            >
+              <MenuItem value={1}>Not Set</MenuItem>
+              <MenuItem value={2}>True</MenuItem>
+              <MenuItem value={3}>False</MenuItem>
+            </Select>
+          </FormControl>
 
-<TextField
-              id="sheetName-input"
-              label="SheetName"
-              type="Text"
-            />
-   </Box>
+          <TextField id="sheetName-input" label="SheetName" type="Text" />
+        </Box>
       </MatDialog>
     </>
   );
