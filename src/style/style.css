@@ -1718,7 +1718,7 @@ nav.MuiList-root {
 
 .Step-container-horizontal .MuiStepLabel-label {
   font-size: 12px !important;
-  width: 116px;
+  width: 112px;
 }
 
 .Step-container-horizontal
@@ -1771,7 +1771,7 @@ nav.MuiList-root {
 }
 
 .drag-wrap-col {
-  width: 25%;
+  width: 50%;
   padding: 0 8px;
 }
 
@@ -1782,6 +1782,26 @@ nav.MuiList-root {
   border-radius: 5px;
   margin: 0 0 10px 0;
   min-height: 45px;
+}
+
+.MuiIconButton-sizeMedium.icon-counter{
+  width: 30px;
+  height: 30px;
+  margin-left: 20px;
+  margin-top: 10px;
+}
+
+
+.badge-counter .icon-counter{
+  margin-top: 0px;
+  margin-left: 
+  
+  
+  
+  
+  
+  
+  0px;
 }
 
 @media (max-width: 1100px) {
