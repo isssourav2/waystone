@@ -69,7 +69,7 @@ const steps = [
     description: ``,
   },
 ];
-const Home = () => {
+const Stapper = () => {
   //Tags & Application specific
 
   const [activeStep, setActiveStep] = React.useState(0);
@@ -510,4 +510,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Stapper;

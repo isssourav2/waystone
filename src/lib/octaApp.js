@@ -20,6 +20,7 @@ import { OktaAuth, toRelativeUrl } from '@okta/okta-auth-js';
 import { oktaConfig } from './oktaConfig';
 import Profile from '../Profile';
 import { Stepper } from '@mui/material';
+import FileProcessing from '../components/Stepper/FileProcess/FileProcessing';
 const CALLBACK_PATH = '/login/callback';
 const oktaAuth = new OktaAuth(oktaConfig);
 
@@ -46,6 +47,7 @@ const OctaApp = () => {
         <OldRoute path="/TabMenu" component={TabMenu} />
         <OldRoute path={CALLBACK_PATH} exact component={LoginCallback} />
         <SecureRoute path="/profile" component={Profile} />
+        <OldRoute path="/FileProcessing" component={FileProcessing} />
       </Switch>
     </Security>
   );

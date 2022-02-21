@@ -7,7 +7,7 @@ import Box from '@mui/material/Box';
 import { Dashboard } from '../..';
 import { Roles, User, Tags, Email, Application } from '../../../components';
 import { TabMenuContext } from '../../../Context/TabMenuContext';
-import BasicButtons from '../../Stapper';
+import FileProcessing from '../../Stepper/FileProcess/FileProcessing';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -91,7 +91,7 @@ const Home = () => {
       </Box>
 
       <TabPanel value={tabMenuOpenIndex} index={0} className="frame">
-        <BasicButtons/>
+        <FileProcessing />
       </TabPanel>
       <TabPanel value={tabMenuOpenIndex} index={1} className="frame">
         Scheduled
