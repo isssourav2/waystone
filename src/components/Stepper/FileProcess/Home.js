@@ -75,19 +75,19 @@ function Home() {
       editable: true,
     },
     {
-      field: 'applicationId',
+      field: 'application',
       headerName: 'Source',
       width: 120,
       editable: true,
     },
     {
-      field: 'tagId',
+      field: 'tag',
       headerName: 'Tags',
       width: 100,
       editable: true,
     },
     {
-      field: 'riskCoreTemplateId',
+      field: 'riskCoreTemplate',
       headerName: 'Riskcore Import Template',
       width: 120,
       editable: true,
