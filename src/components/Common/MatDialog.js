@@ -65,10 +65,11 @@ function MatDialog({
   isSubmit,
   isAction,
   isSubmitDisable,
+  jobClass
 }) {
   return (
     <BootstrapDialog
-      className="modelPopUp"
+      className={'modelPopUp ' +jobClass}
       onClose={handleClose}
       aria-labelledby="customized-dialog-title"
       open={open}
