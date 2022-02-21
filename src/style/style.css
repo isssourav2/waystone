@@ -1794,15 +1794,28 @@ nav.MuiList-root {
 
 .badge-counter .icon-counter{
   margin-top: 0px;
-  margin-left: 
-  
-  
-  
-  
-  
-  
-  0px;
+  margin-left: 0px;
 }
+
+.MuiInputLabel-shrink{
+  z-index: 99 !important;
+  background-color: #fff;
+  padding: 0px 5px 0px 0px !important;
+}
+
+
+.form-col h5.MuiTypography-h5{
+  font-size: 15px;
+  padding: 10px;
+  border-bottom: #05bd0d 1px dashed;
+} 
+
+.modelPopUp.jobclass .MuiDialog-paper{
+  max-width: 100% !important;
+  height: 100%;
+}
+
+
 
 @media (max-width: 1100px) {
   .col-box .css-i4bv87-MuiSvgIcon-root {

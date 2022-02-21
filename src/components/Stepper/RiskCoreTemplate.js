@@ -63,6 +63,8 @@ function RiskCoreTemplate() {
       });
   };
   React.useEffect(() => {
+
+
     GetTagged();
     GetApplication();
     GetRiskCoreTemplate();
@@ -167,15 +169,11 @@ function RiskCoreTemplate() {
       label="Application(s)"
     /> */}
 
-        <FormControl className="form-col-single">
-          <InputLabel
-            id="demo-simple-select-helper-label"
-            htmlFor="grouped-native-select"
-          >
+        <FormControl className="form-col-single label-box">
+          <InputLabel htmlFor="grouped-native-select">
             RiskCore Import Template
           </InputLabel>
           <Select
-            id="demo-simple-select-helper"
             value={SelectRiskCoreTemplate}
             label={SelectRiskCoreTemplate}
             onChange={(e) => SetSelectRiskCoreTemplate(e.target.value)}
