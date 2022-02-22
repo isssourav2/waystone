@@ -1815,6 +1815,52 @@ nav.MuiList-root {
   height: 100%;
 }
 
+.content-box.no-space{
+  padding: 0px;
+}
+
+.content-box.no-space .form-col-single{
+  padding: 0px 10px;
+  width:100%;
+}
+
+.content-box.no-space .form-col,.content-box.no-space .form-col-single{
+  margin-bottom: 15px !important;
+}
+
+.content-box.no-space input.label-counter{
+  width: 25px;
+  line-height: 25px;
+  border-radius: 0;
+}
+
+.content-box.no-space .MuiIconButton-sizeMedium.icon-counter{
+  border: #05bd0d 1px solid;
+  margin: 0px;
+  border-radius: 0;
+
+}
+
+.content-box.no-space .modelPopUp .css-14s5rfu-MuiFormLabel-root-MuiInputLabel-root{
+  left: auto;
+}
+
+.content-box.no-space .css-mhc70k-MuiGrid-root > .MuiGrid-item{
+  padding: 0px !important ;
+}
+
+.content-box.no-space .modelPopUp .MuiDialog-paper input[type='text'],.content-box.no-space .modelPopUp .MuiDialog-paper input[type='Email']{
+  border: 0;
+  border-radius: 5px;
+}
+
+.content-box.no-space .css-mhc70k-MuiGrid-root{
+  border: 0 !important;
+}
+
+
+
+
 
 
 @media (max-width: 1100px) {

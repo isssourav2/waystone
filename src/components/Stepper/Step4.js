@@ -240,10 +240,10 @@ const Step4 = () => {
 
   return (
     <>
-      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+      <Box component="main" sx={{ flexGrow: 1, }}>
         <div className="content-box">
           <Box sx={{ flexGrow: 1 }}>
-            <Grid container spacing={2}>
+            <Grid container >
               <Grid item xs={6}>
                 <Box
                   sx={{
