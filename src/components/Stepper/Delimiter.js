@@ -5,7 +5,8 @@ import Select from '@mui/material/Select';
 import TextField from '@mui/material/TextField';
 import IconButton from '@mui/material/IconButton';
 import AddIcon from '@mui/icons-material/Add';
-import RemoveIcon from '@mui/icons-material/Remove';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import DeleteIcon from '@mui/icons-material/Delete';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
@@ -78,7 +79,7 @@ function Delimiter() {
         </FormControl>
 
         <TextField
-          type="password"
+          type="text"
           className="form-col"
           id="outlined-uncontrolled"
           label="File Password(if any)"
@@ -102,7 +103,8 @@ function Delimiter() {
                   style={{ marginLeft: '20px' }}
                   onClick={() => onRemove(item.name)}
                 >
-                  <RemoveIcon />
+                  <VisibilityIcon />
+                  <DeleteIcon />
                 </ListItemIcon>
               </ListItem>
             );
