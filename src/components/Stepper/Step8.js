@@ -240,11 +240,11 @@ const Step8 = () => {
 
   return (
     <>
-      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-        <div className="content-box">
+      <Box component="main" sx={{ flexGrow: 1, p: 0 }}>
+        <div className="">
           <Box sx={{ flexGrow: 1 }}>
-            <Grid container spacing={2}>
-              <Grid item xs={6}>
+            <Grid container spacing={0}>
+              <Grid item xs={0}>
                 <Box
                   sx={{
                     display: 'flex',
@@ -254,7 +254,7 @@ const Step8 = () => {
                   <Button
                     className="box-btn"
                     variant="contained"
-                    sx={{ marginLeft: 3 }}
+                    sx={{ marginLeft: 3, marginBottom: 3 }}
                     size="small"
                     onClick={handleClickOpen}
                   >
@@ -263,22 +263,11 @@ const Step8 = () => {
                 </Box>
               </Grid>
 
-              <Grid item xs={6}>
-                {/* <IconButton className="print-box">
-                  <PrintIcon />
-                </IconButton> */}
-              </Grid>
+             
             </Grid>
           </Box>
 
-          <Box sx={{ flexGrow: 1 }}>
-            <Grid container spacing={2}>
-              <Grid item xs={10}></Grid>
-              <Grid item xs={2}>
-                <div className="empty-box"></div>
-              </Grid>
-            </Grid>
-          </Box>
+         
 
           <Grid item xs={12}>
             <Grid container spacing={2}>

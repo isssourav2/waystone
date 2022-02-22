@@ -46,12 +46,12 @@ function ConnectionSetup() {
           })}
         </Select>
       </FormControl>
-      <div className="form-col">
+      <div className="form-col fill-box">
         <Typography variant="h5">
-          Protocol | {SelectConnection.protocol}
+          <span>Protocol :</span> {SelectConnection.protocol}
         </Typography>
-        <Typography variant="h5">Host | {SelectConnection.host}</Typography>
-        <Typography variant="h5">Port | {SelectConnection.port}</Typography>
+        <Typography variant="h5"><span>Host :</span> {SelectConnection.host}</Typography>
+        <Typography variant="h5"><span>Port :</span> {SelectConnection.port}</Typography>
       </div>
      
       <div className="two-col-form" style={{ padding: '30px 17px' }}>
