@@ -241,13 +241,14 @@ const Step4 = () => {
   return (
     <>
       <Box component="main" sx={{ flexGrow: 1, }}>
-        <div className="content-box">
+        <div className="">
           <Box sx={{ flexGrow: 1 }}>
             <Grid container >
               <Grid item xs={6}>
                 <Box
                   sx={{
                     display: 'flex',
+                    marginBottom: 3
                   }}
                 >
                   <Typography variant="h2">Rule</Typography>
@@ -271,14 +272,7 @@ const Step4 = () => {
             </Grid>
           </Box>
 
-          <Box sx={{ flexGrow: 1 }}>
-            <Grid container spacing={2}>
-              <Grid item xs={10}></Grid>
-              <Grid item xs={2}>
-                <div className="empty-box"></div>
-              </Grid>
-            </Grid>
-          </Box>
+          
 
           <Grid item xs={12}>
             <Grid container spacing={2}>
