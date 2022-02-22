@@ -53,13 +53,12 @@ function ConnectionSetup() {
         <Typography variant="h5">Host | {SelectConnection.host}</Typography>
         <Typography variant="h5">Port | {SelectConnection.port}</Typography>
       </div>
-      <Typography variant="h6" style={{ padding: '30px 17px' }}>
-        Remote Dir Path
-      </Typography>
+     
       <div className="two-col-form" style={{ padding: '30px 17px' }}>
         <TextField
           id="outlined-uncontrolled"
-          disabled="true"
+         
+          label="Remote Dir Path"
           value={SelectConnection.host}
         />
         <TextField id="outlined-uncontrolled" label="Directory Path" />

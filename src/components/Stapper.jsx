@@ -87,7 +87,7 @@ const Stapper = () => {
 
   return (
     <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-      <div class="content-box">
+      <div class="content-box no-space">
         <Box sx={{ flexGrow: 1 }}>
           <Grid container spacing={2}>
             <Grid item xs={12}>

@@ -70,8 +70,7 @@ function FrequencySetup() {
   return (
     <>
       <div class="two-col-form">
-        <div className="form-col">Frequency</div>
-        <div className="form-col">Tag</div>
+       
 
         <FormControl className="form-col">
           <InputLabel htmlFor="grouped-native-select">Frequency Tag</InputLabel>
@@ -85,7 +84,7 @@ function FrequencySetup() {
           </Select>
         </FormControl>
 
-        <TextField className="form-col" id="outlined-uncontrolled" label="" />
+        <TextField className="form-col" id="outlined-uncontrolled" label="Tag" />
       </div>
       <hr />
       <h3 className="text-center"> File Expected Receive Date </h3>
