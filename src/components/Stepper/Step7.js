@@ -64,12 +64,17 @@ function Step8() {
                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
               >
                 <TableCell component="th" scope="row">
-                  <TextField id="searchValue-input" label="" type="Text" />
+                  <TextField
+                    id="searchValue-input"
+                    label="Report"
+                    type="Text"
+                  />
                 </TableCell>
                 <TableCell align="right">
                   <Select
                     labelId="readFromNextColCell-select-label"
                     id="readFromNextColCell-select"
+                    value={1}
                   >
                     <MenuItem value={1}>Not Set</MenuItem>
                     <MenuItem value={2}>True</MenuItem>
@@ -94,8 +99,8 @@ function Step8() {
         </Table>
       </TableContainer>
       <Stack direction="row" spacing={2} style={{ marginTop: '10px' }}>
-        <Button variant="contained" onClick={onAddRows}>
-          +Add New
+        <Button className="btn" variant="contained" onClick={onAddRows}>
+          + Add New
         </Button>
       </Stack>
     </>
