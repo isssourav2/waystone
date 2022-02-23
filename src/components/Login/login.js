@@ -14,7 +14,7 @@ import { Redirect } from 'react-router-dom';
 const Login = () => {
   const { authState, oktaAuth } = useOktaAuth();
   const loginHandler = () =>
-    oktaAuth.signInWithRedirect({ originalUri: '/profile' });
+    oktaAuth.signInWithRedirect({ originalUri: '/help' });
   if (!authState) {
     return <div>Loading authentication...</div>;
   } else {
