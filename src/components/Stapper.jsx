@@ -38,6 +38,7 @@ import {
   FileProcessingValidation,
   Post,
   PostFile,
+  DownloaDable,
 } from './Stepper/Service/FileProcessingService';
 
 const steps = [
@@ -101,6 +102,9 @@ const Stapper = () => {
   /*****msg dialog*****/
   const [activeStep, setActiveStep] = React.useState(0);
   const handleNext = () => {
+    if (PostFile.isManipulation && FileProcessingValidation(PostFile)) {
+      Post(PostFile);
+    }
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
 
@@ -111,10 +115,7 @@ const Stapper = () => {
     setActiveStep(0);
   };
   if (activeStep == 1) {
-    if (FileProcessingValidation(PostFile)) {
-      // msgDialog('Insert Successfully done!!');
-      Post(PostFile);
-    } else {
+    if (!PostFile.isManipulation || !FileProcessingValidation(PostFile)) {
       handleBack();
       msgDialog('please fill all validation before procced!! \n');
     }

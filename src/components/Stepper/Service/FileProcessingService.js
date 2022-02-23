@@ -9,6 +9,7 @@ const postFileProcess = async (fileProcess) => {
 };
 
 const submitHandler = (fileProcess) => {
+  debugger;
   const response = postFileProcess(fileProcess);
   response.then((save) => {
     console.log('reponse:', save);
@@ -34,7 +35,7 @@ export const PostFile = {
   preprocessedDeliveryPath: '',
   username: '',
   password: '',
-  isManipulation: true,
+  isManipulation: false,
   tagId: 0,
   applicationId: 0,
   tag: '',
@@ -42,5 +43,7 @@ export const PostFile = {
   riskCoreTemplate: '',
   riskCoreTemplateId: 0,
 };
+
+export const DownloaDable = { isDownloadable: false };
 
 export const Post = HocExecute(submitHandler);
