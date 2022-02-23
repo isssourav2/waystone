@@ -532,8 +532,12 @@ const Step4 = () => {
           autoComplete="off"
         >
           <FormControl fullWidth>
-            <InputLabel id="demo-simple-select-label">BasedOn</InputLabel>
-            <Select
+            <InputLabel id="demo-simple-select-label">BasedOn *</InputLabel>
+            {
+              validationBasedOn?(
+                
+                <Select
+                error
               labelId="basedOn-select-label"
               id="basedOn-select"
               value={BasedOn}
@@ -543,11 +547,27 @@ const Step4 = () => {
              <MenuItem value={"Value"}>Value</MenuItem>
             <MenuItem value={"Format"}>Format</MenuItem>
             </Select>
+            
+              ):(
+                <Select
+              labelId="basedOn-select-label"
+              id="basedOn-select"
+              value={BasedOn}
+              label="BasedOn"
+              onChange={(e) => BasedOnChange(e.target.value)}
+            >
+             <MenuItem value={"Value"}>Value</MenuItem>
+            <MenuItem value={"Format"}>Format</MenuItem>
+            </Select>
+              )
+            }
           </FormControl>
 
           <FormControl fullWidth>
-            <InputLabel id="checkIn-select-label">CheckIn</InputLabel>
-            <Select
+            <InputLabel id="checkIn-select-label">CheckIn *</InputLabel>
+            {validationCheckIn?(
+              <Select
+              error
               labelId="checkIn-select-label"
               id="checkIn-select"
               value={CheckIn}
@@ -557,6 +577,20 @@ const Step4 = () => {
               <MenuItem value={"FileContent"}>File Content</MenuItem>
               <MenuItem value={"FileName"}>File Name</MenuItem>
             </Select>
+            ):(
+              <Select
+              labelId="checkIn-select-label"
+              id="checkIn-select"
+              value={CheckIn}
+              label="CheckIn"
+              onChange={(e) => CheckInOnChange(e.target.value)}
+            >
+              <MenuItem value={"FileContent"}>File Content</MenuItem>
+              <MenuItem value={"FileName"}>File Name</MenuItem>
+            </Select>
+
+            )}
+            
           </FormControl>
           <FormControl fullWidth>
             <InputLabel id="cellOrHeader-select-label">CellOrHeader</InputLabel>
@@ -580,24 +614,52 @@ const Step4 = () => {
               onChange={e=>CellOrHeaderValueInputChange(e.target.value)}
           />
           <FormControl fullWidth>
-            <InputLabel id="operation-select-label">Operation</InputLabel>
-            <Select
-              labelId="operation-select-label"
-              id="operation-select"
-              value={Operation}
-              label="Operation"
-              onChange={(e) => OperationOnChange(e.target.value)}
-            >
-              <MenuItem value={"StartsWith"}>StartsWith</MenuItem>
-              <MenuItem value={"EndsWith"}>EndsWith</MenuItem>
-              <MenuItem value={"Contains"}>Contains</MenuItem>
-            </Select>
+            <InputLabel id="operation-select-label">Operation *</InputLabel>
+            {
+              validationOperation ? (
+                <Select
+                error
+                labelId="operation-select-label"
+                id="operation-select"
+                value={Operation}
+                label="Operation"
+                onChange={(e) => OperationOnChange(e.target.value)}
+              >
+                <MenuItem value={"StartsWith"}>StartsWith</MenuItem>
+                <MenuItem value={"EndsWith"}>EndsWith</MenuItem>
+                <MenuItem value={"Contains"}>Contains</MenuItem>
+              </Select>
+              ):(
+                <Select
+                                labelId="operation-select-label"
+                id="operation-select"
+                value={Operation}
+                label="Operation"
+                onChange={(e) => OperationOnChange(e.target.value)}
+              >
+                <MenuItem value={"StartsWith"}>StartsWith</MenuItem>
+                <MenuItem value={"EndsWith"}>EndsWith</MenuItem>
+                <MenuItem value={"Contains"}>Contains</MenuItem>
+              </Select>
+              )
+            }
+           
           </FormControl>
-          <TextField id="searchValue-input" label="SearchValue" type="Text"
+          {validationSearchValue?(
+            <TextField id="searchValue-input" label="SearchValue *" type="Text"
+            error
+            name="SearchValue"
+            value={SearchValue}
+            onChange={e=>SearchValueInputChange(e.target.value)}
+            />
+          ):(
+            <TextField id="searchValue-input" label="SearchValue *" type="Text"
           name="SearchValue"
           value={SearchValue}
           onChange={e=>SearchValueInputChange(e.target.value)}
           />
+          )}
+          
           <FormControl fullWidth>
             <InputLabel id="readFromNextColCell-select-label">
               ReadFromNextColCell
