@@ -43,7 +43,7 @@ function RiskCoreTemplate() {
   const [Application, setApplication] = React.useState([]);
   console.log('Tag Records:', Application);
 
-  const postFileProcess = (fileProcess) => {
+  const postFileProcess =async (fileProcess) => {
     const res = await axios.post(
       'https://localhost:7056/api/FileProcessingTemplate',
       fileProcess
@@ -53,7 +53,7 @@ function RiskCoreTemplate() {
   const [tagName, setTagName] = React.useState('');
 
   const submitHandler = () => {
-    const response = postFileProcess(Tag);
+    const response = postFileProcess(tagName);
     response.then((save) => {
       console.log('reponse:', save);
     });
