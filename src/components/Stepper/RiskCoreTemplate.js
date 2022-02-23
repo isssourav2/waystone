@@ -10,6 +10,7 @@ import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 import FixedTags from '../Common/FixedTags';
 import MenuItem from '@mui/material/MenuItem';
+import axios from 'axios';
 const StyledFormControlLabel = styled((props) => (
   <FormControlLabel {...props} />
 ))(({ theme, checked }) => ({
@@ -42,6 +43,22 @@ function RiskCoreTemplate() {
   const [Application, setApplication] = React.useState([]);
   console.log('Tag Records:', Application);
 
+  const postFileProcess = (fileProcess) => {
+    const res = await axios.post(
+      'https://localhost:7056/api/FileProcessingTemplate',
+      fileProcess
+    );
+    return res.data;
+  };
+  const [tagName, setTagName] = React.useState('');
+
+  const submitHandler = () => {
+    const response = postFileProcess(Tag);
+    response.then((save) => {
+      console.log('reponse:', save);
+    });
+  };
+
   const GetTagged = () => {
     fetch('https://localhost:7056/api/Tag')
       .then((res) => res.json())
@@ -63,8 +80,6 @@ function RiskCoreTemplate() {
       });
   };
   React.useEffect(() => {
-
-
     GetTagged();
     GetApplication();
     GetRiskCoreTemplate();
