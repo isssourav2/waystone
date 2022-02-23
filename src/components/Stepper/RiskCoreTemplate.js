@@ -12,7 +12,7 @@ import FixedTags from '../Common/FixedTags';
 import MenuItem from '@mui/material/MenuItem';
 import axios from 'axios';
 import { HocExecute } from './Service/HocExecute';
-import { PostFile } from './Service/FileProcessingService';
+import { PostFile, DownloaDable } from './Service/FileProcessingService';
 const StyledFormControlLabel = styled((props) => (
   <FormControlLabel {...props} />
 ))(({ theme, checked }) => ({
@@ -71,10 +71,44 @@ function RiskCoreTemplate() {
     GetApplication();
     GetRiskCoreTemplate();
   }, [0]);
+  const [Tag, SetTag] = React.useState(0);
+
+  const [application, Setapplication] = React.useState(0);
+
+  const [RiskTemplate, SetRiskTemplate] = React.useState(0);
+
+  const [validateCount, setValidateCount] = React.useState(1);
+  const onFileProcessingTemplateNameChange = (val) => {
+    if (val === '') {
+      setvalidationfileProcessingTemplateName(true);
+      setValidateCount(++i);
+    } else {
+      setvalidationfileProcessingTemplateName(false);
+      //setBtnDisabled(false);
+      setValidateCount(0);
+    }
+    SetFileProcessingTemplateName(val);
+    PostFile.fileProcessingTemplateName = val;
+    //user.userName = val;
+  };
+  const onTagChange = (val) => {
+    SetTag(val);
+    PostFile.tagId = val;
+    //user.userName = val;
+  };
+  const onApplicationChange = (val) => {
+    Setapplication(val);
+    PostFile.applicationId = val;
+    //user.userName = val;
+  };
+  const onRiskCoreTemplateChange = (val) => {
+    SetRiskTemplate(val);
+    PostFile.riskCoreImportTemplateId = val;
+    //user.userName = val;
+  };
   const fixedOptions = [Tagged[0]];
   const [tagValue, setTagValue] = React.useState([...fixedOptions, Tagged[5]]);
   const handleTaggedChange = (event, newValue) => {
-    debugger;
     if (newValue[0].name === 'All') {
       setTagValue([
         // ...fixedOptions,
@@ -85,6 +119,7 @@ function RiskCoreTemplate() {
         ...newValue.filter((option) => fixedOptions.indexOf(option) === -1),
       ]);
     }
+    onTagChange(newValue[0].tagId);
   };
   const fixedAppOptions = [Application[0]];
   const [appValue, setAppValue] = React.useState([
@@ -103,6 +138,7 @@ function RiskCoreTemplate() {
         ...newValue.filter((option) => fixedAppOptions.indexOf(option) === -1),
       ]);
     }
+    onApplicationChange(newValue[0].applicationId);
   };
   const [SelectRiskCoreTemplate, SetSelectRiskCoreTemplate] = React.useState(0);
   const [RiskCoreTemplate, SetRiskCoreTemplate] = React.useState([]);
@@ -122,20 +158,6 @@ function RiskCoreTemplate() {
     validationfileProcessingTemplateName,
     setvalidationfileProcessingTemplateName,
   ] = React.useState(false);
-  const [validateCount, setValidateCount] = React.useState(1);
-  const onFileProcessingTemplateNameChange = (val) => {
-    if (val === '') {
-      setvalidationfileProcessingTemplateName(true);
-      setValidateCount(++i);
-    } else {
-      setvalidationfileProcessingTemplateName(false);
-      //setBtnDisabled(false);
-      setValidateCount(0);
-    }
-    SetFileProcessingTemplateName(val);
-    PostFile.fileProcessingTemplateName = val;
-    //user.userName = val;
-  };
 
   const AllValidation = () => {
     debugger;
@@ -148,9 +170,13 @@ function RiskCoreTemplate() {
       return true;
     }
   };
-
+  const downloadManipulate = () => {
+    debugger;
+    PostFile.isManipulation = true;
+  };
   console.log('file template:', PostFile);
-  console.log('Application Value', Application);
+  PostFile.riskCoreImportTemplateId = SelectRiskCoreTemplate;
+  console.log('SelectRiskCoreTemplate Value', SelectRiskCoreTemplate);
   return (
     <>
       <RadioGroup
@@ -164,11 +190,13 @@ function RiskCoreTemplate() {
             value="Download Manipulate and Delivery"
             label=" Download Manipulate and Delivery"
             control={<Radio />}
+            onChange={downloadManipulate}
           />
           <MyFormControlLabel
             value="Download Delivery"
             label="Download Delivery"
             control={<Radio />}
+            onChange={downloadManipulate}
           />
         </div>
       </RadioGroup>
