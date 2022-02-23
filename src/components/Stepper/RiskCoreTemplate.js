@@ -11,6 +11,8 @@ import FormControl from '@mui/material/FormControl';
 import FixedTags from '../Common/FixedTags';
 import MenuItem from '@mui/material/MenuItem';
 import axios from 'axios';
+import { HocExecute } from './Service/HocExecute';
+import { PostFile } from './Service/FileProcessingService';
 const StyledFormControlLabel = styled((props) => (
   <FormControlLabel {...props} />
 ))(({ theme, checked }) => ({
@@ -37,28 +39,13 @@ MyFormControlLabel.propTypes = {
    */
   value: PropTypes.any,
 };
+
 function RiskCoreTemplate() {
   const [Tagged, setTagged] = React.useState([]);
   console.log('Tag Records:', Tagged);
   const [Application, setApplication] = React.useState([]);
   console.log('Tag Records:', Application);
-
-  const postFileProcess =async (fileProcess) => {
-    const res = await axios.post(
-      'https://localhost:7056/api/FileProcessingTemplate',
-      fileProcess
-    );
-    return res.data;
-  };
-  const [tagName, setTagName] = React.useState('');
-
-  const submitHandler = () => {
-    const response = postFileProcess(tagName);
-    response.then((save) => {
-      console.log('reponse:', save);
-    });
-  };
-
+  let i = 0;
   const GetTagged = () => {
     fetch('https://localhost:7056/api/Tag')
       .then((res) => res.json())
@@ -129,8 +116,41 @@ function RiskCoreTemplate() {
       });
   };
 
-  console.log('Tagged Value', tagValue);
-  console.log('Application Value', appValue);
+  const [fileProcessingTemplateName, SetFileProcessingTemplateName] =
+    React.useState('');
+  const [
+    validationfileProcessingTemplateName,
+    setvalidationfileProcessingTemplateName,
+  ] = React.useState(false);
+  const [validateCount, setValidateCount] = React.useState(1);
+  const onFileProcessingTemplateNameChange = (val) => {
+    if (val === '') {
+      setvalidationfileProcessingTemplateName(true);
+      setValidateCount(++i);
+    } else {
+      setvalidationfileProcessingTemplateName(false);
+      //setBtnDisabled(false);
+      setValidateCount(0);
+    }
+    SetFileProcessingTemplateName(val);
+    PostFile.fileProcessingTemplateName = val;
+    //user.userName = val;
+  };
+
+  const AllValidation = () => {
+    debugger;
+    if (PostFile.fileProcessingTemplateName == '') {
+      setvalidationfileProcessingTemplateName(true);
+      setValidateCount(++i);
+      return false;
+    } else {
+      setValidateCount(0);
+      return true;
+    }
+  };
+
+  console.log('file template:', PostFile);
+  console.log('Application Value', Application);
   return (
     <>
       <RadioGroup
@@ -154,11 +174,23 @@ function RiskCoreTemplate() {
       </RadioGroup>
 
       <div className="two-col-form">
-        <TextField
-          className="form-col-single"
-          id="outlined-name"
-          label="Job Name"
-        />
+        {validationfileProcessingTemplateName ? (
+          <TextField
+            error
+            className="form-col-single"
+            id="outlined-name"
+            label="Job Name *"
+            onChange={(e) => onFileProcessingTemplateNameChange(e.target.value)}
+          />
+        ) : (
+          <TextField
+            className="form-col-single"
+            id="outlined-name"
+            label="Job Name *"
+            onChange={(e) => onFileProcessingTemplateNameChange(e.target.value)}
+          />
+        )}
+
         <div className="form-col">
           <FixedTags
             tags={Tagged}

@@ -28,7 +28,11 @@ const Login = () => {
               <CardContent className="login-head">
                 <img src={logo} alt="logo" />
                 <h2>Employee Single Sign-On via Okta</h2>
-                <p > To access <strong>PPM</strong>, use your Active Directory credentials.</p>
+                <p>
+                  {' '}
+                  To access <strong>PPM</strong>, use your Active Directory
+                  credentials.
+                </p>
               </CardContent>
               <Button size="large" onClick={loginHandler} className="btn">
                 <LockOpenIcon />
