@@ -70,21 +70,28 @@ function FrequencySetup() {
   return (
     <>
       <div class="two-col-form">
-       
-
         <FormControl className="form-col">
-          <InputLabel htmlFor="grouped-native-select">Frequency Tag</InputLabel>
+          <InputLabel htmlFor="grouped-native-select">
+            Frequency Tag *
+          </InputLabel>
           <Select
             value={SelectFrequency}
             onChange={(e) => onFrequencyChange(e.target.value)}
           >
-            {FrequencyOptions.map((freq) => {
-              return <MenuItem value={freq.tagId}>{freq.tagName}</MenuItem>;
-            })}
+            <MenuItem value={1}>Daily</MenuItem>
+            <MenuItem value={2}>Monthly</MenuItem>
+            <MenuItem value={3}>Weekly</MenuItem>
+            <MenuItem value={4}>Fort-nightly</MenuItem>
+            <MenuItem value={5}>Quarterly</MenuItem>
+            <MenuItem value={6}>Semi-Annual</MenuItem>
           </Select>
         </FormControl>
 
-        <TextField className="form-col" id="outlined-uncontrolled" label="Tag" />
+        <TextField
+          className="form-col"
+          id="outlined-uncontrolled"
+          label="Note"
+        />
       </div>
       <hr />
       <h3 className="text-center"> File Expected Receive Date </h3>

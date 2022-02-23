@@ -11,6 +11,11 @@ import Typography from '@mui/material/Typography';
 
 import TextField from '@mui/material/TextField';
 import PropTypes from 'prop-types';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
 
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
@@ -29,7 +34,11 @@ import Step5 from './Stepper/Step5';
 import Step6 from './Stepper/Step6';
 import Step7 from './Stepper/Step7';
 import Step8 from './Stepper/Step8';
-import Step9 from './Stepper/Step9';
+import {
+  FileProcessingValidation,
+  Post,
+  PostFile,
+} from './Stepper/Service/FileProcessingService';
 
 const steps = [
   {
@@ -69,9 +78,27 @@ const steps = [
     description: ``,
   },
 ];
+function PaperComponent(props) {
+  return <Paper {...props} />;
+}
 const Stapper = () => {
   //Tags & Application specific
+  /*****msg dialog*****/
+  const [msg, setMsg] = React.useState('');
+  const [msgOpen, setMsgOpen] = React.useState(false);
+  const [dialogOpen, setdialogOpen] = React.useState(false);
+  const msgDialog = (param) => {
+    debugger;
+    setMsg(param);
+    setMsgOpen(true);
+  };
+  const dialogHandleClose = () => {
+    debugger;
+    // setdialogOpen(false);
+    setMsgOpen(false);
+  };
 
+  /*****msg dialog*****/
   const [activeStep, setActiveStep] = React.useState(0);
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -80,10 +107,18 @@ const Stapper = () => {
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
-
   const handleReset = () => {
     setActiveStep(0);
   };
+  if (activeStep == 1) {
+    if (FileProcessingValidation(PostFile)) {
+      // msgDialog('Insert Successfully done!!');
+      Post(PostFile);
+    } else {
+      handleBack();
+      msgDialog('please fill all validation before procced!! \n');
+    }
+  }
 
   return (
     <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
@@ -506,6 +541,24 @@ const Stapper = () => {
           </Grid>
         </Box>
       </div>
+      <Dialog
+        open={msgOpen}
+        onClose={dialogHandleClose}
+        PaperComponent={PaperComponent}
+        aria-labelledby="draggable-dialog-title"
+      >
+        <DialogTitle style={{ cursor: 'move' }} id="draggable-dialog-title">
+          Message
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText>{msg}</DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button autoFocus onClick={dialogHandleClose} className="box-btn">
+            Ok
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Box>
   );
 };
