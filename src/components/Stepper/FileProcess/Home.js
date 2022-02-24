@@ -266,7 +266,7 @@ function Home() {
         </div>
       </Box>
 
-      <MatDialog open={open}  title="Role" handleClose={handleClose} jobClass="jobclass">
+      <MatDialog open={open}  title="Job Scheduling: Jobs" handleClose={handleClose} jobClass="jobclass">
         <Box component="form"  noValidate autoComplete="off">
           <Stapper />
         </Box>

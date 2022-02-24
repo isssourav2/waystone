@@ -1984,3 +1984,9 @@ nav.MuiList-root {
 .drag-col-paper.ManipulationRules input[type='radio'] {
   display: none;
 }
+
+
+.modelPopUp.formulaFieldClass .MuiDialog-paper {
+  max-width: 50% !important;
+  height: 100%;
+}
