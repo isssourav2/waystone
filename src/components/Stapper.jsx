@@ -40,14 +40,14 @@ import {
   PostFile,
   DownloaDable,
 } from './Stepper/Service/FileProcessingService';
-
+import { SetJobNameLocalStorage } from '../components/Stepper/Service/localstore';
 const steps = [
   {
-    label: 'Stap 1 Job',
+    label: 'Step 1 Job',
     description: ``,
   },
   {
-    label: 'Step 2 Fund Soheduler',
+    label: 'Step 2 Fund Scheduler',
     description: '',
   },
   {
@@ -102,7 +102,8 @@ const Stapper = () => {
   /*****msg dialog*****/
   const [activeStep, setActiveStep] = React.useState(0);
   const handleNext = () => {
-    if (PostFile.isManipulation && FileProcessingValidation(PostFile)) {
+    if (FileProcessingValidation(PostFile)) {
+      SetJobNameLocalStorage(PostFile.fileProcessingTemplateName);
       Post(PostFile);
     }
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -115,7 +116,7 @@ const Stapper = () => {
     setActiveStep(0);
   };
   if (activeStep == 1) {
-    if (!PostFile.isManipulation || !FileProcessingValidation(PostFile)) {
+    if (!FileProcessingValidation(PostFile)) {
       handleBack();
       msgDialog('please fill all validation before procced!! \n');
     }
@@ -167,7 +168,9 @@ const Stapper = () => {
                           <StepContent>
                             <hr />
                             <Typography className="Step-Wrap-box">
-                              <h3>Job Name: aaa</h3>
+                              <h3>
+                                Job Name: {PostFile.fileProcessingTemplateName}
+                              </h3>
                             </Typography>
 
                             <FrequencySetup />
@@ -202,7 +205,9 @@ const Stapper = () => {
                           <StepLabel>{step.label}</StepLabel>
                           <StepContent>
                             <Typography className="Step-Wrap-box">
-                              <h3>Job Name: 2aaa</h3>
+                              <h3>
+                                Job Name: {PostFile.fileProcessingTemplateName}
+                              </h3>
                             </Typography>
 
                             {/* connection */}
@@ -237,7 +242,9 @@ const Stapper = () => {
                           <StepLabel>{step.label}</StepLabel>
                           <StepContent>
                             <Typography className="Step-Wrap-box">
-                              <h3>Job Name: 3aaa</h3>
+                              <h3>
+                                Job Name: {PostFile.fileProcessingTemplateName}
+                              </h3>
                             </Typography>
 
                             <Delimiter />
@@ -271,7 +278,9 @@ const Stapper = () => {
                           <StepLabel>{step.label}</StepLabel>
                           <StepContent>
                             <Typography className="Step-Wrap-box">
-                              <h3>Job Name: 4aaa</h3>
+                              <h3>
+                                Job Name: {PostFile.fileProcessingTemplateName}
+                              </h3>
                             </Typography>
 
                             <Step4 />
@@ -305,7 +314,9 @@ const Stapper = () => {
                           <StepLabel>{step.label}</StepLabel>
                           <StepContent>
                             <Typography className="Step-Wrap-box">
-                              <h3>Job Name: 4aaa</h3>
+                              <h3>
+                                Job Name: {PostFile.fileProcessingTemplateName}
+                              </h3>
                             </Typography>
 
                             <Step5 />
@@ -340,7 +351,9 @@ const Stapper = () => {
                           <StepLabel>{step.label}</StepLabel>
                           <StepContent>
                             <Typography className="Step-Wrap-box">
-                              <h3>Job Name: 4aaa</h3>
+                              <h3>
+                                Job Name: {PostFile.fileProcessingTemplateName}
+                              </h3>
                             </Typography>
 
                             <Step6 />
@@ -375,7 +388,9 @@ const Stapper = () => {
                           <StepLabel>{step.label}</StepLabel>
                           <StepContent>
                             <Typography className="Step-Wrap-box">
-                              <h3>Job Name: 4aaa</h3>
+                              <h3>
+                                Job Name: {PostFile.fileProcessingTemplateName}
+                              </h3>
                             </Typography>
 
                             <Step7 />
@@ -410,7 +425,9 @@ const Stapper = () => {
                           <StepLabel>{step.label}</StepLabel>
                           <StepContent>
                             <Typography className="Step-Wrap-box">
-                              <h3>Job Name: 4aaa</h3>
+                              <h3>
+                                Job Name: {PostFile.fileProcessingTemplateName}
+                              </h3>
                             </Typography>
 
                             <Step8 />
