@@ -59,15 +59,12 @@ export default function ComplexGrid() {
            
           </Grid>
           <Grid item>
-          <Link class="btn-link" href="#"> <ArrowForwardIcon/></Link>
+          <Link class="btn-link" href="http://localhost:3000/documents/PPM%20User%20Manual%20-%20V.1.4.pdf" target="_blank"> <ArrowForwardIcon/></Link>
           </Grid>
         </Grid>
       </Grid>
 
-
-
-     
-      
+   
       <Typography item>
         <div class="panel-heading">
             <span class="icon-cell">
@@ -86,37 +83,17 @@ export default function ComplexGrid() {
           <Grid item xs container direction="column" spacing={0}>
             <Grid item xs>
               <Typography gutterBottom variant="subtitle1" component="div">
-               <strong>Jira</strong>
+               <strong>Waystone Application Support (JIRA)</strong>
               </Typography>
               
             </Grid>
            
           </Grid>
           <Grid item>
-          <Link class="btn-link" href="#"> <ArrowForwardIcon/></Link>
+          <Link class="btn-link" href="https://waystone-it.atlassian.net/jira/projects" target="_blank"> <ArrowForwardIcon/></Link>
           </Grid>
         </Grid>
       </Grid>
-
-       
-      <Grid container spacing={2}>
-        
-        <Grid item xs={12} sm container>
-          <Grid item xs container direction="column" spacing={0}>
-            <Grid item xs>
-              <Typography gutterBottom variant="subtitle1" component="div">
-               <strong>RiskCore</strong>
-              </Typography>
-              
-            </Grid>
-           
-          </Grid>
-          <Grid item>
-          <Link class="btn-link" href="#"> <ArrowForwardIcon/></Link>
-          </Grid>
-        </Grid>
-      </Grid>
-
 
       <Grid container spacing={2}>
         
@@ -131,10 +108,31 @@ export default function ComplexGrid() {
            
           </Grid>
           <Grid item>
-          <Link class="btn-link" href="#"> <ArrowForwardIcon/></Link>
+          <Link class="btn-link" href="10.200.100.43/Insight/" target="_blank" > <ArrowForwardIcon/></Link>
           </Grid>
         </Grid>
       </Grid>
+       
+      <Grid container spacing={2}>
+        
+        <Grid item xs={12} sm container>
+          <Grid item xs container direction="column" spacing={0}>
+            <Grid item xs>
+              <Typography gutterBottom variant="subtitle1" component="div">
+               <strong>RiskCore</strong>
+              </Typography>
+              
+            </Grid>
+           
+          </Grid>
+          <Grid item>
+          <Link class="btn-link" href="https://riskcore-test.dmsgovernance.com/" target="_blank"> <ArrowForwardIcon/></Link>
+          </Grid>
+        </Grid>
+      </Grid>
+
+
+      
 
       <Grid container spacing={2}>
         
@@ -142,14 +140,13 @@ export default function ComplexGrid() {
           <Grid item xs container direction="column" spacing={0}>
             <Grid item xs>
               <Typography gutterBottom variant="subtitle1" component="div">
-               <strong>Rabbit</strong>
+               <strong>OpsCore</strong>
               </Typography>
-              
-            </Grid>
+             </Grid>
            
           </Grid>
           <Grid item>
-          <Link class="btn-link" href="#"><ArrowForwardIcon/></Link>
+          <Link class="btn-link" href="http://opscore.uat.dmsgovernance.com:9998/" target="_blank"><ArrowForwardIcon/></Link>
           </Grid>
         </Grid>
       </Grid>
