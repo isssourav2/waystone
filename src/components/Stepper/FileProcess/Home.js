@@ -12,6 +12,15 @@ import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import axios from 'axios';
 import MatDialog from '../../Common/MatDialog';
 import Stapper from '../../Stapper';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import Paper from '@mui/material/Paper';
+function PaperComponent(props) {
+  return <Paper {...props} />;
+}
 function Home() {
   const submitHandler = () => {
     if (Validation(tagName)) {
@@ -152,9 +161,9 @@ function Home() {
     );
     return res.data;
   };
-  const DeleteTag = async (tag) => {
+  const DeleteTag = async (filep) => {
     const res = await axios.delete(
-      `https://localhost:7056/api/FileProcessingTemplate/${tag.tagId}`
+      `https://localhost:7056/api/FileProcessingTemplate/${filep.id}`
     );
     return res.data;
   };
@@ -266,11 +275,44 @@ function Home() {
         </div>
       </Box>
 
-      <MatDialog open={open}  title="Job Scheduling: Jobs" handleClose={handleClose} jobClass="jobclass">
-        <Box component="form"  noValidate autoComplete="off">
+      <MatDialog
+        open={open}
+        title="Job Scheduling: Jobs"
+        handleClose={handleClose}
+        jobClass="jobclass"
+      >
+        <Box component="form" noValidate autoComplete="off">
           <Stapper />
         </Box>
       </MatDialog>
+
+      <Dialog
+        open={dialogOpen}
+        onClose={dialogHandleClose}
+        PaperComponent={PaperComponent}
+        aria-labelledby="draggable-dialog-title"
+      >
+        <DialogTitle style={{ cursor: 'move' }} id="draggable-dialog-title">
+          Delete
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            Are you sure you want delete this records?
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button
+            autoFocus
+            onClick={dialogHandleClose}
+            className="box-btn left"
+          >
+            close
+          </Button>
+          <Button onClick={deleteHandleClose} className="box-btn ">
+            Delete
+          </Button>
+        </DialogActions>
+      </Dialog>
     </>
   );
 }
