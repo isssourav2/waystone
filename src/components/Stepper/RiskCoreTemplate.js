@@ -13,7 +13,7 @@ import MenuItem from '@mui/material/MenuItem';
 import axios from 'axios';
 import { HocExecute } from './Service/HocExecute';
 import { PostFile, DownloaDable } from './Service/FileProcessingService';
-
+import { GetEditRiskTemplate } from './Service/RiskCoreEditService.';
 const StyledFormControlLabel = styled((props) => (
   <FormControlLabel {...props} />
 ))(({ theme, checked }) => ({
@@ -67,10 +67,15 @@ function RiskCoreTemplate() {
         setApplication(result);
       });
   };
+  const EditRiskCoreTemplate = () => {
+    const objValue = GetEditRiskTemplate();
+    return objValue;
+  };
   React.useEffect(() => {
     GetTagged();
     GetApplication();
-    GetRiskCoreTemplate();
+    //GetRiskCoreTemplate();
+    EditRiskCoreTemplate();
   }, [0]);
   const [Tag, SetTag] = React.useState(0);
 
@@ -217,14 +222,16 @@ function RiskCoreTemplate() {
             error
             className="form-col-single"
             id="outlined-name"
-            label="Job Name *"
+            // label="Job Name *"
+            value={EditRiskCoreTemplate().fileProcessingTemplateName}
             onChange={(e) => onFileProcessingTemplateNameChange(e.target.value)}
           />
         ) : (
           <TextField
             className="form-col-single"
             id="outlined-name"
-            label="Job Name *"
+            // label="Job Name *"
+            value={EditRiskCoreTemplate().fileProcessingTemplateName}
             onChange={(e) => onFileProcessingTemplateNameChange(e.target.value)}
           />
         )}
@@ -233,6 +240,7 @@ function RiskCoreTemplate() {
           <FixedTags
             tags={Tagged}
             label="Select Tags(s)"
+            value={EditRiskCoreTemplate().tag}
             onTagChangeHandler={handleTaggedChange}
           />
         </div>
@@ -245,6 +253,7 @@ function RiskCoreTemplate() {
           <FixedTags
             tags={Application}
             label="Select Application(s)"
+            value={EditRiskCoreTemplate().application}
             onTagChangeHandler={handleApplicationChange}
           />
         </div>
@@ -259,7 +268,7 @@ function RiskCoreTemplate() {
             RiskCore Import Template
           </InputLabel>
           <Select
-            value={SelectRiskCoreTemplate}
+            value={EditRiskCoreTemplate().riskCoreTemplate}
             label={SelectRiskCoreTemplate}
             onChange={(e) => SetSelectRiskCoreTemplate(e.target.value)}
           >
