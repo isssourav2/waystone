@@ -12,9 +12,9 @@ function FrequencySetup() {
   const [val2, SetVal2] = React.useState(0);
   //set AsAt
   const [AsAt, SetAsAt] = React.useState(true);
-  const [FromTo, SetFromTo] = React.useState(true);
+  const [FromTo, SetFromTo] = React.useState(false);
 
-  const [SelectFrequency, SetSelectFrequency] = React.useState(0);
+  const [SelectFrequency, SetSelectFrequency] = React.useState(1);
   const [FrequencyOptions, SetSelectFrequencyOptions] = React.useState([]);
   const GetFrequency = () => {
     fetch('https://localhost:7056/api/Tag')
@@ -102,7 +102,7 @@ function FrequencySetup() {
               type="radio"
               id="AsAt"
               name="Jobstep2"
-              value="AsAt"
+              checked={AsAt}
               onChange={AsAtChange}
             />
             <label for="AsAt">As At</label>
@@ -135,7 +135,7 @@ function FrequencySetup() {
             type="radio"
             id="fromTo"
             name="Jobstep2"
-            value="fromTo"
+            checked={FromTo}
             onChange={AsFromChange}
           />
           <label for="fromTo">From To</label>

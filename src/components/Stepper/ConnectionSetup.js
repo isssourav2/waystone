@@ -5,6 +5,7 @@ import Select from '@mui/material/Select';
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
 import Typography from '@mui/material/Typography';
+import { GetJobNameLocalStorage } from './Service/localstore';
 function ConnectionSetup() {
   const [SelectConnection, SetSelectConnection] = React.useState({});
   const [ConnectionOptions, SetSelectConnectionOptions] = React.useState([]);
@@ -50,14 +51,17 @@ function ConnectionSetup() {
         <Typography variant="h5">
           <span>Protocol :</span> {SelectConnection.protocol}
         </Typography>
-        <Typography variant="h5"><span>Host :</span> {SelectConnection.host}</Typography>
-        <Typography variant="h5"><span>Port :</span> {SelectConnection.port}</Typography>
+        <Typography variant="h5">
+          <span>Host :</span> {SelectConnection.host}
+        </Typography>
+        <Typography variant="h5">
+          <span>Port :</span> {SelectConnection.port}
+        </Typography>
       </div>
-     
+
       <div className="two-col-form" style={{ padding: '30px 17px' }}>
         <TextField
           id="outlined-uncontrolled"
-         
           label="Remote Dir Path"
           value={SelectConnection.host}
         />

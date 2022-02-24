@@ -13,6 +13,7 @@ import MenuItem from '@mui/material/MenuItem';
 import axios from 'axios';
 import { HocExecute } from './Service/HocExecute';
 import { PostFile, DownloaDable } from './Service/FileProcessingService';
+
 const StyledFormControlLabel = styled((props) => (
   <FormControlLabel {...props} />
 ))(({ theme, checked }) => ({
@@ -142,12 +143,15 @@ function RiskCoreTemplate() {
   };
   const [SelectRiskCoreTemplate, SetSelectRiskCoreTemplate] = React.useState(0);
   const [RiskCoreTemplate, SetRiskCoreTemplate] = React.useState([]);
+  const [DownloadManipulate, SetDownloadManipulate] = React.useState(true);
+  const [DownloadableDelivery, SetDownloadableDelivery] = React.useState(false);
+
   const GetRiskCoreTemplate = () => {
     fetch('https://localhost:7056/api/RiskCoreTemplate')
       .then((res) => res.json())
       .then((result) => {
         //console.log(result);
-        const Options = [{ id: 0, name: 'Select User' }, ...result];
+        const Options = [{ id: 0, name: 'Select' }, ...result];
         SetRiskCoreTemplate(Options);
       });
   };
@@ -171,7 +175,13 @@ function RiskCoreTemplate() {
     }
   };
   const downloadManipulate = () => {
-    debugger;
+    SetDownloadManipulate(true);
+    SetDownloadableDelivery(false);
+    PostFile.isManipulation = true;
+  };
+  const downloadDelivery = () => {
+    SetDownloadableDelivery(true);
+    SetDownloadManipulate(false);
     PostFile.isManipulation = true;
   };
   console.log('file template:', PostFile);
@@ -189,14 +199,14 @@ function RiskCoreTemplate() {
             className="btn"
             value="Download Manipulate and Delivery"
             label=" Download Manipulate and Delivery"
-            control={<Radio />}
+            control={<Radio checked={DownloadManipulate} />}
             onChange={downloadManipulate}
           />
           <MyFormControlLabel
             value="Download Delivery"
             label="Download Delivery"
-            control={<Radio />}
-            onChange={downloadManipulate}
+            control={<Radio checked={DownloadableDelivery} />}
+            onChange={downloadDelivery}
           />
         </div>
       </RadioGroup>
