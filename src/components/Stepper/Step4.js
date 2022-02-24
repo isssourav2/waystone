@@ -49,6 +49,7 @@ const Step4 = () => {
   
   React.useEffect(() => {
     GetFileReadData();
+    setShowFields(false);
   }, [0]);
   
   const [rows, setRows] = React.useState([]);
@@ -70,6 +71,8 @@ const Step4 = () => {
   const [validationCheckIn, setvalidationCheckIn] = React.useState(false);
   const [validationOperation, setvalidationOperation] = React.useState(false);
   const [validationSearchValue, setvalidationSearchValue] = React.useState(false);
+
+  const [showFields, setShowFields] = React.useState(false);
   
   // const [validationCellOrHeader, setvalidationCellOrHeader] = React.useState(false);
   // const [validationCellOrHeaderValue, setvalidationCellOrHeaderValue] = React.useState(false);
@@ -225,6 +228,7 @@ const Step4 = () => {
     setReadFromNextColCell('');
     setSheetName('');
   
+    setShowFields(false);
     //set validate counter
     setValidateCount(0);
   
@@ -372,11 +376,19 @@ const Step4 = () => {
    const CheckInOnChange = (val) => {
     if(val=="" || val==0){
       setvalidationCheckIn(true);
+      setShowFields(false);
         setValidateCount(++i);
-  
     }
     else
     {
+      debugger;
+      if(val==='FileName'){
+        setShowFields(true);
+      }
+      else{
+        setShowFields(false);
+      }
+      
       setvalidationCheckIn(false);
         setValidateCount(++i);
         setCheckIn(val);
@@ -481,7 +493,7 @@ const Step4 = () => {
                     marginBottom: 3
                   }}
                 >
-                  <Typography variant="h2">Rule</Typography>
+                  {/* <Typography variant="h2">Rule</Typography> */}
                   <Button
                     className="box-btn"
                     variant="contained"
@@ -592,7 +604,9 @@ const Step4 = () => {
             )}
             
           </FormControl>
-          <FormControl fullWidth>
+          {!showFields &&(
+            <>
+            <FormControl fullWidth>
             <InputLabel id="cellOrHeader-select-label">CellOrHeader</InputLabel>
             <Select
               labelId="cellOrHeader-select-label"
@@ -605,6 +619,7 @@ const Step4 = () => {
               <MenuItem value={"Header"}>Header</MenuItem>
             </Select>
           </FormControl>
+                
           <TextField
             id="cellOrHeaderValue-input"
             label="CellOrHeaderValue"
@@ -613,6 +628,9 @@ const Step4 = () => {
               value={CellOrHeaderValue}
               onChange={e=>CellOrHeaderValueInputChange(e.target.value)}
           />
+          </>
+          )
+        }
           <FormControl fullWidth>
             <InputLabel id="operation-select-label">Operation *</InputLabel>
             {
@@ -660,7 +678,8 @@ const Step4 = () => {
           />
           )}
           
-          <FormControl fullWidth>
+          {!showFields &&(<>
+            <FormControl fullWidth>
             <InputLabel id="readFromNextColCell-select-label">
               ReadFromNextColCell
             </InputLabel>
@@ -676,7 +695,6 @@ const Step4 = () => {
               <MenuItem value={3}>False</MenuItem>
             </Select>
           </FormControl>
-
           <TextField
               id="sheetName-input"
               label="SheetName"
@@ -685,6 +703,8 @@ const Step4 = () => {
               value={SheetName}
               onChange={e=>SheetNameInputChange(e.target.value)}
             />
+          </>)}
+          
         </Box>
       </MatDialog>
       <Dialog
