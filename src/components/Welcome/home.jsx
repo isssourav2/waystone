@@ -11,7 +11,7 @@ import Stapper from '../Stapper';
 import Calender from '../calender';
 import Chart from '../chart';
 import Typography from '@mui/material/Typography';
-
+import { useHistory } from 'react-router-dom';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import Divider from '@mui/material/Divider';
@@ -28,7 +28,17 @@ import Linkbord from '../linkbord.jsx';
 
 import EditIcon from '@mui/icons-material/Edit';
 
-const home = () => {
+const Home = () => {
+  const history = useHistory();
+  const CreateJobs=()=>{
+    history.push("/TabJobsheduling");
+  }
+  const AddSource=()=>{
+    history.push("/DataSource");
+  }
+   const AddConfig=()=>{
+    history.push("/Settings");
+  }
   return (
     <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
       <div class="content-box">
@@ -67,14 +77,14 @@ const home = () => {
                            
                           </Typography>
                           {
-                            " Released on 2nd November 2021"
+                            "Release notes created on January 31, 2022"
                           }
                         </React.Fragment>
                       }
                     />
 
                     <div className="icon-box">
-                      <Link href="#">
+                      <Link href="http://localhost:3000/documents/PPM Release Notes - V.1.8.4.pdf" download>
                         <SimCardDownloadIcon />
                       </Link>
                     </div>
@@ -93,12 +103,12 @@ const home = () => {
                           >
                            
                           </Typography>
-                          {"Released on 2nd October 2021"}
+                          {"Release notes created on November 12, 2021"}
                         </React.Fragment>
                       }
                     />
                     <div className="icon-box">
-                      <Link href="#">
+                    <Link href="http://localhost:3000/documents/PPM Release Notes - V.1.8.3.pdf" download>
                         <SimCardDownloadIcon />
                       </Link>
                     </div>
@@ -118,13 +128,13 @@ const home = () => {
                            
                           </Typography>
                           {
-                            'Released on 2nd November 2021'
+                            'Release notes created on October 04, 2021'
                           }
                         </React.Fragment>
                       }
                     />
                     <div className="icon-box">
-                      <Link href="#">
+                    <Link href="http://localhost:3000/documents/PPM Release Notes - V.1.8.2.pdf" download>
                         <SimCardDownloadIcon />
                       </Link>
                     </div>
@@ -143,24 +153,21 @@ const home = () => {
                 <br />
                 <List sx={{ width: '100%', bgcolor: 'background.paper' }} >
                   <ListItem alignItems="flex-start">
-                    <ListItemText primary="View Dashborad " />
+                    <ListItemText primary="Create Jobs" />
 
                     <div className="icon-box">
-                      <Link href="#">
-                        {' '}
-                        <ArrowForwardIcon />
-                      </Link>
+                      {/* <Link href={onClick={LogoutHandler}}>
+                        {' '} */}
+                        <ArrowForwardIcon onClick={CreateJobs}/>
+                      {/* </Link> */}
                     </div>
                   </ListItem>
 
                   <ListItem alignItems="flex-start">
-                    <ListItemText primary="Create Data Pipeline" />
+                    <ListItemText primary="Add Config" />
 
                     <div className="icon-box">
-                      <Link href="#">
-                        {' '}
-                        <ArrowForwardIcon />
-                      </Link>
+                    <ArrowForwardIcon onClick={AddConfig}/>
                     </div>
                   </ListItem>
 
@@ -168,10 +175,7 @@ const home = () => {
                     <ListItemText primary="Add Source" />
 
                     <div className="icon-box">
-                      <Link href="#">
-                        {' '}
-                        <ArrowForwardIcon />
-                      </Link>
+                       <ArrowForwardIcon onClick={AddSource}/>
                     </div>
                   </ListItem>
                 </List>
@@ -190,4 +194,4 @@ const home = () => {
   );
 };
 
-export default home;
+export default Home;
