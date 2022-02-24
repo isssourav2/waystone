@@ -18,6 +18,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Paper from '@mui/material/Paper';
+import { SetEditRiskTemplate } from '../Service/RiskCoreEditService.';
 function PaperComponent(props) {
   return <Paper {...props} />;
 }
@@ -63,6 +64,7 @@ function Home() {
 
   const EditHandler = (param) => {
     setRow(param);
+    SetEditRiskTemplate(param);
     setTagName(param.tagName);
     setOpen(true);
   };
@@ -127,7 +129,7 @@ function Home() {
   var i = 0;
   const [validateCount, setValidateCount] = React.useState(1);
   const [rows, setRows] = React.useState([]);
-  const [row, setRow] = React.useState({ tagId: 0 });
+  const [row, setRow] = React.useState({ riskCoreImportTemplateId: 0 });
   const [Tag, setTag] = React.useState({
     tagId: 0,
     tagName: '',
