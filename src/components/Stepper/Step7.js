@@ -20,7 +20,7 @@ function createData(fileProcessing, ColumnOrder, ColumnName, DataType) {
 
 function Step8() {
   const [Rows, SetRows] = React.useState([]);
-
+  console.log('Step 8 Rows', Rows);
   React.useEffect(() => {
     const rows = [createData('Column1', '1', 'Column1', 'Numeric')];
     SetRows(rows);

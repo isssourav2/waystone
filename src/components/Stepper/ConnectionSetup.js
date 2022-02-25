@@ -6,6 +6,7 @@ import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
 import Typography from '@mui/material/Typography';
 import { GetJobNameLocalStorage } from './Service/localstore';
+import { FileFetch } from './Service/FileProcessingService';
 function ConnectionSetup() {
   const [SelectConnection, SetSelectConnection] = React.useState({});
   const [ConnectionOptions, SetSelectConnectionOptions] = React.useState([]);
@@ -21,6 +22,7 @@ function ConnectionSetup() {
   };
 
   const onConnectChange = (val) => {
+    FileFetch.connectionId = val.id;
     SetSelectConnection(val);
     if (val.protocol === 'SMB Share') {
       SetRequiredDoc(true);
@@ -28,7 +30,21 @@ function ConnectionSetup() {
       SetRequiredDoc(false);
     }
   };
-
+  const DirectoryPath = (e) => {
+    FileFetch.sourcePathFormat = e.target.value;
+  };
+  const onFileName = (e) => {
+    FileFetch.fileName = e.target.value;
+  };
+  const onReceivedFrom = (e) => {
+    FileFetch.receivedFrom = e.target.value;
+  };
+  const onSubjectHeader = (e) => {
+    FileFetch.subjectHeader = e.target.value;
+  };
+  const onSentTo = (e) => {
+    FileFetch.sentTo = e.target.value;
+  };
   React.useEffect(() => {
     GetConnection();
     SetRequiredDoc(false);
@@ -60,12 +76,11 @@ function ConnectionSetup() {
       </div>
 
       <div className="two-col-form" style={{ padding: '30px 17px' }}>
+        <TextField id="outlined-uncontrolled" value={SelectConnection.host} />
         <TextField
           id="outlined-uncontrolled"
-          label="Remote Dir Path"
-          value={SelectConnection.host}
+          onInput={(e) => DirectoryPath(e)}
         />
-        <TextField id="outlined-uncontrolled" label="Directory Path" />
       </div>
       {RequiredDoc && (
         <>
@@ -73,21 +88,25 @@ function ConnectionSetup() {
             className="form-col"
             id="outlined-uncontrolled"
             label="File Name"
+            onChange={(e) => onFileName(e)}
           />
           <TextField
             className="form-col"
             id="outlined-uncontrolled"
             label="Sent To"
+            onChange={(e) => onSentTo(e)}
           />
           <TextField
             className="form-col"
             id="outlined-uncontrolled"
             label="Subject Header"
+            onChange={(e) => onSubjectHeader(e)}
           />
           <TextField
             className="form-col"
             id="outlined-uncontrolled"
             label="Received From"
+            onChange={(e) => onReceivedFrom(e)}
           />
         </>
       )}

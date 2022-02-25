@@ -39,8 +39,22 @@ import {
   Post,
   PostFile,
   DownloaDable,
+  FundScheduler,
+  FileFetch,
+  FundSchedulerSubmit,
+  FileFetchSubmit,
+  FProcessingTagManipulationHandlerSubmit,
+  FProcessingDMSApplicationSubmit,
+  FileProcessingTagManipulation,
+  FileProcessingDMSApplication,
+  FileProcessingTagManipulationArray,
+  FileProcessingDMSApplicationArray,
 } from './Stepper/Service/FileProcessingService';
-import { SetJobNameLocalStorage } from '../components/Stepper/Service/localstore';
+import {
+  SetJobNameLocalStorage,
+  SetFileProcessingTemplateLocalStorage,
+  GetFileProcessingTemplateLocalStorage,
+} from '../components/Stepper/Service/localstore';
 const steps = [
   {
     label: 'Step 1 Job',
@@ -101,11 +115,42 @@ const Stapper = () => {
 
   /*****msg dialog*****/
   const [activeStep, setActiveStep] = React.useState(0);
-  const handleNext = () => {
+  //First Step
+  const FirstHandleNext = () => {
+    //Save Method
     if (FileProcessingValidation(PostFile)) {
-      SetJobNameLocalStorage(PostFile.fileProcessingTemplateName);
       Post(PostFile);
+      SetFileProcessingTemplateLocalStorage(PostFile.id);
+      FileProcessingTagManipulationArray.map((v) => {
+        FileProcessingTagManipulation.fileProcessingTemplateId = PostFile.id;
+        FileProcessingTagManipulation.tagId = v;
+        FProcessingTagManipulationHandlerSubmit(FileProcessingTagManipulation);
+      });
+      FileProcessingDMSApplicationArray.map((v) => {
+        FileProcessingDMSApplication.fileProcessingTemplateId = PostFile.id;
+        FileProcessingDMSApplication.dmsApplicationId = v;
+        FProcessingDMSApplicationSubmit(FileProcessingDMSApplication);
+      });
     }
+    handleNext();
+  };
+
+  const SecondHandleNext = () => {
+    //Save Method
+    FundScheduler.fileProcessingTemplateId =
+      GetFileProcessingTemplateLocalStorage();
+    FundSchedulerSubmit(FundScheduler);
+    handleNext();
+  };
+
+  const handleConnectionNext = () => {
+    FileFetch.fileProcessingTemplateId =
+      GetFileProcessingTemplateLocalStorage();
+    FileFetchSubmit(FileFetch);
+    handleNext();
+  };
+
+  const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
 
@@ -142,20 +187,20 @@ const Stapper = () => {
                                 <Button
                                   className="btn"
                                   variant="contained"
-                                  onClick={handleNext}
+                                  onClick={FirstHandleNext}
                                   sx={{ mt: 1, mr: 1 }}
                                 >
                                   {index === steps.length - 1
                                     ? 'Finish'
                                     : 'Save And Next'}
                                 </Button>
-                                <Button
+                                {/* <Button
                                   disabled={index === 0}
                                   onClick={handleBack}
                                   sx={{ mt: 1, mr: 1 }}
                                 >
                                   Previous
-                                </Button>
+                                </Button> */}
                               </div>
                             </Box>
                           </StepContent>
@@ -180,7 +225,7 @@ const Stapper = () => {
                                 <Button
                                   className="btn"
                                   variant="contained"
-                                  onClick={handleNext}
+                                  onClick={SecondHandleNext}
                                   sx={{ mt: 1, mr: 1 }}
                                 >
                                   {index === steps.length - 1
@@ -217,7 +262,7 @@ const Stapper = () => {
                                 <Button
                                   className="btn"
                                   variant="contained"
-                                  onClick={handleNext}
+                                  onClick={handleConnectionNext}
                                   sx={{ mt: 1, mr: 1 }}
                                 >
                                   {index === steps.length - 1

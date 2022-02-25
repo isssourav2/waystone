@@ -7,6 +7,7 @@ import IconButton from '@mui/material/IconButton';
 import AddIcon from '@mui/icons-material/Add';
 import MenuItem from '@mui/material/MenuItem';
 import RemoveIcon from '@mui/icons-material/Remove';
+import { FundScheduler } from './Service/FileProcessingService';
 function FrequencySetup() {
   const [val1, SetVal1] = React.useState(0);
   const [val2, SetVal2] = React.useState(0);
@@ -16,6 +17,33 @@ function FrequencySetup() {
 
   const [SelectFrequency, SetSelectFrequency] = React.useState(1);
   const [FrequencyOptions, SetSelectFrequencyOptions] = React.useState([]);
+
+  //Adding Data
+  // const [frequencyTagId, setFrequencyTagId] = React.useState(0);
+  // const [asAt, setAsAt] = React.useState(0);
+  // const [fromTo, setFromTo] = React.useState(0);
+  const [fromToRange, setFromToRange] = React.useState(0);
+  const [note, setNote] = React.useState('');
+
+  // FundScheduler.fromToRange=fromToRange;
+  // const FrequencyTagIdChange=(val)=>{
+  //   setFrequencyTagId(val);
+  // }
+  // const AsAtChange=(val)=>{
+  //   setAsAt(val);
+  // }
+  // const FromToChange=(val)=>{
+  //   setFromTo(val);
+  // }
+  const FromToRangeChange = (val) => {
+    FundScheduler.fromToRange = fromToRange;
+    setFromToRange(val);
+  };
+  const NoteChange = (val) => {
+    FundScheduler.note = val;
+    setNote(val);
+  };
+
   const GetFrequency = () => {
     fetch('https://localhost:7056/api/Tag')
       .then((res) => res.json())
@@ -30,39 +58,47 @@ function FrequencySetup() {
     GetFrequency();
   }, [0]);
   const onFrequencyChange = (val) => {
+    FundScheduler.frequencyTagId = val;
     SetSelectFrequency(val);
   };
   console.log('Select value', FrequencyOptions);
   const minusVal2 = () => {
     debugger;
     let val = val2;
-    SetVal2(--val);
+    let v1 = --val;
+    SetVal2(v1);
+    FundScheduler.fromTo = v1;
   };
   const addVal2 = () => {
-    debugger;
     let val = val2;
-    SetVal2(++val);
+    let v1 = ++val;
+    SetVal2(v1);
+    FundScheduler.fromTo = v1;
   };
   const minusVal1 = () => {
     debugger;
     let val = val1;
-    SetVal1(--val);
+    let v = --val;
+    SetVal1(v);
+    FundScheduler.asAt = v;
   };
   const addVal1 = () => {
     debugger;
     let val = val1;
-    SetVal1(++val);
+    let v = ++val;
+    SetVal1(v);
+    FundScheduler.asAt = v;
   };
 
   const AsAtChange = (e) => {
     if (e.target.checked) {
       SetAsAt(false);
-      SetFromTo(true);
+      // SetFromTo(true);
     }
   };
   const AsFromChange = (e) => {
     if (e.target.checked) {
-      SetFromTo(false);
+      //  SetFromTo(false);
       SetAsAt(true);
     }
   };
@@ -91,6 +127,7 @@ function FrequencySetup() {
           className="form-col"
           id="outlined-uncontrolled"
           label="Note"
+          onChange={(e) => NoteChange(e.target.value)}
         />
       </div>
       <hr />
@@ -135,7 +172,7 @@ function FrequencySetup() {
             type="radio"
             id="fromTo"
             name="Jobstep2"
-            checked={FromTo}
+            checked={AsAt}
             onChange={AsFromChange}
           />
           <label for="fromTo">From To</label>
@@ -166,6 +203,7 @@ function FrequencySetup() {
               className="label-counter"
               value="0"
               disabled={FromTo}
+              onChange={FromToRangeChange}
             />{' '}
             Days
           </div>
