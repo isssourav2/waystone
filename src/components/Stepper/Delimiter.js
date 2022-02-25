@@ -11,17 +11,43 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemIcon from '@mui/material/ListItemIcon';
+import { PostFile } from './Service/FileProcessingService';
+import { GetFileProcessingTemplateLocalStorage } from './Service/localstore';
+import axios from 'axios';
 function Delimiter() {
   const [FilePassword, SetFilePassword] = React.useState([]);
   const [password, Setpassword] = React.useState('');
+  const [FPassword, SetFPassword] = React.useState({});
   const onPassword = (e) => {
     Setpassword({ id: e.target.value, name: e.target.value });
+  };
+  const AddRecord = async (filePassword) => {
+    debugger;
+    const res = await axios.post(
+      'https://localhost:7056/api/FilePassword',
+      filePassword
+    );
+    return res.data;
   };
   const AddPassword = () => {
     let filePass = FilePassword.slice(0);
     filePass.push(password);
     SetFilePassword(filePass);
+    FPassword.fileProcessingTemplateId =
+      GetFileProcessingTemplateLocalStorage();
+    FPassword.password = password.name;
+    //AddRecord(FPassword);
+    const response = AddRecord(FPassword);
+    response
+      .then((save) => {
+        // filePass.push(password);
+        // SetFilePassword(filePass);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
+
   const onRemove = (value) => {
     const index = FilePassword.findIndex((v) => v.name == value);
     let filePass = [];
@@ -44,15 +70,11 @@ function Delimiter() {
             id="grouped-native-select"
             label="Grouping"
           >
-            <option aria-label="None" value="" />
-            <optgroup label="Category 1">
-              <option value={1}>Select</option>
-              <option value={2}>Select</option>
-            </optgroup>
-            <optgroup label="Category 2">
-              <option value={3}>Select</option>
-              <option value={4}>Select</option>
-            </optgroup>
+            <option aria-label="None" value="0" />
+            <option value="COMMA">,(COMMA)</option>
+            <option value="PIPE">!(PIPE)</option>
+            <option value="SEMICOLON">;(SEMICOLON)</option>
+            <option value="TAB">\t (TAB)</option>
           </Select>
         </FormControl>
 
@@ -66,15 +88,11 @@ function Delimiter() {
             id="grouped-native-select"
             label="Grouping"
           >
-            <option aria-label="None" value="" />
-            <optgroup label="Category 1">
-              <option value={1}>Select</option>
-              <option value={2}>Select</option>
-            </optgroup>
-            <optgroup label="Category 2">
-              <option value={3}>Select</option>
-              <option value={4}>Select</option>
-            </optgroup>
+            <option aria-label="None" value="0" />
+            <option value="COMMA">,(COMMA)</option>
+            <option value="PIPE">!(PIPE)</option>
+            <option value="SEMICOLON">;(SEMICOLON)</option>
+            <option value="TAB">\t (TAB)</option>
           </Select>
         </FormControl>
 

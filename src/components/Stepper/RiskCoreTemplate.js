@@ -10,9 +10,23 @@ import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 import FixedTags from '../Common/FixedTags';
 import MenuItem from '@mui/material/MenuItem';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
 import axios from 'axios';
 import { HocExecute } from './Service/HocExecute';
-import { PostFile, DownloaDable } from './Service/FileProcessingService';
+import {
+  FileProcessingValidation,
+  Post,
+  PostFile,
+  DownloaDable,
+  FundScheduler,
+  FundSchedulerSubmit,
+  FileProcessingTagManipulation,
+  FileProcessingDMSApplication,
+  FileProcessingTagManipulationArray,
+  FileProcessingDMSApplicationArray,
+} from './Service/FileProcessingService';
+import { SetFileProcessingTemplateLocalStorage } from './Service/localstore';
 import { GetEditRiskTemplate } from './Service/RiskCoreEditService.';
 const StyledFormControlLabel = styled((props) => (
   <FormControlLabel {...props} />
@@ -47,6 +61,23 @@ function RiskCoreTemplate() {
   const [Application, setApplication] = React.useState([]);
   console.log('Tag Records:', Application);
   let i = 0;
+  const AllValidation = () => {
+    debugger;
+    if (PostFile.fileProcessingTemplateName == '') {
+      setvalidationfileProcessingTemplateName(true);
+      setValidateCount(++i);
+      return false;
+    } else {
+      setValidateCount(0);
+      return true;
+    }
+  };
+  const handleNext = () => {
+    if (AllValidation) {
+      SetFileProcessingTemplateLocalStorage(PostFile.id);
+      Post(PostFile);
+    }
+  };
   const GetTagged = () => {
     fetch('https://localhost:7056/api/Tag')
       .then((res) => res.json())
@@ -77,6 +108,7 @@ function RiskCoreTemplate() {
     //GetRiskCoreTemplate();
     EditRiskCoreTemplate();
   }, [0]);
+
   const [Tag, SetTag] = React.useState(0);
 
   const [application, Setapplication] = React.useState(0);
@@ -100,11 +132,15 @@ function RiskCoreTemplate() {
   const onTagChange = (val) => {
     SetTag(val);
     PostFile.tagId = val;
+    // FileProcessingTagManipulationArray = [];
+    FileProcessingTagManipulationArray.push(val);
     //user.userName = val;
   };
   const onApplicationChange = (val) => {
     Setapplication(val);
     PostFile.applicationId = val;
+    //  FileProcessingDMSApplicationArray = [];
+    FileProcessingDMSApplicationArray.push(val);
     //user.userName = val;
   };
   const onRiskCoreTemplateChange = (val) => {
@@ -168,17 +204,6 @@ function RiskCoreTemplate() {
     setvalidationfileProcessingTemplateName,
   ] = React.useState(false);
 
-  const AllValidation = () => {
-    debugger;
-    if (PostFile.fileProcessingTemplateName == '') {
-      setvalidationfileProcessingTemplateName(true);
-      setValidateCount(++i);
-      return false;
-    } else {
-      setValidateCount(0);
-      return true;
-    }
-  };
   const downloadManipulate = () => {
     SetDownloadManipulate(true);
     SetDownloadableDelivery(false);
