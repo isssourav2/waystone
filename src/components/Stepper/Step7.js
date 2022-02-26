@@ -14,19 +14,38 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import {LastElementForStep8} from './Service/FileProcessingService'
+
 function createData(fileProcessing, ColumnOrder, ColumnName, DataType) {
   return { fileProcessing, ColumnOrder, ColumnName, DataType };
 }
 
 function Step8() {
   const [Rows, SetRows] = React.useState([]);
+   const [lastElement,SetLastElement]=React.useState('');
   console.log('Step 8 Rows', Rows);
   React.useEffect(() => {
     const rows = [createData('Column1', '1', 'Column1', 'Numeric')];
     SetRows(rows);
   }, [0]);
-
+const ReportChange=(val)=>{
+  SetLastElement(val);
+}
   const AddRows = (obj) => {
+    debugger;
+    var ElementTextbox=document.getElementById('reportvalue');
+  //lastElement=ElementTextbox;
+  if(lastElement==''){
+    alert('cannot be blank');
+  }
+  else
+  {
+    //SetLastElement('');
     const row = createData(
       obj.fileProcessing,
       obj.ColumnOrder,
@@ -35,6 +54,18 @@ function Step8() {
     );
     const rows = [...Rows, row];
     SetRows(rows);
+
+    // FileValidationArray.map((v) => {
+    //   debugger;
+    //   FileValidation.fileProcessingTemplateId = PostFile.id;
+    //   FileValidation=v;
+    //   console.log('FileProcessingTagManipulation:',FileProcessingTagManipulation);
+    //   FileValidationSubmit(FileValidation);
+    // });
+    //FileValidationArray
+    
+    
+  }
   };
   const onAddRows = () => {
     let columnObj = {
@@ -45,11 +76,41 @@ function Step8() {
     };
     AddRows(columnObj);
   };
+
+  LastElementForStep8=lastElement;
+
+/*****Select Data Type*****/
+const [SelectDataType, SetSelectDataType] = React.useState('Select');
+
+//on dropdown change
+const DataTypeOnChange = (val) => {
+  debugger;
+  SetSelectDataType(val);
+ };
+ /*****Select Data Type*****/
+
+ /*****msg dialog*****/
+const [msg,setMsg]=React.useState('');
+ const [msgOpen,setMsgOpen]=React.useState(false);
+ const msgDialog=(param)=>{
+    setMsg(param);
+   setMsgOpen(true);
+ };
+ const dialogHandleClose = () => {
+   setMsgOpen(false);
+};
+/*****msg dialog*****/
+
+
+
+
+
+
   const removeRow = () => {};
   return (
     <>
       <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+        <Table sx={{ minWidth: 650 }} aria-label="simple table" id="tblFileValidation">
           <TableHead>
             <TableRow>
               <TableCell>Report Header</TableCell>
@@ -65,21 +126,24 @@ function Step8() {
               >
                 <TableCell component="th" scope="row">
                   <TextField
-                    id="searchValue-input"
-                    label="Report"
+                    id="reportvalue"
+                    //label=""
                     type="Text"
+                    onChange={(e)=>ReportChange(e.target.value)}
                   />
                 </TableCell>
                 <TableCell align="right">
                   <Select
-                    labelId="readFromNextColCell-select-label"
-                    id="readFromNextColCell-select"
-                    value={1}
+                    labelId="dataType-select-label"
+                    id="dataType-select"
+                    value={SelectDataType}
+                    onChange={(e) => DataTypeOnChange(e.target.value)}
                   >
-                    <MenuItem value={1}>Not Set</MenuItem>
-                    <MenuItem value={2}>True</MenuItem>
-                    <MenuItem value={3}>False</MenuItem>
+                    <MenuItem value={"Select"}>--Select--</MenuItem>
+                    <MenuItem value={"Date"}>Date</MenuItem>
+                    <MenuItem value={"Numeric"}>Numeric</MenuItem>
                   </Select>
+                  
                 </TableCell>
                 <TableCell align="right">
                   <IconButton aria-label="delete" size="small">
@@ -103,6 +167,31 @@ function Step8() {
           + Add New
         </Button>
       </Stack>
+      <Dialog
+        open={msgOpen}
+        onClose={dialogHandleClose}
+        // PaperComponent={PaperComponent}
+        aria-labelledby="draggable-dialog-title"
+      >
+        <DialogTitle style={{ cursor: 'move' }} id="draggable-dialog-title">
+          Message
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            {msg}
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button
+            autoFocus
+            onClick={dialogHandleClose}
+            className="box-btn"
+          >
+            Ok
+          </Button>
+          
+        </DialogActions>
+      </Dialog>
     </>
   );
 }

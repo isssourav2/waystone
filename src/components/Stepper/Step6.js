@@ -200,7 +200,7 @@ const Step6 = () => {
     DeleteData(row).then((del) => {
       GetData();
       clearData();
-      //window.alert('Delete Successfully done!!');
+   
       msgDialog('Delete Successfully done!!');
       dialogHandleClose();
     });

@@ -211,7 +211,6 @@ const Step4 = () => {
     DeleteFileReadData(row).then((del) => {
       GetFileReadData();
       clearData();
-      //window.alert('Delete Successfully done!!');
       msgDialog('Delete Successfully done!!');
       dialogHandleClose();
     });

@@ -51,7 +51,7 @@ const Home = () => {
     department: '',
     roleId: 0,
     roleName: '',
-    isActive: false,
+    isActive: true,
     entryDate: '2022-01-07T00:00:00',
     updateDate: null,
   });
@@ -96,12 +96,21 @@ const Home = () => {
       console.log('insert', User);
       const response = SaveUser(User);
       response.then((save) => {
-        GetUserData();
-        window.alert('Insert Successfully done!!');
-        clearData();
-        // InsertAlert('Insert Successfully done!!');
-        handleClose();
-      });
+        debugger;
+        console.log('reponse:', save);
+  
+      if(save.isError)
+      {
+        msgDialog(save.errorMessage);
+      }
+      else
+      {
+        msgDialog(save.errorMessage);
+      clearData();
+      handleClose();
+      GetUserData();
+      }
+    });
     }
   };
   const EditHandler = (param) => {
@@ -120,7 +129,9 @@ const Home = () => {
   const UpdateHandler = () => {
     alert(User.userId);
     console.log('update');
+    User.userId = row.userId;
     if (Validation(UserName, FirstName, LastName, Email, RoleId)) {
+      
       User.userName = UserName;
       User.firstName = FirstName;
       User.lastName = LastName;
@@ -128,13 +139,22 @@ const Home = () => {
       User.roleId = RoleId;
       User.department = Department;
       User.userId = row.userId;
-      User.isActive = IsActive;
+      User.isActive = ( rows.filter((r) => r.id === User.userId)[0].isActive);
       const response = UpdateUser(User);
-      response.then((save) => {
-        window.alert('Update Successfully done!!');
-        GetUserData();
+      response.then((update) => {
+        debugger;
+        console.log('reponse:', update);
+        if(update.isError)
+      {
+        msgDialog(update.errorMessage);
+      }
+      else
+      {
         clearData();
         handleClose();
+        msgDialog(update.errorMessage);
+         GetUserData();
+      }
       });
     }
   };
@@ -143,14 +163,25 @@ const Home = () => {
     DeleteUser(row).then((del) => {
       GetUserData();
       clearData();
-      window.alert('Delete Successfully done!!');
-      dialogHandleClose();
+      // window.alert('Delete Successfully done!!');
+      msgDialog('Delete Successfully done!!');
+     dialogHandleClose();
+    
     });
   };
 
   const Validation = (UserName, FirstName, LastName, Email, RoleId) => {
-    // debugger;;
-    if (UserName == '') {
+    if(UserName == '' && FirstName == '' && LastName=='' && Email=='' && RoleId=='' )
+    {
+      setvalidationUserName(true);
+      setvalidationFirstName(true);
+      setvalidationLastName(true);
+      setvalidationEmail(true);
+      setvalidationRoleId(true);
+      setValidateCount(++i);
+      return false;
+    }
+   else if (UserName == '') {
       setvalidationUserName(true);
       setValidateCount(++i);
       return false;
@@ -291,6 +322,28 @@ const Home = () => {
     setUpdateDate(val);
   };
 
+
+//checkbox on change
+const CheckHandler = (param,chk) => {
+ 
+  console.log('update');
+  User.userName = param.userName;
+  User.firstName = param.firstName;
+  User.lastName = param.lastName;
+  User.email = param.email;
+  User.roleId = param.roleId;
+  User.department = param.department;
+  User.userId = param.userId;
+  User.isActive =param.isActive;
+
+  const response = UpdateUser(User);
+      response.then((save) => {
+       }).catch((error) => {
+        console.log(error);
+    });    
+};
+
+
   const columns = [
     { field: 'userName', headerName: 'User Name', width: 180, editable: true },
     {
@@ -324,7 +377,7 @@ const Home = () => {
       width: 180,
       renderCell: (params) => (
         <>
-          {params.row.isActive === true ? (
+          {/* {params.row.isActive === true ? (
             <Checkbox
               checked
               onChange={(e) => {
@@ -348,7 +401,29 @@ const Home = () => {
                 //setRows(filterval);
               }}
             />
-          )}
+          )} */}
+          {params.row.isActive === true ? (
+          <Checkbox
+            checked
+            color="success"
+            onChange={(e) => {
+                rows.filter((r) => r.userId === params.row.userId)[0].isActive =
+                e.target.checked;
+              setRows([...rows]);
+              CheckHandler(params.row,e.target.checked);
+              
+            }}
+          />
+        ) : (
+          <Checkbox
+            onChange={(e) => {
+                rows.filter((r) => r.userId === params.row.userId)[0].isActive =
+                e.target.checked;
+              setRows([...rows]);
+              CheckHandler(params.row,e.target.checked);
+            }}
+          />
+        )}
         </>
       ),
     },
@@ -391,6 +466,7 @@ const Home = () => {
   const [selectRole, setselectRole] = React.useState(0);
   const [row, setRow] = React.useState({
     userId: '3fa85f64-5717-4562-b3fc-2c963f66afa6',
+    isActive:true
   });
 
   React.useEffect(() => {
@@ -430,6 +506,7 @@ const Home = () => {
   const [dialogOpen, setdialogOpen] = React.useState(false);
   const dialogHandleClose = () => {
     setdialogOpen(false);
+    setMsgOpen(false);
   };
   const dialogHandleOpen = (param) => {
     deleteHandler(param);
@@ -446,6 +523,18 @@ const Home = () => {
   const viewHandleClose = () => {
     setviewOpen(false);
   };
+
+
+  /*****msg dialog*****/
+  const [msg,setMsg]=React.useState('');
+  const [msgOpen,setMsgOpen]=React.useState(false);
+  const msgDialog=(param)=>{
+   
+    setMsg(param);
+    setMsgOpen(true);
+  };
+  
+  /*****msg dialog*****/
 
   const id = open ? 'simple-popover' : undefined;
   return (
@@ -555,7 +644,7 @@ const Home = () => {
                 <TextField
                   error
                   id="outlined-error"
-                  label="User Name"
+                  label="User Name *"
                   type="Text"
                   value={UserName}
                   onInput={(e) => onUserNameChange(e.target.value)}
@@ -563,7 +652,7 @@ const Home = () => {
               ) : (
                 <TextField
                   id="outlined-password-input"
-                  label="User Name"
+                  label="User Name *"
                   type="Text"
                   value={UserName}
                   onInput={(e) => onUserNameChange(e.target.value)}
@@ -573,7 +662,7 @@ const Home = () => {
                 <TextField
                   error
                   id="outlined-error"
-                  label="First Name"
+                  label="First Name *"
                   type="Text"
                   value={FirstName}
                   onInput={(e) => onUserFirstName(e.target.value)}
@@ -581,7 +670,7 @@ const Home = () => {
               ) : (
                 <TextField
                   id="outlined-password-input"
-                  label="First Name"
+                  label="First Name *"
                   type="Text"
                   value={FirstName}
                   onInput={(e) => onUserFirstName(e.target.value)}
@@ -591,7 +680,7 @@ const Home = () => {
                 <TextField
                   error
                   id="outlined-error"
-                  label="Last Name"
+                  label="Last Name *"
                   type="Text"
                   value={LastName}
                   onInput={(e) => onUserLastNameChange(e.target.value)}
@@ -599,7 +688,7 @@ const Home = () => {
               ) : (
                 <TextField
                   id="outlined-password-input"
-                  label="Last Name"
+                  label="Last Name *"
                   type="Text"
                   value={LastName}
                   onInput={(e) => onUserLastNameChange(e.target.value)}
@@ -609,7 +698,7 @@ const Home = () => {
                 <TextField
                   error
                   id="outlined-error"
-                  label="Email"
+                  label="Email *"
                   type="Text"
                   value={Email}
                   onInput={(e) => onEmailChange(e.target.value)}
@@ -617,7 +706,7 @@ const Home = () => {
               ) : (
                 <TextField
                   id="outlined-password-input"
-                  label="Email"
+                  label="Email *"
                   type="Text"
                   value={Email}
                   onInput={(e) => onEmailChange(e.target.value)}
@@ -633,15 +722,6 @@ const Home = () => {
               />
 
               <FormControl fullWidth>
-                {/* <NativeSelect
-                  defaultValue={30}
-                  inputProps={{
-                    name: 'User',
-                    id: 'uncontrolled-native',
-                  }}
-                  onChange={(e) => onRoleIdChange(e.target.value)}
-                > */}
-
                 {validationRoleId ? (
                   <Select
                     error
@@ -656,6 +736,7 @@ const Home = () => {
                   </Select>
                 ) : (
                   <Select
+                  
                     value={selectRole}
                     onChange={(e) => onRoleIdChange(e.target.value)}
                   >
@@ -666,11 +747,7 @@ const Home = () => {
                     })}
                   </Select>
                 )}
-                {/* {SelectOptions.map((rol) => {
-                  return <option value={rol.roleId}>{rol.roleName}</option>;
-                })} */}
-                {/* </NativeSelect> */}
-              </FormControl>
+                </FormControl>
 
               {/* <TextField
                 id="outlined-password-input"
@@ -738,6 +815,31 @@ const Home = () => {
           <Button onClick={deleteHandleClose} className="box-btn ">
             Delete
           </Button>
+        </DialogActions>
+      </Dialog>
+      <Dialog
+        open={msgOpen}
+        onClose={dialogHandleClose}
+        PaperComponent={PaperComponent}
+        aria-labelledby="draggable-dialog-title"
+      >
+        <DialogTitle style={{ cursor: 'move' }} id="draggable-dialog-title">
+          Message
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            {msg}
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button
+            autoFocus
+            onClick={dialogHandleClose}
+            className="box-btn"
+          >
+            Ok
+          </Button>
+          
         </DialogActions>
       </Dialog>
     </>

@@ -6,6 +6,7 @@ import IconButton from '@mui/material/IconButton';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
+import Stack from '@mui/material/Stack';
 
 function MuiDataGrid({
   rows,
@@ -15,6 +16,15 @@ function MuiDataGrid({
 }) {
   console.log(rows);
   const ref = React.useRef();
+
+  function NoRowsOverlay() {
+    return (
+      <Stack height="100%" alignItems="center" justifyContent="center">
+        No rows in DataGrid
+       
+      </Stack>
+    );
+  }
   return (
     <Box
       sx={{
@@ -36,11 +46,12 @@ function MuiDataGrid({
         ref={ref}
         rows={rows}
         columns={columns}
-        loading={rows.length === 0}
+        //loading={rows.length === 0}
         checkboxSelection={checkboxSelection}
         disableSelectionOnClick={disableSelectionOnClick}
         components={{
           Toolbar: GridToolbar,
+          NoRowsOverlay
         }}
         initialState={{
           filter: {

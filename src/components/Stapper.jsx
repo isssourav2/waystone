@@ -175,6 +175,28 @@ const Stapper = () => {
     //FileFetchSubmit(FileFetch);
   };
 
+
+/*****File Validation*****/
+const handleFileValidationNext=()=>{
+  debugger;
+  console.log('Last Elment',LastElementForStep8);
+  FileValidation.fileProcessingTemplateId = GetFileProcessingTemplateLocalStorage();
+  FileValidationSubmit(FileValidation);
+  handleNext();
+};
+
+// FileValidationArray.map((v) => {
+//   debugger;
+//   FileValidation.fileProcessingTemplateId = PostFile.id;
+//   FileValidation=v;
+//   console.log('FileProcessingTagManipulation:',FileProcessingTagManipulation);
+//   FileValidationSubmit(FileValidation);
+// });
+
+
+/*****File Validation*****/
+
+
   const handleNext = () => {
     // debugger;;
     if (activeStep == 0) {
@@ -478,7 +500,7 @@ const Stapper = () => {
                                 <Button
                                   className="btn"
                                   variant="contained"
-                                  onClick={handleNext}
+                                  onClick={handleFileValidationNext}
                                   sx={{ mt: 1, mr: 1 }}
                                 >
                                   {index === steps.length - 1
