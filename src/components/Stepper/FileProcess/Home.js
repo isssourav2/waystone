@@ -19,6 +19,11 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Paper from '@mui/material/Paper';
 import { SetEditRiskTemplate } from '../Service/RiskCoreEditService.';
+import {
+  FileProcessingTagManipulationArr,
+  FileProcessingDMSApplicationArr,
+} from '../Service/FileProcessingService';
+import { SetFileProcessingTemplateLocalStorage } from '../Service/localstore';
 function PaperComponent(props) {
   return <Paper {...props} />;
 }
@@ -64,6 +69,7 @@ function Home() {
 
   const EditHandler = (param) => {
     setRow(param);
+    SetFileProcessingTemplateLocalStorage(param.id);
     SetEditRiskTemplate(param);
     setTagName(param.tagName);
     setOpen(true);
@@ -176,6 +182,9 @@ function Home() {
     setOpen(true);
   };
   const handleClose = () => {
+    localStorage.removeItem('FileProcessingTemplateId');
+    FileProcessingTagManipulationArr();
+    FileProcessingDMSApplicationArr();
     setOpen(false);
     clearData();
   };

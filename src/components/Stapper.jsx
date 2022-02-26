@@ -38,6 +38,7 @@ import {
   FileProcessingValidation,
   Post,
   PostFile,
+  UpdateFileProcess,
   DownloaDable,
   FundScheduler,
   FileFetch,
@@ -49,11 +50,15 @@ import {
   FileProcessingDMSApplication,
   FileProcessingTagManipulationArray,
   FileProcessingDMSApplicationArray,
+  FileProcessingTagManipulationArr,
+  FileProcessingDMSApplicationArr,
 } from './Stepper/Service/FileProcessingService';
 import {
   SetJobNameLocalStorage,
   SetFileProcessingTemplateLocalStorage,
   GetFileProcessingTemplateLocalStorage,
+  GetValidationTemplateNameStorage,
+  GetValidationStatus,
 } from '../components/Stepper/Service/localstore';
 const steps = [
   {
@@ -103,36 +108,54 @@ const Stapper = () => {
   const [msgOpen, setMsgOpen] = React.useState(false);
   const [dialogOpen, setdialogOpen] = React.useState(false);
   const msgDialog = (param) => {
-    debugger;
     setMsg(param);
     setMsgOpen(true);
   };
   const dialogHandleClose = () => {
-    debugger;
     // setdialogOpen(false);
     setMsgOpen(false);
   };
 
   /*****msg dialog*****/
   const [activeStep, setActiveStep] = React.useState(0);
+
   //First Step
   const FirstHandleNext = () => {
     //Save Method
     if (FileProcessingValidation(PostFile)) {
-      Post(PostFile);
-      SetFileProcessingTemplateLocalStorage(PostFile.id);
-      FileProcessingTagManipulationArray.map((v) => {
-        FileProcessingTagManipulation.fileProcessingTemplateId = PostFile.id;
-        FileProcessingTagManipulation.tagId = v;
-        FProcessingTagManipulationHandlerSubmit(FileProcessingTagManipulation);
-      });
-      FileProcessingDMSApplicationArray.map((v) => {
-        FileProcessingDMSApplication.fileProcessingTemplateId = PostFile.id;
-        FileProcessingDMSApplication.dmsApplicationId = v;
-        FProcessingDMSApplicationSubmit(FileProcessingDMSApplication);
-      });
+      if (PostFile.id != 0) {
+        UpdateFileProcess(PostFile).then((v) => {
+          debugger;
+          SetFileProcessingTemplateLocalStorage(v.message);
+        });
+        handleNext();
+      } else {
+        Post(PostFile).then((v) => {
+          if (!v.isValidation) {
+            // SetFileProcessingTemplateLocalStorage(PostFile.id);
+            SetFileProcessingTemplateLocalStorage(v.message);
+            FileProcessingTagManipulationArray.map((v) => {
+              FileProcessingTagManipulation.fileProcessingTemplateId =
+                PostFile.id;
+              FileProcessingTagManipulation.tagId = v;
+              FProcessingTagManipulationHandlerSubmit(
+                FileProcessingTagManipulation
+              );
+            });
+            FileProcessingDMSApplicationArray.map((v) => {
+              FileProcessingDMSApplication.fileProcessingTemplateId =
+                PostFile.id;
+              FileProcessingDMSApplication.dmsApplicationId = v;
+              FProcessingDMSApplicationSubmit(FileProcessingDMSApplication);
+            });
+            handleNext();
+          } else {
+            //handleBack();
+            msgDialog(v.validation);
+          }
+        });
+      }
     }
-    handleNext();
   };
 
   const SecondHandleNext = () => {
@@ -146,11 +169,19 @@ const Stapper = () => {
   const handleConnectionNext = () => {
     FileFetch.fileProcessingTemplateId =
       GetFileProcessingTemplateLocalStorage();
-    FileFetchSubmit(FileFetch);
-    handleNext();
+    FileFetchSubmit(FileFetch).then((val) => {
+      console.log('connection data:', val);
+    });
+    //FileFetchSubmit(FileFetch);
   };
 
   const handleNext = () => {
+    // debugger;;
+    if (activeStep == 0) {
+      FileProcessingTagManipulationArr();
+      FileProcessingDMSApplicationArr();
+    }
+    //clear the array
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
 
@@ -158,6 +189,9 @@ const Stapper = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
   const handleReset = () => {
+    localStorage.removeItem('FileProcessingTemplateId');
+    FileProcessingTagManipulationArr();
+    FileProcessingDMSApplicationArr();
     setActiveStep(0);
   };
   if (activeStep == 1) {

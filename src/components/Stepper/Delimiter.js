@@ -22,7 +22,7 @@ function Delimiter() {
     Setpassword({ id: e.target.value, name: e.target.value });
   };
   const AddRecord = async (filePassword) => {
-    debugger;
+    // debugger;;
     const res = await axios.post(
       'https://localhost:7056/api/FilePassword',
       filePassword
@@ -51,7 +51,7 @@ function Delimiter() {
   const onRemove = (value) => {
     const index = FilePassword.findIndex((v) => v.name == value);
     let filePass = [];
-    debugger;
+    // debugger;;
     if (index > -1) {
       FilePassword.splice(index, 1);
     }
