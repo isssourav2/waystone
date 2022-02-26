@@ -175,7 +175,7 @@ const Home = () => {
   };
 
   const UpdateHandler = () => {
-    debugger;
+    // debugger;;
     if (Validation(Name, Protocol, Port, Password)) {
       Connection.id = row.id;
       Connection.name = Name;
@@ -346,7 +346,7 @@ const Home = () => {
     setRow(param);
   };
   const deleteHandleClose = () => {
-    debugger;
+    // debugger;;
     console.log('delete data:', row);
     DeleteConnection(row).then((del) => {
       GetConnectionData();

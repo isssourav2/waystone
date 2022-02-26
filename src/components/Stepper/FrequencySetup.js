@@ -63,7 +63,7 @@ function FrequencySetup() {
   };
   console.log('Select value', FrequencyOptions);
   const minusVal2 = () => {
-    debugger;
+    // debugger;;
     let val = val2;
     let v1 = --val;
     SetVal2(v1);
@@ -76,14 +76,14 @@ function FrequencySetup() {
     FundScheduler.fromTo = v1;
   };
   const minusVal1 = () => {
-    debugger;
+    // debugger;;
     let val = val1;
     let v = --val;
     SetVal1(v);
     FundScheduler.asAt = v;
   };
   const addVal1 = () => {
-    debugger;
+    // debugger;;
     let val = val1;
     let v = ++val;
     SetVal1(v);
@@ -93,12 +93,12 @@ function FrequencySetup() {
   const AsAtChange = (e) => {
     if (e.target.checked) {
       SetAsAt(false);
-      // SetFromTo(true);
+      SetFromTo(true);
     }
   };
   const AsFromChange = (e) => {
     if (e.target.checked) {
-      //  SetFromTo(false);
+      SetFromTo(false);
       SetAsAt(true);
     }
   };

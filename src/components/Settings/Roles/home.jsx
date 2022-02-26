@@ -423,7 +423,7 @@ const Home = () => {
   const fixedOptions = [Tagged[0]];
   const [tagValue, setTagValue] = React.useState([...fixedOptions, Tagged[5]]);
   const handleTaggedChange = (event, newValue) => {
-    debugger;
+    // debugger;;
     if (newValue[0].name === 'All') {
       setTagValue([
         // ...fixedOptions,

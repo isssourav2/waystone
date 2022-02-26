@@ -8,7 +8,7 @@ const Profile = () => {
   const [messages, setMessages] = useState([]);
 
   useEffect(() => {
-    debugger;
+    // debugger;;
     if (!authState || !authState.isAuthenticated) {
       // When user isn't authenticated, forget any user info
       setUserInfo(null);

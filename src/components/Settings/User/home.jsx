@@ -149,7 +149,7 @@ const Home = () => {
   };
 
   const Validation = (UserName, FirstName, LastName, Email, RoleId) => {
-    debugger;
+    // debugger;;
     if (UserName == '') {
       setvalidationUserName(true);
       setValidateCount(++i);
@@ -269,7 +269,7 @@ const Home = () => {
     //Role.roleName = val;
   };
   const onRoleIdChange = (val) => {
-    debugger;
+    // debugger;;
     if (val === '' || val === 0) {
       setvalidationRoleId(true);
       setValidateCount(++i);
@@ -328,7 +328,7 @@ const Home = () => {
             <Checkbox
               checked
               onChange={(e) => {
-                debugger;
+                // debugger;;
                 rows.filter((r) => r.id === params.row.id)[0].isActive =
                   e.target.checked;
                 //filterval[0].isActive = e.target.checked || true;
@@ -340,7 +340,7 @@ const Home = () => {
           ) : (
             <Checkbox
               onChange={(e) => {
-                debugger;
+                // debugger;;
                 rows.filter((r) => r.id === params.row.id)[0].isActive =
                   e.target.checked;
                 //filterval[0].isActive = e.target.checked || true;

@@ -230,7 +230,7 @@ function Header() {
   //   setOpen(true);
   // };
   const LogoutHandler = () => {
-    debugger;
+    // debugger;;
     history.push('/');
   };
   const handleChange = (newValue) => {
@@ -375,7 +375,7 @@ function Header() {
         <div class="menu-link">
           <List component="nav">
             <ul onClick={() => handleSubMenu('dashboard')}>
-              <li >
+              <li>
                 <DashboardIcon /> <span>Dashboard</span>
                 {dashboardSubOpen ? (
                   <ExpandMore className="icon-next-down" />
@@ -576,8 +576,8 @@ function Header() {
           <List component="nav">
             {/* <h3>Help</h3> */}
             <ul>
-              <li onClick={helpHandleClick} className='m-active'>
-                <HelpIcon className='m-active' /> Help
+              <li onClick={helpHandleClick} className="m-active">
+                <HelpIcon className="m-active" /> Help
               </li>
             </ul>
           </List>

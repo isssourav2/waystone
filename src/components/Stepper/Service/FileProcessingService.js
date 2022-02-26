@@ -1,7 +1,11 @@
 import { HocExecute } from './HocExecute';
 import axios from 'axios';
 import React from 'react';
-import { SetFileProcessingTemplateLocalStorage } from './localstore';
+import {
+  SetFileProcessingTemplateLocalStorage,
+  SetValidationStatus,
+  SetValidationTemplateNameStorage,
+} from './localstore';
 const postFileProcess = async (fileProcess) => {
   const res = await axios.post(
     'https://localhost:7056/api/FileProcessingTemplate',
@@ -12,9 +16,15 @@ const postFileProcess = async (fileProcess) => {
 
 const submitHandler = (fileProcess) => {
   const response = postFileProcess(fileProcess);
-  response.then((save) => {
-    SetFileProcessingTemplateLocalStorage(save.message);
-  });
+  return response;
+  // response.then((save) => {
+  //   if (save.isValidation) {
+  //     SetValidationStatus(save.isValidation);
+  //     SetValidationTemplateNameStorage(save.validation);
+  //   } else {
+  //     SetFileProcessingTemplateLocalStorage(save.message);
+  //   }
+  // });
 };
 
 const Validation = (PostFile) => {
@@ -77,9 +87,19 @@ export const FileProcessingDMSApplication = {
   dmsApplicationId: 0,
 };
 
-export const FileProcessingTagManipulationArray = [];
+export let FileProcessingTagManipulationArray = [];
 
-export const FileProcessingDMSApplicationArray = [];
+export let FileProcessingDMSApplicationArray = [];
+
+export const FileProcessingTagManipulationArr = () => {
+  FileProcessingTagManipulationArray = [];
+};
+export const FileProcessingTagManipulationArrData = (data) => {
+  FileProcessingTagManipulationArray = data;
+};
+export const FileProcessingDMSApplicationArr = () => {
+  return (FileProcessingDMSApplicationArray = []);
+};
 
 const PostFileProcessingTagManipulation = async (
   FileProcessingTagManipulation
@@ -106,7 +126,9 @@ const PostFileProcessingTagManipulationHandler = (
     FileProcessingTagManipulation
   );
   response
-    .then((save) => {})
+    .then((save) => {
+      // FileProcessingTagManipulationArray = [];
+    })
     .catch((error) => {
       console.log(error);
     });
@@ -118,7 +140,9 @@ const PostFileProcessingDMSApplicationHandler = (
     FileProcessingDMSApplication
   );
   response
-    .then((save) => {})
+    .then((save) => {
+      // FileProcessingDMSApplicationArray = [];
+    })
     .catch((error) => {
       console.log(error);
     });
@@ -153,13 +177,23 @@ const postFileFetch = async (FileFetch) => {
 
 const FileFetchSubmitHandler = (FileFetch) => {
   const response = postFileFetch(FileFetch);
-  response
-    .then((save) => {})
-    .catch((error) => {
-      console.log(error);
-    });
+  return response;
 };
 
+const UpdateFileProcess1 = async (fileProcess) => {
+  const res = await axios.put(
+    'https://localhost:7056/api/FileProcessingTemplate',
+    fileProcess
+  );
+  return res.data;
+};
+
+const UpdateFileProcessHandler = (FileFetch) => {
+  const response = UpdateFileProcess1(FileFetch);
+  return response;
+};
+
+export const UpdateFileProcess = HocExecute(UpdateFileProcessHandler);
 export const FundSchedulerSubmit = HocExecute(FundSchedulerSubmitHandler);
 export const FileFetchSubmit = HocExecute(FileFetchSubmitHandler);
 export const FProcessingTagManipulationHandlerSubmit = HocExecute(

@@ -24,7 +24,7 @@ const columnsFromBackend = {
 const onDragEnd = (result, columns, setColumns) => {
   if (!result.destination) return;
   const { source, destination } = result;
-  debugger;
+  // debugger;;
   if (source.droppableId !== destination.droppableId) {
     const sourceColumn = columns[source.droppableId];
     const destColumn = columns[destination.droppableId];
@@ -119,7 +119,6 @@ function Step5() {
         })}
       </DragDropContext>
     </div>
-    
   );
 }
 

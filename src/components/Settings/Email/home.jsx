@@ -147,7 +147,7 @@ const Home = () => {
   };
   const reloadEmailData = () => {
     reloadEmailSettingData().then((dt) => {
-      debugger;
+      // debugger;;
       SetFrom(dt.from);
       SetHost(dt.host);
       SetPort(dt.port);
@@ -173,7 +173,7 @@ const Home = () => {
   };
 
   const GetScheduleTime = (timeString) => {
-    debugger;
+    // debugger;;
     //var timeString = '18:00:00';
     var H = +timeString.substr(0, 2);
     // var h = H % 12 || 12;
@@ -347,7 +347,7 @@ const Home = () => {
 
   //Email Settings
   const onFromChange = (val) => {
-    debugger;
+    // debugger;;
     if (val === '') {
       setvalidationFromId(true);
       setValidateCount(++i);

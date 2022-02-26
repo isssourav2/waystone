@@ -23,10 +23,16 @@ import {
   FundSchedulerSubmit,
   FileProcessingTagManipulation,
   FileProcessingDMSApplication,
+  FileProcessingTagManipulationArr,
   FileProcessingTagManipulationArray,
   FileProcessingDMSApplicationArray,
+  FileProcessingTagManipulationArrData,
 } from './Service/FileProcessingService';
-import { SetFileProcessingTemplateLocalStorage } from './Service/localstore';
+
+import {
+  SetFileProcessingTemplateLocalStorage,
+  GetFileProcessingTemplateLocalStorage,
+} from './Service/localstore';
 import { GetEditRiskTemplate } from './Service/RiskCoreEditService.';
 const StyledFormControlLabel = styled((props) => (
   <FormControlLabel {...props} />
@@ -57,12 +63,13 @@ MyFormControlLabel.propTypes = {
 
 function RiskCoreTemplate() {
   const [Tagged, setTagged] = React.useState([]);
+  const [EditTags, SetEditTags] = React.useState([]);
+  const [EditApplications, SetApplications] = React.useState([]);
   console.log('Tag Records:', Tagged);
   const [Application, setApplication] = React.useState([]);
   console.log('Tag Records:', Application);
   let i = 0;
   const AllValidation = () => {
-    debugger;
     if (PostFile.fileProcessingTemplateName == '') {
       setvalidationfileProcessingTemplateName(true);
       setValidateCount(++i);
@@ -102,10 +109,40 @@ function RiskCoreTemplate() {
     const objValue = GetEditRiskTemplate();
     return objValue;
   };
+  const GetFileProcessTem = (fileProcess) => {
+    PostFile.id = fileProcess;
+    fetch(`https://localhost:7056/api/FileProcessingTemplate/${fileProcess}`)
+      .then((res) => res.json())
+      .then((result) => {
+        //setEditFileProcess(result)
+        if (result.tags != undefined) {
+          result.tags.map((res) => {
+            res['name'] = res.tagName;
+          });
+        }
+        if (result.applications != undefined) {
+          result.applications.map((res) => {
+            res['tagId'] = res.applicationId;
+            res['name'] = res.applicationName;
+          });
+        }
+        SetEditTags(result.tags);
+        SetApplications(result.applications);
+        SetFileProcessingTemplateName(result.fileProcessingTemplateName);
+        SetSelectRiskCoreTemplate(result.riskCoreImportTemplateId);
+      });
+  };
+  const GetFileProcessTemplate = () => {
+    let val = GetFileProcessingTemplateLocalStorage();
+    if (val != null && val != undefined) {
+      GetFileProcessTem(val);
+    }
+  };
   React.useEffect(() => {
     GetTagged();
     GetApplication();
-    //GetRiskCoreTemplate();
+    GetRiskCoreTemplate();
+    GetFileProcessTemplate();
     EditRiskCoreTemplate();
   }, [0]);
 
@@ -132,14 +169,23 @@ function RiskCoreTemplate() {
   const onTagChange = (val) => {
     SetTag(val);
     PostFile.tagId = val;
-    // FileProcessingTagManipulationArray = [];
     FileProcessingTagManipulationArray.push(val);
     //user.userName = val;
+  };
+  const onTagRemove = (val) => {
+    SetTag(val);
+    PostFile.tagId = val;
+    //FileProcessingTagManipulationArr();
+    console.log('ArrB4Del', FileProcessingTagManipulationArray);
+    FileProcessingTagManipulationArrData(
+      FileProcessingTagManipulationArray.filter((tagId) => tagId !== val)
+    );
+    console.log('ArrAfterDel', FileProcessingTagManipulationArray);
   };
   const onApplicationChange = (val) => {
     Setapplication(val);
     PostFile.applicationId = val;
-    //  FileProcessingDMSApplicationArray = [];
+    //FileProcessingDMSApplicationArr();
     FileProcessingDMSApplicationArray.push(val);
     //user.userName = val;
   };
@@ -150,18 +196,29 @@ function RiskCoreTemplate() {
   };
   const fixedOptions = [Tagged[0]];
   const [tagValue, setTagValue] = React.useState([...fixedOptions, Tagged[5]]);
-  const handleTaggedChange = (event, newValue) => {
-    if (newValue[0].name === 'All') {
-      setTagValue([
-        // ...fixedOptions,
-      ]);
-    } else {
-      setTagValue([
-        // ...fixedOptions,
-        ...newValue.filter((option) => fixedOptions.indexOf(option) === -1),
-      ]);
+  const handleTaggedChange = (event, newValueArr) => {
+    if (newValueArr.length != 0) {
+      if (newValueArr.some((ele) => ele.name === 'All')) {
+        setTagValue([
+          // ...fixedOptions,
+        ]);
+      } else {
+        setTagValue([
+          // ...fixedOptions,
+          ...newValueArr.filter(
+            (option) => fixedOptions.indexOf(option) === -1
+          ),
+        ]);
+      }
+
+      FileProcessingTagManipulationArr();
+      newValueArr.forEach((newValue) => {
+        onTagChange(newValue.tagId);
+      });
     }
-    onTagChange(newValue[0].tagId);
+  };
+  const handleTagDelete = (event, tagId) => {
+    onTagRemove(tagId);
   };
   const fixedAppOptions = [Application[0]];
   const [appValue, setAppValue] = React.useState([
@@ -169,7 +226,6 @@ function RiskCoreTemplate() {
     Application[5],
   ]);
   const handleApplicationChange = (event, newValue) => {
-    debugger;
     if (newValue[0].name === 'All') {
       setAppValue([
         // ...fixedOptions,
@@ -184,6 +240,8 @@ function RiskCoreTemplate() {
   };
   const [SelectRiskCoreTemplate, SetSelectRiskCoreTemplate] = React.useState(0);
   const [RiskCoreTemplate, SetRiskCoreTemplate] = React.useState([]);
+
+  // const [RiskCoreTemplate, SetRiskCoreTemplate] = React.useState([]);
   const [DownloadManipulate, SetDownloadManipulate] = React.useState(true);
   const [DownloadableDelivery, SetDownloadableDelivery] = React.useState(false);
 
@@ -214,9 +272,12 @@ function RiskCoreTemplate() {
     SetDownloadManipulate(false);
     PostFile.isManipulation = true;
   };
-  console.log('file template:', PostFile);
+
   PostFile.riskCoreImportTemplateId = SelectRiskCoreTemplate;
-  console.log('SelectRiskCoreTemplate Value', SelectRiskCoreTemplate);
+
+  console.log('Tags', EditTags);
+  console.log('Applications', EditApplications);
+
   return (
     <>
       <RadioGroup
@@ -248,15 +309,16 @@ function RiskCoreTemplate() {
             className="form-col-single"
             id="outlined-name"
             // label="Job Name *"
-            value={EditRiskCoreTemplate().fileProcessingTemplateName}
+            value={fileProcessingTemplateName}
             onChange={(e) => onFileProcessingTemplateNameChange(e.target.value)}
           />
         ) : (
           <TextField
             className="form-col-single"
             id="outlined-name"
+            value={fileProcessingTemplateName}
             // label="Job Name *"
-            value={EditRiskCoreTemplate().fileProcessingTemplateName}
+            //value={EditRiskCoreTemplate().fileProcessingTemplateName}
             onChange={(e) => onFileProcessingTemplateNameChange(e.target.value)}
           />
         )}
@@ -264,9 +326,11 @@ function RiskCoreTemplate() {
         <div className="form-col">
           <FixedTags
             tags={Tagged}
+            editTags={EditTags}
             label="Select Tags(s)"
             value={EditRiskCoreTemplate().tag}
             onTagChangeHandler={handleTaggedChange}
+            onTagDeleteHandler={handleTagDelete}
           />
         </div>
         {/* <TextField
@@ -277,9 +341,11 @@ function RiskCoreTemplate() {
         <div className="form-col">
           <FixedTags
             tags={Application}
+            editTags={EditApplications}
             label="Select Application(s)"
             value={EditRiskCoreTemplate().application}
             onTagChangeHandler={handleApplicationChange}
+            onTagDeleteHandler={handleTagDelete}
           />
         </div>
         {/* <TextField
@@ -293,8 +359,8 @@ function RiskCoreTemplate() {
             RiskCore Import Template
           </InputLabel>
           <Select
-            value={EditRiskCoreTemplate().riskCoreTemplate}
-            label={SelectRiskCoreTemplate}
+            value={SelectRiskCoreTemplate}
+            //label={SelectRiskCoreTemplate}
             onChange={(e) => SetSelectRiskCoreTemplate(e.target.value)}
           >
             {RiskCoreTemplate.map((freq) => {
