@@ -49,11 +49,22 @@ const Home = () => {
     console.log(tagName);
     const response = SaveTag(Tag);
     response.then((save) => {
+      debugger;
       console.log('reponse:', save);
-      GetTagData();
-      window.alert('Insert Successfully done!!');
+  
+      if(save.isError)
+      {
+        msgDialog(save.errorMessage);
+      }
+      else
+      {
+        msgDialog('Insert Successfully done!!');
       clearData();
       handleClose();
+      GetTagData();
+
+      }
+
     });
   }
   };
@@ -64,11 +75,22 @@ const Home = () => {
     Tag.tagId = row.tagId;
 
     const response = UpdateTag(Tag);
-    response.then((save) => {
-      window.alert('Update Successfully done!!');      
-      clearData();
-      handleClose();
-      GetTagData();
+    response.then((update) => {
+      debugger;
+      console.log("save",update);
+      if(update.isError)
+      {
+        msgDialog(update.errorMessage);
+      }
+      else
+      {
+        clearData();
+        handleClose();
+        msgDialog('Update Successfully done!!');
+        GetTagData();
+
+      }
+     
     });
   }
   };
@@ -78,8 +100,8 @@ const Home = () => {
     DeleteTag(row).then((save) => {
       GetTagData();
       clearData();
-      window.alert('Delete Successfully done!!');
-      dialogHandleClose();
+      msgDialog('Delete Successfully done!!');
+     dialogHandleClose();
     });
   };
 
@@ -112,6 +134,20 @@ const Home = () => {
     setTagName('');
 
   };
+
+    /*****msg dialog*****/
+    const [msg,setMsg]=React.useState('');
+    const [msgOpen,setMsgOpen]=React.useState(false);
+    const msgDialog=(param)=>{
+     
+      setMsg(param);
+      setMsgOpen(true);
+    };
+    
+    /*****msg dialog*****/
+    
+
+
 
   const columns = [
     { field: 'tagName', headerName: 'Tag Name', width: 180, editable: true },
@@ -207,6 +243,7 @@ const Home = () => {
   const [dialogOpen, setdialogOpen] = React.useState(false);
   const dialogHandleClose = () => {
     setdialogOpen(false);
+    setMsgOpen(false);
     clearData();
   };
   const dialogHandleOpen = (param) => {
@@ -319,7 +356,7 @@ const Home = () => {
             <TextField
               error
               id="outlined-error"
-              label="Tag Name"
+              label="Tag Name *"
               type="Text"
               value={tagName}
               onInput={(e) => onTagNameChange(e.target.value)}
@@ -327,7 +364,7 @@ const Home = () => {
           ) : (
             <TextField
               id="outlined-password-input"
-              label="Tag Name"
+              label="Tag Name *"
               type="Text"
               value={tagName}
               onInput={(e) => onTagNameChange(e.target.value)}
@@ -375,6 +412,31 @@ const Home = () => {
           <Button onClick={deleteHandleClose} className="btn">
             Delete
           </Button>
+        </DialogActions>
+      </Dialog>
+      <Dialog
+        open={msgOpen}
+        onClose={dialogHandleClose}
+        PaperComponent={PaperComponent}
+        aria-labelledby="draggable-dialog-title"
+      >
+        <DialogTitle style={{ cursor: 'move' }} id="draggable-dialog-title">
+          Tag
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            {msg}
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button
+            autoFocus
+            onClick={dialogHandleClose}
+            className="box-btn"
+          >
+            Ok
+          </Button>
+          
         </DialogActions>
       </Dialog>
     </>

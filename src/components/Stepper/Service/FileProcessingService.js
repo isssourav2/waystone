@@ -27,6 +27,7 @@ const submitHandler = (fileProcess) => {
   // });
 };
 
+
 const Validation = (PostFile) => {
   if (PostFile.fileProcessingTemplateName == '') {
     return false;
@@ -87,7 +88,11 @@ export const FileProcessingDMSApplication = {
   dmsApplicationId: 0,
 };
 
-export let FileProcessingTagManipulationArray = [];
+export const LastElementForStep8={
+  element:''
+}
+
+export const FileProcessingTagManipulationArray = [];
 
 export let FileProcessingDMSApplicationArray = [];
 
@@ -196,13 +201,55 @@ const UpdateFileProcessHandler = (FileFetch) => {
 export const UpdateFileProcess = HocExecute(UpdateFileProcessHandler);
 export const FundSchedulerSubmit = HocExecute(FundSchedulerSubmitHandler);
 export const FileFetchSubmit = HocExecute(FileFetchSubmitHandler);
-export const FProcessingTagManipulationHandlerSubmit = HocExecute(
-  PostFileProcessingTagManipulationHandler
-);
-export const FProcessingDMSApplicationSubmit = HocExecute(
-  PostFileProcessingDMSApplicationHandler
-);
+export const FProcessingTagManipulationHandlerSubmit = HocExecute(PostFileProcessingTagManipulationHandler);
+export const FProcessingDMSApplicationSubmit = HocExecute(PostFileProcessingDMSApplicationHandler);
+
 
 export const DownloaDable = { isDownloadable: false };
 
 export const Post = HocExecute(submitHandler);
+
+
+
+/*****File Validation*****/
+
+//FileValidation
+export const FileValidation = {
+  id: 0,
+ fileProcessingTemplateId: 0,
+ columnOrder:0,
+ columnName:'',
+ dataType:''
+  // id: 0,
+  // fileProcessingTemplateId: 0,
+  // columnOrder: 0,
+  // columnName: '',
+  // dataType: '',
+  // receivedFrom: '',
+  // subjectHeader: '',
+  // sentTo: '',
+};
+
+export const FileValidationArray = [];
+
+const postFileValidation = async (FileValidation) => {
+  const res = await axios.post('https://localhost:7056/api/FileValidation',FileValidation);
+  return res.data;
+};
+
+const FileValidationSubmitHandler = (FileValidation) => {
+  debugger;
+  const response = postFileValidation(FileValidation);
+  response
+    .then((save) => {
+      FileValidationArray = [];
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
+
+export const FileValidationSubmit = HocExecute(FileValidationSubmitHandler);
+//export const FileValidationSubmit = HocExecute(FileValidationSubmitHandler);
+
+/*****File Validation*****/
